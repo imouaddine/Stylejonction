@@ -9,5 +9,5 @@ gem 'sass-rails', "~> 3.1.0.rc"
 gem 'coffee-script'
 gem 'uglifier'
 gem 'jquery-rails'
-gem "devise", ">= 1.3.4"
+gem "devise", "= 1.3.3"
 gem "rails-footnotes", ">= 3.7", :group => :development
