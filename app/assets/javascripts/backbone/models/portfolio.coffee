@@ -6,6 +6,3 @@ class Stylejonction.Models.Portfolio extends Backbone.Model
     layout: null
     theme: null
   
-class Stylejonction.Collections.PortfoliosCollection extends Backbone.Collection
-  model: Stylejonction.Models.Portfolio
-  url: '/portfolio'

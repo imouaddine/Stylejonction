@@ -1,7 +1,9 @@
 Stylejonction::Application.routes.draw do
  
 
-  #get \"users\/show\"
+
+
+
 
   root :to => "home#index"
 
@@ -17,6 +19,7 @@ Stylejonction::Application.routes.draw do
   
   match 'portfolio/update' => 'portfolio#update'
   
+  resources :projects
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,9 @@
+<div id="portfolio"></div>
+<div id="preview"></div>
+<%= @portfolio.to_json.html_safe -%>
+<script type="text/javascript">
+  $(function() {
+    window.controller = new Stylejonction.Controllers.PortfoliosController({portfolio: <%= @portfolio.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>
