@@ -9,6 +9,14 @@ Stylejonction::Application.routes.draw do
   resources :users, :only => :show 
 
 
+ # get 'portfolio' => 'portfolio#view'
+ 
+
+  get 'portfolio' => 'portfolio#show'
+  get 'portfolio/edit' => 'portfolio#edit'
+  
+  match 'portfolio/update' => 'portfolio#update'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
