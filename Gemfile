@@ -11,3 +11,6 @@ gem 'uglifier'
 gem 'jquery-rails'
 gem "devise", "= 1.3.3"
 gem "rails-footnotes", ">= 3.7", :group => :development
+
+#backbone
+gem "rails-backbone" 

@@ -1,0 +1,8 @@
+<div id="portfolio"></div>
+
+<script type="text/javascript">
+  $(function() {
+    window.controller = new Stylejonction.Controllers.PortfolioController({posts: <%= @posts.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>

@@ -1,5 +1,10 @@
 class PortfolioController < ApplicationController
-  def index
+  def view
+    @us
+  end
+  
+  def edit 
+    
   end
 
 end
