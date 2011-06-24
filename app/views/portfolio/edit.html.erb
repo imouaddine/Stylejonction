@@ -10,3 +10,17 @@
     Backbone.history.start();
   });
 </script>
+<%= form_for @project, :html => {:multipart => true} do |f| %>
+  <%= f.error_messages %>
+
+ 
+  <p>
+    <%= f.file_field :cover %>
+  </p>
+  <p>
+    <%= f.label :remote_cover_url, "or image URL" %><br />
+    <%= f.text_field :remote_cover_url %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>
+
