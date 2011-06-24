@@ -9,7 +9,7 @@
 User.delete_all
 
 puts 'SETTING UP DEFAULT USER LOGIN'
-user = User.create! :name => 'Imad Mouaddine', :email => 'imad@ecomstrategy.ca', :password => 'admin', :password_confirmation => 'admin'
+user = User.create! :first_name => 'Imad', :last_name =>'Mouaddine', :email => 'imad@ecomstrategy.ca', :password => 'admin', :password_confirmation => 'admin', :admin => true
 
 user.portfolio = Portfolio.create(:layout => 1, :theme => 0)
 user.portfolio.projects.create(:title => 'First Project')
@@ -21,7 +21,7 @@ user.save
 
 
 
-puts 'New user created: ' << user.name
+puts 'New user created: ' << user.full_name
 
 
 
