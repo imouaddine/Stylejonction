@@ -3,6 +3,7 @@
 <p>
   <b>Title:</b>
   <%= @project.title %>
+	<%= image_tag @project.cover.url(:thumb) if @project.cover? %>
 </p>
 
 

@@ -3,7 +3,7 @@ Stylejonction::Application.routes.draw do
 
 
 
-  root :to => "home#index"
+  
 
   devise_for :users
   resources :users, :only => :show 
@@ -17,6 +17,8 @@ Stylejonction::Application.routes.draw do
   
   match 'portfolio/update' => 'portfolio#update'
   
+  
+  root :to => "portfolio#edit"
   resources :projects
   # The priority is based upon order of creation:
   # first created -> highest priority.

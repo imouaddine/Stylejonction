@@ -10,10 +10,8 @@
     Backbone.history.start();
   });
 </script>
-<%= form_for @project, :html => {:multipart => true} do |f| %>
-  <%= f.error_messages %>
-
- 
+<%= form_for @portfolio.projects.first, :html => {:multipart => true} do |f| %>
+  
   <p>
     <%= f.file_field :cover %>
   </p>

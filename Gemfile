@@ -24,6 +24,7 @@ gem "rails-backbone"
 #file upload
 gem 'rmagick'
 gem 'carrierwave'
+gem 'fog'
 
 group :production do
   gem 'therubyracer-heroku', '0.8.1.pre3'
