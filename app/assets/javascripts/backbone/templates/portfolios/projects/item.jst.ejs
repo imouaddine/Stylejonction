@@ -1,1 +1,4 @@
 TITLE: <%= title %>
+<% if(cover.thumb) { %>
+	IMAGE: <img src="<%= (cover.thumb.url) %>" alt="<%= title %>" ></img>
+<% } %>

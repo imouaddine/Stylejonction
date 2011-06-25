@@ -6,6 +6,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require swfobject
+//= require jquery.uploadify.v2.1.0.min
 //= require underscore
 //= require backbone
 //= require backbone_rails_sync

@@ -1,4 +1,8 @@
 class ProjectsController < ApplicationController
+  
+  skip_before_filter :verify_authenticity_token
+  
+  
   # GET /projects
   # GET /projects.json
   def index
@@ -47,6 +51,7 @@ class ProjectsController < ApplicationController
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @project.errors, status: :unprocessable_entity }
@@ -59,10 +64,11 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
 
+   
     respond_to do |format|
       if @project.update_attributes(params[:project])
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { head :ok }
+        format.json { render json: @project}
       else
         format.html { render action: "edit" }
         format.json { render json: @project.errors, status: :unprocessable_entity }
@@ -70,6 +76,16 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def upload_image
+    logger.info "upload_image"
+    @project = Project.find(params[:id])
+    respond_to do |format|
+      if @project.update_attributes(params[:project])
+        logger.info @project
+        format.js 
+      end
+    end
+  end
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy

@@ -1,24 +1,21 @@
 Stylejonction.Views.Projects ||= {}
 
 class Stylejonction.Views.Projects.EditView extends Backbone.View
-  template: JST["backbone/templates/portfolios/projects/edit"]
   
   events:
-    "submit #edit-project": "update"
+    "change #project_title": "update"
     
   update: (e) ->
+    title = $("#project_title").val()
+    
     e.preventDefault()
     e.stopPropagation()
     
-    @options.model.save(null,
-      success:(model) =>
-        @options.model = model
-        window.location.hash = "/#{@options.model.id}"
+    @options.model.save(
+      {'title' : title},
+      success: ->
+        #console.log "SAVED"
+      error: ->
+        #console.log 'ERROR'
     )
     
-  render: ->
-    $(this.el).html(this.template(@options.model.toJSON() ))
-    
-    this.$("form").backboneLink(@options.model)
-    
-    return this

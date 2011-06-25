@@ -1,39 +1,47 @@
 class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
   initialize: (options) ->
-      @portfolio = new Stylejonction.Models.Portfolio(options.portfolio)
-      @projects = new Stylejonction.Collections.ProjectsCollection()
-      @projects.refresh options.projects
-      
-      
+    @options = options
+    @portfolio = new Stylejonction.Models.Portfolio(options.portfolio)
+    @projects = new Stylejonction.Collections.ProjectsCollection()
+    @projects.refresh options.projects
+    @action = "this." + options.action+'()'
+    
      
   routes:
-    ".*": "edit_layout"
+    ".*": "default"
     "font": "edit_font"
     "projects/:id/edit" : "edit_project"
 
+  default: ->
+    console.log @action
+    eval(@action) 
+    @add_preview()
+  
+  edit_portfolio: ->
+    @view = new Stylejonction.Views.Portfolios.EditView(model: @portfolio, el: '#edit_portfolio_3')
     
-  edit_layout:  ->
+  
+  edit_project: ->
+    @project = @projects.get(@options.project.id)
+    @view = new Stylejonction.Views.Projects.EditView(model: @project, el: '#main')
 
     
-    @view = new Stylejonction.Views.Portfolios.EditLayoutView(model: @portfolio)
-    $("#stage").html(@view.render().el)
-    @add_preview()
+    
+    
+
+
   
     
   edit_font: ->
     @view = new Stylejonction.Views.Portfolios.EditFontView(model: @portfolio)
     $("#stage").html(@view.render().el)
-    @add_preview()
+   
     
-  edit_project: (id) ->
-    project = @projects.get(id)
-    @view = new Stylejonction.Views.Projects.EditView(model: project)
-    $("#stage").html(@view.render().el)
-    @add_preview()
+ 
+    
     
     
   add_preview: ->
-   
     @view = new Stylejonction.Views.Portfolios.PreviewView(projects: @projects, portfolio: @portfolio)
     $("#preview").html(@view.render().el)
     

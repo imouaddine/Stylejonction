@@ -17,6 +17,9 @@
   </div>
 
   <div class="field">
+		<div id="cover">
+			<%= render 'cover' %>
+		</div>
     <%= f.label :cover %><br />
     <%= f.file_field :cover %>
   </div>
@@ -26,3 +29,5 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+<%= photo_uploadify %>

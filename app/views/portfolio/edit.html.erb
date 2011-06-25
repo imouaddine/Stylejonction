@@ -1,24 +1,8 @@
 <div id="menu" ></div>
-<div id="stage">NOT UPDATED</div>
-<div id="preview"></div>
-<script type="text/javascript">
-  $(function() {
-    window.controller = new Stylejonction.Controllers.PortfoliosController({
-			portfolio: <%= @portfolio.to_json.html_safe -%>, 
-			projects: <%= @portfolio.projects.to_json.html_safe -%>
-		});
-    Backbone.history.start();
-  });
-</script>
-<%= form_for @portfolio.projects.first, :html => {:multipart => true} do |f| %>
-  
-  <p>
-    <%= f.file_field :cover %>
-  </p>
-  <p>
-    <%= f.label :remote_cover_url, "or image URL" %><br />
-    <%= f.text_field :remote_cover_url %>
-  </p>
-  <p><%= f.submit %></p>
-<% end %>
+
+<%= render 'form' %>
+<%= render  "preview",  :action => 'edit_portfolio'  %>
+
+
+
 

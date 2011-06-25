@@ -17,6 +17,8 @@ Stylejonction::Application.routes.draw do
   
   match 'portfolio/update' => 'portfolio#update'
   
+  match 'projects/:id/upload_image' => 'projects#upload_image'
+  
   
   root :to => "portfolio#edit"
   resources :projects

@@ -37,6 +37,7 @@ tmp/*
 /public/cache
 /public/stylesheets/compiled
 /public/system
+/public/uploads
 /spec/tmp/*
 /cache
 /capybara*
@@ -47,6 +48,7 @@ tmp/*
 /spec/routing
 /spec/views
 /specifications
+
 
 # scm revert files
 **.orig
@@ -59,6 +61,7 @@ tmp/*
 
 # Textmate project files
 /*.tmpproj
+
 
 # vim artifacts
 **.swp
