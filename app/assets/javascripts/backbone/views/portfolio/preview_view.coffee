@@ -3,9 +3,6 @@ Stylejonction.Views.Portfolios ||= {}
 class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
   template: JST["backbone/templates/portfolios/preview"]
   
- 
-
-  
   initialize: ()->
     _.bindAll(this, 'addOneProject', 'addAllProjects', 'render', 'update')
     @portfolio = @options.portfolio

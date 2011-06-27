@@ -1,27 +1,28 @@
 Stylejonction::Application.routes.draw do
  
 
-
-
-  
-
   devise_for :users
+  
   resources :users, :only => :show 
 
-
- # get 'portfolio' => 'portfolio#view'
+  match ':user_name' => 'portfolio#show', :as => :portfolio
+  
+  match '#/:page' => 'pages#:page', :as => :page
+  
+  
+   
+  resources :portfolio, :except => :new do
+      resources :projects do
+        member do
+           post 'upload_image'
+         end
+      end
+  end
  
+  
+  
+  root :to => "pages#index"
 
-  get 'portfolio' => 'portfolio#show'
-  get 'portfolio/edit' => 'portfolio#edit'
-  
-  match 'portfolio/update' => 'portfolio#update'
-  
-  match 'projects/:id/upload_image' => 'projects#upload_image'
-  
-  
-  root :to => "portfolio#edit"
-  resources :projects
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
