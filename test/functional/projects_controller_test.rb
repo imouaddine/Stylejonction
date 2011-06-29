@@ -3,7 +3,7 @@ require 'test_helper'
 class ProjectsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   
-  fixtures :users, :portfolios
+  fixtures :users, :portfolios, :projects
   
   def setup
      @user = users(:user1)
@@ -16,6 +16,11 @@ class ProjectsControllerTest < ActionController::TestCase
     assert_response :success
   end
   
+  test "should get new when user is authenticated" do
+    sign_in @user
+    get :new, :portfolio_id => @portfolio.id
+    assert_response :success
+  end
   
   
   

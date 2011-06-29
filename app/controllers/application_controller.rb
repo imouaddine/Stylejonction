@@ -7,5 +7,6 @@ class ApplicationController < ActionController::Base
      def get_portfolio
        @user = User.find_by_username!(request.subdomain)
        @portfolio = @user.portfolio
+       
      end
 end

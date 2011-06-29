@@ -10,7 +10,7 @@ class PortfolioController < ApplicationController
   end
 
   def edit_layout 
-   
+    
   end
   
   def edit_font

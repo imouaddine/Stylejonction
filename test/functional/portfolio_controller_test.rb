@@ -49,4 +49,6 @@ class PortfolioControllerTest < ActionController::TestCase
     assert_redirected_to edit_portfolio_path(@portfolio, :notice => 'Portfolio was successfully updated.')
   end
   
+  
+  
 end
