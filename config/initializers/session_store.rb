@@ -1,6 +1,7 @@
 # Be sure to restart your server when you modify this file.
 
-Stylejonction::Application.config.session_store :cookie_store, key: '_stylejonction_session'
+Stylejonction::Application.config.session_store :cookie_store, key: '_stylejonction_session', :domain => :all
+
 
 Rails.application.config.middleware.insert_before(
   ActionDispatch::Session::CookieStore,

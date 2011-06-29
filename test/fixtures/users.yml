@@ -1,0 +1,8 @@
+imad_mouaddine:
+  id: 1
+  first_name: Imad
+  last_name: Mouaddine
+  username: imouaddine
+  encrypted_password: $2a$10$fDyS55n.lu6mMrFhzBe56.ZMXuA3Ls1jnsVObXK/xkvK...
+  email: imad@ecomstrategy.ca
+  admin: true

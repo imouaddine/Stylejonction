@@ -1,12 +1,12 @@
 class ProjectsController < ApplicationController
-  
+  before_filter :get_portfolio
   skip_before_filter :verify_authenticity_token
   
   
   # GET /projects
   # GET /projects.json
   def index
-    @projects = User.first.portfolio.projects
+    @projects = @portfolio.projects
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @project = Project.find(params[:id])
+    @project = @portfolio.projects.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   # GET /projects/new.json
   def new
-    @project = Project.new
+    @project = @portfolio.projects.new
 
     respond_to do |format|
       format.html # new.html.erb
