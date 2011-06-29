@@ -16,8 +16,8 @@ class PortfolioControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  test "should deny access to edit " do
-    get :edit, {'id' => @user.portfolio.id}
+  test "should deny access to edit_layout " do
+    get :edit_layout, {'id' => @user.portfolio.id}
     assert_redirected_to new_user_session_path
   end
   
@@ -26,9 +26,9 @@ class PortfolioControllerTest < ActionController::TestCase
     assert_redirected_to new_user_session_path
   end
   
-  test "should get edit when user is authenticated " do
+  test "should get edit_layout when user is authenticated " do
     sign_in @user
-    get :edit, {'id' => @user.portfolio.id}
+    get :edit_layout, {'id' => @user.portfolio.id}
     assert_response :success
   end
    

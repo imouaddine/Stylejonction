@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  
+  before_filter :authenticate_user!, :except => [:index, :show]
   before_filter :get_portfolio
   skip_before_filter :verify_authenticity_token
   

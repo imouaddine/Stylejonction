@@ -9,8 +9,12 @@ class PortfolioController < ApplicationController
     end
   end
 
-  def edit 
+  def edit_layout 
      
+  end
+  
+  def edit_font
+  
   end
 
   def update

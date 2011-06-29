@@ -1,0 +1,15 @@
+<nav id="portfolio_menu" class="actions_menu">
+	<ul>
+		<li><%= link_to 'Layout', edit_portfolio_path(@portfolio) %></li>
+		<li><%= link_to 'Font', edit_portfolio_path(@portfolio) %></li>
+		<li>
+			<a href="#" >Project</a>
+			<ul>
+				<%  @portfolio.projects.each do |project| %>
+					<li><%= link_to project.title, edit_portfolio_project_path(@portfolio, project) %></li>
+				<% end %>
+				<li><%= link_to 'New Project', new_portfolio_project_path %></li>
+			</ul>
+		</li>
+	</ul>
+</nav>

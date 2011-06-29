@@ -8,12 +8,16 @@ Stylejonction::Application.routes.draw do
  constraints(Subdomain) do
     match '/' => 'portfolio#show'
     resources :portfolio, :only => [:show, :edit, :update] do
-         resources :projects do
-           member do
-              post 'upload_image'
-            end
-         end
-     end
+      member do 
+        get 'edit_layout'
+        get 'edit_font'
+      end
+      resources :projects do
+        member do
+          post 'upload_image'
+        end
+      end
+   end
  end
   
  root :to => "pages#index"
