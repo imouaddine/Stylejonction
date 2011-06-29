@@ -1,28 +1,16 @@
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
-  # ==> Mailer Configuration
+
   # Configure the e-mail address which will be shown in DeviseMailer.
   config.mailer_sender = "noreply@stylejonction.com"
+  
+  config.mailer = "Devise::Mailer"
 
-  # Configure the class responsible to send e-mails.
-  # config.mailer = "Devise::Mailer"
-
-  # ==> ORM configuration
-  # Load and configure the ORM. Supports :active_record (default) and
-  # :mongoid (bson_ext recommended) by default. Other ORMs may be
-  # available as additional gems.
   require 'devise/orm/active_record'
 
   # ==> Configuration for any authentication mechanism
-  # Configure which keys are used when authenticating a user. The default is
-  # just :email. You can configure it to use [:username, :subdomain], so for
-  # authenticating a user, both parameters are required. Remember that those
-  # parameters are used only when authenticating and not when retrieving from
-  # session. If you need permissions, you should implement that in a before filter.
-  # You can also supply a hash where the value is a boolean determining whether
-  # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [ :username ]
+  config.authentication_keys = [ :email ]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -34,7 +22,7 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [ :username ]
+  config.case_insensitive_keys = [:email ]
 
   # Tell if authentication through request.params is enabled. True by default.
   # config.params_authenticatable = true
@@ -73,7 +61,7 @@ Devise.setup do |config|
   # config.remember_for = 2.weeks
 
   # If true, a valid remember token can be re-used between multiple browsers.
-  # config.remember_across_browsers = true
+  config.remember_across_browsers = true
 
   # If true, extends the user's remember period when remembered via cookie.
   # config.extend_remember_period = false
@@ -105,7 +93,7 @@ Devise.setup do |config|
   # config.lock_strategy = :failed_attempts
 
   # Defines which key will be used when locking and unlocking an account
-  config.unlock_keys = [ :username ]
+  config.unlock_keys = [ :email ]
 
   # Defines which strategy will be used to unlock an account.
   # :email = Sends an unlock link to the user email
@@ -124,7 +112,7 @@ Devise.setup do |config|
   # ==> Configuration for :recoverable
   #
   # Defines which key will be used when recovering the password for an account
-  config.reset_password_keys = [ :username ]
+  config.reset_password_keys = [ :email ]
 
   # Time interval you can reset your password with a reset password key.
   # Don't put a too small interval or your users won't have the time to
