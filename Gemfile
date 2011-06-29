@@ -8,6 +8,9 @@ gem 'uglifier'
 gem 'jquery-rails'
 gem "devise", "= 1.3.3"
 
+gem 'compass', git: 'https://github.com/chriseppstein/compass.git', branch: 'rails31'
+
+
 
 #backbone
 gem "rails-backbone" 
@@ -16,6 +19,7 @@ gem "rails-backbone"
 gem 'rmagick'
 gem 'carrierwave'
 gem 'fog'
+
 
 group :development, :test do
 	gem 'sqlite3'

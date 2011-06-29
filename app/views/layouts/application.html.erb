@@ -15,24 +15,23 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="container">
-    <header>
-      <nav>
+  <div id="container" class="two-col">
+		<section id="header">
+			<nav>
         <ul>
           <%= render 'devise/menu/registration_items' %>
           <%= render 'devise/menu/login_items' %>
         </ul>
       </nav>
-      <%- flash.each do |name, msg| -%>
-        <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-      <%- end -%>
-    </header>
-    <div id="main" role="main">
-				<div id="flash_notice"></div>
+		</section>
+    <section id="page" role="main">
+			 <header>
+		      <%- flash.each do |name, msg| -%>
+		        <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+		      <%- end -%>
+		    </header>
       	<%= yield %>
-    </div>
-    <footer>
-    </footer>
+    </section>
   </div> <!--! end of #container -->
 </body>
 </html>

@@ -1,4 +1,5 @@
 class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
+  
   initialize: (options) ->
     @options = options
     @portfolio = new Stylejonction.Models.Portfolio(options.portfolio)
@@ -9,11 +10,9 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
      
   routes:
     ".*": "default"
-    "font": "edit_font"
     "projects/:id/edit" : "edit_project"
 
   default: ->
-    console.log @action
     eval(@action) 
     @add_preview()
   

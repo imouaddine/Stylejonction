@@ -1,5 +1,8 @@
-<h1>New project</h1>
+<%= render('/portfolio/sidebar') %>
 
-<%= render 'form' %>
+<section id="edit">
+	<%= render 'form' %>
+</section>
 
-<%= link_to 'Back', portfolio_projects_path(@portfolio) %>
+<%= render  "portfolio/preview",  :action => 'new_project'  %>
+

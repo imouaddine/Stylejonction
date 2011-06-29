@@ -1,4 +1,5 @@
-<%= render 'portfolio/actions_menu' %>
-<%= render 'form' %>
-
+<%= render('/portfolio/sidebar') %>
+<section id="edit">
+	<%= render 'form' %>
+</section>
 <%= render  "portfolio/preview",  :action => 'edit_project'  %>
