@@ -6,12 +6,11 @@ Factory.define :user do |u|
     u.encrypted_password "$2a$10$fDyS55n.lu6mMrFhzBe56.ZMXuA3Ls1jnsVObXK/xkvK..."
     u.email "imad@ecomstrategy.ca"
     u.admin false
+    u.association :portfolio
 end
-
 
 Factory.define :portfolio do |p|
     p.sequence(:theme) { |n| n } 
-    p.association :user
 end
 
 

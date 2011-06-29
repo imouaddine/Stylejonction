@@ -4,10 +4,8 @@ class PortfolioControllerTest < ActionController::TestCase
   
   include Devise::TestHelpers
   
-  fixtures :users, :portfolios
-  
   def setup
-    @user = users(:user1)
+    @user = Factory(:user)
     @request.host = "#{@user.username}.stylejonction.com"
   end
   
@@ -48,7 +46,5 @@ class PortfolioControllerTest < ActionController::TestCase
     get :update, {'id' => @user.portfolio.id}
     assert_redirected_to edit_portfolio_path(@portfolio, :notice => 'Portfolio was successfully updated.')
   end
-  
-  
   
 end
