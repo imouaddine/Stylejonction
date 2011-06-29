@@ -1,21 +1,19 @@
 Stylejonction.Views.Portfolios ||= {}
 
-class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View 
+class Stylejonction.Views.Portfolios.EditView extends Backbone.View 
 
-  
   events:
     "change #portfolio_theme": "updateTheme"
-  
-
-     
+    "change #portfolio_theme": "updateFont"
+    
   updateTheme: (e) ->
-    console.log $("#portfolio_theme").val()
-    
-    
     e.preventDefault()
     e.stopPropagation()
-    
-    @options.model.save(
-      {'theme': $("#portfolio_theme").val()},
-    )
-    
+    newTheme = $("#portfolio_theme").val()
+    @options.model.save({'theme': newTheme})
+  
+  updateFont: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    newFont = $("#portfolio_font").val()
+    @options.model.save({'font': newFont})

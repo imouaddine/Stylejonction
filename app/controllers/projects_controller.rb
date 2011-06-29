@@ -31,17 +31,18 @@ class ProjectsController < ApplicationController
   # GET /projects/new.json
   def new
     @project = @portfolio.projects.new
-
+    @project.title = 'new project'
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @project }
     end
+    
   end
 
   # GET /projects/1/edit
   def edit
-    @project = Project.find(params[:id])
-    @portfolio = @project.portfolio
+    @project = @portfolio.projects.find(params[:id])
+    
   end
 
   # POST /projects
@@ -76,7 +77,19 @@ class ProjectsController < ApplicationController
       end
     end
   end
-
+  
+  
+  def upload_cover
+    @project = Project.find(params[:id])
+    respond_to do |format|
+      if @project.update_attributes(params[:project])
+        format.js
+      else
+        render :template => 'portfolio/upload_cover_error'
+      end
+    end
+  end
+    
  
   # DELETE /projects/1
   # DELETE /projects/1.json

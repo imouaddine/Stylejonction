@@ -5,4 +5,7 @@ class Stylejonction.Models.Project extends Backbone.Model
   
 class Stylejonction.Collections.ProjectsCollection extends Backbone.Collection
   model: Stylejonction.Models.Project
-  url: '/projects'
+  url: '/portfolio/:portfolio_id/projects'
+  
+
+    

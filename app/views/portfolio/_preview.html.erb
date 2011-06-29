@@ -1,10 +1,12 @@
-<section id="preview"></div>
+<section id="preview" class="full_width"></section>
 <script type="text/javascript">
   $(function() {
     window.controller = new Stylejonction.Controllers.PortfoliosController({
 			portfolio: <%= @portfolio.to_json.html_safe -%>, 
 			projects: <%= @portfolio.projects.to_json.html_safe -%>,
-			project: <%= @project.to_json.html_safe if @project -%>,
+			<% if @project.present? %>
+			project: <%= @project.to_json.html_safe  -%>,
+			<% end %>
 			action : '<%= action -%>'
 		});
     Backbone.history.start();

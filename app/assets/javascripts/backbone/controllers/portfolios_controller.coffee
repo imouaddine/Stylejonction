@@ -4,6 +4,7 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
     @options = options
     @portfolio = new Stylejonction.Models.Portfolio(options.portfolio)
     @projects = new Stylejonction.Collections.ProjectsCollection()
+    @projects.url = @projects.url.replace ':portfolio_id', @portfolio.id
     @projects.refresh options.projects
     @action = "this." + options.action+'()'
     
@@ -17,28 +18,13 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
     @add_preview()
   
   edit_portfolio: ->
-    @view = new Stylejonction.Views.Portfolios.EditView(model: @portfolio, el: '#edit_portfolio_3')
+    @view = new Stylejonction.Views.Portfolios.EditView(model: @portfolio, el: '#edit')
     
-  
   edit_project: ->
     @project = @projects.get(@options.project.id)
-    @view = new Stylejonction.Views.Projects.EditView(model: @project, el: '#main')
-
+    @view = new Stylejonction.Views.Projects.EditView(model: @project, el: '#edit')
     
-    
-    
-
-
-  
-    
-  edit_font: ->
-    @view = new Stylejonction.Views.Portfolios.EditFontView(model: @portfolio)
-    $("#stage").html(@view.render().el)
-   
-    
- 
-    
-    
+  new_project: ->
     
   add_preview: ->
     @view = new Stylejonction.Views.Portfolios.PreviewView(projects: @projects, portfolio: @portfolio)
