@@ -1,5 +1,4 @@
 class ProjectsController < ApplicationController
-  
   before_filter :authenticate_user!, :except => [:index, :show]
   before_filter :get_portfolio
   skip_before_filter :verify_authenticity_token
@@ -29,19 +28,14 @@ class ProjectsController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @project }
     end
-    
-  end
-
-  def edit
-    @project = @portfolio.projects.find(params[:id])
   end
 
   def create
-    @project = Project.new(params[:project])
+    @project = @portfolio.projects.new(params[:project])
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to portfolio_project_path(@portfolio, @project), notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
         format.js
       else
@@ -49,6 +43,10 @@ class ProjectsController < ApplicationController
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def edit
+    @project = @portfolio.projects.find(params[:id])
   end
 
   def update

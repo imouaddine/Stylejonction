@@ -44,7 +44,7 @@ class PortfolioControllerTest < ActionController::TestCase
   test "should get update when user is authenticated " do
     sign_in @user
     get :update, {'id' => @user.portfolio.id}
-    assert_redirected_to edit_portfolio_path(@portfolio, :notice => 'Portfolio was successfully updated.')
+    assert_redirected_to portfolio_path(@portfolio, :notice => 'Portfolio was successfully updated.')
   end
   
 end
