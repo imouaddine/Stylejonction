@@ -19,6 +19,7 @@ tmp/*
 
 
 db/schema.rb
+.rvmrc
 # various artifacts
 **.war
 *.rbc
