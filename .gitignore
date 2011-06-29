@@ -17,6 +17,8 @@ db/*.sqlite3
 /log/*
 tmp/*
 
+
+db/schema.rb
 # various artifacts
 **.war
 *.rbc
