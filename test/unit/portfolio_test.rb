@@ -2,9 +2,9 @@ require 'test_helper'
  
 class PortfolioTest < ActiveSupport::TestCase
   
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "can create a test object from fg" do
+    portfolio = Factory(:portfolio)
+    assert portfolio.valid?
   end
   
   
