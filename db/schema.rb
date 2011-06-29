@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20110623193415) do
     t.integer  "layout"
     t.integer  "theme"
     t.integer  "user_id"
+    t.integer  "font"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

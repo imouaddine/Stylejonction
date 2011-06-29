@@ -21,6 +21,11 @@ class PortfolioControllerTest < ActionController::TestCase
     assert_redirected_to new_user_session_path
   end
   
+  test "should deny access to edit_font " do
+    get :edit_font, {'id' => @user.portfolio.id}
+    assert_redirected_to new_user_session_path
+  end
+  
   test "should deny access to update" do
     post :update, {'id' => @user.portfolio.id}
     assert_redirected_to new_user_session_path
@@ -31,6 +36,12 @@ class PortfolioControllerTest < ActionController::TestCase
     get :edit_layout, {'id' => @user.portfolio.id}
     assert_response :success
   end
+  
+  test "should get edit_font when user is authenticated " do
+     sign_in @user
+     get :edit_font, {'id' => @user.portfolio.id}
+     assert_response :success
+   end
    
   test "should get update when user is authenticated " do
     sign_in @user
