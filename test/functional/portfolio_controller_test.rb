@@ -7,22 +7,35 @@ class PortfolioControllerTest < ActionController::TestCase
   fixtures :users, :portfolios
   
   def setup
-    
-    sign_in @user
-    @request.host = "#{@user.subdomain}.example.com"
+    @user = users(:user1)
+    @request.host = "#{@user.username}.stylejonction.com"
   end
- 
-  
   
   test "should get show" do
-   
-    
-    
     get :show
     assert_response :success
   end
   
-
+  test "should deny access to edit " do
+    get :edit, {'id' => @user.portfolio.id}
+    assert_redirected_to new_user_session_path
+  end
   
+  test "should deny access to update" do
+    post :update, {'id' => @user.portfolio.id}
+    assert_redirected_to new_user_session_path
+  end
+  
+  test "should get edit when user is authenticated " do
+    sign_in @user
+    get :edit, {'id' => @user.portfolio.id}
+    assert_response :success
+  end
+   
+  test "should get update when user is authenticated " do
+    sign_in @user
+    get :update, {'id' => @user.portfolio.id}
+    assert_redirected_to edit_portfolio_path(@portfolio, :notice => 'Portfolio was successfully updated.')
+  end
   
 end

@@ -7,7 +7,7 @@ Stylejonction::Application.routes.draw do
   
  constraints(Subdomain) do
     match '/' => 'portfolio#show'
-    resources :portfolio, :except => :new do
+    resources :portfolio, :only => [:show, :edit, :update] do
          resources :projects do
            member do
               post 'upload_image'
