@@ -7,7 +7,7 @@ class ProjectTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "Should not save project without title" do
     
-    user = users(:imad_mouaddine)
+    user = users(:user1)
     assert user.valid?
     
     portfolio = user.portfolio
