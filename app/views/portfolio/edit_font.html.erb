@@ -1,6 +1,8 @@
+<%= render 'actions_menu' %>
 <%= form_for(@portfolio) do |f| %>
 	<div class="field">
 	   <%= f.label :font %><br />
 	   <%= f.text_field :font %>
 	 </div>
 <% end %>
+<%= render  "preview",  :action => 'edit_portfolio'  %>

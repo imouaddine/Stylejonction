@@ -5,16 +5,16 @@ class PortfolioController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @post }
+      format.json { render json: @portfolio }
     end
   end
 
   def edit_layout 
-     
+   
   end
   
   def edit_font
-  
+    
   end
 
   def update
