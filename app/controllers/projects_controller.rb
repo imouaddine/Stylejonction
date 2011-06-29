@@ -65,7 +65,6 @@ class ProjectsController < ApplicationController
   # PUT /projects/1.json
   def update
     @project = Project.find(params[:id])
-
    
     respond_to do |format|
       if @project.update_attributes(params[:project])
@@ -78,16 +77,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def upload_image
-    logger.info "upload_image"
-    @project = Project.find(params[:id])
-    respond_to do |format|
-      if @project.update_attributes(params[:project])
-        logger.info @project
-        format.js 
-      end
-    end
-  end
+ 
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
