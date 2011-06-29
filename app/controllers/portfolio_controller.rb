@@ -4,7 +4,7 @@ class PortfolioController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html # show.html.erb
+      format.html 
       format.json { render json: @portfolio }
     end
   end
@@ -28,8 +28,5 @@ class PortfolioController < ApplicationController
         end
       end
   end
-  
-  
- 
   
 end

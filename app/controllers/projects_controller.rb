@@ -4,9 +4,6 @@ class ProjectsController < ApplicationController
   before_filter :get_portfolio
   skip_before_filter :verify_authenticity_token
   
-  
-  # GET /projects
-  # GET /projects.json
   def index
     @projects = @portfolio.projects
 
@@ -16,8 +13,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
   def show
     @project = @portfolio.projects.find(params[:id])
 
@@ -27,8 +22,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/new
-  # GET /projects/new.json
   def new
     @project = @portfolio.projects.new
     @project.title = 'new project'
@@ -39,14 +32,10 @@ class ProjectsController < ApplicationController
     
   end
 
-  # GET /projects/1/edit
   def edit
     @project = @portfolio.projects.find(params[:id])
-    
   end
 
-  # POST /projects
-  # POST /projects.json
   def create
     @project = Project.new(params[:project])
 
@@ -62,8 +51,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PUT /projects/1
-  # PUT /projects/1.json
   def update
     @project = Project.find(params[:id])
    
@@ -91,8 +78,6 @@ class ProjectsController < ApplicationController
   end
     
  
-  # DELETE /projects/1
-  # DELETE /projects/1.json
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
