@@ -22,13 +22,14 @@ a{
 
 .two-col{
    @include container;
-   #header, #footer{
+   #header, #footer, #preview{
      @include column(8)
    }
    #sidebar{
      @include column(2);
    }
-   #content{
+   #content, #edit{
       @include column(6, true);
    }
+ 
 }

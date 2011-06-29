@@ -5,9 +5,11 @@
 		<li>
 			<a href="#" >Project</a>
 			<ul>
-				<%  @portfolio.projects.each do |project| %>
-					<li><%= link_to project.title, edit_portfolio_project_path(@portfolio, project) %></li>
-				<% end %>
+				 	<% @portfolio.projects.each do |project| %>
+						<% if !project.new_record? %>
+							<li><%= link_to project.title, edit_portfolio_project_path(@portfolio, project) %></li>
+						<% end %>
+					<% end %>
 					<li><%= link_to 'New project', new_portfolio_project_path(@portfolio) %></li>
 			</ul>
 			

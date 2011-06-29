@@ -12,7 +12,11 @@ Stylejonction::Application.routes.draw do
         get 'edit_layout'
         get 'edit_font'
       end
-      resources :projects 
+      resources :projects  do
+        member do
+         match 'upload_cover'
+        end
+      end
    end
  end
   

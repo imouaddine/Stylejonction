@@ -22,7 +22,7 @@ module ApplicationHelper
      <script type='text/javascript'>
        $(document).ready(function() {
          $('#project_cover').uploadify({
-           script          : '/projects/#{@project.id}/upload_image.js',
+           script          : '/portfolio/#{@portfolio.id}/projects/#{@project.id}/upload_cover.js',
            fileDataName    : 'project[cover]',
            uploader        : '/uploadify/uploadify.swf',
            cancelImg       : '/assets/images/cancel.png',
