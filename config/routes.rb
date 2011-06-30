@@ -6,8 +6,8 @@ Stylejonction::Application.routes.draw do
  match '#/:page' => 'pages#:page', :as => :page
   
  constraints(Subdomain) do
-    match '/' => 'portfolio#show'
-    resources :portfolio, :only => [:show, :edit, :update] do
+    match '/' => 'portfolio#new'
+    resources :portfolio, do
       member do 
         get 'edit_layout'
         get 'edit_font'
