@@ -1,16 +1,16 @@
 <nav id="portfolio_menu" class="actions_menu">
 	<ul>
-		<li><%= link_to 'Layout', edit_layout_portfolio_path(@portfolio) %></li>
-		<li><%= link_to 'Font', edit_font_portfolio_path(@portfolio) %></li>
+		<li><%= active_link_to 'Layout', edit_layout_portfolio_path(@portfolio) %></li>
+		<li><%= active_link_to 'Font', edit_font_portfolio_path(@portfolio) %></li>
 		<li>
 			<a href="#" >Project</a>
 			<ul>
 				 	<% @portfolio.projects.each do |project| %>
 						<% if !project.new_record? %>
-							<li><%= link_to project.title, edit_portfolio_project_path(@portfolio, project) %></li>
+							<li><%= active_link_to project.title, edit_portfolio_project_path(@portfolio, project) %></li>
 						<% end %>
 					<% end %>
-					<li><%= link_to 'New project', new_portfolio_project_path(@portfolio) %></li>
+					<li><%= active_link_to 'New project', new_portfolio_project_path(@portfolio) %></li>
 			</ul>
 			
 		</li>

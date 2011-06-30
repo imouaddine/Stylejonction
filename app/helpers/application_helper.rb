@@ -45,4 +45,15 @@ module ApplicationHelper
 
      }.gsub(/[\n ]+/, ' ').strip.html_safe
    end
+   
+   
+   def section_link(body, url, html_options = {})
+       if html_options[:action] == @current_action and html_options[:controller] == @current_controller
+          html_options[:class] = 'selected'
+          link_to(body, url, html_options)
+       else
+         link_to(body, url, html_options)
+       end
+   end
+   
 end

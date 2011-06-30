@@ -153,15 +153,25 @@ a{
   border: 1px solid #c3d4db;
   border-top: 0;
   background: #f2f2f2 url('images/main_bg.png') repeat-y;
- 
-   @include border-bottom-right-radius(4px);
-   @include border-bottom-left-radius(4px);
-   @include box-shadow;
-   @include clearfix;
+  @include border-bottom-right-radius(4px);
+  @include border-bottom-left-radius(4px);
+  @include box-shadow;
+  @include clearfix;
 }
 
 #sidebar{
-   @include column(5);
+  @include column(5);
+  #portfolio_menu{
+    margin-top: 20px;
+    a{
+      @include link-colors(#5c6f7c);
+      text-align: center;
+      display: block;
+      &.active{
+       background: #ededed;
+     }
+    }
+  }
 }
 #edit{
   @include column(18, true);

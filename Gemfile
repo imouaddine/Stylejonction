@@ -10,7 +10,7 @@ gem "devise", "= 1.3.3"
 
 gem 'compass', git: 'https://github.com/chriseppstein/compass.git', branch: 'rails31'
 
-
+gem 'active_link_to'
 
 #backbone
 gem "rails-backbone" 
