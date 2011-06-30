@@ -14,15 +14,17 @@ class ProjectsControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  # test "should get new when user is authenticated" do
-  #   sign_in @user
-  #   get :new, :portfolio_id => 1 
-  #   assert_response :success
-  # end
+  test "should get new when user is authenticated" do
+    sign_in @user
+    get :new, :portfolio_id => 1 
+    assert_response :success
+  end
   
-  
-   
-   
-  
-  
+  test "should destroy project" do
+    sign_in @user
+    project = Factory(:project, :portfolio => @portfolio)
+    assert_difference('Project.count', -1) do
+      delete :destroy, :portfolio_id => @portfolio.id, :id => project.id
+    end 
+  end 
 end

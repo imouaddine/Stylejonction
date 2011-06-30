@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
     @projects = @portfolio.projects
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html 
       format.json { render json: @projects }
     end
   end
@@ -81,7 +81,7 @@ class ProjectsController < ApplicationController
     @project.destroy
 
     respond_to do |format|
-      format.html { redirect_to projects_url }
+      format.html { redirect_to portfolio_path(@portfolio) }
       format.json { head :ok }
     end
   end
