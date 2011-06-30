@@ -41,10 +41,15 @@ class PortfolioControllerTest < ActionController::TestCase
      assert_response :success
    end
    
-  test "should get update when user is authenticated " do
+  test "should update portfolio" do
     sign_in @user
-    get :update, {'id' => @user.portfolio.id}
+    @user.portfolio.theme = 2
+    @user.portfolio.save
+
+    get :update, {'id' => @user.portfolio.id, :portfolio => {:theme => 10} }
     assert_redirected_to portfolio_path(@portfolio, :notice => 'Portfolio was successfully updated.')
+    @user.reload
+    assert_equal 10, @user.portfolio.theme
   end
   
 end
