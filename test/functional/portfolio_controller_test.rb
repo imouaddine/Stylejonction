@@ -9,10 +9,6 @@ class PortfolioControllerTest < ActionController::TestCase
     @request.host = "#{@user.username}.stylejonction.com"
   end
   
-  test "should get show" do
-    get :show
-    assert_response :success
-  end
   
   test "should deny access to edit_layout " do
     get :edit_layout, {'id' => @user.portfolio.id}
@@ -50,6 +46,16 @@ class PortfolioControllerTest < ActionController::TestCase
     assert_redirected_to portfolio_path(@portfolio, :notice => 'Portfolio was successfully updated.')
     @user.reload
     assert_equal 10, @user.portfolio.theme
+  end
+
+  test "should be able to create a new portfolio" do
+    sign_in @user
+    assert_difference("Portfolio.count", 1) do
+      post :create, {:portfolio => { :layout => 1,
+        :theme => 10,
+        :font => 12,
+        :user_id => @user.id } }
+    end
   end
   
 end
