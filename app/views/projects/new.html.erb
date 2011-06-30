@@ -5,6 +5,10 @@
 <section id="edit">
 	<%= render 'form' %>
 </section>
+<% content_for :preview do %>
+  <%= render  "portfolio/preview",  :action => 'new_project'  %>
+<% end %>
 
-<%= render  "portfolio/preview",  :action => 'new_project'  %>
+
+
 

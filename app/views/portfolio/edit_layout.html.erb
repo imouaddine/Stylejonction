@@ -8,5 +8,6 @@
 		 </div>
 	<% end %>
 </section>
-
-<%= render  "preview",  :action => 'edit_portfolio'  %>
+<% content_for :preview do %>
+  <%= render  "preview",  :action => 'edit_portfolio'  %>
+<% end %>

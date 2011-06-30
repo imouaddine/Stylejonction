@@ -7,5 +7,7 @@
 		 </div>
 	<% end %>
 </section>
+<% content_for :preview do %>
+  <%= render  "preview",  :action => 'edit_portfolio'  %>
+<% end %>
 
-<%= render  "preview",  :action => 'edit_portfolio'  %>

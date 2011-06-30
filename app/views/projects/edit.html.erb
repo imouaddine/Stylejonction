@@ -2,4 +2,7 @@
 <section id="edit">
 	<%= render 'form' %>
 </section>
-<%= render  "portfolio/preview",  :action => 'edit_project'  %>
+<% content_for :preview do %>
+  <%= render  "portfolio/preview",  :action => 'edit_project'  %>
+<% end %>
+

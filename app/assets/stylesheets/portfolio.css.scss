@@ -46,7 +46,6 @@ a{
 }
 #header{
   width: 100%;
-
   
   #toolbar{
     height: 25px;
@@ -113,7 +112,7 @@ a{
           line-height: $height;
           display: block;
           border-right: 1px solid #c9c8c8;
-          width: span(5);
+          width: span(5) + 3px;
           text-align: center;
           @include link-colors(#a8a8a8);
           text-transform: uppercase;
@@ -132,7 +131,7 @@ a{
       }
       li.secondary{
         a{
-           width: span(2) + 1px ;
+           width: span(2) - 5px ;
            color: $pink-color;
            text-transform: none;
            font-size: 17px;
@@ -153,18 +152,21 @@ a{
   margin-top: -2px;
   border: 1px solid #c3d4db;
   border-top: 0;
-  background: #f2f2f2;
+  background: #f2f2f2 url('images/main_bg.png') repeat-y;
  
    @include border-bottom-right-radius(4px);
    @include border-bottom-left-radius(4px);
    @include box-shadow;
+   @include clearfix;
 }
 
 #sidebar{
-   @include column($blueprint-grid-columns);
- }
- #content, #edit{
-    @include column($blueprint-grid-columns/3, true);
- }
-
+   @include column(5);
+}
+#edit{
+  @include column(18, true);
+}
+#preview{
+  margin-top: 20px;
+}
 
