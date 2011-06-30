@@ -4,7 +4,7 @@ class PortfolioController < ApplicationController
 
   def new
     if !current_user.portfolio.nil? 
-      redirect_to(portfolio_path(@user.portfolio), :notice => "You already, have a portfolio")
+      redirect_to( portfolio_path(@user.portfolio), :notice => "You already, have a portfolio")
     else
       @portfolio = Portfolio.new
     end

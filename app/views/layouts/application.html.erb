@@ -15,23 +15,51 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="container" class="two-col">
-		<section id="header">
-			<nav>
-        <ul>
-          <%= render 'devise/menu/registration_items' %>
-          <%= render 'devise/menu/login_items' %>
-        </ul>
-      </nav>
-		</section>
+  <div id="wrapper" >
+	
     <section id="page" role="main">
-			 <header>
-		      <%- flash.each do |name, msg| -%>
-		        <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-		      <%- end -%>
-		    </header>
-      	<%= yield %>
+    	 <header id="header">
+  			  <nav id="toolbar">
+            <ul class="secondary_links">
+							<li> Questions? </li>
+							<li><a href="#">FAQ</a></li>
+							<li><a href="#"> Agent Online</a></li>
+							<li><a href="#">Contact us</a></li>
+						</ul>
+						<ul class="login_links">
+              <%= render 'devise/menu/registration_items' %>
+              <%= render 'devise/menu/login_items' %>
+            </ul>
+          </nav>
+          <div id="logo">
+              <%= link_to image_tag('images/logo.png'), '/' %>
+          </div>
+					<h1 id="title">
+						<em><%= current_user.full_name %></em>'s portfolio
+					</h1>
+  	 	 </header>
+			 <div>
+			    <%- flash.each do |name, msg| -%>
+ 		        <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+ 		      <%- end -%>
+			 </div>
+				<nav id="main_nav">
+					<ul>
+						<li class="first selected">
+							<%= link_to 'Portfolio', edit_layout_portfolio_path(current_user.portfolio) %>
+						</li>
+						<li><a href="#">Blog</a></li>
+						<li><a href="#">Resume</a></li>
+						<li><a href="#">Business Card</a></li>
+						<li class="secondary"><%= link_to('profile', edit_user_registration_path) %></li>
+						<li class="last secondary"><a href="#">stats</a></li>
+					</ul>
+				</nav>
+			 <div id="main">
+				
+          <%= yield %>
+       </div>
     </section>
-  </div> <!--! end of #container -->
+  </div> 
 </body>
 </html>

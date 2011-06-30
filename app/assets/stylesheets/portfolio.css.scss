@@ -1,37 +1,170 @@
 // Place all the styles related to the portfolio controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$blueprint-grid-columns : 24;
+$blueprint-grid-width   : 30px;
+$blueprint-grid-margin  : 10px;
+$font-color             : #444;
+$link-color             : #999;
+$default-box-shadow-color: #CCC;
+$default-box-shadow-blur: 3px;
+$pink-color             : #ec5f89;
+
+//Text-shadow
+$default-text-shadow-color: white;
+$default-text-shadow-blur : 1px;
+
+@import "blueprint";
+
+@import "compass/reset";
+@import "compass/layout/grid-background";
+
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
+@import "compass/css3/text-shadow";
+
+@import "compass/typography/links";
+@import "compass/typography/lists/horizontal-list";
 
 
 
 
+body{
 
-.uploadifyQueueItem {
-	font: 11px Verdana, Geneva, sans-serif;
-	border: 2px solid #E5E5E5;
-	background-color: #F5F5F5;
-	margin-top: 5px;
-	padding: 10px;
-	width: 350px;
+   background: #f2f2f2 url('images/grid_bg.png') repeat;
+   font-family: 'Calibri', 'Helvetica Neue', Arial, Helvetica, sans-serif
 }
-.uploadifyError {
-	border: 2px solid #FBCBBC !important;
-	background-color: #FDE5DD !important;
+a{
+  @include hover-link;
+  @include link-colors(#00c, #0cc, #c0c, #ccc, #cc0)
 }
-.uploadifyQueueItem .cancel {
-	float: right;
+#wrapper{
+  background: transparent url('images/header_bg.png') repeat-x;
 }
-.uploadifyProgress {
-	background-color: #FFFFFF;
-	border-top: 1px solid #808080;
-	border-left: 1px solid #808080;
-	border-right: 1px solid #C5C5C5;
-	border-bottom: 1px solid #C5C5C5;
-	margin-top: 10px;
-	width: 100%;
+#page{
+  @include container;
 }
-.uploadifyProgressBar {
-	background-color: #0099FF;
-	width: 1px;
-	height: 3px;
+#header{
+  width: 100%;
+
+  
+  #toolbar{
+    height: 25px;
+    line-height: 23px;
+    font-size: 12px;
+    color: #bbcad3;
+    font-style: italic;
+    a{
+      font-style: normal;
+      @include link-colors(#FFF);
+      
+      display: block;
+      height: 24px;
+    }
+    ul{
+      @include horizontal-list-container;
+      li{
+         @include horizontal-list-item(0px);
+      }
+    }
+    .secondary_links{
+      float: left;
+      a{
+        padding: 0 10px 0 9px;
+        background: transparent url('images/toolbar_border_bg.png') no-repeat right;
+      }
+    }
+    .login_links{
+      float: right;
+      
+    }
+  }
+  #logo{
+    text-align: center;
+  }
+  #title{
+    @include text-shadow;
+    color: #72828c;
+    font-weight: normal;
+    font-size: 21px;
+    margin: 10px 0;
+    em{
+      color: #5c707c;
+      font-style: normal;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
 }
+
+#main_nav{
+    background:#e7e7e7 url('images/nav_bg.png') repeat-x;
+    $height: 39px;
+    height: $height;
+    border-right: 1px solid #e1e1e1;
+    border-left: 1px solid #e1e1e1;
+    ul{
+      
+      @include horizontal-list-container;
+      li{
+        @include horizontal-list-item;
+        a{
+          height: $height - 2px;
+          line-height: $height;
+          display: block;
+          border-right: 1px solid #c9c8c8;
+          width: span(5);
+          text-align: center;
+          @include link-colors(#a8a8a8);
+          text-transform: uppercase;
+          font-size: 24px;
+          font-family: 'Alternate Gothic LT Two', Helvetica;
+          &:hover{
+            text-decoration: none;
+          }
+        }
+        
+      }
+      li.selected a{
+        background:$pink-color    url('images/nav_bg_selected.png') repeat-x;
+        @include link-colors(#FFF);
+        @include text-shadow(0);
+      }
+      li.secondary{
+        a{
+           width: span(2) + 1px ;
+           color: $pink-color;
+           text-transform: none;
+           font-size: 17px;
+           font-style: italic;
+           font-family: Calibri, Helvetica;
+        }
+      }
+      li.last{
+        a{
+          border-right: 0;
+        }
+      }
+    }
+}
+
+
+#main{
+  margin-top: -2px;
+  border: 1px solid #c3d4db;
+  border-top: 0;
+  background: #f2f2f2;
+ 
+   @include border-bottom-right-radius(4px);
+   @include border-bottom-left-radius(4px);
+   @include box-shadow;
+}
+
+#sidebar{
+   @include column($blueprint-grid-columns);
+ }
+ #content, #edit{
+    @include column($blueprint-grid-columns/3, true);
+ }
+
+
