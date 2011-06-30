@@ -9,13 +9,8 @@ class PortfolioController < ApplicationController
     end
   end
 
-  def edit_layout 
-    
-  end
-  
-  def edit_font
-    
-  end
+  def edit_layout; end
+  def edit_font; end
 
   def update
       respond_to do |format|
