@@ -2,17 +2,23 @@ class User < ActiveRecord::Base
   
   has_one :portfolio
   
-  
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  after_create :create_default_portfolio 
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :first_name, :last_name, :email, :password, :password_confirmation, :remember_me
   
   
   def full_name
    "#{first_name} #{last_name}"
+  end
+
+
+  private 
+
+  def create_default_portfolio
+    self.portfolio = Portfolio.new(:user => self)
+    self.portfolio.save
   end
 end
