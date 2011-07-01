@@ -6,3 +6,6 @@
  *= require_tree . 
 */
 
+.hidden{
+  display: none;
+}

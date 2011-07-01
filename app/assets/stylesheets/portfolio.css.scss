@@ -1,23 +1,35 @@
 // Place all the styles related to the portfolio controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$pink-color             : #ec5f89;
+$blue-color             : #5b6f7b;
+$gray-color             : #757575;
+
+$font-color             : #444444;
+$link-color             : $blue-color ;
+
+
 $blueprint-grid-columns : 24;
 $blueprint-grid-width   : 30px;
 $blueprint-grid-margin  : 10px;
-$font-color             : #444;
-$link-color             : #999;
+
+
 $default-box-shadow-color: #CCC;
 $default-box-shadow-blur: 3px;
-$pink-color             : #ec5f89;
 
 //Text-shadow
 $default-text-shadow-color: white;
 $default-text-shadow-blur : 1px;
 
+$font-family-primary: 'Calibri', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+$font-family-secondary: 'Alternate Gothic LT Two', Helvetica;
+
 @import "blueprint";
 
 @import "compass/reset";
 @import "compass/layout/grid-background";
+@import "compass/layout/sticky-footer";
 
 @import "compass/css3/border-radius";
 @import "compass/css3/box-shadow";
@@ -26,13 +38,17 @@ $default-text-shadow-blur : 1px;
 @import "compass/typography/links";
 @import "compass/typography/lists/horizontal-list";
 
+@mixin fancy-border-bottom($border-color: #e1e1e1){
+   border-bottom: 1px solid #e1e1e1;
+   @include single-box-shadow(white, 0px, 1px, 0px, false, false);
+}
 
 
 
 body{
 
    background: #f2f2f2 url('images/grid_bg.png') repeat;
-   font-family: 'Calibri', 'Helvetica Neue', Arial, Helvetica, sans-serif
+   font-family: $font-family-primary;
 }
 a{
   @include hover-link;
@@ -42,11 +58,11 @@ a{
   background: transparent url('images/header_bg.png') repeat-x;
 }
 #page{
-  @include container;
+  
 }
 #header{
   width: 100%;
-  
+  @include container;
   #toolbar{
     height: 25px;
     line-height: 23px;
@@ -100,11 +116,20 @@ a{
     background:#e7e7e7 url('images/nav_bg.png') repeat-x;
     $height: 39px;
     height: $height;
-    border-right: 1px solid #e1e1e1;
-    border-left: 1px solid #e1e1e1;
+    @include container;
+    
     ul{
       
       @include horizontal-list-container;
+      li.first{
+        a{
+          width: span(5) + 4px;
+          &.active{
+            border-left: 1px solid #eb5f89;
+          }
+        }
+        
+      }
       li{
         @include horizontal-list-item;
         a{
@@ -117,14 +142,14 @@ a{
           @include link-colors(#a8a8a8);
           text-transform: uppercase;
           font-size: 24px;
-          font-family: 'Alternate Gothic LT Two', Helvetica;
+          font-family: $font-family-secondary;
           &:hover{
             text-decoration: none;
           }
         }
         
       }
-      li.selected a{
+      li.active a{
         background:$pink-color    url('images/nav_bg_selected.png') repeat-x;
         @include link-colors(#FFF);
         @include text-shadow(0);
@@ -136,19 +161,18 @@ a{
            text-transform: none;
            font-size: 17px;
            font-style: italic;
-           font-family: Calibri, Helvetica;
+           font-family: $font-family-primary;
         }
       }
       li.last{
-        a{
-          border-right: 0;
-        }
+        
       }
     }
 }
 
 
 #main{
+  @include container;
   margin-top: -2px;
   border: 1px solid #c3d4db;
   border-top: 0;
@@ -162,21 +186,94 @@ a{
 #sidebar{
   @include column(5);
   #portfolio_menu{
-    margin-top: 20px;
+    margin-top: 40px;
     a{
-      @include link-colors(#5c6f7c);
+      height: 40px;
+      line-height: 40px;
+      margin: 0 -3px;
+     
       text-align: center;
       display: block;
+      @include fancy-border-bottom;
+      @include link-colors(#757575);
       &.active{
+       font-style: italic;
+       font-weight: bold;
        background: #ededed;
+       @include link-colors($blue-color);
+     }
+     &.last{
+       border-bottom: 0;
+       @include single-box-shadow(false, 0, 0, 0);
      }
     }
+    .active {
+      ul{
+        display: block;
+      }
+    }
   }
+  .separator{
+    text-align: center;
+    margin: 20px 0;
+  }
+  section{
+    color: $gray-color;
+    padding-bottom: 20px;
+    text-align: center;
+    font-size: 14px;
+    header h1{
+      font-size: 24px;
+      text-transform: uppercase;
+      color: $blue-color;
+      font-family: $font-family-secondary;
+      margin-bottom: 10px;
+    }
+  } 
+  #video_guide{
+    margin: 0 auto;
+  
+    figure{
+     padding: 10px 0;
+     @include fancy-border-bottom;
+     figcaption{
+         width: 140px;
+         margin: 0 auto;
+     }
+    }
+    figure.last{
+      border-bottom: 0;
+      @include single-box-shadow(false, 0, 0, 0);
+    }
+  }
+  
 }
+
 #edit{
   @include column(18, true);
 }
+#preview_wrapper{
+  margin-top: 0px;
+
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
 #preview{
-  margin-top: 20px;
+    background: white;
+}
+#separator{
+  background: transparent url('images/sep_bg.png') repeat-x;
+  height: 15px;
+  width: 100%;
+  margin-top: -5px;
+ 
+  @include fancy-border-bottom;
+  @include single-box-shadow( rgba(0, 0, 0, 0.1) );
+  text-align: center;
+  padding-top: 3px;
+  #dragger{
+    cursor: move;
+  }
 }
 
