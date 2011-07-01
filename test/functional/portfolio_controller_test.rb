@@ -48,14 +48,4 @@ class PortfolioControllerTest < ActionController::TestCase
     assert_equal 10, @user.portfolio.theme
   end
 
-  test "should be able to create a new portfolio" do
-    sign_in @user
-    assert_difference("Portfolio.count", 1) do
-      post :create, {:portfolio => { :layout => 1,
-        :theme => 10,
-        :font => 12,
-        :user_id => @user.id } }
-    end
-  end
-  
 end

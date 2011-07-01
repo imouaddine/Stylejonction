@@ -5,4 +5,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def index
+    redirect_to "/portfolio/edit" 
+  end
+
 end

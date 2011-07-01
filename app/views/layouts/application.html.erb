@@ -35,7 +35,9 @@
               <%= link_to image_tag('images/logo.png'), '/' %>
           </div>
 					<h1 id="title">
+                      <%- if user_signed_in? -%>
 						<em><%= current_user.full_name %></em>'s portfolio
+                      <% end %>
 					</h1>
   	 	 </header>
 			 <div>
@@ -43,11 +45,12 @@
  		        <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
  		      <%- end -%>
 			 </div>
+		 	 <%- if user_signed_in? %>
 				<nav id="main_nav">
 					<ul>
-						<li class="first active">
-							<%= link_to 'Portfolio', edit_layout_portfolio_path(current_user.portfolio), :class => 'active' %>
-						</li>
+					 	<li class="first active">
+               <%= link_to 'Portfolio', edit_layout_portfolio_path(current_user.portfolio), :class => 'active' %>
+            </li>
 						<li><a href="#">Blog</a></li>
 						<li><a href="#">Resume</a></li>
 						<li><a href="#">Business Card</a></li>
@@ -55,6 +58,7 @@
 						<li class="last secondary"><a href="#">stats</a></li>
 					</ul>
 				</nav>
+			 <% end %>
 			 <div id="main">
           <%= yield %>
        </div>
