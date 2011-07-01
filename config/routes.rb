@@ -3,10 +3,12 @@ Stylejonction::Application.routes.draw do
  
  devise_for :users
  
+ match "/users" => "users#index"
+
  match '#/:page' => 'pages#:page', :as => :page
   
  constraints(Subdomain) do
-    match '/' => 'portfolio#new'
+    match '/' => 'portfolio#show'
     resources :portfolio, do
       member do 
         get 'edit_layout'
