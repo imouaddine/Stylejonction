@@ -181,6 +181,8 @@ a{
   @include border-bottom-left-radius(4px);
   @include box-shadow;
   @include clearfix;
+  
+   padding-bottom: 500px;
 }
 
 #sidebar{
@@ -251,16 +253,16 @@ a{
 
 #edit{
   @include column(18, true);
+ 
 }
 #preview_wrapper{
-  margin-top: 0px;
 
-  position: absolute;
-  bottom: 0;
+  position: fixed;
   width: 100%;
 }
 #preview{
     background: white;
+    height: 100%;
 }
 #separator{
   background: transparent url('images/sep_bg.png') repeat-x;
@@ -276,4 +278,20 @@ a{
     cursor: move;
   }
 }
+.ui-resizable-n{
+  background: transparent url('images/sep_bg.png') repeat-x;
+   height: 15px;
+   width: 100%;
+   margin-top: -5px;
 
+   @include fancy-border-bottom;
+   @include single-box-shadow( rgba(0, 0, 0, 0.1) );
+   text-align: center;
+   padding-top: 3px;
+   #dragger{
+     cursor: move;
+   }
+}
+.ui-resizable-handle{
+  width: 10px;
+}

@@ -14,3 +14,17 @@
 //= require backbone_datalink
 //= require backbone/stylejonction
 //= require_tree .
+
+$(window).bind("load", function() { 
+      $("#preview_wrapper").pinFooter();
+      initialOffset = $("#preview_wrapper").offset();
+      initialHeight = $("#preview_wrapper").height();
+     
+               
+});
+$(window).bind("resize", function() { 
+      $("#preview_wrapper").pinFooter();
+
+     
+               
+});

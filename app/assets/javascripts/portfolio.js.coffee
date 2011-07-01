@@ -2,12 +2,27 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
-  $("#separator").draggable({ axis: "y" })
+  
+  $("#preview_wrapper").draggable({ axis: "y" })
+  $('#preview_wrapper').bind 'drag', (event, ui) =>
+    offset = {left: 0, top: ui.offset.top}
+    $("#preview_wrapper").offset(offset)
+    $("#preview_wrapper").height( $(document).height() - ui.offset.top )
+    $("#preview").height( $(document).height() - ui.offset.top)
     
-  $('#separator').bind 'drag', (event, ui) =>
-      console.log ui
-      offset = {left: 0, top: -ui.position.top}
-      $("#preview_wrapper").offset(offset)
-      $("#preview_wrapper").height(ui.offset.top)
-      $("#preview").height(ui.offset.top)
+  $("#dragger").dblclick -> 
+    console.log 'DBLICK'
+    console.log initialOffset
+    console.log initialHeight
+    #$("#preview_wrapper").offset(initialOffset)
+    $("#preview_wrapper").height(initialHeight)
+    $("#preview_wrapper").animate({top: initialOffset.top}, 1000) #.animate({height:initialHeight}, 2000)
+   
+    
+    
+    
+      
+
+  
+
   
