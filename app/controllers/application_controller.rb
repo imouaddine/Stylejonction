@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     if params[:user].present?
       usr = User.find_by_email(params[:user][:email])
-      request.url.gsub(/\/\//, "//#{usr.username}.").gsub(/www\./, "")
+      redirect_url = request.url.gsub(/\/\//, "//#{usr.username}.").gsub(/www\./, "")
+      return redirect_url.gsub(/users\/sign_in/, "portfolio/edit")
     else
       "/"
     end
