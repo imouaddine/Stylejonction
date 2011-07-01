@@ -35,7 +35,9 @@
               <%= link_to image_tag('images/logo.png'), '/' %>
           </div>
 					<h1 id="title">
+                      <%- if user_signed_in? -%>
 						<em><%= current_user.full_name %></em>'s portfolio
+                      <% end %>
 					</h1>
   	 	 </header>
 			 <div>
@@ -45,9 +47,11 @@
 			 </div>
 				<nav id="main_nav">
 					<ul>
-						<li class="first selected">
-							<%= section_link 'Portfolio', edit_layout_portfolio_path(current_user.portfolio) %>
-						</li>
+                        <%- if user_signed_in? %>
+                          <li class="first selected">
+                              <%= section_link 'Portfolio', edit_layout_portfolio_path(current_user.portfolio) %>
+                          </li>
+                        <% end %>
 						<li><a href="#">Blog</a></li>
 						<li><a href="#">Resume</a></li>
 						<li><a href="#">Business Card</a></li>

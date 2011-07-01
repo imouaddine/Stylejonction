@@ -11,6 +11,7 @@ end
 
 Factory.define :portfolio do |p|
     p.sequence(:theme) { |n| n } 
+    p.font 10
 end
 
 
