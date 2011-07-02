@@ -5,6 +5,9 @@ class Portfolio < ActiveRecord::Base
   belongs_to :user
   has_many :projects
 
+  def has_saved_project?
+    projects.present? && !projects.first.new_record?
+  end
    
    
 end

@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = @portfolio.projects.new
+    @project = Project.new
     @project.title = 'new project'
     respond_to do |format|
       format.html # new.html.erb
@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to portfolio_project_path(@portfolio, @project), notice: 'Project was successfully created.' }
+        format.html { redirect_to portfolio_project_path(@project), notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
         format.js
       else
@@ -51,10 +51,10 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-   
+    logger.info @project.inspect 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.html { redirect_to portfolio_project_path(@project), notice: 'Project was successfully updated.' }
         format.json { render json: @project}
       else
         format.html { render action: "edit" }
@@ -70,7 +70,7 @@ class ProjectsController < ApplicationController
       if @project.update_attributes(params[:project])
         format.js
       else
-        render :template => 'portfolio/upload_cover_error'
+        render :template => 'portfolios/upload_cover_error'
       end
     end
   end
@@ -81,7 +81,7 @@ class ProjectsController < ApplicationController
     @project.destroy
 
     respond_to do |format|
-      format.html { redirect_to portfolio_path(@portfolio) }
+      format.html { redirect_to portfolio_path }
       format.json { head :ok }
     end
   end

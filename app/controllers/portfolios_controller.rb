@@ -3,10 +3,6 @@ class PortfoliosController < ApplicationController
   before_filter :authenticate_user!, :except => [:show]
 
   def show
-    if params[:id].present?
-      @portfolio = @user.portfolio
-    end
-
     respond_to do |format|
       format.html 
       format.json { render json: @portfolio }
@@ -26,7 +22,7 @@ class PortfoliosController < ApplicationController
         format.html { redirect_to portfolio_path, notice: 'Portfolio was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "show" }
         format.json { render json: @portfolio.errors, status: :unprocessable_entity }
       end
     end

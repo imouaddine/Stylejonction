@@ -1,8 +1,7 @@
 <%= render('sidebar') %>
 
 <section id="edit" class="edit_portfolio_layout">
-	<%= form_for(@portfolio) do |f| %>
-	
+  <%= form_for(@portfolio, :url => portfolio_path) do |f| %>
 		<fieldset class="edit_portfolio_bg">
 				<div class="order">1</div>
 				<legend>Background image</legend>

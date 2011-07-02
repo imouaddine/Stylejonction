@@ -6,7 +6,7 @@ Stylejonction::Application.routes.draw do
  match "/users" => "users#index"
   
  constraints(Subdomain) do
-    match '/' => 'portfolio#show'
+    match '/' => 'portfolios#show'
 
     resource :portfolio, :except => [:destroy, :new] do
       member do 
