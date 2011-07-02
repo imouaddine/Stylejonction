@@ -8,12 +8,12 @@ $ ->
     offset = {left: 0, top: ui.offset.top}
     $("#preview_wrapper").offset(offset)
     $("#preview_wrapper").height( $(document).height() - ui.offset.top )
-    $("#preview").height( $(document).height() - ui.offset.top)
+    newHeight = $(document).height() - ui.offset.top
+    $("#preview").height( newHeight )
+    if(newHeight < 50)
+      return false
     
   $("#dragger").dblclick -> 
-    console.log 'DBLICK'
-    console.log initialOffset
-    console.log initialHeight
     #$("#preview_wrapper").offset(initialOffset)
     $("#preview_wrapper").height(initialHeight)
     $("#preview_wrapper").animate({top: initialOffset.top}, 1000) #.animate({height:initialHeight}, 2000)

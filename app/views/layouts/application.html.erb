@@ -35,16 +35,15 @@
               <%= link_to image_tag('images/logo.png'), '/' %>
           </div>
 					<h1 id="title">
-                      <%- if user_signed_in? -%>
-						<em><%= current_user.full_name %></em>'s portfolio
-                      <% end %>
+             <%- if user_signed_in? -%>
+								<em><%= current_user.full_name %></em>'s portfolio
+              <% end %>
+							
 					</h1>
+					<%- if flash[:notice] %>
+					    <div id="notice"><%= flash[:notice] %></div>
+					<% end %>
   	 	 </header>
-			 <div>
-			    <%- flash.each do |name, msg| -%>
- 		        <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
- 		      <%- end -%>
-			 </div>
 		 	 <%- if user_signed_in? %>
 				<nav id="main_nav">
 					<ul>
