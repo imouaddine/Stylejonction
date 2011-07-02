@@ -57,6 +57,7 @@ body{
    line-height: 1.3em;
 }
 a{
+  outline: none;
   @include hover-link;
   @include link-colors(#00c, #0cc, #c0c, #ccc, #cc0)
 }
@@ -311,63 +312,63 @@ form {
        color: $grey-color;
        font-style: italic;
     }
-    .field{
-      margin-top: 10px;
-      @include box;
-      width: 620px;
-      padding: 18px 10px 19px 10px;
-      position: relative;
-      border-right:0;
-      @include border-bottom-right-radius(0px);
-      @include border-top-right-radius(0px);
-    }
-    .selection_list{
-      @include clearfix;
-      li{
-       @include column(3);
-       margin-right: 15px;
-       text-align: center;
-       .selection_title{
-          color: #4d4d4d;
-          font-size: 15px;
-          padding-top: 10px;
-          display: block;
-        
-        }
-        &:nth-child(5){
-           margin-right: 0;
-        }
-      }
-     
-      
-    }
-    
-  }
-  .scroll{
-    position: absolute;
-    right: 0;
-    top: 0;
-    margin-right: -28px;
-    margin-top: -1px;
-    $height: 184px;
-    height: $height;
-    width: 28px;
-    a{
-      display: block;
-      height: $height / 2;
-      width: 28px;
-    }
-    .left_scroll{
-      background: url('images/bg_scroll_bg.png') no-repeat 0 0;
-    
-    }
-    .right_scroll{
-      background: url('images/bg_scroll_bg.png') no-repeat left -94px;
-     
-    }
   }
 }
-.edit_portfolio_layout{
+.background_field{
+  margin-top: 10px;
+  @include box;
+  width: 620px;
+  padding: 18px 10px 19px 10px;
+  position: relative;
+  border-right:0;
+  @include border-bottom-right-radius(0px);
+  @include border-top-right-radius(0px);
+  .selection_list{
+    @include clearfix;
+  }
+  .select_bg_overlay{
+    background: url('images/pf_bg_sele.png') no-repeat;
+    display: none;
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    top: 0;
+    opacity: 0.8;
+    filter: alpha(opacity=80); 
+    
+  }
+  .custom_bg, li{
+    @include column(3);
+    margin-right: 15px;
+    text-align: center;
+    position: relative;
+    &.selected{
+      .selection_title{
+        font-weight: bold;
+      }
+      .select_bg_overlay{
+        display: block;
+      }
+    }
+    .selection_title{
+      color: #4d4d4d;
+      font-size: 15px;
+      padding-top: 10px;
+      display: block;
+    }
+  }
+  .select_bg{
+    opacity: 0.8;
+    &:hover{
+      opacity:1;
+      .select_bg_overlay{
+        display: none;
+      }
+    }
+  }
+  .jcarousel-clip-horizontal{
+    width: 490px;
+  }
   #add_custombg_btn{
     background: url('images/big_cirle_bg.png') no-repeat;
     display: block;
@@ -392,6 +393,30 @@ form {
     border: 1px solid #ccc;
     @include single-box-shadow(rgba(#c0c0c0, 0.5), 0px, 1px);
   }
-  
+  .scroll{
+     position: absolute;
+     right: 0;
+     top: 0;
+     margin-right: -28px;
+     margin-top: -1px;
+     $height: 184px;
+     height: $height;
+     width: 28px;
+     a{
+       display: block;
+       height: $height / 2;
+       width: 28px;
+       background: url('images/bg_scroll_bg.png') no-repeat;
+       &:hover{
+         background: url('images/bg_scroll_bg_sel.png') no-repeat;
+       }
+     }
+     .left_scroll, .left_scroll:hover{
+       background-position: 0 0;
+     }
+     .right_scroll, .right_scroll:hover{
+       background-position: left -94px;
+     }
+   }
 }
 
