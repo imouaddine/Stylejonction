@@ -326,16 +326,44 @@ form {
   .selection_list{
     @include clearfix;
   }
+  .select_bg_overlay{
+    background: url('images/pf_bg_sele.png') no-repeat;
+    display: none;
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    top: 0;
+    opacity: 0.8;
+    filter: alpha(opacity=80); 
+    
+  }
   .custom_bg, li{
-   @include column(3);
-   margin-right: 15px;
-   text-align: center;
-  
-   .selection_title{
+    @include column(3);
+    margin-right: 15px;
+    text-align: center;
+    position: relative;
+    &.selected{
+      .selection_title{
+        font-weight: bold;
+      }
+      .select_bg_overlay{
+        display: block;
+      }
+    }
+    .selection_title{
       color: #4d4d4d;
       font-size: 15px;
       padding-top: 10px;
       display: block;
+    }
+  }
+  .select_bg{
+    opacity: 0.8;
+    &:hover{
+      opacity:1;
+      .select_bg_overlay{
+        display: none;
+      }
     }
   }
   .jcarousel-clip-horizontal{
