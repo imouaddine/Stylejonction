@@ -16,15 +16,29 @@
 //= require_tree .
 
 $(window).bind("load", function() { 
-      $("#preview_wrapper").pinFooter();
-      initialOffset = $("#preview_wrapper").offset();
-      initialHeight = $("#preview_wrapper").height();
-     
-               
+  $("#preview_wrapper").pinFooter();
+  initialOffset = $("#preview_wrapper").offset();
+  initialHeight = $("#preview_wrapper").height();
 });
 $(window).bind("resize", function() { 
-      $("#preview_wrapper").pinFooter();
-
-     
-               
+  $("#preview_wrapper").pinFooter();           
 });
+$(function(){
+  $("#background_field").jcarousel({
+      scroll :1,
+      initCallback: init_carousel,
+      buttonNextHTML: null,
+      buttonPrevHTML: null
+  });
+})
+function init_carousel(carousel){
+  
+  $('#left_scroll_bg').bind('click', function() {
+      carousel.prev();
+      return false;
+  });
+  $('#right_scroll_bg').bind('click', function() {
+      carousel.next();
+      return false;
+  });
+}

@@ -14,9 +14,16 @@ $ ->
       return false
     
   $("#dragger").dblclick -> 
-    #$("#preview_wrapper").offset(initialOffset)
     $("#preview_wrapper").height(initialHeight)
-    $("#preview_wrapper").animate({top: initialOffset.top}, 1000) #.animate({height:initialHeight}, 2000)
+    $("#preview_wrapper").animate({top: initialOffset.top}, 1000) 
+  
+  #Background selection carousel
+ 
+  
+
+  
+    
+      
    
     
     

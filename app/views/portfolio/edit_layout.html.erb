@@ -7,12 +7,12 @@
 				<div class="order">1</div>
 				<legend>Background image</legend>
 				<p class="description">Select a background from the gallery or create your own background</p>
-				<div class="field box">
+				<div id="background_field" class="field box background_field">
+					<div class="custom_bg">
+						<a id="add_custombg_btn" href="#">CREATE<br>YOUR OWN</a>
+						<span class="selection_title">Custom</span>
+					</div>
 					<ul class="selection_list">
-						<li>
-							<a id="add_custombg_btn" href="#">CREATE<br>YOUR OWN</a>
-							<span class="selection_title">Custom</span>
-						</li>
 						<li>
 							<a href="#" class="select_bg">
 								<img src="http://placehold.it/110x110" />
@@ -31,16 +31,29 @@
 							</a>
 							<span class="selection_title">Street Deco</span>
 						</li>
-							<li>
+						<li>
 								<a href="#" class="select_bg">
 									<img alt="temp" src="http://placehold.it/110x110" />
 								</a>
 								<span class="selection_title">Too Sexy</span>
+						</li>
+							<li>
+								<a href="#" class="select_bg">
+									<img alt="temp" src="http://placehold.it/110x110" />
+								</a>
+								<span class="selection_title">Street Deco</span>
 							</li>
+							<li>
+									<a href="#" class="select_bg">
+										<img alt="temp" src="http://placehold.it/110x110" />
+									</a>
+									<span class="selection_title">Too Sexy</span>
+							</li>
+							
 					</ul>
 					<div class="scroll">
-						<a  href="#" class="left_scroll" ></a>
-						<a  href="#" class="right_scroll" ></a>
+						<a  href="#" id="left_scroll_bg" class="left_scroll" ></a>
+						<a  href="#" id="right_scroll_bg" class="right_scroll" ></a>
 						
 					</div>
 				</div>
