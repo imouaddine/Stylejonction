@@ -4,8 +4,6 @@ Stylejonction::Application.routes.draw do
  devise_for :users
  
  match "/users" => "users#index"
- match '#/:page' => 'pages#:page', :as => :page
- match "portfolio/:id" => "pages#index"
   
  constraints(Subdomain) do
     match '/' => 'portfolio#show'
@@ -23,5 +21,7 @@ Stylejonction::Application.routes.draw do
    end
  end
   
+ match "portfolio/:id" => "pages#index"
+ match '#/:page' => 'pages#:page', :as => :page
  root :to => "pages#index"
 end
