@@ -1,0 +1,21 @@
+<div id="preview_wrapper">	
+	<div id="separator">
+		<a id="dragger" href="#"><%= image_tag 'images/sep.png' %></a>
+	</div>
+	<section id="preview" class="full_width">
+
+	</section>
+</div>
+<script type="text/javascript">
+  $(function() {
+    window.controller = new Stylejonction.Controllers.PortfoliosController({
+			portfolio: <%= @portfolio.to_json.html_safe -%>, 
+			projects: <%= @portfolio.projects.to_json.html_safe -%>,
+			<% if @project.present? %>
+			project: <%= @project.to_json.html_safe  -%>,
+			<% end %>
+			action : '<%= action -%>'
+		});
+    Backbone.history.start();
+  });
+</script>

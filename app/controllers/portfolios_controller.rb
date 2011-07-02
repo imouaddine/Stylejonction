@@ -1,5 +1,5 @@
-class PortfolioController < ApplicationController
-  before_filter :get_portfolio, :except => [:new, :create]
+class PortfoliosController < ApplicationController
+  before_filter :get_portfolio
   before_filter :authenticate_user!, :except => [:show]
 
   def show
@@ -16,10 +16,14 @@ class PortfolioController < ApplicationController
   def edit_layout; end
   def edit_font; end
 
+  def edit
+    redirect_to action: "show"
+  end
+
   def update
     respond_to do |format|
       if @portfolio.update_attributes(params[:portfolio])
-        format.html { redirect_to portfolio_path @portfolio, notice: 'Portfolio was successfully updated.' }
+        format.html { redirect_to portfolio_path, notice: 'Portfolio was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
