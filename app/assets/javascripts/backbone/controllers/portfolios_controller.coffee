@@ -11,7 +11,7 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
      
   routes:
     ".*": "default"
-    "projects/:id/edit" : "edit_project"
+    "projects/:i/edit" : "edit_project"
 
   default: ->
     eval(@action) 

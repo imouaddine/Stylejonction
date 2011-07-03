@@ -3,8 +3,14 @@ Stylejonction.Views.Portfolios ||= {}
 class Stylejonction.Views.Portfolios.EditView extends Backbone.View 
 
   events:
+    "click .select_bg": "updateBackground"
     "change #portfolio_theme": "updateTheme"
     "change #portfolio_theme": "updateFont"
+    
+  updateBackground: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    @options.model.save({'background': 1})
     
   updateTheme: (e) ->
     e.preventDefault()

@@ -13,7 +13,7 @@ class PortfolioTest < ActiveSupport::TestCase
   test "new portoflio is not published" do
     assert ! @portfolio.published?
   end
-  
+
   test "can change portfolio state to published" do
     @portfolio.publish!
     @portfolio.reload

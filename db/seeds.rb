@@ -11,7 +11,15 @@ User.delete_all
 puts 'SETTING UP DEFAULT USER LOGIN'
 user = User.create! :username => 'imouaddine', :first_name => 'Imad', :last_name =>'Mouaddine', :email => 'imad@ecomstrategy.ca', :password => 'pass', :password_confirmation => 'pass', :admin => true
 
+puts "create some backgrounds"
+10.times { Background.create }
+
+puts "create some layouts"
+10.times { |i| Layout.create(:name => "layout #{i}", :css_name => "layout_#{i}.css") }
+
+
 user.portfolio = Portfolio.create(:theme => 0)
+user.portfolio.background = Background.first
 user.portfolio.projects.create(:title => 'First Project')
 user.portfolio.projects.create(:title => 'Second Project')
 user.portfolio.projects.create(:title => 'Third Project')
@@ -31,11 +39,6 @@ puts "Create some fonts"
 end
 
 
-puts "create some backgrounds"
-10.times { Background.create }
-
-puts "create some layouts"
-10.times { |i| Layout.create(:name => "layout #{i}", :css_name => "layout_#{i}.css") }
 
 
 
