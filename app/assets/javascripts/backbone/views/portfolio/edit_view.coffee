@@ -10,7 +10,18 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
   updateBackground: (e)->
     e.preventDefault()
     e.stopPropagation()
-    @options.model.save({'background': 1})
+    target = $(e.currentTarget)
+    newBackground = target.data('id')
+    target.children(".select_loading_overlay").show()
+    @.$("#background_field li").removeClass("selected")
+    @options.model.save({'background_id': newBackground}, 
+      success: -> 
+        target.children(".select_loading_overlay").hide();
+        
+        $(e.currentTarget).parent().addClass("selected")
+        
+      
+    )
     
   updateTheme: (e) ->
     e.preventDefault()

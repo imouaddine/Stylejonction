@@ -1,6 +1,6 @@
 class Stylejonction.Models.Portfolio extends Backbone.Model
   paramRoot: 'portfolio'
-  url: '/portfolio/update'
+  url: '/portfolio.json'
   
   defaults:
     layout: null

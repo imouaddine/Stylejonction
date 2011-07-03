@@ -2,7 +2,7 @@
 
 <section id="edit" class="edit_portfolio_layout">
   <%= form_for(@portfolio, :url => portfolio_path) do |f| %>
-		<%= debug @portfolio.background %>
+	
 		<fieldset class="edit_portfolio_bg">
 				<div class="order">1</div>
 				<legend>Background image</legend>
@@ -15,9 +15,10 @@
 					<ul class="selection_list">
 						<% Background.all.each do |background| %>
 							<li class='<%= 'selected' if @portfolio.background == background  %>' >
-								<a href="#" class="select_bg">
+								<a data-id='<%= background.id %>' href="#" class="select_bg">
 									<img src="http://placehold.it/110x110" />
 									<span class="select_bg_overlay"></span>
+									<div class="select_loading_overlay"></div>
 								</a>
 								<span class="selection_title"><%= background.name  %></span>
 							</li>

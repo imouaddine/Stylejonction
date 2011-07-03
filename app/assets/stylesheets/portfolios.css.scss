@@ -327,7 +327,7 @@ form {
   .selection_list{
     @include clearfix;
   }
-  .select_bg_overlay{
+  .select_bg_overlay, .select_loading_overlay{
     background: url('images/pf_bg_sele.png') no-repeat;
     display: none;
     position: absolute;
@@ -336,7 +336,12 @@ form {
     top: 0;
     opacity: 0.8;
     filter: alpha(opacity=80); 
-    
+  }
+  .select_loading_overlay{
+    background: url('images/ajax_loader_1.gif') no-repeat 50% 50%;
+    display: none;
+    opacity:1;
+    filter: alpha(opacity=100);
   }
   .custom_bg, li{
     @include column(3);
@@ -362,9 +367,7 @@ form {
     opacity: 0.8;
     &:hover{
       opacity:1;
-      .select_bg_overlay{
-        display: none;
-      }
+     
     }
   }
   .jcarousel-clip-horizontal{
