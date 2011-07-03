@@ -74,8 +74,13 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    ZenTest (4.5.0)
     active_link_to (0.0.8)
     arel (2.1.1)
+    autotest (4.4.6)
+      ZenTest (>= 4.4.1)
+    autotest-rails (4.1.0)
+      ZenTest
     bcrypt-ruby (2.1.4)
     builder (3.0.0)
     carrierwave (0.5.4)
@@ -187,6 +192,8 @@ PLATFORMS
 
 DEPENDENCIES
   active_link_to
+  autotest
+  autotest-rails
   capybara!
   carrierwave
   coffee-script
