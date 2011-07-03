@@ -32,7 +32,6 @@ $(function(){
   });
 })
 function init_carousel(carousel){
-  
   $('#left_scroll_bg').bind('click', function() {
       carousel.prev();
       return false;
