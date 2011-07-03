@@ -2,8 +2,15 @@
 
 <div> Portofilo id: <%= @portfolio.id %> </div>
 
+<%- unless @portfolio.published? -%>
+  <%= form_tag(publish_portfolio_path, :method => :put) do %>
+    <%= submit_tag("Publish") %>
+  <% end %>
+<% end %>
+
 <ul>
   <li> layout: <%= @portfolio.layout || "-" %> </li>
   <li> theme: <%= @portfolio.theme || "-" %> </li>
   <li> font: <%= @portfolio.font || "-" %> </li>
+  <li> published? <%= @portfolio.published? %> </li>
 </ul>
