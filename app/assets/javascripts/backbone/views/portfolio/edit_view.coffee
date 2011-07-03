@@ -4,6 +4,7 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
 
   events:
     "click .select_bg": "updateBackground"
+    "click .select_layout": "updateLayout"
     "change #portfolio_theme": "updateTheme"
     "change #portfolio_theme": "updateFont"
     
@@ -22,6 +23,21 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
         
       
     )
+  
+  updateLayout: (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    target = $(e.currentTarget)
+    newLayout = target.data('id')
+    target.children(".select_loading_overlay").show()
+    @.$("#layout_field .select_layout").removeClass("selected")
+    @options.model.save({'layout_id': newLayout}, 
+      success: -> 
+        target.children(".select_loading_overlay").hide();
+        $(e.currentTarget).addClass("selected")
+    )
+    
+    
     
   updateTheme: (e) ->
     e.preventDefault()
