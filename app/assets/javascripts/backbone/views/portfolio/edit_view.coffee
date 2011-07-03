@@ -3,10 +3,10 @@ Stylejonction.Views.Portfolios ||= {}
 class Stylejonction.Views.Portfolios.EditView extends Backbone.View 
 
   events:
-    "click .select_bg": "updateBackground"
-    "click .select_layout": "updateLayout"
-    "change #portfolio_theme": "updateTheme"
-    "change #portfolio_theme": "updateFont"
+    "click .select_bg":         "updateBackground"
+    "click .select_layout":     "updateLayout"
+    "click .select_theme":      "updateTheme"
+    "change #portfolio_theme":  "updateFont"
     
   updateBackground: (e)->
     e.preventDefault()
@@ -42,8 +42,15 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
   updateTheme: (e) ->
     e.preventDefault()
     e.stopPropagation()
-    newTheme = $("#portfolio_theme").val()
-    @options.model.save({'theme': newTheme})
+    target = $(e.currentTarget)
+    newTheme = target.data('id')
+    @.$("#theme_field .select_theme").removeClass("selected")
+    @options.model.save({'theme': newTheme},
+      success: -> 
+        #target.children(".select_loading_overlay").hide();
+        $(e.currentTarget).addClass("selected")
+    
+    )
   
   updateFont: (e)->
     e.preventDefault()

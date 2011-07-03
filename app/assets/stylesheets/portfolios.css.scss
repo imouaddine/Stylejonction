@@ -59,7 +59,11 @@ body{
 a{
   outline: none;
   @include hover-link;
-  @include link-colors(#00c, #0cc, #c0c, #ccc, #cc0)
+  @include link-colors(#00c, #0cc, #c0c, #ccc, #cc0);
+  &:focus { 
+      outline: none; 
+  }
+  
 }
 #wrapper{
   background: transparent url('images/header_bg.png') repeat-x;
@@ -319,8 +323,12 @@ form {
       padding: 18px 10px 19px 10px;
       position: relative;
       margin-top: 10px;
-      .selection_list{
+    .selection_list{
        @include clearfix;
+       @include horizontal-list-container;
+       li{
+         @include horizontal-list-item;
+       }
        .select_loading_overlay{
          background: url('images/ajax_loader_1.gif') no-repeat 50% 50%;
          display: none;
@@ -337,12 +345,11 @@ form {
 }
 
 
-.background_field{
+form #background_field{
   width: 620px;
-  border-right:0;
+  border-right:0 !important;
   @include border-bottom-right-radius(0px);
   @include border-top-right-radius(0px);
-  
   .select_bg_overlay, .select_loading_overlay{
     background: url('images/pf_bg_sele.png') no-repeat;
     display: none;
@@ -356,7 +363,7 @@ form {
   
   .custom_bg, li{
     @include column(3);
-    margin-right: 15px;
+    padding-left: 0px;
     text-align: center;
     position: relative;
     &.selected{
@@ -434,17 +441,8 @@ form {
      }
    }
 }
-.layout_field{
-    width: 475px;
-  .selection_list {
-  
-    @include horizontal-list-container;
-    li{
-      @include horizontal-list-item;
-     
-    }
-    
-  }
+#layout_field{
+  width: 475px;
   @each $layout in left, right, top, bottom{
     #select_layout_#{$layout} { 
       background-image: url("images/layouts/layout_#{$layout}.png");
@@ -459,13 +457,49 @@ form {
       }
     }
   }
-  .select_layout,   .select_loading_overlay{
-    width: 112px;
-    height: 119px;
+  .select_layout{
     display: block;
   }
-  
-  
-  
+  .select_layout, .select_loading_overlay{
+    width: 112px;
+    height: 119px;
+   
+  }
 }
-
+#theme_field{
+  .select_theme{
+    display: block;
+    width: 232px;
+    height: 45px;
+    background: url('images/btn_theme.png') no-repeat;
+    line-height: 50px;
+    text-align: center;
+    font-family: $font-family-secondary;
+    font-size: 25px;
+    color: white;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+  #select_theme_light{
+    background-position: 0 0;
+    color: #b3b3b3;
+    &:hover{
+      background-position: 0px -89px;
+      color: white;
+    }
+    &.selected{
+      background-position: 0px -179px;
+      color: white;
+    }
+  }
+  #select_theme_dark{
+    background-position: 0px -44px;
+    &:hover{
+      background-position: 0px -134px;
+    }
+    &.selected{
+      background-position: 0px -224px;
+    }
+  }
+}

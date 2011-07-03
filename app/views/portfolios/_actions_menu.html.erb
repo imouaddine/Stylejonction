@@ -2,7 +2,6 @@
 <ul>
   <li><%= active_link_to 'Layout', edit_layout_portfolio_path %></li>
   <li><%= active_link_to 'Font', edit_font_portfolio_path %></li>
-  <li><%= active_link_to 'Background', edit_background_portfolio_path %></li>
   <li class="last <%=  'active' if controller.controller_name == 'projects'  %>">
   <%- if @portfolio.has_saved_project? -%>
     <%= active_link_to 'Project', edit_portfolio_project_path(@portfolio.projects.first), :class => 'last' %>
@@ -13,8 +12,8 @@
         <li><%= active_link_to project.title, edit_portfolio_project_path(project) %></li>
       <% end %>
     <% end %>
+		<li><%= active_link_to 'New project', new_portfolio_project_path %></li>
   </ul>
-  <li><%= active_link_to 'New project', new_portfolio_project_path %></li>
   </li>
 </ul>
 </nav>
