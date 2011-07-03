@@ -12,6 +12,7 @@ Stylejonction::Application.routes.draw do
       member do 
         get 'edit_layout'
         get 'edit_font'
+        put 'publish'
       end
       resources :projects  do
         member do

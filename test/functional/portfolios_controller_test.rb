@@ -47,4 +47,11 @@ class PortfoliosControllerTest < ActionController::TestCase
     assert_equal 10, @user.portfolio.theme
   end
 
+  test "can publish a portfolio" do
+    sign_in @user
+    put :publish
+    @user.reload
+    assert_equal true, @user.portfolio.published?
+  end
+
 end

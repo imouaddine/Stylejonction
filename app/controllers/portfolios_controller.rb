@@ -9,6 +9,11 @@ class PortfoliosController < ApplicationController
     end
   end
 
+  def publish
+    @portfolio.publish!
+    redirect_to action: "show", notice: "Portfolio was published"
+  end
+
   def edit_layout; end
   def edit_font; end
 
