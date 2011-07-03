@@ -15,13 +15,20 @@ class PortfoliosController < ApplicationController
   end
 
   def edit_layout; end
-  def edit_font; end
+
+  def edit_font
+      @fonts = Font.all 
+  end
 
   def edit
     redirect_to action: "show"
   end
 
   def update
+    if params[:font].present?
+      @portfolio.font = Font.find(params[:font][:id])
+    end
+
     respond_to do |format|
       if @portfolio.update_attributes(params[:portfolio])
         format.html { redirect_to portfolio_path, notice: 'Portfolio was successfully updated.' }

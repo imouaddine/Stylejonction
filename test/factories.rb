@@ -19,3 +19,11 @@ Factory.define :project do |p|
   p.sequence(:title) { |n| "Title #{n}" }
   p.association :portfolio
 end 
+
+Factory.define :font do |f|
+  f.name "Inconsolata"
+  f.provider "Google"
+  f.url "http://google.webfonts.com"
+  f.title "Font title"
+  f.visible true
+end

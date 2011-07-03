@@ -4,7 +4,7 @@ class CreatePortfolios < ActiveRecord::Migration
       t.integer :layout
       t.integer :theme
       t.integer :user_id
-      t.integer :font
+      t.integer :font_id
       t.boolean :published, :default => false
       t.timestamps
     end

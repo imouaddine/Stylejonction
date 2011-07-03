@@ -23,6 +23,16 @@ user.save
 
 puts 'New user created: ' << user.full_name
 
+puts "Create some fonts"
+
+10.times do |i|
+  Font.create(:name => "Font #{i}", 
+              :provider => "Google web fonts", 
+              :url => "http://google.webfonts.com/#{i}",
+              :title => "Title"
+             )
+end
+
 
 
 

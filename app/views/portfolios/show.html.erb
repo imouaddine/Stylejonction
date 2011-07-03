@@ -11,6 +11,8 @@
 <ul>
   <li> layout: <%= @portfolio.layout || "-" %> </li>
   <li> theme: <%= @portfolio.theme || "-" %> </li>
-  <li> font: <%= @portfolio.font || "-" %> </li>
+  <%- if @portfolio.font.present? %>
+    <li> font: <%= @portfolio.font.name || "-" %> </li>
+  <% end %>
   <li> published? <%= @portfolio.published? %> </li>
 </ul>
