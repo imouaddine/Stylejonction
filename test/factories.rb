@@ -12,6 +12,7 @@ end
 Factory.define :portfolio do |p|
     p.sequence(:theme) { |n| n } 
     p.association :font
+    p.association :background
 end
 
 
@@ -26,4 +27,10 @@ Factory.define :font do |f|
   f.url "http://google.webfonts.com"
   f.title "Font title"
   f.visible true
+end
+
+Factory.define :background do |f|
+  f.display_mode_id 1
+  f.color_id 1
+  f.pattern_id 1
 end

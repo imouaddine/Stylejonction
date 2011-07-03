@@ -4,7 +4,8 @@ class Portfolio < ActiveRecord::Base
 
   belongs_to :user
   has_many :projects
-  belongs_to :font
+  belongs_to :font 
+  belongs_to :background
 
   def has_saved_project?
     projects.present? && !projects.first.new_record?

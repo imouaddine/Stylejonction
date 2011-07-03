@@ -34,6 +34,11 @@ puts "Create some fonts"
 end
 
 
+puts "create some backgrounds"
+
+10.times { Background.create }
+
+
 
 
 

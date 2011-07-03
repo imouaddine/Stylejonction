@@ -19,15 +19,18 @@ class PortfoliosController < ApplicationController
   def edit_font
       @fonts = Font.all 
   end
+  
+  def edit_background
+    @backgrounds = Background.all
+  end
 
   def edit
     redirect_to action: "show"
   end
 
   def update
-    if params[:font].present?
-      @portfolio.font = Font.find(params[:font][:id])
-    end
+    @portfolio.font = Font.find(params[:font][:id]) if params[:font].present?
+    @portfolio.background = Background.find(params[:background][:id]) if params[:background].present?
 
     respond_to do |format|
       if @portfolio.update_attributes(params[:portfolio])

@@ -14,5 +14,8 @@
   <%- if @portfolio.font.present? %>
     <li> font: <%= @portfolio.font.name || "-" %> </li>
   <% end %>
+   <%- if @portfolio.background.present? %>
+    <li> background: <%= @portfolio.background.name || "-" %> </li>
+  <% end %>
   <li> published? <%= @portfolio.published? %> </li>
 </ul>

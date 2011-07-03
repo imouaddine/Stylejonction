@@ -5,8 +5,11 @@ class CreatePortfolios < ActiveRecord::Migration
       t.integer :theme
       t.integer :user_id
       t.integer :font_id
+      t.integer :background_id
       t.boolean :published, :default => false
       t.timestamps
     end
+
+    add_index :portfolios, :user_id
   end
 end
