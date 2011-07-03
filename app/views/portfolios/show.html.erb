@@ -9,13 +9,16 @@
 <% end %>
 
 <ul>
-  <li> layout: <%= @portfolio.layout || "-" %> </li>
+  
+  <%- if @portfolio.layout.present? %>
+    <li> layout: <%= @portfolio.layout.name %> </li>
+  <% end %>
   <li> theme: <%= @portfolio.theme || "-" %> </li>
   <%- if @portfolio.font.present? %>
-    <li> font: <%= @portfolio.font.name || "-" %> </li>
+    <li> font: <%= @portfolio.font.name %> </li>
   <% end %>
    <%- if @portfolio.background.present? %>
-    <li> background: <%= @portfolio.background.name || "-" %> </li>
+    <li> background: <%= @portfolio.background.name %> </li>
   <% end %>
   <li> published? <%= @portfolio.published? %> </li>
 </ul>

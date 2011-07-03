@@ -34,3 +34,8 @@ Factory.define :background do |f|
   f.color_id 1
   f.pattern_id 1
 end
+
+Factory.define :layout do |f|
+  f.name "Layout 1"
+  f.css_name "portfolio.css"
+end

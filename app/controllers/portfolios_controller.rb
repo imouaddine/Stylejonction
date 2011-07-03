@@ -14,7 +14,9 @@ class PortfoliosController < ApplicationController
     redirect_to action: "show", notice: "Portfolio was published"
   end
 
-  def edit_layout; end
+  def edit_layout
+    @layouts = Layout.all 
+  end
 
   def edit_font
       @fonts = Font.all 
@@ -30,6 +32,7 @@ class PortfoliosController < ApplicationController
 
   def update
     @portfolio.font = Font.find(params[:font][:id]) if params[:font].present?
+    @portfolio.layout = Layout.find(params[:layout][:id]) if params[:layout].present?
     @portfolio.background = Background.find(params[:background][:id]) if params[:background].present?
 
     respond_to do |format|

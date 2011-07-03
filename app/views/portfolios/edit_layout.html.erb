@@ -44,12 +44,9 @@
 					</div>
 				</div>
 		</fieldset>
-		
-		
-		<div class="field">
-		   <%= f.label :layout %><br />
-		   <%= f.text_field :layout %>
-		 </div>
+
+        <%= select "layout", "id", @layouts.map {|u| [u.name,u.id]} %>
+        <%= submit_tag("Change layout") %>
 	<% end %>
 </section>
 <% content_for :preview do %>
