@@ -10,7 +10,18 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     "click  #body_font_field .select_font":         "updateBodyFont"
     "change  #color_picker_title_input":               "updateTitleColor"
     "change  #color_picker_body_input":                "updateBodyColor"
+    "change .bg_upload_switcher" : "switchTab"
     
+  
+  switchTab: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    visibleTab = $($(e.currentTarget).data("target"))
+    @.$(".custom_bg .tabs > div").slideUp("slow")
+    visibleTab.slideDown("slow")
+    
+    
+  
   updateBackground: (e)->
     e.preventDefault()
     e.stopPropagation()

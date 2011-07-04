@@ -20,6 +20,7 @@ class PortfoliosController < ApplicationController
 
   def edit_layout
     @layouts = Layout.all 
+    @backgrounds = Background.all
   end
 
   def edit_font
@@ -27,9 +28,7 @@ class PortfoliosController < ApplicationController
     @non_webfonts = Font.non_webfont
   end
   
-  def edit_background
-      @backgrounds = Background.all
-  end
+ 
 
   def edit
     redirect_to action: "show"

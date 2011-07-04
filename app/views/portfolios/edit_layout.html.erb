@@ -9,11 +9,11 @@
 				<p class="description">Select a background from the gallery or create your own background</p>
 				<div id="background_field" class="field box background_field">
 					<div class="custom_bg">
-							<a id="add_custombg_btn" href="#">CREATE<br>YOUR OWN</a>
+							<a class="add_custombg_btn" id="add_custombg_btn" href="#">CREATE<br>YOUR OWN</a>
 							<span class="selection_title">Custom</span>
 					</div>
 					<ul class="selection_list">
-						<% Background.all.each do |background| %>
+						<% @backgrounds.each do |background| %>
 							<li class='<%= 'selected' if @portfolio.background == background  %>' >
 								<a data-id='<%= background.id %>' href="#" class="select_bg">
 									<img src="http://placehold.it/110x110" />
@@ -27,6 +27,63 @@
 					<div class="scroll">
 						<a id="left_scroll_bg" href="#" class="left_scroll" ></a>
 						<a id="right_scroll_bg"  href="#" class="right_scroll" ></a>
+					</div>
+				</div>
+				<div id="custom_background_field" class="field box background_field">
+					<div>
+							<a class="add_custombg_btn selected" href="#">CREATE<br>YOUR OWN</a>
+							<div class="custom_bg_selection">
+								<p class="description">Select <em>one</em> of the following options for your background.</p>
+								<ul>
+									<li>
+										<input data-target="#bg_upload_your_image" class="bg_upload_switcher" checked name="bg" id="bg_input_upload_your_image" type="radio"></input>
+										<label for="upload_your_image" >Upload your image</label>
+									</li>
+									<li><input data-target="#bg_choose_color" class="bg_upload_switcher" name="bg" id="bg_input_choose_color" type="radio"></input><label for="bg_input_choose_color">Choose a colour & pattern</label></li>
+								</ul>
+							</div>
+					</div>
+					<div class="custom_bg">
+							<div class="tabs">
+								<div style="display:block" id="bg_upload_your_image">
+										<div class="first col">
+											<img src="http://placehold.it/164x126" />
+											<a class="icon_link edit_link" href="#">Edit your background</a>
+											<a class="icon_link remove_link" href="#">Remove</a>
+										</div>
+										<div class="col">
+											<a href="#" class="upload_btn btn">Upload</a>
+											<p class="information">Ideal dimension: 1024 px x 768 px – JPG, PNG formats</p>
+										</div>
+								</div>
+								<div style="display:none" id="bg_choose_color">
+										<p class="description"> Click <em>boxes</em> to customize</p>
+										<ul>
+											<li>
+												<div class="color_picker panel" id="own_color_picker">
+													<div style="background-color: #bccc08"></div>
+												</div>
+											</li>
+											<li class="text">&</li>
+											<li>
+												<div class="pattern panel">
+												</div>
+												+
+												<div class="pattern_preview panel" style="background-color: #bccc08">
+												</div>
+											</li>
+											<li  class="text">
+												=
+											</li>
+											<li>
+												<div class="preview panel" style="background-color: #bccc08;" >
+													
+												</div>
+											</li>
+										</ul>
+									
+								</div>
+							</div>
 					</div>
 				</div>
 		</fieldset>
