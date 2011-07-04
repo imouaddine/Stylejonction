@@ -3,7 +3,7 @@ Factory.define :user do |u|
     u.last_name  'Doe'
     u.username "user1"
     u.password "password"
-    u.encrypted_password "$2a$10$fDyS55n.lu6mMrFhzBe56.ZMXuA3Ls1jnsVObXK/xkvK..."
+    u.password_confirmation "password"
     u.email "imad@ecomstrategy.ca"
     u.admin false
     u.association :portfolio

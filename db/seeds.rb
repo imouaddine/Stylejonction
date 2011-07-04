@@ -69,7 +69,8 @@ Font.create(
 user.portfolio = Portfolio.create(:theme => 0)
 user.portfolio.background = Background.first
 user.portfolio.layout = Layout.first
-user.portfolio.font = Font.first
+user.portfolio.title_font = Font.first
+user.portfolio.body_font = Font.first
 user.portfolio.projects.create(:title => 'First Project')
 user.portfolio.projects.create(:title => 'Second Project')
 user.portfolio.projects.create(:title => 'Third Project')

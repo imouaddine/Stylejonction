@@ -42,7 +42,7 @@ class PortfoliosControllerTest < ActionController::TestCase
     @user.portfolio.save
 
     get :update, {:portfolio => {:theme => 10} }
-    assert_redirected_to portfolio_path, :notice => 'Portfolio was successfully updated.'
+    assert_redirected_to edit_layout_portfolio_path, :notice => 'Portfolio was successfully updated.'
     @user.reload
     assert_equal 10, @user.portfolio.theme
   end
