@@ -29,6 +29,10 @@
 								<% end %>
 						</dd>
 				</dl>
+				<footer>
+				
+			    <%= f.text_field :title_color, :class=> 'color_picker' %> 	<%= f.label :title_color %>
+				</footer>
 			</div>
 	</fieldset>
 	<fieldset class="edit_portfolio_font">
@@ -52,6 +56,11 @@
 								<% end %>
 						</dd>
 				</dl>
+					<footer>
+				
+				    <%= f.text_field :body_color, :class=> 'color_picker' %>
+						<%= f.label :body_color %>
+					</footer>
 			</div>
 	</fieldset>
 <% end %>

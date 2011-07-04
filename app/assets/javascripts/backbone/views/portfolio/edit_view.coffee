@@ -8,6 +8,8 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     "click  .select_theme":                         "updateTheme"
     "click  #title_font_field .select_font":        "updateTitleFont"
     "click  #body_font_field .select_font":         "updateBodyFont"
+    "change  #portfolio_title_color":               "updateTitleColor"
+    "change  #portfolio_body_color":                "updateBodyColor"
     
   updateBackground: (e)->
     e.preventDefault()
@@ -75,3 +77,17 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
       success: -> 
         $(e.currentTarget).addClass("selected")
     )
+  updateTitleColor: (e)->
+    console.log "SSS"
+    e.preventDefault()
+    e.stopPropagation()
+    target = $(e.currentTarget)
+    newColor = target.val()
+    @options.model.save({'title_color': newColor})
+   
+  updateBodyColor: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    target = $(e.currentTarget)
+    newColor = target.val()
+    @options.model.save({'body_color': newColor})

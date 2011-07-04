@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require swfobject
+//= require colorpicker
 //= require jquery.uploadify.v2.1.0.min
 //= require underscore
 //= require backbone
@@ -29,6 +30,19 @@ $(function(){
       initCallback: init_carousel,
       buttonNextHTML: null,
       buttonPrevHTML: null
+  });
+  $('.color_picker').ColorPicker({
+  	onSubmit: function(hsb, hex, rgb, el) {
+  		$(el).val(hex);
+  		$(el).trigger('change');
+  		$(el).ColorPickerHide();
+  	},
+  	onBeforeShow: function () {
+  		$(this).ColorPickerSetColor(this.value);
+  	}
+  })
+  .bind('keyup', function(){
+  	$(this).ColorPickerSetColor(this.value);
   });
 })
 function init_carousel(carousel){

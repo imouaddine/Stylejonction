@@ -1,6 +1,6 @@
 class Portfolio < ActiveRecord::Base
   
-  attr_accessible :id, :layout, :theme, :created_at, :updated_at, :user_id, :background_id, :title_font_id, :body_font_id, :layout_id
+  attr_accessible :id, :layout, :theme, :created_at, :updated_at, :user_id, :background_id, :title_font_id, :body_font_id, :layout_id, :body_color, :title_color
 
   belongs_to :user
   has_many :projects
