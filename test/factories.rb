@@ -11,7 +11,8 @@ end
 
 Factory.define :portfolio do |p|
     p.sequence(:theme) { |n| n } 
-    p.association :font
+    p.association :font_body
+    p.association :font_title
     p.association :background
 end
 
@@ -28,6 +29,7 @@ Factory.define :font do |f|
   f.title "Font title"
   f.visible true
 end
+
 
 Factory.define :background do |f|
   f.display_mode_id 1

@@ -1,8 +1,59 @@
 <%= render('sidebar') %>
-<section id="edit">
+
+<% content_for :header do %>
+	<% @non_webfonts.each  do |font| %>
+		<%= stylesheet_link_tag(font.url) %>
+	<% end %>
+<% end %>
+
+<section id="edit" class="edit_portfolio_font">
 <%= form_for(@portfolio, :url => portfolio_path) do |f| %>
-  <%= select "font", "id", @fonts.map {|u| [u.name,u.id]} %>
-  <%= submit_tag("Change font") %>
+ 	<fieldset class="edit_portfolio_font">
+			<div class="order">1</div>
+			<legend>Display font</legend>
+			<p class="description">Choose the font you would like displayed as your <em>titles</em>. </p>
+			<div id="title_font_field" class="field box font_field">
+				<dl class="webfonts">
+					<dt>Standard</dt>
+					<dd>
+						<% @webfonts.each  do |font| %>
+							<%= font_link @portfolio, font, @portfolio.title_font == font %> 
+						<% end %>
+					</dd>
+				</dl>
+				<dl class="non_webfonts">
+						<dt>Something new</dt>
+						<dd>
+								<% @non_webfonts.each  do |font| %>
+									<%= font_link @portfolio, font, @portfolio.title_font == font  %> 
+								<% end %>
+						</dd>
+				</dl>
+			</div>
+	</fieldset>
+	<fieldset class="edit_portfolio_font">
+			<div class="order">2</div>
+			<legend>Body font</legend>
+			<p class="description">Choose the font you would like displayed as your <em>body text</em>. </p>
+			<div id="body_font_field" class="field box font_field">
+				<dl class="webfonts">
+					<dt>Standard</dt>
+					<dd>
+						<% @webfonts.each  do |font| %>
+							<%= font_link @portfolio, font, @portfolio.title_font == font %> 
+						<% end %>
+					</dd>
+				</dl>
+				<dl class="non_webfonts">
+						<dt>Something new</dt>
+						<dd>
+								<% @non_webfonts.each  do |font| %>
+									<%= font_link @portfolio, font, @portfolio.title_font == font  %> 
+								<% end %>
+						</dd>
+				</dl>
+			</div>
+	</fieldset>
 <% end %>
 </section>
 <% content_for :preview do %>

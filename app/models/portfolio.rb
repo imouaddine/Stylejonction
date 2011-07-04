@@ -1,10 +1,13 @@
 class Portfolio < ActiveRecord::Base
   
-  attr_accessible :id, :layout, :theme, :created_at, :updated_at, :user_id, :background_id, :font_id, :layout_id
+  attr_accessible :id, :layout, :theme, :created_at, :updated_at, :user_id, :background_id, :title_font_id, :body_font_id, :layout_id
 
   belongs_to :user
   has_many :projects
-  belongs_to :font 
+  
+  belongs_to :title_font, :class_name => "Font", :foreign_key => "title_font_id"
+  belongs_to :body_font, :class_name => "Font", :foreign_key => "body_font_id"
+   
   belongs_to :background
   belongs_to :layout
 

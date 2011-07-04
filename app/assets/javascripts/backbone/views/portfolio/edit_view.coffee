@@ -3,10 +3,11 @@ Stylejonction.Views.Portfolios ||= {}
 class Stylejonction.Views.Portfolios.EditView extends Backbone.View 
 
   events:
-    "click .select_bg":         "updateBackground"
-    "click .select_layout":     "updateLayout"
-    "click .select_theme":      "updateTheme"
-    "change #portfolio_theme":  "updateFont"
+    "click  .select_bg":                            "updateBackground"
+    "click  .select_layout":                        "updateLayout"
+    "click  .select_theme":                         "updateTheme"
+    "click  #title_font_field .select_font":        "updateTitleFont"
+    "click  #body_font_field .select_font":         "updateBodyFont"
     
   updateBackground: (e)->
     e.preventDefault()
@@ -52,8 +53,25 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     
     )
   
-  updateFont: (e)->
+  updateTitleFont: (e)->
     e.preventDefault()
     e.stopPropagation()
-    newFont = $("#portfolio_font").val()
-    @options.model.save({'font': newFont})
+    target = $(e.currentTarget)
+    newFont = target.data('id')
+    @.$("#title_font_field .select_font").removeClass("selected")
+    @options.model.save({'title_font_id': newFont},
+      success: -> 
+        $(e.currentTarget).addClass("selected")
+    )
+    
+    
+  updateBodyFont: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    target = $(e.currentTarget)
+    newFont = target.data('id')
+    @.$("#body_font_field .select_font").removeClass("selected")
+    @options.model.save({'body_font_id': newFont},
+      success: -> 
+        $(e.currentTarget).addClass("selected")
+    )

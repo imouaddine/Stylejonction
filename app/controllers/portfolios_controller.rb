@@ -23,11 +23,12 @@ class PortfoliosController < ApplicationController
   end
 
   def edit_font
-      @fonts = Font.all 
+    @webfonts = Font.webfont
+    @non_webfonts = Font.non_webfont
   end
   
   def edit_background
-    @backgrounds = Background.all
+      @backgrounds = Background.all
   end
 
   def edit
@@ -37,7 +38,7 @@ class PortfoliosController < ApplicationController
 
 
   def update
-    @portfolio.font = Font.find(params[:font][:id]) if params[:font].present?
+    #@portfolio.font = Font.find(params[:font][:id]) if params[:font].present?
     @portfolio.layout = Layout.find(params[:layout][:id]) if params[:layout].present?
     @portfolio.background = Background.find(params[:background][:id]) if params[:background].present?
       
