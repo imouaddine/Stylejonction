@@ -19,12 +19,16 @@ class ApplicationController < ActionController::Base
 
   protected 
   def get_portfolio
-    @user = User.find_by_username!(request.subdomain)
+    if user_signed_in?
+      @user = current_user
+    else
+      @user = User.find_by_username(request.subdomain)
+    end
     @portfolio = @user.portfolio
   end
 
   def redirect_destination
-    if params[:user].present?
+    if params[:user].present? 
       usr = User.find_by_email(params[:user][:email])
       redirect_url = request.url.gsub(/\/\//, "//#{usr.username}.").gsub(/www\./, "")
       return redirect_url.gsub(/users\/sign_in/, "portfolio/edit")

@@ -23,7 +23,7 @@ Stylejonction::Application.routes.draw do
    end
  end
   
- match "portfolio/:id" => "pages#index"
+ #match "portfolio/:id" => "portfolios#show"
  match '#/:page' => 'pages#:page', :as => :page
  root :to => "pages#index"
 end

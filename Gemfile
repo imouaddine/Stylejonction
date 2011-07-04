@@ -27,7 +27,7 @@ group :development, :test do
   gem 'sqlite3'
   gem "rails-footnotes", ">= 3.7"
   gem "factory_girl"
-  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git' 
   gem 'launchy'
   gem 'database_cleaner'
 end
