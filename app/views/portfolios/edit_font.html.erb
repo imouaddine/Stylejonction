@@ -30,8 +30,14 @@
 						</dd>
 				</dl>
 				<footer>
-				
-			    <%= f.text_field :title_color, :class=> 'color_picker' %> 	<%= f.label :title_color %>
+			   	<div id="color_picker_title" class="color_picker" >
+							<input id="color_picker_title_input" type="hidden" val="<%= @portfolio.title_color %>" />
+			   			<div style="background-color: #<%= @portfolio.title_color %>"></div>
+			   	</div>
+					<div class="color_picker_label">
+						Color
+					</div>
+					
 				</footer>
 			</div>
 	</fieldset>
@@ -57,9 +63,14 @@
 						</dd>
 				</dl>
 					<footer>
+						<div  id="color_picker_body" class="color_picker" >
+							<input id="color_picker_body_input" type="hidden" val="<%= @portfolio.body_color %>" />
+							<div style="background-color: #<%= @portfolio.body_color %>"></div>
+						</div>
+				 		<div class="color_picker_label">
+							Color
+						</div>
 				
-				    <%= f.text_field :body_color, :class=> 'color_picker' %>
-						<%= f.label :body_color %>
 					</footer>
 			</div>
 	</fieldset>

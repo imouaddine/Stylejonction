@@ -8,8 +8,8 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     "click  .select_theme":                         "updateTheme"
     "click  #title_font_field .select_font":        "updateTitleFont"
     "click  #body_font_field .select_font":         "updateBodyFont"
-    "change  #portfolio_title_color":               "updateTitleColor"
-    "change  #portfolio_body_color":                "updateBodyColor"
+    "change  #color_picker_title_input":               "updateTitleColor"
+    "change  #color_picker_body_input":                "updateBodyColor"
     
   updateBackground: (e)->
     e.preventDefault()

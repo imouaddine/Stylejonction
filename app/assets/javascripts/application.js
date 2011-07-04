@@ -31,20 +31,26 @@ $(function(){
       buttonNextHTML: null,
       buttonPrevHTML: null
   });
-  $('.color_picker').ColorPicker({
-  	onSubmit: function(hsb, hex, rgb, el) {
-  		$(el).val(hex);
-  		$(el).trigger('change');
-  		$(el).ColorPickerHide();
-  	},
-  	onBeforeShow: function () {
-  		$(this).ColorPickerSetColor(this.value);
-  	}
-  })
-  .bind('keyup', function(){
-  	$(this).ColorPickerSetColor(this.value);
-  });
+  
+  init_colorpicker('#color_picker_title');
+  init_colorpicker('#color_picker_body');
 })
+function init_colorpicker(color_picker_title){
+  $(color_picker_title).ColorPicker({
+       onChange: function (hsb, hex, rgb) {
+         var  colorPkTitle = $(color_picker_title).children("div");
+         colorPkTitle.css('backgroundColor', '#' + hex);
+         $(color_picker_title+"_input").val(hex);
+     	 },
+     	 onHide: function(colpkr) {
+     	   $(color_picker_title+"_input").trigger("change");
+   	   }
+   })
+   .bind('keyup', function(){
+   	  $(this).ColorPickerSetColor(this.value);
+   	 
+   });
+}
 function init_carousel(carousel){
   $('#left_scroll_bg').bind('click', function() {
       carousel.prev();
