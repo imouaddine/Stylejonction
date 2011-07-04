@@ -24,7 +24,6 @@
     <%= f.file_field :cover %>
   </div>
 
-
 <% end %>
 
-<%= photo_uploadify %>
+<%= photo_uploadify( "#cover", upload_cover_portfolio_project_path(:id => @project.id)) %>

@@ -10,6 +10,7 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     "click  #body_font_field .select_font":         "updateBodyFont"
     "change  #color_picker_title_input":               "updateTitleColor"
     "change  #color_picker_body_input":                "updateBodyColor"
+    "change  #own_color_picker_input":                "updatePatternBackgroundColor"
     "change .bg_upload_switcher" : "switchTab"
     
   
@@ -89,7 +90,6 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
         $(e.currentTarget).addClass("selected")
     )
   updateTitleColor: (e)->
-    console.log "SSS"
     e.preventDefault()
     e.stopPropagation()
     target = $(e.currentTarget)
@@ -102,3 +102,15 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     target = $(e.currentTarget)
     newColor = target.val()
     @options.model.save({'body_color': newColor})
+  
+  
+  
+  updatePatternBackgroundColor: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    target = $(e.currentTarget)
+    newColor = target.val()
+    @.$("#pattern_preview").css("background-color", "#"+newColor);
+    @.$("#final_preview").css("background-color", "#"+newColor);
+    
+    

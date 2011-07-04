@@ -15,6 +15,32 @@
 //= require backbone_datalink
 //= require backbone/stylejonction
 //= require_tree .
+$(function(){
+  $("#background_field").jcarousel({
+      scroll :1,
+      initCallback: init_carousel,
+      buttonNextHTML: null,
+      buttonPrevHTML: null
+  });
+  init_colorpicker('#color_picker_title');
+  init_colorpicker('#color_picker_body');
+  init_colorpicker('#own_color_picker');
+  
+  init_fancybox();
+  
+  $('.cropbox').Jcrop({
+    aspectRatio: 0
+  });  
+});
+function init_fancybox(){
+  $(".iframe_fancy").fancybox({
+     hideOnContentClick: true,
+     showCloseButton: true,
+     padding: 0
+  });
+}
+
+
 
 $(window).bind("load", function() { 
   $("#preview_wrapper").pinFooter();
@@ -24,17 +50,7 @@ $(window).bind("load", function() {
 $(window).bind("resize", function() { 
   $("#preview_wrapper").pinFooter();           
 });
-$(function(){
-  $("#background_field").jcarousel({
-      scroll :1,
-      initCallback: init_carousel,
-      buttonNextHTML: null,
-      buttonPrevHTML: null
-  });
-  
-  init_colorpicker('#color_picker_title');
-  init_colorpicker('#color_picker_body');
-})
+
 function init_colorpicker(color_picker_title){
   $(color_picker_title).ColorPicker({
        onChange: function (hsb, hex, rgb) {

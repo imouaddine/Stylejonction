@@ -22,12 +22,9 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = Project.new
-    @project.title = 'new project'
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @project }
-    end
+    @project = @portfolio.projects.create(:title => 'new project')
+    #temp find solution later
+    redirect_to edit_portfolio_project_path(@project)
   end
 
   def create

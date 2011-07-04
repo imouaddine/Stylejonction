@@ -6,21 +6,21 @@ $pink-color             : #ec5f89;
 $blue-color             : #5b6f7b;
 $grey-color             : #757575;
 
-$font-color             : #444444;
+$font-color             : #5d5d5d;
 $link-color             : $blue-color ;
 
-$default-border-color   :#cad8de;
+$default-border-color   : #e1e1e1;
 
 $blueprint-grid-columns : 24;
 $blueprint-grid-width   : 30px;
 $blueprint-grid-margin  : 10px;
 
 
-$default-box-shadow-color: #CCC;
-$default-box-shadow-blur: 3px;
+$default-box-shadow-color: #ffffff;
+$default-box-shadow-blur: 1px;
 
 //Text-shadow
-$default-text-shadow-color: white;
+$default-text-shadow-color: rgba(#f1f1f1, 1);
 $default-text-shadow-blur : 1px;
 
 $font-family-primary: 'Calibri', 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -59,17 +59,22 @@ $font-family-secondary: 'Alternate Gothic LT Two', Helvetica;
 }
 
 body{
- 
    background: #f2f2f2 url('images/grid_bg.png') repeat;
    font-family: $font-family-primary;
    line-height: 1.3em;
+   font-size: 13px;
 }
 a{
   outline: none;
-  @include hover-link;
-  @include link-colors(#00c, #0cc, #c0c, #ccc, #cc0);
+  text-decoration: none;
+  &:hover{
+    text-decoration: none;
+  }
   &:focus { 
       outline: none; 
+  }
+  &.active{
+    @include unstyled-link;
   }
 }
 label{
@@ -93,15 +98,55 @@ em{
   padding-left: 30px;
   line-height: 16px;
   display: block;
-
+}
+.edit_link{
+  background: transparent url('images/edit_icon.png') no-repeat left 0%;
+}
+.remove_link{
+  background: transparent url('images/remove_icon.png') no-repeat left 50%;
+}
+.description{
+  color: $grey-color;
+  font-style: italic;
+}
+.vertical_inputs{
   
-  &.edit_link{
-    background: transparent url('images/edit_icon.png') no-repeat left 0%;
+}
+#fancybox-outer{
+  background: transparent;
+}
+
+#fancybox-content, .fancybox{
+  @include border-radius(5px);
+  border-width: 1px;
+  border: 1px solid #f2f2f2;
+  border-width: 1px;
+  background: #f2f2f2;
+  @include single-box-shadow(rgba(#65747e, 0.67));
+  header{
+    padding: 10px;
+    height: 30px;
+    line-height: 30px;
+    @include fancy-border-bottom;
   }
-  &.remove_link{
-    background: transparent url('images/remove_icon.png') no-repeat left 50%;
+  .content{
+    @include clearfix;
+    padding: 10px;
+    line-height: 30px;
+    .left_col{
+      @include column(5);
+    }
+    .right_col{
+      @include column(10, true);
+    }
+  }
+  
+  h1{
+    color: #5d5d5d;
+    font-size: 13px;
   }
 }
+
 
 #wrapper{
   background: transparent url('images/header_bg.png') repeat-x;
@@ -165,9 +210,15 @@ em{
     $height: 39px;
     height: $height;
     @include container;
-    
+    a{
+      @include link-colors(#a8a8a8, $grey-color);
+      &.active{
+         @include unstyled-link;
+         color: white;
+         @include single-text-shadow(#ad3859);
+      }
+    }
     ul{
-      
       @include horizontal-list-container;
       li.first{
         a{
@@ -176,7 +227,6 @@ em{
             border-left: 1px solid #eb5f89;
           }
         }
-        
       }
       li{
         @include horizontal-list-item;
@@ -187,7 +237,7 @@ em{
           border-right: 1px solid #c9c8c8;
           width: span(5) + 3px;
           text-align: center;
-          @include link-colors(#a8a8a8);
+        
           text-transform: uppercase;
           font-size: 24px;
           font-family: $font-family-secondary;
@@ -199,13 +249,12 @@ em{
       }
       li.active a{
         background:$pink-color    url('images/nav_bg_selected.png') repeat-x;
-        @include link-colors(#FFF);
-        @include text-shadow(0);
+       
       }
       li.secondary{
         a{
            width: span(2) - 5px ;
-           color: $pink-color;
+           @include link_colors($pink-color, $grey-color, $pink-color);
            text-transform: none;
            font-size: 17px;
            font-style: italic;
@@ -234,34 +283,7 @@ em{
 
 #sidebar{
   @include column(5);
-  #portfolio_menu{
-    margin-top: 40px;
-    a{
-      height: 40px;
-      line-height: 40px;
-      margin: 0 -3px;
-     
-      text-align: center;
-      display: block;
-      @include fancy-border-bottom;
-      @include link-colors(#757575);
-      &.active{
-       font-style: italic;
-       font-weight: bold;
-       background: #ededed;
-       @include link-colors($blue-color);
-     }
-     &.last{
-       border-bottom: 0;
-       @include single-box-shadow(false, 0, 0, 0);
-     }
-    }
-    .active {
-      ul{
-        display: block;
-      }
-    }
-  }
+  padding-left: 3px;
   .separator{
     text-align: center;
     margin: 20px 0;
@@ -297,6 +319,56 @@ em{
   }
   
 }
+#portfolio_menu{
+  margin-top: 40px;
+  font-size: 14px;
+ 
+  a{
+    @include link-colors(#757575);
+     @include single-text-shadow;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: block;
+    @include fancy-border-bottom;
+    &.active{
+     font-style: italic;
+     font-weight: bold;
+     background: #ededed;
+     @include link-colors($blue-color);
+   }
+   &.last{
+     border-bottom: 0;
+     @include single-box-shadow(false, 0, 0, 0);
+   }
+  }
+  .active {
+    ol{
+      display: block;
+      li{
+        clear: both;
+        @include clearfix;
+      }
+      a{
+        text-align: left;
+        padding-left: 10px;
+        @include link-colors(#757575);
+        &.active{
+          font-style: normal;
+          //@include links-colors(#6a6a6a);
+        }
+        .number{
+          padding-right: 20px;
+          color: $pink-color;
+        }
+        
+      }
+      
+      
+    }
+  }
+  
+}
 #edit{
   @include column(18, true);
   width: 745px;
@@ -328,6 +400,7 @@ em{
 }
 
 form {
+ 
   fieldset{
     position: relative;
     padding-left: span(1);
@@ -351,10 +424,7 @@ form {
       font-weight: bold;
       text-transform: uppercase;
     }
-    .description{
-       color: $grey-color;
-       font-style: italic;
-    }
+    
   }
   .box{
       @include box;
@@ -469,10 +539,11 @@ form #background_field{
   display: block;
   width: 110px;
   height: 75px;
+  line-height: 25px;
   padding: 35px 0 0;
   font-size: 24px;
   text-align: center;
-  color: white;
+  @include link_colors(white, white, white, white, white);
   font-family: $font-family-secondary;
   @include text-shadow;
   &:hover, &.selected{
