@@ -11,8 +11,7 @@ end
 
 Factory.define :portfolio do |p|
     p.sequence(:theme) { |n| n } 
-    p.association :font_body
-    p.association :font_title
+    #p.association :font
     p.association :background
 end
 
@@ -26,7 +25,6 @@ Factory.define :font do |f|
   f.name "Inconsolata"
   f.provider "Google"
   f.url "http://google.webfonts.com"
-  f.title "Font title"
   f.visible true
 end
 
