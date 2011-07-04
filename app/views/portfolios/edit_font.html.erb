@@ -44,7 +44,7 @@
 					<dt>Standard</dt>
 					<dd>
 						<% @webfonts.each  do |font| %>
-							<%= font_link @portfolio, font, @portfolio.title_font == font %> 
+							<%= font_link @portfolio, font, @portfolio.body_font == font %> 
 						<% end %>
 					</dd>
 				</dl>
@@ -52,7 +52,7 @@
 						<dt>Something new</dt>
 						<dd>
 								<% @non_webfonts.each  do |font| %>
-									<%= font_link @portfolio, font, @portfolio.title_font == font  %> 
+									<%= font_link @portfolio, font, @portfolio.body_font == font  %> 
 								<% end %>
 						</dd>
 				</dl>
