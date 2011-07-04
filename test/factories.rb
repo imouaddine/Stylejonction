@@ -1,7 +1,7 @@
 Factory.define :user do |u|
     u.first_name 'John'
     u.last_name  'Doe'
-    u.username "user1"
+    u.username "user"
     u.password "password"
     u.password_confirmation "password"
     u.email "imad@ecomstrategy.ca"

@@ -5,6 +5,4 @@ class UsersTest < ActionDispatch::IntegrationTest
   test "User should login" do
     loggin
   end
-  
-  
 end

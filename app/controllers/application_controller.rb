@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
     else
       @user = User.find_by_username(request.subdomain)
     end
+
     @portfolio = @user.portfolio
   end
 
