@@ -52,7 +52,7 @@
 											<a class="icon_link remove_link" href="#">Remove</a>
 										</div>
 										<div class="col">
-											<a href="#" class="upload_btn btn">Upload</a>
+											<a id="upload_custom_bg" href="#" class="upload_btn btn">Upload</a>
 											<p class="information">Ideal dimension: 1024 px x 768 px – JPG, PNG formats</p>
 										</div>
 								</div>
@@ -132,3 +132,5 @@
 <% content_for :preview do %>
   <%= render  "preview",  :action => 'edit_portfolio'  %>
 <% end %>
+
+<%= photo_uploadify( "#upload_custom_bg", upload_background_portfolio_path(:format => 'js')) %>

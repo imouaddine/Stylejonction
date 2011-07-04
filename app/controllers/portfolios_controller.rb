@@ -48,5 +48,15 @@ class PortfoliosController < ApplicationController
       end
     end
   end
+  
+   def upload_background
+     respond_to do |format|
+       if @portfolio.update_attributes(params[:portfolio])
+         format.js
+       else
+         render :template => 'portfolios/upload_cover_error'
+       end
+     end
+   end
 
 end

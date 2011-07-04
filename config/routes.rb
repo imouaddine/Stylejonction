@@ -12,7 +12,7 @@ Stylejonction::Application.routes.draw do
       member do 
         get 'edit_layout'
         get 'edit_font'
-        get 'edit_background'
+        post 'upload_background'
         put 'publish'
       end
       resources :projects  do
