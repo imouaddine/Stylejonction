@@ -455,6 +455,7 @@ form {
 
 form #background_field{
   width: 620px;
+  height: 143px;
   border-right:0 !important;
   @include border-bottom-right-radius(0px);
   @include border-top-right-radius(0px);
