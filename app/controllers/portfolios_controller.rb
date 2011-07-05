@@ -20,7 +20,7 @@ class PortfoliosController < ApplicationController
 
   def edit_layout
     @layouts = Layout.all 
-    @backgrounds = Background.all
+    @backgrounds = PredefinedBackground.all
   end
 
   def edit_font
@@ -36,7 +36,7 @@ class PortfoliosController < ApplicationController
 
   def update
     @portfolio.layout = Layout.find(params[:layout][:id]) if params[:layout].present?
-    @portfolio.background = Background.find(params[:background][:id]) if params[:background].present?
+    @portfolio.background = PredefinedBackground.find(params[:background][:id]) if params[:background].present?
       
     respond_to do |format|
       if @portfolio.update_attributes(params[:portfolio])

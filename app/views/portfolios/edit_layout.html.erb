@@ -13,6 +13,7 @@
 							<span class="selection_title">Custom</span>
 					</div>
 					<ul class="selection_list">
+                      <%- if @backgrounds.present? %>
 						<% @backgrounds.each do |background| %>
 							<li class='<%= 'selected' if @portfolio.background == background  %>' >
 								<a data-id='<%= background.id %>' href="#" class="select_bg">
@@ -23,6 +24,7 @@
 								<span class="selection_title"><%= background.name  %></span>
 							</li>
 						<% end %>
+                      <% end %>
 					</ul>
 					<div class="scroll">
 						<a id="left_scroll_bg" href="#" class="left_scroll" ></a>

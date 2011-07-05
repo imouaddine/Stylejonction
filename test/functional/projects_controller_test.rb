@@ -27,4 +27,5 @@ class ProjectsControllerTest < ActionController::TestCase
       delete :destroy, :portfolio_id => @portfolio.id, :id => project.id
     end 
   end 
+
 end

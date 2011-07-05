@@ -12,9 +12,8 @@ end
 Factory.define :portfolio do |p|
     p.sequence(:theme) { |n| n } 
     #p.association :font
-    p.association :background
+    # p.association :background
 end
-
 
 Factory.define :project do |p|
   p.sequence(:title) { |n| "Title #{n}" }
