@@ -2,7 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
-  
   $("#preview_wrapper").draggable({ axis: "y" })
   $('#preview_wrapper').bind 'drag', (event, ui) =>
     offset = {left: 0, top: ui.offset.top}
@@ -17,8 +16,15 @@ $ ->
     $("#preview_wrapper").height(initialHeight)
     $("#preview_wrapper").animate({top: initialOffset.top}, 1000) 
   
-  #Background selection carousel
- 
+$(window).bind "load", () ->
+    $("#preview_wrapper").pinFooter()
+    initialOffset = $("#preview_wrapper").offset()
+    initialHeight = $("#preview_wrapper").height()
+
+$(window).bind "resize", ()->
+    $("#preview_wrapper").pinFooter()
+
+    
   
 
   

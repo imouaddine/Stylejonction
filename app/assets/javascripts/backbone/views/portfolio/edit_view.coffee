@@ -3,17 +3,69 @@ Stylejonction.Views.Portfolios ||= {}
 class Stylejonction.Views.Portfolios.EditView extends Backbone.View 
 
   events:
-    "click  .select_bg":                            "updateBackground"
-    "click  .select_layout":                        "updateLayout"
-    "click  .select_theme":                         "updateTheme"
-    "click  #title_font_field .select_font":        "updateTitleFont"
-    "click  #body_font_field .select_font":         "updateBodyFont"
-    "change  #color_picker_title_input":               "updateTitleColor"
-    "change  #color_picker_body_input":                "updateBodyColor"
+    "click  .select_bg":                              "updateBackground"
+    "click  .select_layout":                          "updateLayout"
+    "click  .select_theme":                           "updateTheme"
+    "click  #title_font_field .select_font":          "updateTitleFont"
+    "click  #body_font_field .select_font":           "updateBodyFont"
+    "change  #color_picker_title_input":              "updateTitleColor"
+    "change  #color_picker_body_input":               "updateBodyColor"
     "change  #own_color_picker_input":                "updatePatternBackgroundColor"
-    "change .bg_upload_switcher" : "switchTab"
+    "change .bg_upload_switcher" :                    "switchTab"
     
   
+  initialize: (e)->
+    #Carousel
+    @.$("#background_field").jcarousel
+      scroll :1,
+      initCallback: @.init_carousel,
+      buttonNextHTML: null,
+      buttonPrevHTML: null
+      
+    #Color pickers
+    @.init_colorpicker('#color_picker_title')
+    @.init_colorpicker('#color_picker_body')
+    @.init_colorpicker('#own_color_picker')
+    
+    #fancybox
+    @.init_fancybox()
+    
+    #jcrop
+    @.init_jcrop()
+
+  #background carousel
+  init_carousel: (carousel) ->
+    $('#left_scroll_bg').bind 'click', () =>
+      carousel.prev()
+      false
+      
+    $('#right_scroll_bg').bind 'click', () => 
+      carousel.next()
+      false;
+      
+  init_colorpicker: (element) ->
+    $(element).ColorPicker
+         onChange: (hsb, hex, rgb) ->
+           colorPkTitle = $(element).children("div")
+           colorPkTitle.css('backgroundColor', '#' + hex)
+           $(element+"_input").val(hex)
+         
+         onHide: (colpkr) ->
+       	   $(element+"_input").trigger("change")
+     .bind 'keyup', () =>
+     	  $(this).ColorPickerSetColor(this.value)
+
+     
+  init_fancybox: ()->
+    $(".iframe_fancy").fancybox
+       hideOnContentClick: true,
+       showCloseButton: true,
+       padding: 0
+       
+  init_jcrop: ()->
+    $('.cropbox').Jcrop
+       aspectRatio: 0
+       
   switchTab: (e)->
     e.preventDefault()
     e.stopPropagation()
@@ -102,8 +154,6 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     target = $(e.currentTarget)
     newColor = target.val()
     @options.model.save({'body_color': newColor})
-  
-  
   
   updatePatternBackgroundColor: (e)->
     e.preventDefault()
