@@ -8,7 +8,7 @@ class Portfolio < ActiveRecord::Base
   belongs_to :title_font, :class_name => "Font", :foreign_key => "title_font_id"
   belongs_to :body_font, :class_name => "Font", :foreign_key => "body_font_id"
    
-  belongs_to :background
+  belongs_to :background, :polymorphic => true
   belongs_to :layout
 
   def has_saved_project?

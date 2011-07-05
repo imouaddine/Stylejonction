@@ -36,5 +36,14 @@ class PortfolioTest < ActiveSupport::TestCase
     assert_equal true, @portfolio.published?
   end
 
+  test "polymorphic association works" do
+    portfolio = Factory.create(:portfolio)
+    background = Factory.create(:predefined_background)
+    portfolio.background = background
+    portfolio.save
+    portfolio.reload
+    assert_equal "PredefinedBackground", portfolio.background_type
+  end
+
 
 end

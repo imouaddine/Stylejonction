@@ -28,11 +28,9 @@ Factory.define :font do |f|
   f.visible true
 end
 
-
-Factory.define :background do |f|
-  f.display_mode_id 1
-  f.color_id 1
-  f.pattern_id 1
+Factory.define :predefined_background do |f|
+  f.name "PredefinedBlob"
+  f.background "img.jpg"
 end
 
 Factory.define :layout do |f|
