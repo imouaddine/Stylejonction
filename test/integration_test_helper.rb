@@ -37,6 +37,8 @@ Capybara.run_server = true
 Capybara.server_port = 9887
 PORT = Capybara.server_port
 
+
+
 Capybara.app_host = "project.test:#{PORT}"
 Capybara.default_driver = :selenium
 
@@ -57,4 +59,6 @@ def loggin
      fill_in 'Email', :with => user.email
      fill_in 'Password', :with => user.password
      click_button 'Sign in'
+     assert_not_nil user.portfolio, 'User portfolio cannot be null'
+     user
 end
