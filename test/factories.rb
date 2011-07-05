@@ -32,6 +32,19 @@ Factory.define :predefined_background do |f|
   f.background "img.jpg"
 end
 
+Factory.define :custom_background do |f|
+  f.name "CustomBack"
+  f.background "img.jpg"
+  f.display_mode "original"
+  f.association :user
+end
+
+Factory.define :pattern_background do |f|
+  f.name "PatternBackground"
+  f.background "imp.gif"
+  f.color "#ccc333"
+end
+
 Factory.define :layout do |f|
   f.name "Layout 1"
   f.css_name "portfolio.css"

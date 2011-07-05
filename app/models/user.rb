@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   
   has_one :portfolio
-  
+  has_many :custom_backgrounds  
+
   after_create :create_default_portfolio 
 
   devise :database_authenticatable, :registerable,
