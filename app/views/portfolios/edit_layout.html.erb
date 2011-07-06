@@ -13,6 +13,7 @@
 							<span class="selection_title">Custom</span>
 					</div>
 					<ul class="selection_list">
+                      <%- if @backgrounds.present? %>
 						<% @backgrounds.each do |background| %>
 							<li class='<%= 'selected' if @portfolio.background == background  %>' >
 								<a data-id='<%= background.id %>' href="#" class="select_bg">
@@ -23,6 +24,7 @@
 								<span class="selection_title"><%= background.name  %></span>
 							</li>
 						<% end %>
+                      <% end %>
 					</ul>
 					<div class="scroll">
 						<a id="left_scroll_bg" href="#" class="left_scroll" ></a>
@@ -47,7 +49,7 @@
 							<div class="tabs">
 								<div style="display:block" id="bg_upload_your_image">
 										<div class="first col">
-											<img src="http://placehold.it/164x126" />
+												<%= render 'custom_bg' %>
 											<a class="icon_link edit_link iframe_fancy" href="#edit_own_background">Edit your background</a>
 											<a class="icon_link remove_link" href="#">Remove</a>
 										</div>
@@ -133,7 +135,7 @@
 				</header>
 				<div class="content">
 					<div class="left_col">
-							<%= image_tag 'http://placehold.it/164x126', :class => "cropbox" %>
+							<%= render 'custom_bg' %>
 					</div>
 					<div class="right_col">
 						<p class="description">Drag your image to adjust</p>
@@ -158,4 +160,4 @@
   <%= render  "preview",  :action => 'edit_portfolio'  %>
 <% end %>
 
-<%= photo_uploadify( "#upload_custom_bg", upload_background_portfolio_path(:format => 'js')) %>
+<%= photo_uploadify "#upload_custom_bg", upload_background_portfolio_path(:format => 'js'), 'portfolio[background]' %>

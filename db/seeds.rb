@@ -8,7 +8,7 @@
 
 User.delete_all
 Layout.delete_all
-Background.delete_all
+PredefinedBackground.delete_all
 Portfolio.delete_all
 Font.delete_all
 
@@ -16,7 +16,9 @@ puts 'SETTING UP ADMIN LOGIN'
 user = User.create! :username => 'imouaddine', :first_name => 'Imad', :last_name =>'Mouaddine', :email => 'imad@ecomstrategy.ca', :password => 'pass', :password_confirmation => 'pass', :admin => true
 
 puts "create some backgrounds"
-10.times { Background.create }
+10.times do |i|
+  PredefinedBackground.create(:name => "Background #{i}", :background => "#{i}.jpg") 
+end
 
 
 puts "create 4 layouts"
@@ -67,7 +69,7 @@ Font.create(
 
 
 user.portfolio = Portfolio.create(:theme => 0)
-user.portfolio.background = Background.first
+user.portfolio.background = PredefinedBackground.first
 user.portfolio.layout = Layout.first
 user.portfolio.title_font = Font.first
 user.portfolio.body_font = Font.first

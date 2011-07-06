@@ -20,7 +20,7 @@ class PortfoliosController < ApplicationController
 
   def edit_layout
     @layouts = Layout.all 
-    @backgrounds = Background.all
+    @backgrounds = PredefinedBackground.all
   end
 
   def edit_font
@@ -36,8 +36,11 @@ class PortfoliosController < ApplicationController
 
   def update
     @portfolio.layout = Layout.find(params[:layout][:id]) if params[:layout].present?
-    @portfolio.background = Background.find(params[:background][:id]) if params[:background].present?
-      
+
+    if params[:background].present?
+      @portfolio.background = PredefinedBackground.find(params[:background][:id])
+    end
+
     respond_to do |format|
       if @portfolio.update_attributes(params[:portfolio])
         format.html { redirect_to edit_layout_portfolio_path, notice: 'Portfolio was successfully updated.' }
@@ -49,14 +52,19 @@ class PortfoliosController < ApplicationController
     end
   end
   
-   def upload_background
+  def upload_background
+     
+     background = CustomBackground.create(params[:portfolio], :user_id => @portfolio.user.id, :display_mode => 'original')
+     
+     background.display_mode = 'original'
+     
      respond_to do |format|
-       if @portfolio.update_attributes(params[:portfolio])
+       if  @portfolio.update_attributes(:background_id => background.id, :background_type => 'CustomBackground' )
          format.js
        else
          render :template => 'portfolios/upload_cover_error'
        end
      end
-   end
+  end
 
 end

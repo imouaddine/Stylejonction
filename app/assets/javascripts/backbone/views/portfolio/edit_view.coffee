@@ -58,7 +58,7 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
      
   init_fancybox: ()->
     $(".iframe_fancy").fancybox
-       hideOnContentClick: true,
+       hideOnContentClick: false,
        showCloseButton: true,
        padding: 0
        
@@ -73,7 +73,6 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     @.$(".custom_bg .tabs > div").slideUp("slow")
     visibleTab.slideDown("slow")
     
-    
   
   updateBackground: (e)->
     e.preventDefault()
@@ -82,13 +81,12 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     newBackground = target.data('id')
     target.children(".select_loading_overlay").show()
     @.$("#background_field li").removeClass("selected")
-    @options.model.save({'background_id': newBackground}, 
+    @options.model.save({'background_id': newBackground, 'background_type': 'PredefinedBackground'}, 
       success: -> 
         target.children(".select_loading_overlay").hide();
-        
         $(e.currentTarget).parent().addClass("selected")
-        
-      
+      error: ->
+        alert 'Something wrong happened'
     )
   
   updateLayout: (e) ->

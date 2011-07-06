@@ -13,7 +13,7 @@ class ProjectsControllerTest < ActionController::TestCase
     get :index, :portfolio_id => @portfolio.id
     assert_response :success
   end
-  
+
   test "should get new when user is authenticated" do
     sign_in @user
     get :new, :portfolio_id => 1 
@@ -27,4 +27,5 @@ class ProjectsControllerTest < ActionController::TestCase
       delete :destroy, :portfolio_id => @portfolio.id, :id => project.id
     end 
   end 
+
 end

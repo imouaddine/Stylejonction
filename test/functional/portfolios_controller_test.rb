@@ -46,7 +46,33 @@ class PortfoliosControllerTest < ActionController::TestCase
     @user.reload
     assert_equal 10, @user.portfolio.theme
   end
-
+  
+  test "should update predefined background" do
+    sign_in @user
+    background = Factory(:predefined_background)
+    get :update, {:portfolio => { :background_id => background.id, :background_type => "PredefinedBackground" } }
+    
+    assert_redirected_to edit_layout_portfolio_path, :notice => 'Portfolio was successfully updated.'
+    @user.reload
+    
+    assert_equal background, @user.portfolio.background
+  end
+  
+  test "should update custom background" do
+    sign_in @user
+    
+    background = Factory(:custom_background, :user => @user)
+    
+    get :update, {:portfolio => { :background_id => background.id, :background_type => "CustomBackground" } }
+    assert_redirected_to edit_layout_portfolio_path, :notice => 'Portfolio was successfully updated.'
+    @user.reload
+    assert_equal background, @user.portfolio.background
+    assert_equal background.user, @user
+    
+  end
+  
+  
+  
   test "can publish a portfolio" do
     sign_in @user
     put :publish
