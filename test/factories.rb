@@ -11,8 +11,6 @@ end
 
 Factory.define :portfolio do |p|
     p.sequence(:theme) { |n| n } 
-    #p.association :font
-    # p.association :background
 end
 
 Factory.define :project do |p|
@@ -29,7 +27,11 @@ end
 
 Factory.define :predefined_background do |f|
   f.name "PredefinedBlob"
-  f.background "img.jpg"
+  f.background "imp.gif"
+end
+
+Factory.define :pattern do |p|
+  p.pattern "I'm a pattern"
 end
 
 Factory.define :custom_background do |f|
@@ -41,7 +43,7 @@ end
 
 Factory.define :pattern_background do |f|
   f.name "PatternBackground"
-  f.background "imp.gif"
+  f.association :pattern
   f.color "#ccc333"
 end
 
