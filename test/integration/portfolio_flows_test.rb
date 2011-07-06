@@ -11,27 +11,27 @@ class PortfolioFlowsTest < ActionDispatch::IntegrationTest
   
   
   test "supports js" do
-      visit portfolio_path(@portfolio)
+      visit portfolio_path
       click_link "test js"
-      page.should have_content("js works")
+
+     # This would only work used with RSpec: page.should have_content("js works")
+      assert_equal true, page.has_content?("js works")
   end
   
   test "edit_layout portfolio page" do
-    
-    visit  edit_layout_portfolio_path(@portfolio) 
-    
+    visit  edit_layout_portfolio_path
   end
   
   test "edit_font portfolio page" do
-    
-    assert_not_nil @user.portfolio, 'User portfolio cannot be null'
-    
     Font.create(:name => 'Times New Roman', :webfont => true)
     f = Font.create(:name => 'Arial', :webfont => true)
     
-    visit  edit_font_portfolio_path(@portfolio) 
+    visit  edit_font_portfolio_path 
     
     find('#title_font_field').click_link "Arial"
-    assert_equal f, @porfolio.title_font
+    # You had a typo here, also you have to reload the
+    # object if you change it in the db
+    @portfolio.reload
+    assert_equal f, @portfolio.title_font
   end
 end

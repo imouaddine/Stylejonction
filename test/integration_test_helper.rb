@@ -59,6 +59,5 @@ def loggin
      fill_in 'Email', :with => user.email
      fill_in 'Password', :with => user.password
      click_button 'Sign in'
-     assert_not_nil user.portfolio, 'User portfolio cannot be null'
      user
 end
