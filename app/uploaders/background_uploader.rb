@@ -1,8 +1,8 @@
 # encoding: utf-8
 
 class BackgroundUploader < CarrierWave::Uploader::Base
+  include CarrierWave::RMagick
 
-  storage :file
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -22,6 +22,10 @@ class BackgroundUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+  version :preview do 
+    process :resize_to_limit => [160, 160]
+  end
+  
   # Create different versions of your uploaded files:
   # version :thumb do
   #   process :scale => [50, 50]

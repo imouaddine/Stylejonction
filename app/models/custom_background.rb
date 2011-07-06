@@ -6,4 +6,11 @@ class CustomBackground < ActiveRecord::Base
   mount_uploader :background, BackgroundUploader
   has_many :portfolios, :as => :background
   belongs_to :user
+  
+  after_initialize :init
+  
+  def init
+    self.display_mode ||= 'original'
+  end
+  
 end

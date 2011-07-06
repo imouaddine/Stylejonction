@@ -3,7 +3,7 @@ class CreateCustomBackgrounds < ActiveRecord::Migration
     create_table :custom_backgrounds do |t|
       t.string :name
       t.string :background
-      t.string :display_mode
+      t.string :display_mode, :default => 'original'
       t.integer :user_id
 
       t.timestamps
