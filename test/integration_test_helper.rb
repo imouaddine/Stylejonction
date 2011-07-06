@@ -45,7 +45,9 @@ Capybara.default_driver = :selenium
 DOMAIN = "project.test"
  
 def change_subdomain_to(subdomain)
+  unless !!Capybara.app_host.split(".").first.match(/#{subdomain}/)
     Capybara.app_host = "#{subdomain}.#{DOMAIN}:#{PORT}"
+  end
 end
 
 def loggin

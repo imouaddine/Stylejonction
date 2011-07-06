@@ -31,8 +31,11 @@ class ApplicationController < ActionController::Base
   def redirect_destination
     if params[:user].present? 
       usr = User.find_by_email(params[:user][:email])
-      redirect_url = request.url.gsub(/\/\//, "//#{usr.username}.").gsub(/www\./, "")
-      return redirect_url.gsub(/users\/sign_in/, "portfolio/edit")
+      new_url = request.url
+      unless !!new_url.split(".").first.match(/#{usr.username}/)
+        new_url = request.url.gsub(/\/\//, "//#{usr.username}.").gsub(/www\./, "")
+      end
+      return new_url.gsub(/users\/sign_in/, "portfolio/edit")
     else
       "/"
     end
