@@ -1,6 +1,6 @@
 class Portfolio < ActiveRecord::Base
   
-  attr_accessible :id, :layout, :theme, :created_at, :updated_at, :user_id, :background_id, :title_font_id, :body_font_id, :layout_id, :body_color, :title_colo, :background_type, :published, :title_color, :background
+  attr_accessible :id, :layout, :theme, :created_at, :updated_at, :user_id, :background_id, :title_font_id, :body_font_id, :layout_id, :body_color, :title_colo, :background_type, :published, :title_color, :background, :background_display_mode
 
   belongs_to :user
   has_many :projects
@@ -25,6 +25,15 @@ class Portfolio < ActiveRecord::Base
       write_attribute(:published, value)
     end
   end
+  
+
+  
+  def background_display_mode=(value)
+    self.background.display_mode = value
+    self.background.save
+  end
+  
+  
   
   
   def custom_background_url( version = :preview)

@@ -18,7 +18,7 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
     @add_preview()
   
   edit_portfolio: ->
-    @view = new Stylejonction.Views.Portfolios.EditView(model: @portfolio, el: '#edit')
+    @view = new Stylejonction.Views.Portfolios.EditView(model: @portfolio, el: 'body')
     
   edit_project: ->
     @project = @projects.get(@options.project.id)

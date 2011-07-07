@@ -40,7 +40,7 @@ class PortfoliosController < ApplicationController
     if params[:background].present?
       @portfolio.background = PredefinedBackground.find(params[:background][:id])
     end
-
+    
     respond_to do |format|
       if @portfolio.update_attributes(params[:portfolio])
         format.html { redirect_to edit_layout_portfolio_path, notice: 'Portfolio was successfully updated.' }
@@ -51,6 +51,8 @@ class PortfoliosController < ApplicationController
       end
     end
   end
+  
+  
   
   def upload_background
      

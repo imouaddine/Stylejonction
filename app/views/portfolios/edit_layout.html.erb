@@ -140,13 +140,13 @@
 					<div class="right_col">
 						<p class="description">Drag your image to adjust</p>
 						<div>
-							<input type="radio" id="original_display_mode" name="display_mode" />
+							<input value="original" <%= 'checked' if @portfolio.background.display_mode == 'original' %> type="radio" id="original_display_mode" name="display_mode" />
 							<label for="original_display_mode" >Original format</label>
 							<br>
-							<input  type="radio" id="tile_display_mode" name="display_mode" />
+							<input value="tile" <%= 'checked' if @portfolio.background.display_mode == 'tile' %> type="radio" id="tile_display_mode" name="display_mode" />
 							<label for="tile_display_mode" >Tile</label>
 							<br>
-							<input  type="radio" id="strech_display_mode" name="display_mode" />
+							<input value="stretch"  <%= 'checked' if @portfolio.background.display_mode == 'stretch' %> type="radio" id="strech_display_mode" name="display_mode" />
 							<label for="strech_display_mode" >Stretch to fit</label>
 						</div>
 						<p class="information">Original image is <em>1024px x 768px</em></p>

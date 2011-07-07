@@ -12,6 +12,7 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     "change  #color_picker_body_input":               "updateBodyColor"
     "change  #own_color_picker_input":                "updatePatternBackgroundColor"
     "change .bg_upload_switcher" :                    "switchTab"
+    "change input[name='display_mode']":             "updateBgDisplayMode"
     
   
   initialize: (e)->
@@ -32,6 +33,11 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     
     #jcrop
     @.init_jcrop()
+    
+    #event for elements outside the view
+    #$("#edit_own_background").delegate "change", "input[name='display_mode']",  @.updateBgDisplayMode
+   
+      
 
   #background carousel
   init_carousel: (carousel) ->
@@ -160,5 +166,12 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     newColor = target.val()
     @.$("#pattern_preview").css("background-color", "#"+newColor);
     @.$("#final_preview").css("background-color", "#"+newColor);
+    
+  updateBgDisplayMode: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    target = $(e.currentTarget)
+    @options.model.save({'background_display_mode': target.val()})
+    
     
     
