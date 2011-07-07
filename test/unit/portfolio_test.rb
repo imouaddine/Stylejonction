@@ -64,4 +64,19 @@ class PortfolioTest < ActiveSupport::TestCase
   end
 
 
+  test "by default portfolio should have " do
+    Factory.create(:predefined_background) 
+    Layout.create(:name => "left")
+    Factory.create(:font) 
+
+    portfolio = Portfolio.create
+    portfolio.reload
+
+    assert_equal "PredefinedBackground", portfolio.background_type
+    assert_equal "left", portfolio.layout.name
+    #assert_equal Theme.find_by_type("light"), portfolio.theme 
+    assert_equal Font.first, portfolio.title_font
+    assert_equal Font.first, portfolio.body_font
+    #assert_equla "#5d5d5d", portfolio.font.color 
+  end
 end

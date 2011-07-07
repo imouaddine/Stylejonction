@@ -11,6 +11,8 @@ class Portfolio < ActiveRecord::Base
   belongs_to :background, :polymorphic => true
   belongs_to :layout
 
+  after_create :set_default_attributes
+
   def has_saved_project?
     projects.present? && !projects.first.new_record?
   end
@@ -40,4 +42,18 @@ class Portfolio < ActiveRecord::Base
     background.background.url(version) if background 
   end
 
+
+  private
+
+  def set_default_attributes
+    self.background = PredefinedBackground.first if (PredefinedBackground.count > 0)
+    self.layout = Layout.find_by_name("left") if (Layout.count > 0)
+    if Font.count > 0
+      self.title_font = Font.first
+      self.body_font = Font.first
+    end
+    save!
+  end
+
 end
+
