@@ -21,6 +21,7 @@ class PortfoliosController < ApplicationController
   def edit_layout
     @layouts = Layout.all 
     @backgrounds = PredefinedBackground.all
+    @background = @portfolio.background
   end
 
   def edit_font
@@ -54,19 +55,6 @@ class PortfoliosController < ApplicationController
   
   
   
-  def upload_background
-     
-     background = CustomBackground.create(params[:portfolio], :user_id => @portfolio.user.id, :display_mode => 'original')
-     
-     background.display_mode = 'original'
-     
-     respond_to do |format|
-       if  @portfolio.update_attributes(:background_id => background.id, :background_type => 'CustomBackground' )
-         format.js
-       else
-         render :template => 'portfolios/upload_cover_error'
-       end
-     end
-  end
+  
 
 end

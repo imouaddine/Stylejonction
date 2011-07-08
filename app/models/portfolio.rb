@@ -9,6 +9,12 @@ class Portfolio < ActiveRecord::Base
   belongs_to :body_font, :class_name => "Font", :foreign_key => "body_font_id"
    
   belongs_to :background, :polymorphic => true
+  belongs_to :predefined_background
+  belongs_to :custom_background
+  belongs_to :pattern_background
+  
+  
+  
   belongs_to :layout
 
   after_create :set_default_attributes
@@ -28,25 +34,36 @@ class Portfolio < ActiveRecord::Base
     end
   end
   
-
+  def has_custom_background?
+    self.background.present? && self.background_type == 'CustomBackground'
+  end
+  def has_pattern_background?
+    self.background.present? && self.background_type == 'PatternBackground'
+  end
+  def has_predefined_background?
+    self.background.present? && self.background_type == 'PredefinedBackground'
+  end
+   
   
   def background_display_mode=(value)
-    self.background.display_mode = value
-    self.background.save
+    self.custom_background.display_mode = value
+    self.custom_background.save
   end
   
   
   
-  
-  def custom_background_url( version = :preview)
-    background.background.url(version) if background 
-  end
+
 
 
   private
 
   def set_default_attributes
     self.background = PredefinedBackground.first if (PredefinedBackground.count > 0)
+    
+    self.predefined_background = self.background 
+    self.custom_background = CustomBackground.create(:user => self.user)
+    self.pattern_background = PatternBackground.create( :pattern => Pattern.first, :color => '000000')
+    
     self.layout = Layout.find_by_name("left") if (Layout.count > 0)
     if Font.count > 0
       self.title_font = Font.first

@@ -1,163 +1,20 @@
 <%= render('sidebar') %>
-
-<section id="edit" class="edit_portfolio_layout">
-
+<section id="edit_portfolio_layout" class="edit edit_portfolio_layout">
+	
   <%= form_for(@portfolio, :url => portfolio_path) do |f| %>
-		<fieldset class="edit_portfolio_bg">
-				<div class="order">1</div>
-				<legend>Background image</legend>
-				<p class="description">Select a background from the gallery or create your own background</p>
-				<div id="background_field" class="field box background_field">
-					<div class="custom_bg">
-							<a class="add_custombg_btn" id="add_custombg_btn" href="#">CREATE<br>YOUR OWN</a>
-							<span class="selection_title">Custom</span>
-					</div>
-					<ul class="selection_list">
-                      <%- if @backgrounds.present? %>
-						<% @backgrounds.each do |background| %>
-							<li class='<%= 'selected' if @portfolio.background == background  %>' >
-								<a data-id='<%= background.id %>' href="#" class="select_bg">
-									<img src="http://placehold.it/110x110" />
-									<span class="select_bg_overlay"></span>
-									<div class="select_loading_overlay"></div>
-								</a>
-								<span class="selection_title"><%= background.name  %></span>
-							</li>
-						<% end %>
-                      <% end %>
-					</ul>
-					<div class="scroll">
-						<a id="left_scroll_bg" href="#" class="left_scroll" ></a>
-						<a id="right_scroll_bg"  href="#" class="right_scroll" ></a>
-					</div>
-				</div>
-				<div id="custom_background_field" class="field box background_field">
-					<div>
-							<a class="add_custombg_btn selected" href="#">CREATE<br>YOUR OWN</a>
-							<div class="custom_bg_selection">
-								<p class="description">Select <em>one</em> of the following options for your background.</p>
-								<ul>
-									<li>
-										<input data-target="#bg_upload_your_image" class="bg_upload_switcher" checked name="bg" id="bg_input_upload_your_image" type="radio"></input>
-										<label for="upload_your_image" >Upload your image</label>
-									</li>
-									<li><input data-target="#bg_choose_color" class="bg_upload_switcher" name="bg" id="bg_input_choose_color" type="radio"></input><label for="bg_input_choose_color">Choose a colour & pattern</label></li>
-								</ul>
-							</div>
-					</div>
-					<div class="custom_bg">
-							<div class="tabs">
-								<div style="display:block" id="bg_upload_your_image">
-										<div class="first col">
-												<%= render 'custom_bg' %>
-											<a class="icon_link edit_link iframe_fancy" href="#edit_own_background">Edit your background</a>
-											<a class="icon_link remove_link" href="#">Remove</a>
-										</div>
-										<div class="col">
-											<a id="upload_custom_bg" href="#" class="upload_btn btn">Upload</a>
-											<p class="information">Ideal dimension: 1024 px x 768 px – JPG, PNG formats</p>
-										</div>
-								</div>
-								<div style="display:none" id="bg_choose_color">
-										<p class="description"> Click <em>boxes</em> to customize</p>
-										<ul>
-											<li>
-												<div class="color_picker panel" id="own_color_picker">
-													<div style="background-color: #bccc08"></div>
-													<input type="hidden" id="own_color_picker_input" value="bccc08" ></input>
-												</div>
-											</li>
-											<li class="text">&</li>
-											<li>
-												<div class="pattern panel">
-												</div>
-												+
-												<div id="pattern_preview" class="pattern_preview panel" style="background-color: #bccc08">
-												</div>
-											</li>
-											<li  class="text">
-												=
-											</li>
-											<li>
-												<div id="final_preview" class="preview panel" style="background-color: #bccc08;" >
-												</div>
-											</li>
-										</ul>
-								</div>
-							</div>
-					</div>
-				</div>
-		</fieldset>
-		<fieldset class="edit_layout">
-			<div class="order">2</div>
-			<legend>Layout</legend>
-			<p class="description">Select from the following layouts.</p>
-			<div id="layout_field" class="field box layout_field">
-				<ul class="selection_list">
-						<% @layouts.each do |layout| %>
-							<li>
-								<a id="select_layout_<%= layout.name %>" data-id='<%= layout.id %>' href="#" 
-									class="select_layout <%= 'selected' if @portfolio.layout == layout  %>">
-									<span class="select_bg_overlay"></span>
-									<div class="select_loading_overlay"></div>
-								</a>
-							</li>
-						<% end %>
-				</ul>
-			</div>
-		</fieldset>
-		<fieldset>
-			<div class="order">3</div>
-			<legend>Theme</legend>
-			<p class="description">Select either the dark or light theme for the content boxes.
-			(Typically, you would use a light theme on a dark background)</p>
-			<div id="theme_field" class="field box theme_field">
-				<ul class="selection_list">
-					<li>
-						<a id="select_theme_light" data-id='0' href="#" 
-							class="select_theme <%= 'selected' if @portfolio.theme == 0  %>">
-								LIGHT
-						</a>
-					</li>
-					<li>
-						<a id="select_theme_dark" data-id='1' href="#" 
-							class="select_theme <%= 'selected' if @portfolio.theme == 1  %>">
-								DARK
-						</a>
-					</li>
-				</ul>
-			</div>
-		</fieldset>
-		<div style="opacity: 0">
-			<section class="fancybox" id="edit_own_background">
-				<header>
-					<h1 class="icon_link edit_link">Edit your background</h1>
-				</header>
-				<div class="content">
-					<div class="left_col">
-							<%= render 'custom_bg' %>
-					</div>
-					<div class="right_col">
-						<p class="description">Drag your image to adjust</p>
-						<div>
-							<input value="original" <%= 'checked' if @portfolio.background.display_mode == 'original' %> type="radio" id="original_display_mode" name="display_mode" />
-							<label for="original_display_mode" >Original format</label>
-							<br>
-							<input value="tile" <%= 'checked' if @portfolio.background.display_mode == 'tile' %> type="radio" id="tile_display_mode" name="display_mode" />
-							<label for="tile_display_mode" >Tile</label>
-							<br>
-							<input value="stretch"  <%= 'checked' if @portfolio.background.display_mode == 'stretch' %> type="radio" id="strech_display_mode" name="display_mode" />
-							<label for="strech_display_mode" >Stretch to fit</label>
-						</div>
-						<p class="information">Original image is <em>1024px x 768px</em></p>
-					</div>
-				</div>
-			</section>
-		</div>
+
+		<%= render ('portfolios/fields/background_field') %>
+		
+		<%= render ('portfolios/fields/layout_field') %>
+		
+		<%= render ('portfolios/fields/theme_field') %>
+		
 	<% end %>
+	
 </section>
+
 <% content_for :preview do %>
   <%= render  "preview",  :action => 'edit_portfolio'  %>
 <% end %>
 
-<%= photo_uploadify "#upload_custom_bg", upload_background_portfolio_path(:format => 'js'), 'portfolio[background]' %>
+

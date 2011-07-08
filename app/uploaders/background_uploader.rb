@@ -23,7 +23,7 @@ class BackgroundUploader < CarrierWave::Uploader::Base
   # end
 
   version :preview do 
-    process :resize_to_limit => [160, 160]
+    process :resize_to_limit => [160, 125]
   end
   
   # Create different versions of your uploaded files:

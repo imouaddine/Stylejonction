@@ -1,0 +1,51 @@
+<fieldset id="background_field" class="background_field edit_portfolio_bg">
+		<div class="order">1</div>
+		<legend>Background image</legend>
+		<p class="description">Select a background from the gallery or create your own background</p>
+		<div>
+			<%= render 'backgrounds/predefined_background_field', :visible => @portfolio.has_predefined_background? %>
+			<div id="custom_background_field" class="field box background_field <%= 'hidden' if @portfolio.has_predefined_background? %>">
+				<div>
+					<a class="toggle_btn" href="#">
+						<small>CHOOSE FROM </small><br>GALLERY
+					</a>
+					<div class="user_selection">
+						<p class="description">
+							Select <em>one</em> of the following options for your background.
+						</p>
+						<ul class="horizontal_list">
+							<li>
+								<%= radio_button_tag 'bg', 
+												'update_custom_background', 
+												 @portfolio.has_custom_background?, 
+												:id => "custom_background_input",
+												:class => 'custom_background_toggle'   %>
+								<label for="custom_background_input" >Upload your image</label>
+							</li>
+							<li>
+								<%= radio_button_tag 'bg', 
+												'update_pattern_background', 
+												 @portfolio.has_pattern_background?, 
+												:id => "pattern_background_input",
+												:class => 'custom_background_toggle'    %>
+								<label for="pattern_background_input">Choose a colour & pattern</label>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="tabs">
+						<%= render 'backgrounds/update_custom', 
+												:background => @portfolio.custom_background, 
+												:visible => @portfolio.has_custom_background? || !@portfolio.has_pattern_background?,
+												:show_links =>  @portfolio.has_custom_background? %>
+
+						<%= render 'backgrounds/update_pattern', 
+												:background => @portfolio.pattern_background,
+												:visible => @portfolio.has_pattern_background? %>
+				</div>
+			</div>
+		</div>
+</fieldset>
+
+
+<%= photo_uploadify "#upload_custom_bg", upload_portfolio_background_path(:format => 'js'), 'background[background]' %>

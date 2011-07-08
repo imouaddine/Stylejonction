@@ -1,0 +1,18 @@
+<fieldset id="layout_field">
+	<div class="order">2</div>
+	<legend>Layout</legend>
+	<p class="description">Select from the following layouts.</p>
+	<div id="layout_field" class="field box layout_field">
+		<ul class="selection_list">
+				<% @layouts.each do |layout| %>
+					<li>
+						<a id="select_layout_<%= layout.name %>" data-id='<%= layout.id %>' href="#" 
+							class="select_layout <%= 'selected' if @portfolio.layout == layout  %>">
+							<span class="select_bg_overlay"></span>
+							<div class="select_loading_overlay"></div>
+						</a>
+					</li>
+				<% end %>
+		</ul>
+	</div>
+</fieldset>
