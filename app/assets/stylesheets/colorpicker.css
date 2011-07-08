@@ -20,6 +20,7 @@
 	font-family: Arial, Helvetica, sans-serif;
 	display: none;
 }
+
 .colorpicker_color {
 	width: 150px;
 	height: 150px;
@@ -171,4 +172,8 @@
 }
 .colorpicker_slider {
 	background-position: bottom;
+}
+.color_picker{
+  cursor: pointer;
+  height: 30px;
 }

@@ -42,7 +42,6 @@ module ApplicationHelper
          });
        });
      </script>
-
      }.gsub(/[\n ]+/, ' ').strip.html_safe
    end
    
@@ -52,7 +51,7 @@ module ApplicationHelper
           html_options[:class] = 'selected'
           link_to(body, url, html_options)
        else
-         link_to(body, url, html_options)
+          link_to(body, url, html_options)
        end
    end
    

@@ -1,3 +1,11 @@
+@import "variables";
+@import "blueprint";
+@import "compass/layout/grid-background";
+@import "compass/layout/sticky-footer";
+@import "compass/css3";
+@import "compass/typography/links";
+@import "compass/typography/lists/horizontal-list";
+
 @mixin has_image_overlay($width, $height){
   position: relative;
   overflow: hidden;
@@ -20,14 +28,28 @@
     height: $height;
   }
 }
-@mixin fancy-border-bottom($border-color: $default-border-color, $shadow-color: $default-box-shadow-color ){
-   border-bottom: 1px solid $border-color;
-   @include single-box-shadow($shadow-color, 0px, 1px, 0px, false, false);
+@mixin fancy-border($border-color: $default-border-color, $shadow-color: $default-box-shadow-color){
+  border: 1px solid $border-color;
+ @include single-box-shadow($shadow-color, 0px, -1px, 0px, false, false);
 }
 @mixin fancy-border-top($border-color: $default-border-color, $shadow-color: $default-box-shadow-color  ){
    border-top: 1px solid $border-color;
    @include single-box-shadow($shadow-color, 0px, -1px, 0px, false, false);
 }
+@mixin fancy-border-right($border-color: $default-border-color, $shadow-color: $default-box-shadow-color ){
+   border-right: 1px solid $border-color;
+   @include single-box-shadow($shadow-color, 0px, 0px, 1px, false, false);
+}
+@mixin fancy-border-bottom($border-color: $default-border-color, $shadow-color: $default-box-shadow-color ){
+   border-bottom: 1px solid $border-color;
+   @include single-box-shadow($shadow-color, 0px, 1px, 0px, false, false);
+}
+@mixin fancy-border-left($border-color: $default-border-color, $shadow-color: $default-box-shadow-color  ){
+   border-left: 1px solid $border-color;
+   @include single-box-shadow($shadow-color, 0px, 0px, -1px, false, false);
+}
+
+
 @mixin fancy-box-shadow(){
    @include box-shadow(rgba(#ffffff, 0.85) 0 0 1px, rgba(#000000, 0.3) 0 0 1px 1px inset);
 }

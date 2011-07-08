@@ -1,6 +1,81 @@
 <%= render('/portfolios/sidebar') %>
-<section id="edit">
-	<%= render 'form' %>
+<section id="edit_project" class="edit_project edit">
+	<%= form_for(@project, :url => url_for_action(@project)) do |f| %>
+	<ul class="tabs horizontal_list">
+		<li><a href="#" class="active left" >Project properties</a></li>
+		<li><a class="right" href="#">Content</a></li>
+	</ul>
+	<div>
+		<div class="tab_content" id="edit_project_properties">
+			<!-- Project Title !-->
+			<fieldset id="project_title">
+				<span class="order">1</span>
+				<legend>Project title</legend>
+				<p class="description">Give your project a catchy title. (ex.: Spring 2011 Streetwear Designs)</p>
+				<%= text_field_tag 'title', @project.title, :placeholder => 'Enter project title here' %>
+				<%= check_box_tag 'default_project' %>
+				<%= label_tag 'default_project', "<em>Make this your default project.</em> Will become the cover project for your portfolio.".html_safe %>
+			</fieldset>
+			<!-- Project Title !-->
+			<fieldset id="project_cover">
+				<span class="order">2</span>
+				<legend>Upload a cover image</legend>
+				<p class="description">This thumbnail should represent the project.</p>
+				<div class="first col">
+					<%= render 'cover' %>
+					<div id="upload_custom_bg_links" class="upload_custom_bg_links">
+					</div>
+				</div>
+				<div class="col">
+					<a id="upload_custom_bg" href="#" class="upload_btn btn">Upload</a>
+					<a class="icon_link edit_link iframe_fancy" href="#">Edit your cover</a>
+					<p class="information">Ideal dimension: 165 px x 165 px – JPG, PNG formats</p>
+				</div>
+			</fieldset>
+			<fieldset>
+				<span class="order">3</span>
+				<legend>Privacy Settings</legend>
+				<p class="description">Make your project public or limited access</p>
+				<ul class="horizontal_list access_toolbar">
+					<li>
+						<a class="access_toggle" id="private_project_btn" >
+							Limited Access
+						</a>
+					</li>
+					<li>
+						<a class="access_toggle" id="public_project_btn" >
+							Public 
+						</a>
+					</li>
+				</ul>
+				<div id="private_project">
+					<div class="col">
+						<div id="invitation_list">
+							<%= text_field_tag 'invitation', 'imad@ecomstrategy.ca', :placeholder => 'enter the email address here ...' %>
+							<%= text_field_tag 'invitation', '', :placeholder => 'enter the email address here ...' %>
+						</div>
+						<a class="more_link" href="#" >Issue more invites</a>
+					</div>
+					<div class="col">
+						<p>
+							<em>Invited guests will be granted access for 48hs.</em>
+							Simply enter a valid email address and 
+							send the Invite.
+						</p>
+						<a class="btn" href="#">invite</a>
+					</div>
+				</div>
+				<div id="public_project">
+				</div>
+			</fieldset>
+		</div>
+		<div class="tab_content" id="edit_project_content">
+			
+			
+		</div>
+	</div>
+	
+	<% end %>
 </section>
 <% content_for :preview do %>
   <%= render  "portfolios/preview",  :action => 'edit_project'  %>
