@@ -3,7 +3,6 @@
 class BackgroundUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
-
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
@@ -25,6 +24,7 @@ class BackgroundUploader < CarrierWave::Uploader::Base
   version :preview do 
     process :resize_to_limit => [160, 125]
   end
+ 
   
   # Create different versions of your uploaded files:
   # version :thumb do

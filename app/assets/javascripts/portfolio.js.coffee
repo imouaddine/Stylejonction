@@ -24,6 +24,18 @@ $(window).bind "load", () ->
 $(window).bind "resize", ()->
     $("#preview_wrapper").pinFooter()
     
+window.init_colorpicker = (element) ->
+  $(element).ColorPicker
+       onChange: (hsb, hex, rgb) ->
+         colorPkTitle = $(element).children("div")
+         colorPkTitle.css('backgroundColor', '#' + hex)
+         $(element+"_input").val(hex)
+
+       onHide: (colpkr) ->
+     	   $(element+"_input").trigger("change")
+   .bind 'keyup', () =>
+   	  $(this).ColorPickerSetColor(this.value)
+  
 
     
   

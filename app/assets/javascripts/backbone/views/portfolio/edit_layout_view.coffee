@@ -1,53 +1,33 @@
 Stylejonction.Views.Portfolios ||= {}
 
-class Stylejonction.Views.Portfolios.EditView extends Backbone.View 
-
+class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View 
   events:
-  
+    
     "click  #predefined_background_field .toggle_btn"     : "showCustomBackgroundSection"
     "click  #custom_background_field .toggle_btn"         : "showPredefinedBackgroundSection"
     "change .custom_background_toggle"                    : "toggleCustomBackgroundSection"
-    
     "click  #layout_field .image_link"                    : "updateLayout"
-    
-    "click  .select_theme":                           "updateTheme"
-    "click  #title_font_field .select_font":          "updateTitleFont"
-    "click  #body_font_field .select_font":           "updateBodyFont"
-    "change  #color_picker_title_input":              "updateTitleColor"
-    "change  #color_picker_body_input":               "updateBodyColor"
-
-    
-   
-    
-    
+    "click  .select_theme"                                :  "updateTheme"
   
   initialize: (e)->
-    #Color pickers
-    @.init_colorpicker('#color_picker_title')
-    @.init_colorpicker('#color_picker_body')
-    @.init_colorpicker('#background_pattern_color_picker')
+    @portfolio = @options.model
     
+    #Edit pattern view 
+    background = new Stylejonction.Models.Background({id: @portfolio.pattern_background_id})
+    background.fetch()
+    @custom_background_edit_view = new Stylejonction.Views.Backgrounds.EditPatternView(model: background, el: 'body')
+    
+    #Edit background view 
+    background = new Stylejonction.Models.Background({id: @portfolio.custom_background_id})
+    background.fetch()
+    @custom_background_edit_view = new Stylejonction.Views.Backgrounds.EditCustomView(model: background, el: 'body')
+    
+    #pattern background view
+    @custom_background_edit_view = new Stylejonction.Views.Backgrounds.EditPredefinedView(model: @portfolio, el: '#predefined_background_field')
+    
+    #Color pickers
     #jcrop
-    @.init_jcrop()
-      
-  init_colorpicker: (element) ->
-    $(element).ColorPicker
-         onChange: (hsb, hex, rgb) ->
-           colorPkTitle = $(element).children("div")
-           colorPkTitle.css('backgroundColor', '#' + hex)
-           $(element+"_input").val(hex)
-         
-         onHide: (colpkr) ->
-       	   $(element+"_input").trigger("change")
-     .bind 'keyup', () =>
-     	  $(this).ColorPickerSetColor(this.value)
-
-     
- 
-       
-  init_jcrop: ()->
-    $('.cropbox').Jcrop
-       aspectRatio: 0
+  
        
   toggleCustomBackgroundSection: (e)->
     e.preventDefault()
@@ -73,7 +53,7 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
 
     $("#predefined_background_field").css("margin-left", '0')
     $("#custom_background_field").css("margin-left", '-9999px')
-    $("#layout_field").css("margin-top", '-220px')
+    $("#layout_field").addClass("move_to_top")
     
     @selected_predefined_bg = @options.model.get('background_predefined_id')
     @options.model.save({'background_id': @selected_predefined_bg, 'background_type': 'PredefinedBackground'})
@@ -86,7 +66,7 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
 
      $("#predefined_background_field").css("margin-left", '-9999px');
      $("#custom_background_field").css("margin-left", '0');
-     $("#layout_field").css("margin-top", '0'); 
+     $("#layout_field").removeClass("move_to_top"); 
      
      @custom_bg = @options.model.get('custom_background_id')
      @options.model.save({'background_id': @custom_bg, 'background_type': 'CustomBackground'}) 
@@ -121,41 +101,7 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     
     )
   
-  updateTitleFont: (e)->
-    e.preventDefault()
-    e.stopPropagation()
-    target = $(e.currentTarget)
-    newFont = target.data('id')
-    @.$("#title_font_field .select_font").removeClass("selected")
-    @options.model.save({'title_font_id': newFont},
-      success: -> 
-        $(e.currentTarget).addClass("selected")
-    )
-    
-    
-  updateBodyFont: (e)->
-    e.preventDefault()
-    e.stopPropagation()
-    target = $(e.currentTarget)
-    newFont = target.data('id')
-    @.$("#body_font_field .select_font").removeClass("selected")
-    @options.model.save({'body_font_id': newFont},
-      success: -> 
-        $(e.currentTarget).addClass("selected")
-    )
-  updateTitleColor: (e)->
-    e.preventDefault()
-    e.stopPropagation()
-    target = $(e.currentTarget)
-    newColor = target.val()
-    @options.model.save({'title_color': newColor})
-   
-  updateBodyColor: (e)->
-    e.preventDefault()
-    e.stopPropagation()
-    target = $(e.currentTarget)
-    newColor = target.val()
-    @options.model.save({'body_color': newColor})
+  
   
 
     

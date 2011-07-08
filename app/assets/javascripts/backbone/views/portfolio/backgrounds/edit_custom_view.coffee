@@ -8,7 +8,17 @@ class Stylejonction.Views.Backgrounds.EditCustomView extends Backbone.View
   initialize: ()->
     #fancybox
     @.init_fancybox()
-      
+    #@.init_jcrop()
+
+
+
+
+
+
+  init_jcrop: ()->
+    $('.cropbox').Jcrop
+       aspectRatio: 0
+    
   init_fancybox: ()->
     $(".iframe_fancy").fancybox
       hideOnContentClick: false,

@@ -672,7 +672,9 @@ form #custom_background_field{
 #layout_field{
   $item-width: 112px;
   $item-height: 119px;
- 
+  &.move_to_top{
+    margin-top: -190px; 
+  }
   .box{
      width: 475px;
   }

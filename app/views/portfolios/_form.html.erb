@@ -1,4 +1,5 @@
 <%= form_for(@portfolio, :url => portfolio_index_path, :html => { :method => :post }) do |f| %>
+
   <% if @portfolio.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@portfolio.errors.count, "error") %> prohibited this portfolio from being saved:</h2>

@@ -4,6 +4,10 @@ class Stylejonction.Views.Backgrounds.EditPatternView extends Backbone.View
   events:
     "change #background_pattern_color_picker_input"    : "updatePatternBackgroundColor"
     
+  initialize: ()->
+    init_colorpicker('#background_pattern_color_picker')
+    
+
  
   updatePatternBackgroundColor: (e)->
     e.preventDefault()

@@ -1,4 +1,6 @@
 <%= render('sidebar') %>
+<% #@portfolio.custom_background.background.dimensions %>
+
 <section id="edit_portfolio_layout" class="edit edit_portfolio_layout">
 
   <%= form_for(@portfolio, :url => portfolio_path) do |f| %>
@@ -14,7 +16,7 @@
 </section>
 
 <% content_for :preview do %>
-  <%= render  "preview",  :action => 'edit_portfolio'  %>
+  <%= render  "preview",  :action => 'edit_layout_portfolio'  %>
 <% end %>
 
 

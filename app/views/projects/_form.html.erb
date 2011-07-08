@@ -26,4 +26,8 @@
 
 <% end %>
 
+
+<%= photo_uploadify "#upload_custom_bg", upload_portfolio_background_path(:format => 'js'), 'background[background]' %>
+
+
 <%= photo_uploadify( "#cover", upload_cover_portfolio_project_path(:id => @project.id)) %>
