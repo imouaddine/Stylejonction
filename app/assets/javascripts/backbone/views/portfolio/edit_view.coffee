@@ -6,10 +6,7 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     "click  #predefined_background_field .image_link"     : "updatePredefinedBackground"
     "click  #predefined_background_field .toggle_btn"     : "showCustomBackgroundSection"
     "click  #custom_background_field .toggle_btn"         : "showPredefinedBackgroundSection"
-    
-    
     "change .custom_background_toggle"                    : "toggleCustomBackgroundSection"
-    
     "click  .select_layout":                           "updateLayout"
     "click  .select_theme":                           "updateTheme"
     "click  #title_font_field .select_font":          "updateTitleFont"
@@ -23,9 +20,8 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     
   
   initialize: (e)->
-    #Carousel
+    #Get selected background
     start_position = @.$("#background_carousel li.selected").index()
-    
     @.$("#background_carousel").jcarousel
       scroll :1,
       initCallback: @.init_carousel,
@@ -43,14 +39,6 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     
     #jcrop
     @.init_jcrop()
-    
-    
-    
-    
-    #event for elements outside the view
-    #$("#edit_own_background").delegate "change", "input[name='display_mode']",  @.updateBgDisplayMode
-   
-      
 
   #background carousel
   init_carousel: (carousel) ->
@@ -79,8 +67,7 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     $(".iframe_fancy").fancybox
        hideOnContentClick: false,
        showCloseButton: true,
-       padding: 0,
-       
+       padding: 0
        
   init_jcrop: ()->
     $('.cropbox').Jcrop
@@ -93,14 +80,49 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     visibleTab = $("##{val}")
     @.$("#custom_background_field .tabs > div").hide()
     visibleTab.show()
+    if( val == "update_custom_background" )
+      custom_bg = @options.model.get('custom_background_id')
+      @options.model.save({'background_id': custom_bg, 'background_type': 'CustomBackground'})
+    else
+      pattern_bg_id = @options.model.get('pattern_background_id')
+      @options.model.save({'background_id': pattern_bg_id, 'background_type': 'PatternBackground'})
     
+    
+    
+    
+  
+  showPredefinedBackgroundSection: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+
+    $("#predefined_background_field").css("margin-left", '0')
+    $("#custom_background_field").css("margin-left", '-9999px')
+    $("#layout_field").css("margin-top", '-140px')
+    
+    
+    @selected_predefined_bg = @options.model.get('background_predefined_id')
+    @options.model.save({'background_id': @selected_predefined_bg, 'background_type': 'PredefinedBackground'})
+    
+    
+
+   showCustomBackgroundSection: (e)->
+     e.preventDefault()
+     e.stopPropagation()
+
+     $("#predefined_background_field").css("margin-left", '-9999px');
+     $("#custom_background_field").css("margin-left", '0');
+     $("#layout_field").css("margin-top", '0'); 
+     
+     @custom_bg = @options.model.get('custom_background_id')
+     @options.model.save({'background_id': @custom_bg, 'background_type': 'CustomBackground'}) 
+     
+     
   
   updatePredefinedBackground: (e)->
     e.preventDefault()
     e.stopPropagation()
     target = $(e.currentTarget)
     newBackground = target.data('id')
-    #target.children(".select_loading_overlay").show()
     @.$("#predefined_background_field .image_link").removeClass("selected")
     @.$("#predefined_background_field li").removeClass("selected")
     @options.model.save({'background_id': newBackground, 'background_type': 'PredefinedBackground'}, 
@@ -112,19 +134,7 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
         alert 'Something wrong happened'
     )
   
-  showPredefinedBackgroundSection: (e)->
-    e.preventDefault()
-    e.stopPropagation()
-   
-    $("#predefined_background_field").css("margin-left", '0');
-    $("#custom_background_field").css("margin-left", '-9999px');
-    
-  showCustomBackgroundSection: (e)->
-    e.preventDefault()
-    e.stopPropagation()
-
-    $("#predefined_background_field").css("margin-left", '-9999px');
-    $("#custom_background_field").css("margin-left", '0');
+ 
     
     
   updateLayout: (e) ->

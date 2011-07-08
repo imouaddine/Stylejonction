@@ -7,6 +7,7 @@
 	<ul class="horizontal_list background_list">
 	    <%- if @backgrounds.present? %>
 			<% @backgrounds.each do |background| %>
+			<%= @portfolio.predefined_background == background %>
 				<li class='<%= 'selected' if @portfolio.predefined_background == background  %>' >
 					<a class='image_link <%= 'selected' if @portfolio.predefined_background == background  %>' data-id='<%= background.id %>' href="#" class="image_link">
 						<img src="http://placehold.it/110x110" />

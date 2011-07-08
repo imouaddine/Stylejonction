@@ -1,6 +1,9 @@
 @mixin has_image_overlay($width, $height){
   position: relative;
   overflow: hidden;
+  width: $width;
+  height: $height; 
+  display: block;
   &:hover{
     .image_overlay{
        @include opacity(0);

@@ -670,9 +670,15 @@ form #custom_background_field{
    }
  }
 #layout_field{
-  width: 475px;
+  $item-width: 112px;
+  $item-height: 119px;
+ 
+  .box{
+     width: 475px;
+  }
+  
   @each $layout in left, right, top, bottom{
-    #select_layout_#{$layout} { 
+    #layout_link_#{$layout} { 
       background-image: url("images/layouts/layout_#{$layout}.png");
       opacity: 0.8;
       filter: alpha(opacity=80); 
@@ -685,15 +691,12 @@ form #custom_background_field{
       }
     }
   }
-  .select_layout{
-    display: block;
+  .image_link{
+    @include has_image_overlay($item-width, $item-height);
   }
-  .select_layout, .select_loading_overlay{
-    width: 112px;
-    height: 119px;
-   
-  }
+ 
 }
+
 #theme_field{
   .select_theme{
     display: block;
