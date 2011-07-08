@@ -19,7 +19,35 @@ class PortfolioFlowsTest < ActionDispatch::IntegrationTest
   end
   
   test "edit_layout portfolio page" do
+    
+    #test predefined background
+    background = Factory( :predefined_background )
+    
     visit  edit_layout_portfolio_path
+  
+    find(".select_bg[@data-id='#{background.id}']").click
+    
+    @portfolio.reload
+    assert_equal background, @portfolio.background
+    
+  end
+  
+  test "update display mode of custom background" do
+    
+    @portfolio.background = Factory( :custom_background, :user => @user )
+
+    assert_equal @portfolio.save, true
+    
+    @portfolio.reload
+    
+    visit  edit_layout_portfolio_path
+    
+    find("input[@value='tile']").click
+    
+    background.reload
+    
+    assert_equal background.display_mode, "tile"
+    
   end
   
   test "edit_font portfolio page" do
@@ -34,4 +62,7 @@ class PortfolioFlowsTest < ActionDispatch::IntegrationTest
     @portfolio.reload
     assert_equal f, @portfolio.title_font
   end
+  
+  
+  
 end

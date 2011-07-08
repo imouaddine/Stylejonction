@@ -7,6 +7,7 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
     @projects.url = @projects.url.replace ':portfolio_id', @portfolio.id
     @projects.refresh options.projects
     @action = "this." + options.action+'()'
+    @background = new Stylejonction.Models.Background({id: @portfolio.background_id})
     
      
   routes:
@@ -18,7 +19,8 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
     @add_preview()
   
   edit_portfolio: ->
-    @view = new Stylejonction.Views.Portfolios.EditView(model: @portfolio, el: '#edit')
+    @view = new Stylejonction.Views.Portfolios.EditView(model: @portfolio, el: '#edit_portfolio_layout')
+    @background_edit_view = new Stylejonction.Views.Backgrounds.EditView(model: @background, el: 'body')
     
   edit_project: ->
     @project = @projects.get(@options.project.id)

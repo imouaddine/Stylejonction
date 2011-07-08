@@ -1,0 +1,13 @@
+<div class="upload_custom_bg <%= 'hidden' unless visible %>" id="update_custom_background">
+		<div class="first col">
+			<%= render 'backgrounds/preview', :background => background %>
+			<div id="upload_custom_bg_links" class="upload_custom_bg_links <%= 'hidden' unless show_links %>">
+				<a class="icon_link edit_link iframe_fancy" href="<%= edit_portfolio_background_path %>">Edit your background</a>
+				<a class="icon_link remove_link" href="#">Remove</a>
+			</div>
+		</div>
+		<div class="col">
+			<a id="upload_custom_bg" href="#" class="upload_btn btn">Upload</a>
+			<p class="information">Ideal dimension: 1024 px x 768 px – JPG, PNG formats</p>
+		</div>
+</div>

@@ -77,6 +77,25 @@ class PortfolioTest < ActiveSupport::TestCase
     #assert_equal Theme.find_by_type("light"), portfolio.theme 
     assert_equal Font.first, portfolio.title_font
     assert_equal Font.first, portfolio.body_font
+    assert_not_nil portfolio.predefined_background
+    assert_not_nil portfolio.pattern_background
+    assert_not_nil portfolio.custom_background
+    
+    
     #assert_equla "#5d5d5d", portfolio.font.color 
+  end
+  
+  test "has_custom_background return good value" do
+     portfolio = Factory.create(:portfolio)
+     assert_equal portfolio.has_custom_background?, false
+     
+     user = Factory(:user)
+     portfolio.background = Factory.create(:custom_background, :user => user )
+     assert_equal portfolio.has_custom_background?, true
+     
+     portfolio.background = Factory.create(:pattern_background)
+     assert_equal portfolio.has_custom_background?, false
+     
+    
   end
 end

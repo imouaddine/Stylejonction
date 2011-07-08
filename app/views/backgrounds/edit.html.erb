@@ -1,0 +1,27 @@
+<div  id="edit_background">
+	<section class="fancybox" id="edit_own_background">
+		<header>
+			<h1 class="icon_link edit_link">Edit your background</h1>
+		</header>
+		<div class="content">
+			<div class="left_col">
+					<%= render 'preview', :background => @background %>
+			</div>
+			<div class="right_col">
+				<p class="description">Drag your image to adjust</p>
+				<div>
+					<input value="original" <%= 'checked' if @background.display_mode == 'original' %> type="radio" id="original_display_mode" name="display_mode" />
+					<label for="original_display_mode" >Original format</label>
+					<br>
+					<input value="tile" <%= 'checked' if @background.display_mode == 'tile' %> type="radio" id="tile_display_mode" name="display_mode" />
+					<label for="tile_display_mode" >Tile</label>
+					<br>
+					<input value="stretch"  <%= 'checked' if @background.display_mode == 'stretch' %> type="radio" id="strech_display_mode" name="display_mode" />
+					<label for="strech_display_mode" >Stretch to fit</label>
+				</div>
+				<p class="information">Original image is <em>1024px x 768px</em></p>
+			</div>
+		</div>
+		
+	</section>
+</div>

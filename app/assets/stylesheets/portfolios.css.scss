@@ -35,34 +35,23 @@ $font-family-secondary: 'Alternate Gothic LT Two', Helvetica;
 @import "compass/css3/border-radius";
 @import "compass/css3/box-shadow";
 @import "compass/css3/text-shadow";
+@import "compass/css3/opacity";
 
 @import "compass/typography/links";
 @import "compass/typography/lists/horizontal-list";
 
-@mixin fancy-border-bottom($border-color: $default-border-color, $shadow-color: $default-box-shadow-color ){
-   border-bottom: 1px solid $border-color;
-   @include single-box-shadow($shadow-color, 0px, 1px, 0px, false, false);
-}
-@mixin fancy-border-top($border-color: $default-border-color, $shadow-color: $default-box-shadow-color  ){
-   border-top: 1px solid $border-color;
-   @include single-box-shadow($shadow-color, 0px, -1px, 0px, false, false);
-}
-@mixin fancy-box-shadow(){
-   @include box-shadow(rgba(#ffffff, 0.85) 0 0 1px, rgba(#000000, 0.3) 0 0 1px 1px inset);
-}
+@import "mixins";
 
-@mixin box{
-  border: 1px solid #cad8de;
-  @include box-shadow(rgba(white, 0.5) 0 0 1px, rgba(#000000, 0.1) 0 0 1px 1px inset);
-  @include border-radius(5px);
-  background: #ebebeb;
-}
+
 
 body{
    background: #f2f2f2 url('images/grid_bg.png') repeat;
    font-family: $font-family-primary;
    line-height: 1.3em;
    font-size: 13px;
+}
+small{
+  font-size: 80%;
 }
 a{
   outline: none;
@@ -369,7 +358,7 @@ em{
   }
   
 }
-#edit{
+.edit{
   @include column(18, true);
   width: 745px;
   form{
@@ -400,8 +389,8 @@ em{
 }
 
 form {
- 
   fieldset{
+    margin: 10px;
     position: relative;
     padding-left: span(1);
     margin-bottom: 40px;
@@ -452,63 +441,91 @@ form {
   }
 }
 
+//Background field
+.background_field{
+  .toggle_btn{
+    @include text-shadow;
+    background: url('images/big_cirle_bg.png') no-repeat;
+    display: block;
+    width: 110px;
+    height: 85px;
+    padding: 35px 0 0;
+    font: normal 2.0em/1em $font-family-secondary;
+    text-align: center;
+    @include link_colors(white, white, white, white, white);
+    &:hover, &.selected{
+      text-decoration: none;
+      color: white;
+      background: url('images/big_cirle_bg_sel.png') no-repeat;
+    }
+  }
+}
 
-form #background_field{
+//EDIT LAYOUT FIELDS 
+form #predefined_background_field{
+  
+  &.hidden{
+     margin-left: -99999px;
+     display: block !important;
+   }
+  $background-width: 110px;
+  $background-height: 110px;
+  
   width: 620px;
   height: 143px;
   border-right:0 !important;
+
   @include border-bottom-right-radius(0px);
   @include border-top-right-radius(0px);
-  .select_bg_overlay, .select_loading_overlay{
-    background: url('images/pf_bg_sele.png') no-repeat;
-    display: none;
-    position: absolute;
-    width: 110px;
-    height: 110px;
-    top: 0;
-    opacity: 0.8;
-    filter: alpha(opacity=80); 
+  
+  > div{
+    position: relative;
   }
   
-  .custom_bg, li{
+  .image_link{
+    @include has_image_overlay($background-width, $background-height);
+    @include border-radius(4px);
+    @include single-box-shadow(rgba(#c0c0c0, 0.5), 0px, 1px);
+    display: block;
+    width: $background-width;
+    height: $background-height;
+    border: 1px solid rgba(#CCC, 0.1);
+    &.selected{
+      .image_overlay{
+        background: url('images/pf_bg_sele.png') no-repeat;
+        @include opacity(1.0);
+      
+      }
+    }
+  }
+  .own_background{
+    z-index: 1000;
+  }
+  .own_background, .background_list li{
     @include column(3);
     padding-left: 0px;
     text-align: center;
     position: relative;
+  }
+  .background_list li{ 
     &.selected{
-      .selection_title{
+      .title{
         font-weight: bold;
       }
-      .select_bg_overlay{
+      .image_overlay{
         display: block;
       }
     }
-    .selection_title{
+    .title{
       color: #4d4d4d;
-      font-size: 15px;
+      font-size: 1em;
       padding-top: 10px;
       display: block;
     }
   }
-  .select_bg{
-    opacity: 0.8;
-    &:hover{
-      opacity:1;
-     
-    }
-  }
   .jcarousel-clip-horizontal{
-    width: 490px;
-  }
-  
-  .select_bg{
-    @include border-radius;
-    display: block;
-    width: 110px;
-    height: 110px;
-    border: 1px solid #ccc;
-    @include single-box-shadow(rgba(#c0c0c0, 0.5), 0px, 1px);
-  }
+     width: 490px;
+   }
   .scroll{
      position: absolute;
      right: 0;
@@ -535,62 +552,45 @@ form #background_field{
      }
    }
 }
-.add_custombg_btn{
-  background: url('images/big_cirle_bg.png') no-repeat;
-  display: block;
-  width: 110px;
-  height: 75px;
-  line-height: 25px;
-  padding: 35px 0 0;
-  font-size: 24px;
-  text-align: center;
-  @include link_colors(white, white, white, white, white);
-  font-family: $font-family-secondary;
-  @include text-shadow;
-  &:hover, &.selected{
-    text-decoration: none;
-    color: white;
-    background: url('images/big_cirle_bg_sel.png') no-repeat;
+
+form #custom_background_field{
+  margin-top: -180px;
+  position: relative;
+  &.hidden{
+    margin-left: -99999px;
+   
+    display: block !important;
   }
-}
-#custom_background_field{
   padding: 0;
   width: 666px;
   > div{
     padding: 18px 10px 19px;
     @include clearfix;
   }
-  .add_custombg_btn{
+  .toggle_btn{
     float: left;
     margin-right: 20px;
   }
-  .custom_bg_selection{
+  .user_selection{
+     .description{
+      font-size: 1.3em;
+      line-height: 2em;
+      color: $blue-color;
+      @include fancy-border-bottom( #d1d1d1, rgba(white, 0.6));
+
+     }
       @include column(11, true);
-  }
-  #bg_upload_your_image .description{
-    font-size: 19px;
-    color: #63727c;
-    @include fancy-border-bottom( #d1d1d1, rgba(white, 0.6));
-    line-height: 40px;
-  }
-  .custom_bg_selection{
-     ul{
-        @include horizontal-list-container;
-        li{
-          @include horizontal-list-item;
-          padding: 10px 0 40px;
-          margin-right: 20px;
-          input{
-            margin-right: 10px;
-          }
+      li{
+        padding: 10px 0 40px;
+        margin-right: 20px;
+        input{
+              margin-right: 10px;
         }
       }
   }
-  .custom_bg{
-    clear: both;
+  .tabs{
     @include clearfix;
     background: #e3e3e3 url('images/own_bg_border_bg.png') repeat-x top left;
-    min-height: 50px;
     img{
       border: 1px solid $grey-color;
     }
@@ -627,48 +627,48 @@ form #background_field{
   .tabs > div{
     clear: both;
   }
-  #bg_choose_color{
-    .description{
-      margin: 10px 0;
-      font-style: normal;
-    }
-     ul{
-        @include horizontal-list-container;
-        li{
-          @include horizontal-list-item;
-          text-align: center;
-          margin-right: 10px;
-          &.text{
-             line-height: 77px;
-          }
-       }
-    }
-    .pattern{
-      background:  url('images/pattern_bg.png') repeat;
-    }
-    .panel{
-       width: 107px;
-        height: 77px;
-        @include border-radius(5px);
-        border: 1px solid #e0e0e0;
-       @include fancy-box-shadow;
-    }
-    .pattern_preview{
-        height: 20px;
-    }
-    .preview{
-      background-image: url('images/pattern_bg.png');
-      width: 270px;
-    }
-    #own_color_picker{
-      div{
-        width: 107px;
-        height: 77px;
-      }
-    }
-  }
+ 
 }
-
+#update_pattern_background{
+   .description{
+     margin: 10px 0;
+     font-style: normal;
+   }
+    ul{
+       @include horizontal-list-container;
+       li{
+         @include horizontal-list-item;
+         text-align: center;
+         margin-right: 10px;
+         &.text{
+            line-height: 77px;
+         }
+      }
+   }
+   .pattern{
+     background:  url('images/pattern_bg.png') repeat;
+   }
+   .panel{
+      width: 107px;
+       height: 77px;
+       @include border-radius(5px);
+       border: 1px solid #e0e0e0;
+      @include fancy-box-shadow;
+   }
+   .pattern_preview{
+       height: 20px;
+   }
+   .preview{
+     background-image: url('images/pattern_bg.png');
+     width: 270px;
+   }
+   #own_color_picker{
+     div{
+       width: 107px;
+       height: 77px;
+     }
+   }
+ }
 #layout_field{
   width: 475px;
   @each $layout in left, right, top, bottom{

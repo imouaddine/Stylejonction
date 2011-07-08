@@ -20,6 +20,11 @@ Stylejonction::Application.routes.draw do
          match 'upload_cover'
         end
       end
+      resource :background, :except => [:destroy, :new, :create] do
+        member do
+           match 'upload'
+        end
+      end
    end
  end
   

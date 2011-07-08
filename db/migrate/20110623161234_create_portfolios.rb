@@ -8,6 +8,8 @@ class CreatePortfolios < ActiveRecord::Migration
       t.integer :background_id
       t.string  :background_type
       t.boolean :published, :default => false
+    
+      
       t.timestamps
     end
 
