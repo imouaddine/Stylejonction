@@ -23,6 +23,7 @@ $(window).bind "load", () ->
 
 $(window).bind "resize", ()->
     $("#preview_wrapper").pinFooter()
+    
 
     
   

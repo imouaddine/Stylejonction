@@ -1,6 +1,6 @@
 <%= render('sidebar') %>
 <section id="edit_portfolio_layout" class="edit edit_portfolio_layout">
-	<%= @portfolio.inspect %>
+
   <%= form_for(@portfolio, :url => portfolio_path) do |f| %>
 
 		<%= render ('portfolios/fields/background_field') %>

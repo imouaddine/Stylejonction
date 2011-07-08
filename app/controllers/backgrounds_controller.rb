@@ -19,7 +19,11 @@ class BackgroundsController < ApplicationController
   end
  
   def update
+    
+    
     @background = @portfolio.background
+    
+    
     
     respond_with do |format|
       if @background.update_attributes(params[:background])

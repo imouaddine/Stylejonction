@@ -1,9 +1,9 @@
 <div class="upload_custom_bg <%= 'hidden' unless visible %>" id="update_custom_background">
 		<div class="first col">
 			<%= render 'backgrounds/preview', :background => background %>
-			<div id="upload_custom_bg_links" class="upload_custom_bg_links <%= 'hidden' unless show_links %>">
+			<div id="upload_custom_bg_links" class="upload_custom_bg_links">
 				<a class="icon_link edit_link iframe_fancy" href="<%= edit_portfolio_background_path %>">Edit your background</a>
-				<a class="icon_link remove_link" href="#">Remove</a>
+				<!--<a class="icon_link remove_link hidden" href="#">Remove</a> -->
 			</div>
 		</div>
 		<div class="col">

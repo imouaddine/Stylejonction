@@ -608,8 +608,8 @@ form #custom_background_field{
       @include link-colors(#5d5d5d); 
       font-size: 13px;
       &.edit_link{
-        @include fancy-border-bottom(#a9a9a9);
-        padding-bottom: 9px;
+        //@include fancy-border-bottom(#a9a9a9);
+        //padding-bottom: 9px;
         margin: 10px 0;
       }
       &.icon_link{
@@ -662,7 +662,7 @@ form #custom_background_field{
      background-image: url('images/pattern_bg.png');
      width: 270px;
    }
-   #own_color_picker{
+   .color_picker{
      div{
        width: 107px;
        height: 77px;

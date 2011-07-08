@@ -3,52 +3,32 @@ Stylejonction.Views.Portfolios ||= {}
 class Stylejonction.Views.Portfolios.EditView extends Backbone.View 
 
   events:
-    "click  #predefined_background_field .image_link"     : "updatePredefinedBackground"
+  
     "click  #predefined_background_field .toggle_btn"     : "showCustomBackgroundSection"
     "click  #custom_background_field .toggle_btn"         : "showPredefinedBackgroundSection"
     "change .custom_background_toggle"                    : "toggleCustomBackgroundSection"
-    "click  .select_layout":                           "updateLayout"
+    
+    "click  #layout_field .image_link"                    : "updateLayout"
+    
     "click  .select_theme":                           "updateTheme"
     "click  #title_font_field .select_font":          "updateTitleFont"
     "click  #body_font_field .select_font":           "updateBodyFont"
     "change  #color_picker_title_input":              "updateTitleColor"
     "change  #color_picker_body_input":               "updateBodyColor"
-    "change  #own_color_picker_input":                "updatePatternBackgroundColor"
+
     
    
-    "click #upload_custom_bg_links .edit_link"  :     "createBackgroundView"
+    
     
   
   initialize: (e)->
-    #Get selected background
-    start_position = @.$("#background_carousel li.selected").index()
-    @.$("#background_carousel").jcarousel
-      scroll :1,
-      initCallback: @.init_carousel,
-      buttonNextHTML: null,
-      buttonPrevHTML: null
-      start: start_position
-      
     #Color pickers
     @.init_colorpicker('#color_picker_title')
     @.init_colorpicker('#color_picker_body')
-    @.init_colorpicker('#own_color_picker')
-    
-    #fancybox
-    @.init_fancybox()
+    @.init_colorpicker('#background_pattern_color_picker')
     
     #jcrop
     @.init_jcrop()
-
-  #background carousel
-  init_carousel: (carousel) ->
-    $('#left_scroll_bg').bind 'click', () =>
-      carousel.prev()
-      false
-      
-    $('#right_scroll_bg').bind 'click', () => 
-      carousel.next()
-      false;
       
   init_colorpicker: (element) ->
     $(element).ColorPicker
@@ -63,11 +43,7 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
      	  $(this).ColorPickerSetColor(this.value)
 
      
-  init_fancybox: ()->
-    $(".iframe_fancy").fancybox
-       hideOnContentClick: false,
-       showCloseButton: true,
-       padding: 0
+ 
        
   init_jcrop: ()->
     $('.cropbox').Jcrop
@@ -97,8 +73,7 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
 
     $("#predefined_background_field").css("margin-left", '0')
     $("#custom_background_field").css("margin-left", '-9999px')
-    $("#layout_field").css("margin-top", '-140px')
-    
+    $("#layout_field").css("margin-top", '-220px')
     
     @selected_predefined_bg = @options.model.get('background_predefined_id')
     @options.model.save({'background_id': @selected_predefined_bg, 'background_type': 'PredefinedBackground'})
@@ -118,35 +93,16 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
      
      
   
-  updatePredefinedBackground: (e)->
-    e.preventDefault()
-    e.stopPropagation()
-    target = $(e.currentTarget)
-    newBackground = target.data('id')
-    @.$("#predefined_background_field .image_link").removeClass("selected")
-    @.$("#predefined_background_field li").removeClass("selected")
-    @options.model.save({'background_id': newBackground, 'background_type': 'PredefinedBackground'}, 
-      success: -> 
-        #target.children(".select_loading_overlay").hide();
-        $(e.currentTarget).parent().addClass("selected")
-        $(e.currentTarget).addClass("selected")
-      error: ->
-        alert 'Something wrong happened'
-    )
-  
- 
-    
+
     
   updateLayout: (e) ->
     e.preventDefault()
     e.stopPropagation()
     target = $(e.currentTarget)
     newLayout = target.data('id')
-    target.children(".select_loading_overlay").show()
-    @.$("#layout_field .select_layout").removeClass("selected")
+    @.$("#layout_field .image_link").removeClass("selected")
     @options.model.save({'layout_id': newLayout}, 
       success: -> 
-        target.children(".select_loading_overlay").hide();
         $(e.currentTarget).addClass("selected")
     )
     
@@ -201,21 +157,11 @@ class Stylejonction.Views.Portfolios.EditView extends Backbone.View
     newColor = target.val()
     @options.model.save({'body_color': newColor})
   
-  updatePatternBackgroundColor: (e)->
-    e.preventDefault()
-    e.stopPropagation()
-    target = $(e.currentTarget)
-    newColor = target.val()
-    @.$("#pattern_preview").css("background-color", "#"+newColor);
-    @.$("#final_preview").css("background-color", "#"+newColor);
+
     
 
     
-  createBackgroundView: (e)->
-    @background = new Stylejonction.Models.Background()
-    @background.fetch()
-    @background_edit_view = new Stylejonction.Views.Backgrounds.EditView(model: @background, el: '#edit_background')
-    
+ 
     
     
     

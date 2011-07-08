@@ -22,10 +22,6 @@ class PortfolioFlowsTest < ActionDispatch::IntegrationTest
     
     visit  edit_layout_portfolio_path
  
-    # Maybe you forgot to commit somethign here because theres
-    # no select_bg class 
-    # find(".select_bg[@data-id='#{background.id}']").click
-
     find(".image_link[@data-id='#{background.id}']").click
     
     @portfolio.reload
@@ -39,10 +35,12 @@ class PortfolioFlowsTest < ActionDispatch::IntegrationTest
     @portfolio.reload
     visit  edit_layout_portfolio_path
     
-    find("input[@value='tile']").click
-    background.reload
     
-    assert_equal background.display_mode, "tile"
+    find("#upload_custom_bg_links .edit_link").click
+    find("#edit_own_background input[@value='tile']").click
+    @portfolio.background.reload
+    
+    assert_equal @portfolio.background.display_mode, "tile"
   end
   
   test "edit_font portfolio page" do
