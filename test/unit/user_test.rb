@@ -35,5 +35,11 @@ class UserTest < ActiveSupport::TestCase
     assert user.admin?
   end
 
+  def test_portfolio_is_deleted_when_user_is_deleted
+    user = Factory.create(:user)
+    before_portfolios = Portfolio.count
+    user.destroy
 
+    assert_equal before_portfolios - 1, Portfolio.count
+  end
 end
