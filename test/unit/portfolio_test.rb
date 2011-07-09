@@ -1,15 +1,15 @@
 require 'test_helper'
- 
+
 class PortfolioTest < ActiveSupport::TestCase
 
   def setup
     @portfolio = Factory :portfolio
   end
-  
+
   test "can create a test object from fg" do
     assert @portfolio.valid?
   end
-  
+
   test "new portoflio is not published" do
     assert ! @portfolio.published?
   end
@@ -19,7 +19,7 @@ class PortfolioTest < ActiveSupport::TestCase
     @portfolio.body_font = @font
     @portfolio.save
     assert_equal @font, @portfolio.body_font
-    
+
   end
   test "can change portfolio state to published" do
     @portfolio.publish!
@@ -32,7 +32,7 @@ class PortfolioTest < ActiveSupport::TestCase
     @portfolio.reload
     @portfolio.published = false
     @portfolio.save
-    
+
     assert_equal true, @portfolio.published?
   end
 
@@ -64,38 +64,38 @@ class PortfolioTest < ActiveSupport::TestCase
   end
 
 
-  test "by default portfolio should have " do
-    Factory.create(:predefined_background) 
+  test "by default portfolio should have default attributes" do
+    Factory.create(:predefined_background)
     Layout.create(:name => "left")
-    Factory.create(:font) 
+    Factory.create(:font)
 
-    portfolio = Portfolio.create
+    portfolio = Portfolio.create!
     portfolio.reload
 
     assert_equal "PredefinedBackground", portfolio.background_type
     assert_equal "left", portfolio.layout.name
-    #assert_equal Theme.find_by_type("light"), portfolio.theme 
+    assert_equal portfolio.theme, "light"
     assert_equal Font.first, portfolio.title_font
     assert_equal Font.first, portfolio.body_font
     assert_not_nil portfolio.predefined_background
     assert_not_nil portfolio.pattern_background
     assert_not_nil portfolio.custom_background
-    
-    
-    #assert_equla "#5d5d5d", portfolio.font.color 
+
+
+    #assert_equla "#5d5d5d", portfolio.font.color
   end
-  
+
   test "has_custom_background return good value" do
      portfolio = Factory.create(:portfolio)
      assert_equal portfolio.has_custom_background?, false
-     
+
      user = Factory(:user)
      portfolio.background = Factory.create(:custom_background, :user => user )
      assert_equal portfolio.has_custom_background?, true
-     
+
      portfolio.background = Factory.create(:pattern_background)
      assert_equal portfolio.has_custom_background?, false
-     
-    
+
+
   end
 end

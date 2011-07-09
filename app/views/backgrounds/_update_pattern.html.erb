@@ -1,26 +1,26 @@
 <div class="<%= 'hidden' unless visible %>" id="update_pattern_background">
-			<p class="description"> Click <em>boxes</em> to customize</p>
-			<ul>
-			<li>
-				<div class="color_picker panel" id="background_pattern_color_picker">
-					<div style="background-color: #<%= background.color %>"></div>
-					<input type="hidden" id="background_pattern_color_picker_input" value="<%= background.color %>" ></input>
-				</div>
-			</li>
-			<li class="text">&</li>
-			<li>
-				<div class="pattern panel">
-				</div>
-				+
-				<div id="pattern_preview" class="pattern_preview panel" style="background-color: #<%= background.color %>">
-				</div>
-			</li>
-			<li  class="text">
-				=
-			</li>
-			<li>
-				<div id="final_preview" class="preview panel" style="background-color: #<%= background.color %>;" >
-				</div>
-			</li>
-		</ul>
+  <p class="description"> Click <em>boxes</em> to customize</p>
+  <ul>
+    <li>
+      <div class="color_picker panel" id="background_pattern_color_picker">
+        <div style="background-color: #<%= background.color %>"></div>
+        <input type="hidden" id="background_pattern_color_picker_input" value="<%= background.color %>" ></input>
+      </div>
+    </li>
+    <li class="text">&</li>
+    <li>
+      <div class="pattern panel">
+      </div>
+      +
+      <div id="pattern_preview" class="pattern_preview panel" style="background-color: #<%= background.color %>">
+      </div>
+    </li>
+    <li  class="text">
+      =
+    </li>
+    <li>
+      <div id="final_preview" class="preview panel" style="background-color: #<%= background.color %>;" >
+      </div>
+    </li>
+  </ul>
 </div>

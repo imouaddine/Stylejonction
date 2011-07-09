@@ -17,7 +17,7 @@ user = User.create! :username => 'imouaddine', :first_name => 'Imad', :last_name
 
 puts "create some backgrounds"
 10.times do |i|
-  PredefinedBackground.create(:name => "Background #{i}", :background => "#{i}.jpg") 
+  PredefinedBackground.create(:name => "Background #{i}", :background => "#{i}.jpg")
 end
 
 
@@ -36,39 +36,39 @@ Font.create(:name => 'Georgia', :webfont => true);
 
 puts "Create google fonts"
 Font.create(
-  :name => 'Playfair Display', 
+  :name => 'Playfair Display',
   :provider => "Google web fonts",
   :url => 'http://fonts.googleapis.com/css?family=Playfair+Display&v1'
 );
 Font.create(
-  :name => 'PT Serif', 
+  :name => 'PT Serif',
   :provider => "Google web fonts",
   :url => 'http://fonts.googleapis.com/css?family=PT+Serif:400,400italic&v2'
 );
 Font.create(
-  :name => 'Kameron', 
+  :name => 'Kameron',
   :provider => "Google web fonts",
   :url => 'http://fonts.googleapis.com/css?family=Kameron&v2'
 );
 Font.create(
-  :name => 'Nunito', 
+  :name => 'Nunito',
   :provider => "Google web fonts",
   :url => 'http://fonts.googleapis.com/css?family=Nunito&v2'
 );
 Font.create(
-  :name => 'Dancing Script', 
+  :name => 'Dancing Script',
   :provider => "Google web fonts",
   :url => 'http://fonts.googleapis.com/css?family=Dancing+Script&v2'
 );
 Font.create(
-  :name => 'Kreon', 
+  :name => 'Kreon',
   :provider => "Google web fonts",
   :url => 'http://fonts.googleapis.com/css?family=Kreon&v2'
 );
 
 
 
-user.portfolio = Portfolio.create(:theme => 0)
+user.portfolio = Portfolio.create(:theme => "light")
 user.portfolio.background = PredefinedBackground.first
 user.portfolio.layout = Layout.first
 user.portfolio.title_font = Font.first
@@ -81,12 +81,3 @@ user.portfolio.projects.create(:title => 'Fourth Project')
 user.save
 
 puts 'New user created: ' << user.full_name
-
-
-
-
-
-
-
-
-

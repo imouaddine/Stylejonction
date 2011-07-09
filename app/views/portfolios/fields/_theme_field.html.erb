@@ -1,27 +1,27 @@
 <fieldset id="theme_field" class="theme_field">
-	
-	<div class="order">3</div>
-	
-	<legend>Theme</legend>
-	
-	<p class="description">Select either the dark or light theme for the content boxes.
-	(Typically, you would use a light theme on a dark background)</p>
-	
-	
-	<div id="theme_field" class="field box theme_field">
-		<ul class="selection_list">
-			<li>
-				<a id="select_theme_light" data-id='0' href="#" 
-					class="select_theme <%= 'selected' if @portfolio.theme == 0  %>">
-						LIGHT
-				</a>
-			</li>
-			<li>
-				<a id="select_theme_dark" data-id='1' href="#" 
-					class="select_theme <%= 'selected' if @portfolio.theme == 1  %>">
-						DARK
-				</a>
-			</li>
-		</ul>
-	</div>
+
+  <div class="order">3</div>
+
+  <legend>Theme</legend>
+
+  <p class="description">Select either the dark or light theme for the content boxes.
+    (Typically, you would use a light theme on a dark background)</p>
+
+
+  <div id="theme_field" class="field box theme_field">
+    <ul class="selection_list">
+      <li>
+        <a id="select_theme_light" data-id='light' href="#"
+           class="select_theme <%= 'selected' if @portfolio.theme == "light"  %>">
+          LIGHT
+        </a>
+      </li>
+      <li>
+        <a id="select_theme_dark" data-id='dark' href="#"
+           class="select_theme <%= 'selected' if @portfolio.theme == "dark"  %>">
+          DARK
+        </a>
+      </li>
+    </ul>
+  </div>
 </fieldset>

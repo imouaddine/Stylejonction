@@ -10,13 +10,13 @@ Factory.define :user do |u|
 end
 
 Factory.define :portfolio do |p|
-    p.sequence(:theme) { |n| n } 
+  p.theme "light"
 end
 
 Factory.define :project do |p|
   p.sequence(:title) { |n| "Title #{n}" }
   p.association :portfolio
-end 
+end
 
 Factory.define :font do |f|
   f.name "Inconsolata"
