@@ -5,6 +5,7 @@ class PortfoliosControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   def setup
+    Factory.create(:font)
     @user = Factory(:user)
     @request.host = "#{@user.username}.stylejonction.com"
   end

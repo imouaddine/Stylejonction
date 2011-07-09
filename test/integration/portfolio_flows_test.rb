@@ -4,6 +4,7 @@ require 'integration_test_helper'
 class PortfolioFlowsTest < ActionDispatch::IntegrationTest
 
   def setup
+      Factory.create(:font)
       @user = loggin
       @portfolio = @user.portfolio
       change_subdomain_to(@user.username)
