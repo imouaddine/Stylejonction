@@ -1,8 +1,11 @@
 class Portfolio < ActiveRecord::Base
   THEMES = %w{light dark}
 
-  attr_accessible :id, :layout, :theme, :created_at, :updated_at, :user_id, :background_id, :title_font_id, :body_font_id, :layout_id, :body_color, :title_colo, :background_type, :published, :title_color, :background, :background_display_mode,
-  :custom_background_id, :pattern_background_id, :predefined_background_id
+  attr_accessible(:id, :layout, :theme, :created_at, :updated_at,
+                  :user_id, :background_id, :title_font_id,
+                  :body_font_id, :layout_id, :background_type,
+                  :published, :background, :background_display_mode,
+                  :custom_background_id, :pattern_background_id, :predefined_background_id)
 
   belongs_to :user
   has_many :projects
@@ -32,6 +35,14 @@ class Portfolio < ActiveRecord::Base
     unless published?
       write_attribute(:published, value)
     end
+  end
+
+  def title_color
+    title_font.color
+  end
+
+  def body_color
+    body_font.color
   end
 
   def has_custom_background?

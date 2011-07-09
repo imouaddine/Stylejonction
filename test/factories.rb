@@ -21,6 +21,7 @@ end
 Factory.define :font do |f|
   f.name "Inconsolata"
   f.provider "Google"
+  f.color "c2c2c2"
   f.url "http://google.webfonts.com"
   f.visible true
 end
@@ -44,7 +45,7 @@ end
 Factory.define :pattern_background do |f|
   f.name "PatternBackground"
   f.association :pattern
-  f.color "#ccc333"
+  f.color "ccc333"
 end
 
 Factory.define :layout do |f|
