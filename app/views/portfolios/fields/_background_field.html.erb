@@ -35,7 +35,7 @@
       </div>
       <div class="tabs">
         <%= render 'backgrounds/update_custom',
-            :background => @portfolio.background,
+            :background => @portfolio.custom_background,
             :visible => @portfolio.has_custom_background? || !@portfolio.has_pattern_background?,
             :show_links =>  @portfolio.has_custom_background? %>
 
