@@ -1,81 +1,82 @@
 <%= render('sidebar') %>
 
 <% content_for :header do %>
-  <% @non_webfonts.each  do |font| %>
-    <%= stylesheet_link_tag(font.url) %>
-  <% end %>
+	<% @non_webfonts.each  do |font| %>
+		<%= stylesheet_link_tag(font.url) %>
+	<% end %>
 <% end %>
 
 <section id="edit_portfolio_font" class="edit_portfolio_font edit">
-  <%= form_for(@portfolio, :url => portfolio_path) do |f| %>
-    <fieldset class="edit_portfolio_font">
-      <div class="order">1</div>
-      <legend>Display font</legend>
-      <p class="description">Choose the font you would like displayed as your <em>titles</em>. </p>
-      <div id="title_font_field" class="field box font_field">
-        <dl class="webfonts">
-          <dt>Standard</dt>
-          <dd>
-            <% @webfonts.each  do |font| %>
-              <%= font_link @portfolio, font, @portfolio.title_font == font %>
-            <% end %>
-          </dd>
-        </dl>
-        <dl class="non_webfonts">
-          <dt>Something new</dt>
-          <dd>
-            <% @non_webfonts.each  do |font| %>
-              <%= font_link @portfolio, font, @portfolio.title_font == font  %>
-            <% end %>
-          </dd>
-        </dl>
-        <footer>
-          <div id="color_picker_title" class="color_picker" >
-            <input id="color_picker_title_input" type="hidden" val="<%= @portfolio.title_color %>" />
-            <div style="background-color: #<%= @portfolio.title_color %>"></div>
-          </div>
-          <div class="color_picker_label">
-            Color
-          </div>
-
-        </footer>
-      </div>
-    </fieldset>
-    <fieldset class="edit_portfolio_font">
-      <div class="order">2</div>
-      <legend>Body font</legend>
-      <p class="description">Choose the font you would like displayed as your <em>body text</em>. </p>
-      <div id="body_font_field" class="field box font_field">
-        <dl class="webfonts">
-          <dt>Standard</dt>
-          <dd>
-            <% @webfonts.each  do |font| %>
-              <%= font_link @portfolio, font, @portfolio.body_font == font %>
-            <% end %>
-          </dd>
-        </dl>
-        <dl class="non_webfonts">
-          <dt>Something new</dt>
-          <dd>
-            <% @non_webfonts.each  do |font| %>
-              <%= font_link @portfolio, font, @portfolio.body_font == font  %>
-            <% end %>
-          </dd>
-        </dl>
-        <footer>
-          <div  id="color_picker_body" class="color_picker" >
-            <input id="color_picker_body_input" type="hidden" val="<%= @portfolio.body_color %>" />
-            <div style="background-color: #<%= @portfolio.body_color %>"></div>
-          </div>
-          <div class="color_picker_label">
-            Color
-          </div>
-
-        </footer>
-      </div>
-    </fieldset>
-  <% end %>
+<%= form_for(@portfolio, :url => portfolio_path) do |f| %>
+ 	<fieldset class="edit_portfolio_font">
+			<div class="order">1</div>
+			<legend>Display font</legend>
+			<p class="description">Choose the font you would like displayed as your <em>titles</em>. </p>
+			<div id="title_font_field" class="field box font_field">
+				<dl class="webfonts">
+					<dt>Standard</dt>
+					<dd>
+						<% @webfonts.each  do |font| %>
+							<%= font_link @portfolio, font, @portfolio.title_font == font %> 
+						<% end %>
+					</dd>
+				</dl>
+				<dl class="non_webfonts">
+						<dt>Something new</dt>
+						<dd>
+								<% @non_webfonts.each  do |font| %>
+									<%= font_link @portfolio, font, @portfolio.title_font == font  %> 
+								<% end %>
+						</dd>
+				</dl>
+				<footer>
+			   	<div id="color_picker_title" class="color_picker" >
+							<input id="color_picker_title_input" type="hidden" val="<%= @portfolio.title_color %>" />
+			   			<div style="background-color: #<%= @portfolio.title_color %>"></div>
+			   	</div>
+					<div class="color_picker_label">
+						Color
+					</div>
+					
+				</footer>
+			</div>
+	</fieldset>
+	<fieldset class="edit_portfolio_font">
+			<div class="order">2</div>
+			<legend>Body font</legend>
+			<p class="description">Choose the font you would like displayed as your <em>body text</em>. </p>
+			<div id="body_font_field" class="field box font_field">
+				<dl class="webfonts">
+					<dt>Standard</dt>
+					<dd>
+						<% @webfonts.each  do |font| %>
+							<%= font_link @portfolio, font, @portfolio.body_font == font %> 
+						<% end %>
+					</dd>
+				</dl>
+				<dl class="non_webfonts">
+						<dt>Something new</dt>
+						<dd>
+								<% @non_webfonts.each  do |font| %>
+									<%= font_link @portfolio, font, @portfolio.body_font == font  %> 
+								<% end %>
+						</dd>
+				</dl>
+					<footer>
+						<div  id="color_picker_body" class="color_picker" >
+							<input id="color_picker_body_input" type="hidden" val="<%= @portfolio.body_color %>" />
+							<div style="background-color: #<%= @portfolio.body_color %>"></div>
+						</div>
+				 		<div class="color_picker_label">
+							Color
+						</div>
+				
+					</footer>
+			</div>
+	</fieldset>
+<% end %>
 </section>
 <% content_for :preview do %>
   <%= render  "preview",  :action => 'edit_font_portfolio'  %>
 <% end %>
+

@@ -5,8 +5,8 @@ class CreateFonts < ActiveRecord::Migration
       t.string :provider
       t.string :url
       t.string :title
-      t.string :color
       t.boolean :visible, :default => true
+
       t.timestamps
     end
   end
