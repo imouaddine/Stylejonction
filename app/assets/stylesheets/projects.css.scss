@@ -10,13 +10,25 @@
   >form {
     width: 640px;
     margin: 20px;
-    margin-left: 40px;
+    margin-left: 60px;
     padding: 0;
-    @include border-radius(4px);
+    @include border-radius(10px);
     @include fancy-border;
   }
   fieldset{
     @include fancy-border-bottom;
+    padding: 5px 20px 20px ;
+    margin: 0;
+    .order{
+      margin-left: -60px;
+    }
+    legend{
+      margin-top: 15px;
+    }
+    &.last{
+      border-bottom: 0px;
+      box-shadow: 0 0 0;
+    }
   }
   .tabs{
     li{
@@ -28,15 +40,17 @@
           line-height: 60px;
           text-indent: 20px;
           font-size: 1.1em;
-          
-          
+          @include fancy-border-bottom;
           &.active{
+             border-bottom: 0px;
+             @include single-box-shadow(0, 0, 0, 0);
              @include unstyled-link;
              color: $pink-color;
              background: transparent;
           }
           &.left{
-          
+            @include fancy-border-right;
+            width: 319px;
           }
           &.right{
             @include border-top-right-radius(4px);
@@ -45,5 +59,53 @@
       }
       
     }
+  }
+  .access_toolbar{
+    margin-top: 20px;
+  }
+  .access_toggle{
+     display: block;
+     height: 53px;
+     @include link_colors($grey-color);
+     padding-left: 40px;
+     line-height: 40px;
+     width: 120px; 
+     font-weight: bold;
+     &.selected{
+       @include unstyled-link;
+       color: white;
+     }
+     
+  }
+  #private_project_btn{
+    margin-right: 0px;
+  }
+  #private_project {
+    
+    .left.col{
+      @include column(9);
+      input{
+        width: 290px;
+      }
+    }
+    .right.col{
+       @include column(6, true);
+    }
+    
+  }
+  
+}
+#private_project_btn{
+  background: url('images/limited_access_bg.png') no-repeat;
+  height: 53px;
+  &.selected{
+    background: url('images/limited_access_bg_sel.png') no-repeat;
+  }
+ 
+}
+#public_project_btn{
+  background: url('images/limited_access_bg.png') no-repeat;
+  &.selected{
+    background: url('images/public_access_bg_sel.png') no-repeat;
   }
 }

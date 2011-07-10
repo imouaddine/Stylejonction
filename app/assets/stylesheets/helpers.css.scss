@@ -25,7 +25,6 @@
 }
 
 
-
 /*** BOUTONS **/
 .btn{
   background: url('images/blue_btn_bg.png') repeat-x;
@@ -40,7 +39,10 @@
 }
 
 
-
+.number{
+  color: $pink-color;
+  
+}
 
 /***** LINKS ****/
 .icon_link{
@@ -52,6 +54,9 @@
   background: transparent url('images/edit_icon.png') no-repeat left 0%;
 }
 .remove_link{
+  background: transparent url('images/remove_icon.png') no-repeat left 50%;
+}
+.more_link{
   background: transparent url('images/remove_icon.png') no-repeat left 50%;
 }
 /**** BOXES AND FRAMES ***/
