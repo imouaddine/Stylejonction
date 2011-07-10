@@ -13,21 +13,20 @@ gem 'compass', git: 'https://github.com/chriseppstein/compass.git', branch: 'rai
 gem 'active_link_to'
 
 #backbone
-gem "rails-backbone" 
+gem "rails-backbone"
 
 #file upload
 gem 'rmagick'
 gem 'carrierwave'
 gem 'fog'
 
-
 group :development, :test do
   gem 'autotest-rails'
-  gem 'autotest' 
+  gem 'autotest'
   gem 'sqlite3'
   gem "rails-footnotes", ">= 3.7"
   gem "factory_girl"
-  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git' 
+  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
   gem 'launchy'
   gem 'database_cleaner'
 end
@@ -36,4 +35,3 @@ group :production do
   gem 'therubyracer-heroku', '0.8.1.pre3'
   gem 'pg'
 end
-

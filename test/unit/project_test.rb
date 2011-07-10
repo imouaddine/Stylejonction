@@ -60,4 +60,15 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal p2, user.default_project
     assert_equal false, p1.default?
   end
+
+  test "can invite someone to the project" do
+    user = Factory.create(:user)
+    p1 = Project.create(:title => "one")
+    user.portfolio.projects << p1
+
+    p1.invite("john@mail.ma")
+
+    assert_equal 1, Invitation.count
+    assert ! Invitation.first.used?, "Invitation shouldn't be used"
+  end
 end

@@ -1,15 +1,15 @@
 Stylejonction::Application.routes.draw do
- require 'subdomain' 
- 
+ require 'subdomain'
+
  devise_for :users
- 
- match "/users" => "users#index"
-  
+
+  match "/users" => "users#index"
+
  constraints(Subdomain) do
     match '/' => 'portfolios#edit_layout'
 
     resource :portfolio, :except => [:destroy, :new] do
-      member do 
+      member do
         get 'edit_layout'
         get 'edit_font'
         post 'upload_background'
@@ -26,8 +26,10 @@ Stylejonction::Application.routes.draw do
         end
       end
    end
- end
-  
+  end
+
+  resources :invitation, :only => [:show]
+
  #match "portfolio/:id" => "portfolios#show"
  match '#/:page' => 'pages#:page', :as => :page
  root :to => "pages#index"
