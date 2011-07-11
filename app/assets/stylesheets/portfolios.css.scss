@@ -10,8 +10,6 @@
 @import "helpers";
 @import "compass/reset";
 
-
-
 /*** LINKS & TYPES *******/
 body{
    background: #f2f2f2 url('images/grid_bg.png') repeat;
@@ -39,10 +37,41 @@ small{
 em{
   font-weight: bold;
 }
+
 /*** FORM ELEMENTS *******/
 label{
   color: #5d5d5d;
 }
+form {
+  fieldset{
+    margin: 10px;
+    position: relative;
+    padding-left: span(1);
+    margin-bottom: 40px;
+    .order{
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin-top: -15px;
+      margin-left: -40px;
+      background: transparent url('images/circle_bg.png') repeat-x;
+      width: 31px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      color: white;
+    }
+    legend{
+      color: $grey-color;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+  }
+  
+}
+
 /*** LAYOUT *******/
 #wrapper{
   background: transparent url('images/header_bg.png') repeat-x;
@@ -267,10 +296,12 @@ label{
 #preview_wrapper{
   position: fixed;
   width: 100%;
+  z-index: 11;
 }
 #preview{
   background: white;
   height: 100%;
+  
 }
 #separator{
   background: transparent url('images/sep_bg.png') repeat-x;
@@ -325,41 +356,6 @@ label{
 
 /** FORM  ELEMNTS**/
 
-
-
-
-
-
-form {
-  fieldset{
-    margin: 10px;
-    position: relative;
-    padding-left: span(1);
-    margin-bottom: 40px;
-    .order{
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0;
-      margin-top: -15px;
-      margin-left: -40px;
-      background: transparent url('images/circle_bg.png') repeat-x;
-      width: 31px;
-      height: 30px;
-      line-height: 30px;
-      text-align: center;
-      color: white;
-    }
-    legend{
-      color: $grey-color;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-    
-  }
-  
-}
-
 //Background field
 .background_field{
   .toggle_btn{
@@ -383,19 +379,22 @@ form {
 //EDIT LAYOUT FIELDS 
 form #predefined_background_field{
   
-  &.hidden{
-     margin-left: -99999px;
-     display: block !important;
-   }
   $background-width: 110px;
   $background-height: 110px;
-  
   width: 620px;
   height: 143px;
   border-right:0 !important;
-
+  
   @include border-bottom-right-radius(0px);
   @include border-top-right-radius(0px);
+  
+  
+  &.hidden{
+     margin-left: -99999px;
+     display: block !important;
+  }
+  
+  
   
   > div{
     position: relative;
@@ -418,7 +417,7 @@ form #predefined_background_field{
     }
   }
   .own_background{
-    z-index: 1000;
+    z-index: 10;
   }
   .own_background, .background_list li{
     @include column(3);

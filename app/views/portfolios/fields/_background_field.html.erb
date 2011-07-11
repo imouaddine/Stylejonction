@@ -41,7 +41,10 @@
 
         <%- if @portfolio.has_pattern_background? %>
           <%= render 'backgrounds/update_pattern',
-              :background => @portfolio.pattern_background %>
+              :background => @portfolio.pattern_background,
+ 							:visible => @portfolio.has_pattern_background?
+
+ %>
 
         <% end %>
       </div>

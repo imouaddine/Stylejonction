@@ -25,6 +25,7 @@ class PortfoliosController < ApplicationController
   end
 
   def edit_font
+    @background = @portfolio.background
     @webfonts = Font.webfont
     @non_webfonts = Font.non_webfont
   end

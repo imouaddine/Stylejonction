@@ -5,6 +5,8 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
     @portfolio = new Stylejonction.Models.Portfolio(options.portfolio)
     @projects = new Stylejonction.Collections.ProjectsCollection()
     @projects.url = @projects.url.replace ':portfolio_id', @portfolio.id
+    
+    @background = new Stylejonction.Models.BackgroundFactory().create( @portfolio.get('background_type'), options.background )
     @projects.refresh options.projects
     @action = "this." + options.action+'()'
     
@@ -31,7 +33,7 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
   new_project: ->
     
   add_preview: ->
-    @view = new Stylejonction.Views.Portfolios.PreviewView(projects: @projects, portfolio: @portfolio)
+    @view = new Stylejonction.Views.Portfolios.PreviewView(projects: @projects, portfolio: @portfolio, background: @background)
     $("#preview").html(@view.render().el)
     
     

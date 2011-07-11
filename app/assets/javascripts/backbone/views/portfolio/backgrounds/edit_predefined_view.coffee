@@ -31,19 +31,19 @@ class Stylejonction.Views.Backgrounds.EditPredefinedView extends Backbone.View
     e.stopPropagation()
     target = $(e.currentTarget)
     newBackground = target.data('id')
-    console.log newBackground
     @.$(".image_link").removeClass("selected")
     @.$("li").removeClass("selected")
     
     @options.model.save({'background_id': newBackground, 'predefined_background_id':  newBackground, 'background_type': 'PredefinedBackground'}, 
-      success: -> 
-        #target.children(".select_loading_overlay").hide();
+      success: (model) -> 
         $(e.currentTarget).parent().addClass("selected")
         $(e.currentTarget).addClass("selected")
+        model.trigger("change")
       error: ->
         alert 'Something wrong happened'
     )
-    
+   
+   
     
     
     

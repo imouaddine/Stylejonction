@@ -32,5 +32,9 @@ class Stylejonction.Views.Backgrounds.EditCustomView extends Backbone.View
     @options.model.fetch(
       success: (e)->
         e.set({'display_mode': target.val() })
-        e.save()
+        e.save(
+          success: (ee)->
+            
+        )
+        
     )

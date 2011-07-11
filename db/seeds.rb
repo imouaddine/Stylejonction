@@ -17,7 +17,9 @@ user = User.create! :username => 'imouaddine', :first_name => 'Imad', :last_name
 
 puts "create some backgrounds"
 10.times do |i|
-  PredefinedBackground.create(:name => "Background #{i}", :background => "#{i}.jpg")
+  b = PredefinedBackground.create(:name => "Background #{i}")
+  b.background.store!(File.open(File.join(Rails.root, "public/assets/images/predefined_backgrounds/#{i}.jpg")))
+  b.save!
 end
 
 

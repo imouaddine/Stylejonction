@@ -6,20 +6,23 @@ $ ->
   $('#preview_wrapper').bind 'drag', (event, ui) =>
     offset = {left: 0, top: ui.offset.top}
     $("#preview_wrapper").offset(offset)
-    $("#preview_wrapper").height( $(document).height() - ui.offset.top )
-    newHeight = $(document).height() - ui.offset.top
+    $("#preview_wrapper").height( window.document_height - ui.offset.top )
+    newHeight = window.document_height - ui.offset.top
     $("#preview").height( newHeight )
-    if(newHeight < 50)
+    
+    delta =  ui.position.top - ui.originalPosition.top
+    if( (delta > 0 && newHeight < 50) || ( (newHeight + 100) >=   window.document_height && delta < 0  ) )
       return false
     
   $("#dragger").dblclick -> 
-    $("#preview_wrapper").height(initialHeight)
+    $("#preview_wrapper").height(window.initialHeight)
     $("#preview_wrapper").animate({top: initialOffset.top}, 1000) 
   
 $(window).bind "load", () ->
     $("#preview_wrapper").pinFooter()
-    initialOffset = $("#preview_wrapper").offset()
-    initialHeight = $("#preview_wrapper").height()
+    window.initialOffset = $("#preview_wrapper").offset()
+    window.initialHeight = $("#preview_wrapper").height()
+    window.document_height = $(document).height();
 
 $(window).bind "resize", ()->
     $("#preview_wrapper").pinFooter()
