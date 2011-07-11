@@ -1,10 +1,10 @@
-require 'integration_test_helper'
+ require 'integration_test_helper'
 
 
-class PortfolioFlowsTest < ActionDispatch::IntegrationTest
+ class PortfolioFlowsTest < ActionDispatch::IntegrationTest
 
-  def setup
-    b = PredefinedBackground.create(:name => "Background sadasdasd")
+   def setup
+     b = PredefinedBackground.create(:name => "Background sadasdasd")
     b.background.store!(File.open(File.join(Rails.root, "public/assets/images/predefined_backgrounds/2.jpg")))
     b.save!
     Factory.create :font

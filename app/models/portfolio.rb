@@ -59,6 +59,7 @@ class Portfolio < ActiveRecord::Base
     self.background = PredefinedBackground.first if (PredefinedBackground.count > 0)
     self.theme = THEMES.first
     self.predefined_background = self.background
+    self.projects << Project.create(:title => "First project")
     self.custom_background = CustomBackground.create(:user => self.user)
     self.pattern_background = PatternBackground.create( :pattern => Pattern.first, :color => '000000')
     self.layout = Layout.find_by_name("left") if (Layout.count > 0)
