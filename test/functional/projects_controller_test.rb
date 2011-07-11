@@ -27,6 +27,20 @@ class ProjectsControllerTest < ActionController::TestCase
     end
   end
 
+  test "destroy on project removes all project invitations" do
+    sign_in @user
+    2.times do |i|
+      Invitation.create!(:email => "my#{i}@email.com", :project => @portfolio.projects.first)
+    end
+
+    invitation_count = Invitation.count
+
+    assert_difference('Project.count', -1) do
+      delete :destroy, :portfolio_id => @portfolio.id, :id => @portfolio.projects.first
+    end
+    assert_equal (invitation_count - 2), Invitation.count
+  end
+
   test "should invite user to project" do
     sign_in @user
     assert_difference("Invitation.count", 1) do

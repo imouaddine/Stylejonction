@@ -3,7 +3,7 @@ class Project < ActiveRecord::Base
   validates_presence_of :title
   belongs_to :portfolio
 
-  has_many :invitations
+  has_many :invitations, :dependent => :destroy
 
   scope :default, where(:default => true)
   mount_uploader :cover, CoverUploader
