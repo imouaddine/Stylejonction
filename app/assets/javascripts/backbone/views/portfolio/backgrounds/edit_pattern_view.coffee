@@ -19,7 +19,13 @@ class Stylejonction.Views.Backgrounds.EditPatternView extends Backbone.View
     
     @options.model.fetch(
       success: (e)->
-        e.save({ 'color': newColor})
+        e.save(
+          { 'color': newColor}, 
+          success: (m) ->   
+            console.log m
+            m.trigger('change')
+        )
+       
     )
     
   

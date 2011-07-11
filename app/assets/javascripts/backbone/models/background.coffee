@@ -6,27 +6,44 @@ class Stylejonction.Models.Background extends Backbone.Model
     
   background_url: ()->
     @.get('background').url
+  render: (element)->
+    url = @.background_url()
+    element.css("background-image", "url(#{url})")
     
     
 class Stylejonction.Models.PredefinedBackground extends Stylejonction.Models.Background
   
   #against MVC pattern best practices but found it simple
   render: (element)->
-    url = @.background_url()
-    element.css("background-image", "url(#{url})")
-    console.log element.css("background-image")
-    return
-
+    super 
+   
+  
     
 class Stylejonction.Models.PatternBackground extends Stylejonction.Models.Background
   render: (element)->
+    #super 
+    
+    color = @.get('color')
+    console.log color
+    element.css("background-color", "##{color}")
+
     
     
 class Stylejonction.Models.CustomBackground extends Stylejonction.Models.Background
   render: (element)->
-     url = @.background_url()
-     element.css("background-image", "url(#{url})")
-     display_mode = element.get("display_mode")
+     super 
+     display_mode = @.get("display_mode")
+     switch display_mode
+      when 'original'  
+        element.css("background-size", "auto")
+        element.css("background-repeat", "none") 
+      when 'stretch'  
+        element.css("background-size", "100%")
+      when 'tile'  
+        element.css("background-size", "auto") 
+        element.css("background-repeat", "repeat") 
+        
+   
     
     
 class Stylejonction.Models.BackgroundFactory

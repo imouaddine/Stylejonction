@@ -13,16 +13,16 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
     @portfolio = @options.model
     
     #Edit pattern view 
-    background = new Stylejonction.Models.Background({id: @portfolio.pattern_background_id})
+    background = new Stylejonction.Models.PatternBackground({id: @portfolio.pattern_background_id})
     background.fetch()
     @custom_background_edit_view = new Stylejonction.Views.Backgrounds.EditPatternView(model: background, el: 'body')
     
     #Edit background view 
-    background = new Stylejonction.Models.Background({id: @portfolio.custom_background_id})
+    background = new Stylejonction.Models.CustomBackground({id: @portfolio.custom_background_id})
     background.fetch()
     @custom_background_edit_view = new Stylejonction.Views.Backgrounds.EditCustomView(model: background, el: 'body')
     
-    #pattern background view
+    #prefefined background view
     @custom_background_edit_view = new Stylejonction.Views.Backgrounds.EditPredefinedView(model: @portfolio, el: '#predefined_background_field')
     
     #Color pickers
