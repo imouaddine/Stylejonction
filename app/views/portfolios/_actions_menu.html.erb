@@ -1,21 +1,21 @@
 <nav id="portfolio_menu" class="actions_menu">
-<ul>
-  <li><%= active_link_to 'Layout', edit_layout_portfolio_path %></li>
-  <li><%= active_link_to 'Fonts', edit_font_portfolio_path %></li>
-  <li class="last <%=  'active' if controller.controller_name == 'projects'  %>">
- 	 	<%- if @portfolio.has_saved_project? -%>
-			<% className = 'active' if controller.controller_name == 'projects'  %>
-	    <%= active_link_to 'Projects', edit_portfolio_project_path(@portfolio.projects.first), :class => "last #{className}"  %>
-	  <% end %>
-  	<ol class="hidden">
-	    <% 
-				counter = 1
-	 			@portfolio.projects.each do |project| %>
-	        <li><%= active_link_to "<span class=\'number\'>#{++counter}</span>#{project.title}".html_safe, edit_portfolio_project_path(project) %></li>
-			
-	    <% end %>
-			<li><%= active_link_to '<span class=\'number\'> + </span> New project'.html_safe, new_portfolio_project_path %></li>
-	  </ol>
+  <ul>
+    <li><%= active_link_to 'Layout', edit_layout_portfolio_path %></li>
+    <li><%= active_link_to 'Fonts', edit_font_portfolio_path %></li>
+    <li class="last <%=  'active' if controller.controller_name == 'projects'  %>">
+      <%- if @portfolio.has_saved_project? -%>
+        <% className = 'active' if controller.controller_name == 'projects'  %>
+        <%= active_link_to 'Projects', edit_portfolio_project_path(@portfolio.projects.first), :class => "last #{className}"  %>
+      <% end %>
+      <ol class="hidden">
+        <%
+                                counter = 1
+                                @portfolio.projects.each do |project| %>
+                <li><%= active_link_to "<span class=\'number\'>#{++counter}</span>#{project.title}".html_safe, edit_portfolio_project_path(project) %></li>
+
+            <% end %>
+                        <li><%= active_link_to '<span class=\'number\'> + </span> New project'.html_safe, new_portfolio_project_path %></li>
+          </ol>
   </li>
 </ul>
 </nav>

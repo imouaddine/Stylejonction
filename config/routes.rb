@@ -17,6 +17,7 @@ Stylejonction::Application.routes.draw do
       end
       resources :projects  do
         member do
+         post 'invite'
          match 'upload_cover'
         end
       end

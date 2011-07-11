@@ -1,21 +1,28 @@
-require 'integration_test_helper'
+ require 'integration_test_helper'
 
 
-class PortfolioFlowsTest < ActionDispatch::IntegrationTest
+ class PortfolioFlowsTest < ActionDispatch::IntegrationTest
 
-  def setup
-      Factory.create(:font)
-      @user = loggin
-      @portfolio = @user.portfolio
-      change_subdomain_to(@user.username)
-   end
+   def setup
+     b = PredefinedBackground.create(:name => "Background sadasdasd")
+    b.background.store!(File.open(File.join(Rails.root, "public/assets/images/predefined_backgrounds/2.jpg")))
+    b.save!
+    Factory.create :font
+    @user = loggin
+    @portfolio = @user.portfolio
+    change_subdomain_to(@user.username)
+  end
+
+  def teardown
+    PredefinedBackground.delete_all
+  end
 
 
   test "supports js" do
-      visit portfolio_path
-      click_link "test js"
+    visit portfolio_path
+    click_link "test js"
 
-      assert_equal true, page.has_content?("js works")
+    assert_equal true, page.has_content?("js works")
   end
 
   test "edit_layout portfolio page" do
@@ -50,7 +57,8 @@ class PortfolioFlowsTest < ActionDispatch::IntegrationTest
 
     visit  edit_font_portfolio_path
 
-    find('#title_font_field').click_link "Arial"
+    find('#title_font_field').click_link("Arial")
+
     @portfolio.reload
     assert_equal f, @portfolio.title_font
   end

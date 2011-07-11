@@ -2,12 +2,12 @@ class ProjectsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
   before_filter :get_portfolio
   skip_before_filter :verify_authenticity_token
-  
+
   def index
     @projects = @portfolio.projects
 
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render json: @projects }
     end
   end
@@ -48,7 +48,7 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    logger.info @project.inspect 
+    logger.info @project.inspect
     respond_to do |format|
       if @project.update_attributes(params[:project])
         format.html { redirect_to portfolio_project_path(@project), notice: 'Project was successfully updated.' }
@@ -59,8 +59,8 @@ class ProjectsController < ApplicationController
       end
     end
   end
-  
-  
+
+
   def upload_cover
     @project = Project.find(params[:id])
     respond_to do |format|
@@ -71,8 +71,22 @@ class ProjectsController < ApplicationController
       end
     end
   end
-    
- 
+
+  def invite
+    @project = Project.find(params[:id])
+
+    respond_to do |format|
+      if params[:email].present?
+        @project.invite(params[:email])
+        format.html { redirect_to portfolio_project_path(@project), notice: "#{params[:email]} has been invited to your project" }
+        format.json { head :ok }
+      else
+        format.html { redirect_to portfolio_project_path(@project), notice: "You have to provide an email" }
+        format.json { head :ok }
+      end
+    end
+  end
+
   def destroy
     @project = Project.find(params[:id])
     @project.destroy

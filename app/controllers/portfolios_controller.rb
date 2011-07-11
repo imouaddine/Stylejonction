@@ -1,14 +1,14 @@
 class PortfoliosController < ApplicationController
   before_filter :get_portfolio
   before_filter :authenticate_user!, :except => [:show]
-  
-  
+
+
   skip_before_filter :verify_authenticity_token
 
-   
+
   def show
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render json: @portfolio }
     end
   end
@@ -19,7 +19,7 @@ class PortfoliosController < ApplicationController
   end
 
   def edit_layout
-    @layouts = Layout.all 
+    @layouts = Layout.all
     @backgrounds = PredefinedBackground.all
     @background = @portfolio.background
   end
@@ -29,8 +29,6 @@ class PortfoliosController < ApplicationController
     @webfonts = Font.webfont
     @non_webfonts = Font.non_webfont
   end
-  
- 
 
   def edit
     redirect_to action: "show"
@@ -42,7 +40,7 @@ class PortfoliosController < ApplicationController
     if params[:background].present?
       @portfolio.background = PredefinedBackground.find(params[:background][:id])
     end
-    
+
     respond_to do |format|
       if @portfolio.update_attributes(params[:portfolio])
         format.html { redirect_to edit_layout_portfolio_path, notice: 'Portfolio was successfully updated.' }
@@ -53,9 +51,9 @@ class PortfoliosController < ApplicationController
       end
     end
   end
-  
-  
-  
-  
+
+
+
+
 
 end

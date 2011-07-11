@@ -1,8 +1,11 @@
 class Portfolio < ActiveRecord::Base
   THEMES = %w{light dark}
 
-  attr_accessible :id, :layout, :theme, :created_at, :updated_at, :user_id, :background_id, :title_font_id, :body_font_id, :layout_id, :body_color, :title_colo, :background_type, :published, :title_color, :background, :background_display_mode,
-  :custom_background_id, :pattern_background_id, :predefined_background_id
+  attr_accessible(:id, :layout, :theme, :created_at, :updated_at, :user_id,
+                  :background_id, :title_font_id, :body_font_id, :layout_id,
+                  :body_color, :background_type, :published, :title_color,
+                  :background, :background_display_mode, :custom_background_id,
+                  :pattern_background_id, :predefined_background_id)
 
   belongs_to :user
   has_many :projects
@@ -56,6 +59,7 @@ class Portfolio < ActiveRecord::Base
     self.background = PredefinedBackground.first if (PredefinedBackground.count > 0)
     self.theme = THEMES.first
     self.predefined_background = self.background
+    self.projects << Project.create(:title => "First project")
     self.custom_background = CustomBackground.create(:user => self.user)
     self.pattern_background = PatternBackground.create( :pattern => Pattern.first, :color => '000000')
     self.layout = Layout.find_by_name("left") if (Layout.count > 0)
