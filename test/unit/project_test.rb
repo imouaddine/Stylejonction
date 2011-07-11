@@ -17,9 +17,9 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.save
   end
 
-  test "is private by default" do
+  test "is public by default" do
     project = Project.new
-    assert ! project.public?
+    assert  project.public?
   end
 
   test "is not default when created" do

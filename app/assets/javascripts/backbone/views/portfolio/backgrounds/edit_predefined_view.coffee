@@ -38,7 +38,12 @@ class Stylejonction.Views.Backgrounds.EditPredefinedView extends Backbone.View
       success: (model) -> 
         $(e.currentTarget).parent().addClass("selected")
         $(e.currentTarget).addClass("selected")
-        model.trigger("change")
+        background = new Stylejonction.Models.CustomBackground({id:model.get('background_id')})
+        background.fetch(
+          success: ->
+            model.trigger("backgroundChanged", background)
+        )
+        
       error: ->
         alert 'Something wrong happened'
     )

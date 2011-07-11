@@ -4,7 +4,7 @@
   <p class="description">Select a background from the gallery or create your own background</p>
   <div>
     <%= render 'backgrounds/predefined_background_field', :visible => @portfolio.has_predefined_background? %>
-    <div id="custom_background_field" class="field box background_field <%= 'hidden' if @portfolio.has_predefined_background? %>">
+    <div id="custom_background_field" class="field box background_field ">
       <div>
         <a class="toggle_btn" href="#">
           <small>CHOOSE FROM </small><br>GALLERY

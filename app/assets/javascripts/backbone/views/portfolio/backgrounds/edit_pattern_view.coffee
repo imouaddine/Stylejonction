@@ -6,27 +6,28 @@ class Stylejonction.Views.Backgrounds.EditPatternView extends Backbone.View
     
   initialize: ()->
     init_colorpicker('#background_pattern_color_picker')
-    
+    @background = @options.model
+    @portfolio = @options.portfolio
 
  
   updatePatternBackgroundColor: (e)->
     e.preventDefault()
     e.stopPropagation()
+    
     target = $(e.currentTarget)
     newColor = target.val()
-    @.$("#pattern_preview").css("background-color", "#"+newColor)
-    @.$("#final_preview").css("background-color", "#"+newColor)
     
-    @options.model.fetch(
-      success: (e)->
-        e.save(
-          { 'color': newColor}, 
-          success: (m) ->   
-            console.log m
-            m.trigger('change')
-        )
-       
+    @.$("#pattern_preview").css("background-color", "##{newColor}" )
+    @.$("#final_preview").css("background-color",   "##{newColor}" )
+    portfolio = @portfolio
+    @options.model.save(
+      { 'color': newColor },
+      success: (event)->
+        portfolio.trigger 'backgroundChanged', event
+      error: (event)->
+        alert "Error has occured"
     )
+    
     
   
     

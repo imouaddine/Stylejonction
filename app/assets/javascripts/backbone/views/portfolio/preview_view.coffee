@@ -5,13 +5,17 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
 
 
   initialize: ()->
-    _.bindAll(this, 'addOneProject', 'addAllProjects', 'render', 'update')
+    _.bindAll(this, 'addOneProject', 'addAllProjects', 'render', 'update', 'updateBackground')
     @portfolio = @options.portfolio
     @projects = @options.projects
     @background = @options.background
+    
 
-    @options.portfolio.bind('change',     this.update)
-    @options.projects.bind('add',     this.addOneProject)
+
+    @options.portfolio.bind 'change', @.update
+    @options.projects.bind  'add',     @.addOneProject
+    @options.portfolio.bind 'backgroundChanged', @.updateBackground
+   
 
   addOneProject: (project) ->
     @view = new Stylejonction.Views.Projects.PreviewProjectItemView({project: project})
@@ -21,16 +25,15 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
     @projects.each(this.addOneProject);
 
   update: ->
-    # console.log 'UPDATE'
-    @background.fetch(
-      success: (model)->
-        model.render($("#preview"))
-    )
     $('#theme').text(@portfolio.get('theme'))
 
+  updateBackground: (background)->
+    @background = background
+    @background.render($("#preview"))
+    
   render: ->
     $(this.el).html(this.template(@options.portfolio.toJSON()))
-    @background.render($("#preview"))
+    @background.render( $("#preview") )
     @addAllProjects()
     return this
 

@@ -3,9 +3,9 @@ class CreateProjects < ActiveRecord::Migration
     create_table :projects do |t|
       t.string :title
       t.integer :portfolio_id
-      t.string :cover
+      t.string  :cover
       t.boolean :default, :default => false
-      t.boolean :public, :default => false
+      t.boolean :public, :default => true
       t.timestamps
     end
   end
