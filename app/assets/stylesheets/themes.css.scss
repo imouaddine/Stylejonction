@@ -1,0 +1,17 @@
+
+@import "mixins";
+@import "helpers";
+
+.theme_light{
+  #projects_nav, #project_conten{
+    background: white;
+    color: #222;
+  }
+  
+}
+.theme_dark{
+  #projects_nav, #project_conten{
+     background: black;
+     color: white;
+   }
+}
