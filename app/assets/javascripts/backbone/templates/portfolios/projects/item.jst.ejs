@@ -1,4 +1,6 @@
-TITLE: <%= title %>
-<% if(cover.thumb) { %>
-	IMAGE: <img src="<%= (cover.thumb.url) %>" alt="<%= title %>" ></img>
-<% } %>
+<figure class="project_cover">
+	<% if(cover.thumb) { %>
+		<img src="<%= (cover.thumb.url) %>" alt="<%= title %>" ></img>
+	<% } %>
+	<figurecaption><%= title %></figurecaption>
+</figure>

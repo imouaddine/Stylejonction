@@ -1,16 +1,17 @@
 Factory.define :user do |u|
-    u.first_name 'John'
-    u.last_name  'Doe'
-    u.username "user"
-    u.password "password"
-    u.password_confirmation "password"
-    u.email "imad@ecomstrategy.ca"
-    u.admin false
-    u.association :portfolio
+  u.first_name 'John'
+  u.last_name  'Doe'
+  u.username "user"
+  u.password "password"
+  u.password_confirmation "password"
+  u.email "imad@ecomstrategy.ca"
+  u.admin false
+  u.association :portfolio
 end
 
 Factory.define :portfolio do |p|
   p.theme "light"
+  p.layout "left"
 end
 
 Factory.define :project do |p|
@@ -47,7 +48,4 @@ Factory.define :pattern_background do |f|
   f.color "#ccc333"
 end
 
-Factory.define :layout do |f|
-  f.name "Layout 1"
-  f.css_name "portfolio.css"
-end
+

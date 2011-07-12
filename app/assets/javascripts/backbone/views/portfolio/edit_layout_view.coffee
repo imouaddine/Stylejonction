@@ -98,7 +98,7 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
     target = $(e.currentTarget)
     newLayout = target.data('id')
     @.$("#layout_field .image_link").removeClass("selected")
-    @options.model.save({'layout_id': newLayout}, 
+    @options.model.save({'layout': newLayout}, 
       success: -> 
         $(e.currentTarget).addClass("selected")
     )

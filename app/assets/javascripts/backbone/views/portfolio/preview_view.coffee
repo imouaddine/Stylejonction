@@ -19,13 +19,18 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
 
   addOneProject: (project) ->
     @view = new Stylejonction.Views.Projects.PreviewProjectItemView({project: project})
-    @.$("#projects-list").after(@view.render().el)
+    @.$("#projects_list").after(@view.render().el)
 
   addAllProjects: ->
     @projects.each(this.addOneProject);
 
   update: ->
-    $('#theme').text(@portfolio.get('theme'))
+    layout = @options.portfolio.get('layout')
+    $("#preview").addClass("layout-#{layout}");
+    
+    theme = @options.portfolio.get('theme')
+    $("#preview").addClass("theme-#{theme}");
+    
 
   updateBackground: (background)->
     @background = background
@@ -35,6 +40,7 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
     $(this.el).html(this.template(@options.portfolio.toJSON()))
     @background.render( $("#preview") )
     @addAllProjects()
+    @.update()
     return this
 
 

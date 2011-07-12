@@ -9,10 +9,7 @@
 <% end %>
 
 <ul>
-  
-  <%- if @portfolio.layout.present? %>
-    <li> layout: <%= @portfolio.layout.name %> </li>
-  <% end %>
+	<li> layout: <%= @portfolio.layout %> </li>
   <li> theme: <%= @portfolio.theme || "-" %> </li>
   <%- if @portfolio.title_font.present? %>
     <li> font: <%= @portfolio.title_font.name %> </li>

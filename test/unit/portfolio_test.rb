@@ -66,14 +66,13 @@ class PortfolioTest < ActiveSupport::TestCase
 
   test "by default portfolio should have default attributes" do
     Factory.create(:predefined_background)
-    Layout.create(:name => "left")
     Factory.create(:font)
 
     portfolio = Portfolio.create!
     portfolio.reload
 
     assert_equal "PredefinedBackground", portfolio.background_type
-    assert_equal "left", portfolio.layout.name
+    assert_equal "left", portfolio.layout
     assert_equal portfolio.theme, "light"
     assert_equal "First project", portfolio.projects.first.title
     assert_equal Font.first, portfolio.title_font

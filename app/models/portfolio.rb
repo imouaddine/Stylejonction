@@ -1,12 +1,17 @@
 class Portfolio < ActiveRecord::Base
   THEMES = %w{light dark}
+  LAYOUTS = %w{left top right bottom}
 
+  
   attr_accessible(:id, :layout, :theme, :created_at, :updated_at, :user_id,
-                  :background_id, :title_font_id, :body_font_id, :layout_id,
+                  :background_id, :title_font_id, :body_font_id,
                   :body_color, :background_type, :published, :title_color,
-                  :background, :background_display_mode, :custom_background_id,
+                  :background, :custom_background_id,
                   :pattern_background_id, :predefined_background_id)
 
+  validates_inclusion_of :layout, :in => LAYOUTS, :message => "Layout % should be one of #{LAYOUTS}"
+  validates_inclusion_of :theme, :in => THEMES, :message => "Theme  %s should be one of #{THEMES}"
+  
   belongs_to :user
   has_many :projects
 
@@ -17,8 +22,7 @@ class Portfolio < ActiveRecord::Base
   belongs_to :predefined_background
   belongs_to :custom_background
   belongs_to :pattern_background
-
-  belongs_to :layout
+  
 
   after_create :set_default_attributes
 
@@ -48,10 +52,7 @@ class Portfolio < ActiveRecord::Base
   end
 
 
-  def background_display_mode=(value)
-    self.custom_background.display_mode = value
-    self.custom_background.save
-  end
+ 
 
   private
 
@@ -59,10 +60,10 @@ class Portfolio < ActiveRecord::Base
     self.background = PredefinedBackground.first if (PredefinedBackground.count > 0)
     self.theme = THEMES.first
     self.predefined_background = self.background
-    self.projects << Project.create(:title => "First project")
     self.custom_background = CustomBackground.create(:user => self.user)
     self.pattern_background = PatternBackground.create( :pattern => Pattern.first, :color => '000000')
-    self.layout = Layout.find_by_name("left") if (Layout.count > 0)
+    self.projects << Project.create(:title => "First project")
+    self.layout = LAYOUTS.first
     if Font.count > 0
       self.title_font = Font.first
       self.body_font = Font.first

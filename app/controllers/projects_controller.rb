@@ -48,7 +48,6 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    logger.info @project.inspect
     respond_to do |format|
       if @project.update_attributes(params[:project])
         format.html { redirect_to portfolio_project_path(@project), notice: 'Project was successfully updated.' }

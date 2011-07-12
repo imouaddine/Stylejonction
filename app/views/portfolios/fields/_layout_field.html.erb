@@ -6,7 +6,7 @@
 		<ul class="horizontal_list">
 				<% @layouts.each do |layout| %>
 					<li>
-						<a id="layout_link_<%= layout.name %>" data-id='<%= layout.id %>' href="#" 
+						<a id="layout_link_<%= layout %>" data-id='<%= layout %>' href="#" 
 							class="image_link <%= 'selected' if @portfolio.layout == layout  %>">
 							<span class="image_overlay"></span>
 						</a>

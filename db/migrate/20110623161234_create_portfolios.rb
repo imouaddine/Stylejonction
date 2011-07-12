@@ -1,8 +1,8 @@
 class CreatePortfolios < ActiveRecord::Migration
   def change
     create_table :portfolios do |t|
-      t.integer :layout_id
-      t.string :theme
+      t.string  :layout, :default => 'left'
+      t.string  :theme, :default => 'light'
       t.integer :user_id
       t.integer :font_id
       t.integer :background_id

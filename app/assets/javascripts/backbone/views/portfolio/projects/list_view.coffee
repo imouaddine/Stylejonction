@@ -6,7 +6,7 @@ class Stylejonction.Views.Projects.ProjectListView extends Backbone.View
   events:
     "click .destroy" : "destroy"
       
-  tagName: "tr"
+  tagName: "li"
   
   destroy: () ->
     @options.model.destroy()

@@ -7,7 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.delete_all
-Layout.delete_all
 PredefinedBackground.delete_all
 Portfolio.delete_all
 Font.delete_all
@@ -21,13 +20,6 @@ puts "create some backgrounds"
   b.background.store!(File.open(File.join(Rails.root, "public/assets/images/predefined_backgrounds/#{i}.jpg")))
   b.save!
 end
-
-
-puts "create 4 layouts"
-Layout.create(:name => "left")
-Layout.create(:name => "right")
-Layout.create(:name => "top")
-Layout.create(:name => "bottom")
 
 
 puts "Create standard fonts"
@@ -70,15 +62,19 @@ Font.create(
 
 
 
-user.portfolio = Portfolio.create(:theme => "light")
+user.portfolio = Portfolio.create( :theme => Portfolio::THEMES.first, :layout => Portfolio::LAYOUTS.first )
 user.portfolio.background = PredefinedBackground.first
-user.portfolio.layout = Layout.first
 user.portfolio.title_font = Font.first
 user.portfolio.body_font = Font.first
-user.portfolio.projects.create(:title => 'First Project')
-user.portfolio.projects.create(:title => 'Second Project', :public => false)
-user.portfolio.projects.create(:title => 'Third Project')
-user.portfolio.projects.create(:title => 'Fourth Project')
+
+puts "Create portfolio project"
+4.times do |i|
+  project = user.portfolio.projects.create(:title => "Project #{i}")
+  project.cover.store!(File.open(File.join(Rails.root, "public/assets/images/projects/#{i}.jpg")))
+  project.save!
+end
+
+
 
 user.save
 
