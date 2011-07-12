@@ -26,7 +26,7 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
 
   edit_project: ->
     @project = @projects.get(@options.project.id)
-    @view = new Stylejonction.Views.Projects.EditView(model: @project, el: '#edit')
+    @view = new Stylejonction.Views.Projects.EditView(model: @project, el: '#edit_project_properties')
 
 
 
