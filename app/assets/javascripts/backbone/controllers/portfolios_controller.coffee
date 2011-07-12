@@ -32,7 +32,7 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
 
   add_preview: ->
     @previewView = new Stylejonction.Views.Portfolios.PreviewView(projects: @projects, portfolio: @portfolio, background: @background)
-    #$("#preview").html(@previewView.render().el)
+    $("#preview").html(@previewView.render().el)
 
 
 
