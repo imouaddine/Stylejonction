@@ -12,6 +12,10 @@
   width: $width;
   height: $height; 
   display: block;
+  border: 0;
+  @include box-shadow(1px 1px 5px rgba(#c0c0c0, 0.5) );
+  @include border-radius(5px);
+  
   &:hover{
     .image_overlay{
        @include opacity(0);
@@ -20,12 +24,15 @@
   .image_overlay{
     background: white;
     position: absolute;
-    @include opacity(0.2);
+    @include opacity(0.1);
     display: block;
     top: 0;
     left: 0;
     width: $width;
     height: $height;
+   
+    @include border-radius(5px);
+    
   }
 }
 @mixin fancy-border($border-color: $default-border-color, $shadow-color: $default-box-shadow-color){

@@ -24,7 +24,9 @@
   display: none;
 }
 
-
+.cover_background{
+  @include background-size(cover);
+}
 /*** BOUTONS **/
 .btn{
   background: url('images/blue_btn_bg.png') repeat-x;

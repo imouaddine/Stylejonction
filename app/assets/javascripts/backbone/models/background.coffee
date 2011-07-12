@@ -15,7 +15,8 @@ class Stylejonction.Models.PredefinedBackground extends Stylejonction.Models.Bac
 
   #against MVC pattern best practices but found it simple
   render: (element)->
-    super 
+    super
+    element.addClass("cover_background") 
    
   
     
@@ -36,9 +37,11 @@ class Stylejonction.Models.CustomBackground extends Stylejonction.Models.Backgro
       when 'original'  
         element.css("background-size", "auto")
         element.css("background-repeat", "none") 
+        element.removeClass("cover_background")
       when 'stretch'  
-        element.css("background-size", "100%")
+        element.addClass("cover_background")
       when 'tile'  
+        element.removeClass("cover_background")
         element.css("background-size", "auto") 
         element.css("background-repeat", "repeat") 
 
