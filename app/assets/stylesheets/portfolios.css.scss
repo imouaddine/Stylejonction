@@ -301,7 +301,12 @@ form {
 #preview{
   background: white;
   height: 100%;
-
+  #preview_content{
+    @include container;
+    @include clearfix;
+    height: 100%;
+  }
+ 
 }
 #separator{
   background: transparent url('images/sep_bg.png') repeat-x;

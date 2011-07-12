@@ -8,9 +8,44 @@
 
 .layout_left{
   #projects_nav{
-    @include column(14);
+    @include column(10);
   }
-  #projects_list{
-    @include column(14);
+  #project_content{
+    @include column(14, true);
+  }
+}
+.layout_right{
+  #projects_nav{
+    @include column(10);
+    float: right;
+  }
+  #project_content{
+    @include column(14, true);
+    float: right;
+  }
+}
+.layout_top{
+  #projects_nav{
+    @include horizontal-list-container;
+    li{
+      @include horizontal-list-item;
+    }
+  }
+  #project_content{
+   
+  }
+}
+.layout_bottom{
+  position: relative;
+  #projects_nav{
+    position: absolute;
+    bottom: 0;
+    @include horizontal-list-container;
+    li{
+      @include horizontal-list-item;
+    }
+  }
+  #project_content{
+    padding-bottom: 200px;
   }
 }
