@@ -1,4 +1,6 @@
 class Portfolio < ActiveRecord::Base
+  include BackgroundValidator
+
   THEMES = %w{light dark}
   LAYOUTS = %w{left top right bottom}
 
@@ -14,17 +16,18 @@ class Portfolio < ActiveRecord::Base
   
   belongs_to :user
   has_many :projects
-
   belongs_to :title_font, :class_name => "Font", :foreign_key => "title_font_id"
   belongs_to :body_font, :class_name => "Font", :foreign_key => "body_font_id"
-
   belongs_to :background, :polymorphic => true
   belongs_to :predefined_background
   belongs_to :custom_background
   belongs_to :pattern_background
-  
 
   after_create :set_default_attributes
+
+  validates :custom_background_id, :custom_background => true, :unless => lambda { |p| p.custom_background_id.nil? }
+  validates :predefined_background_id, :predefined_background => true, :unless => lambda { |p| p.predefined_background_id.nil? }
+  validates :pattern_background_id, :pattern_background => true, :unless => lambda { |p| p.pattern_background_id.nil? }
 
   def has_saved_project?
     projects.present? && !projects.first.new_record?

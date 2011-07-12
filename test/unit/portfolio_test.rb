@@ -95,7 +95,47 @@ class PortfolioTest < ActiveSupport::TestCase
 
      portfolio.background = Factory.create(:pattern_background)
      assert_equal portfolio.has_custom_background?, false
-
-
   end
+
+  test "validate custome background " do
+    portfolio = Factory.create(:portfolio)
+    not_a_correct_id = 33
+
+    portfolio.update_attributes({custom_background_id: not_a_correct_id})
+    assert ! portfolio.valid?
+    assert_equal "There's no Custom Background with id = 33", portfolio.errors[:custom_background_id].first
+  end
+
+  test "validate predefined background " do
+    portfolio = Factory.create(:portfolio)
+    not_a_correct_id = 33
+
+    portfolio.update_attributes({predefined_background_id: not_a_correct_id})
+    assert ! portfolio.valid?
+    assert_equal "There's no Predefined Background with id = 33", portfolio.errors[:predefined_background_id].first
+  end
+
+  test "validate pattern background " do
+    portfolio = Factory.create(:portfolio)
+    not_a_correct_id = 33
+
+    portfolio.update_attributes({pattern_background_id: not_a_correct_id})
+    assert ! portfolio.valid?
+    assert_equal "There's no Pattern Background with id = 33", portfolio.errors[:pattern_background_id].first
+  end
+
+  test "validate proper background_type is set" do
+    portfolio = Factory.create(:portfolio)
+
+    portfolio.background = Factory.create(:predefined_background)
+    assert_equal "PredefinedBackground", portfolio.background_type
+
+    portfolio.background = Factory.create(:custom_background)
+    assert_equal "CustomBackground", portfolio.background_type
+
+    portfolio.background = Factory.create(:pattern_background)
+    assert_equal "PatternBackground", portfolio.background_type
+  end
+
+
 end
