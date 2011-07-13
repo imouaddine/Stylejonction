@@ -9,6 +9,7 @@ class Stylejonction.Views.Backgrounds.EditCustomView extends Backbone.View
     @portfolio = @options.portfolio
     @background =  @options.model
     
+    @.validatesParams()
     #fancybox
     @.init_fancybox()
     #@.init_jcrop()
@@ -39,5 +40,12 @@ class Stylejonction.Views.Backgrounds.EditCustomView extends Backbone.View
        success: (model)->
          portfolio.trigger("backgroundChanged", model)
     )
+  validatesParams: ()->
+    if @portfolio not instanceof Stylejonction.Models.Portfolio
+      debug.error 'Error. Portfolio object of EditCustomView is not valid'
+      
+    if @background not instanceof Stylejonction.Models.CustomBackground
+      debug.error 'Error. Background object of EditCustomView should CustomBackground'
+    
     
    

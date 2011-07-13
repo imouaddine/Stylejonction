@@ -6,6 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require debug
 //= require swfobject
 //= require colorpicker
 //= require jquery.uploadify.v2.1.0.min

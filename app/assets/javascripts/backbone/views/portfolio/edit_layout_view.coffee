@@ -10,22 +10,36 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
     "click  .select_theme"                                :  "updateTheme"
   
   initialize: (e)->
-    @portfolio = @options.model
+    @portfolio = portfolio = @options.model
     @backgroundFactory = new Stylejonction.Models.BackgroundFactory()
     
     
     #Edit pattern view 
     background = new Stylejonction.Models.PatternBackground({id: @portfolio.pattern_background_id})
-    background.fetch()
-    @custom_background_edit_view = new Stylejonction.Views.Backgrounds.EditPatternView(model: background, portfolio: @portfolio, el: 'body')
+    background.fetch(
+      success: (e)->
+        pattern_view = new Stylejonction.Views.Backgrounds.EditPatternView(
+          model: e, 
+          portfolio: portfolio, 
+          el: 'body'
+        )
+    )
+   
     
     #Edit background view 
     background = new Stylejonction.Models.CustomBackground({id: @portfolio.custom_background_id})
-    background.fetch()
-    @custom_background_edit_view = new Stylejonction.Views.Backgrounds.EditCustomView(model: background, portfolio: @portfolio, el: 'body')
+    background.fetch(
+      success: (e)->
+        custom_view = new Stylejonction.Views.Backgrounds.EditCustomView(
+          model: e, 
+          portfolio: portfolio, 
+          el: 'body'
+        )
+    
+    )
     
     #prefefined background view
-    @custom_background_edit_view = new Stylejonction.Views.Backgrounds.EditPredefinedView(model: @portfolio, el: '#predefined_background_field')
+    custom_background_edit_view = new Stylejonction.Views.Backgrounds.EditPredefinedView(model: @portfolio, el: '#predefined_background_field')
     
     #Color pickers
     #jcrop
