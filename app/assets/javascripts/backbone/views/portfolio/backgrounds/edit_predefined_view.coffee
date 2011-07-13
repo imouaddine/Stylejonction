@@ -5,18 +5,21 @@ class Stylejonction.Views.Backgrounds.EditPredefinedView extends Backbone.View
     "click .image_link"     : "updatePredefinedBackground"
     
   initialize: ()->
-    #Get selected background
+   @.init_jcarousel()
+   @.validatesParams();
+   
+    
+    
+  init_jcarousel: () ->
     start_position = @.$("#background_carousel li.selected").index()
     @.$("#background_carousel").jcarousel
       scroll :1,
-      initCallback: @.init_carousel,
+      initCallback: @.on_init_carousel,
       buttonNextHTML: null,
       buttonPrevHTML: null
       start: start_position
-    
-    
-  #background carousel
-  init_carousel: (carousel) ->
+  
+  on_init_carousel: (carousel) ->
     $('#left_scroll_bg').bind 'click', () =>
       carousel.prev()
       false
@@ -47,6 +50,10 @@ class Stylejonction.Views.Backgrounds.EditPredefinedView extends Backbone.View
       error: ->
         alert 'Something wrong happened'
     )
+  
+  validatesParams: ()->
+    if @options.model not instanceof Stylejonction.Models.Portfolio
+      debug.error 'Error. Portfolio object of PredefinedView is not valid'
    
    
     

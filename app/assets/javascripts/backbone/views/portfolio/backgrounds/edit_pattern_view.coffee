@@ -6,9 +6,12 @@ class Stylejonction.Views.Backgrounds.EditPatternView extends Backbone.View
     
   initialize: ()->
     init_colorpicker('#background_pattern_color_picker')
-    @background = @options.model
+    
     @portfolio = @options.portfolio
-
+    @background = @options.model
+    
+    @.validatesParams()
+    
  
   updatePatternBackgroundColor: (e)->
     e.preventDefault()
@@ -27,6 +30,15 @@ class Stylejonction.Views.Backgrounds.EditPatternView extends Backbone.View
       error: (event)->
         alert "Error has occured"
     )
+    
+    
+  validatesParams: () ->
+    if @portfolio not instanceof Stylejonction.Models.Portfolio
+      debug.error 'Error. Portfolio object of EditPatternView is not valid'
+      
+    if @background not instanceof Stylejonction.Models.PatternBackground
+      debug.error 'Error. Background object of EditPatternView should PatternBackground'
+     
     
     
   
