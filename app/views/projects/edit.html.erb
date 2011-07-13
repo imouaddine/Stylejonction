@@ -24,9 +24,9 @@
                                 <legend>Upload a cover image</legend>
                                 <p class="description">This thumbnail should represent the project.</p>
                                 <div class="first col">
-																				<figure id="cover">
-                                        	<%= render 'cover' %>
-																				</figure>
+                                                                                                                                                                <figure id="cover">
+                                                <%= render 'cover' %>
+                                                                                                                                                                </figure>
                                         <div id="upload_custom_bg_links" class="upload_custom_bg_links">
                                         </div>
                                 </div>
@@ -42,12 +42,12 @@
                                 <p class="description">Make your project public or limited access</p>
                                 <ul class="horizontal_list access_toolbar">
                                         <li>
-                                                <a class="access_toggle selected" id="private_project_btn" >
+                                                <a class="access_toggle <%= "selected" unless @project.default? %>" id="private_project_btn" >
                                                         Limited Access
                                                 </a>
                                         </li>
                                         <li>
-                                                <a class="access_toggle" id="public_project_btn" >
+                                                <a class="access_toggle <%= "selected" if @project.default? %>" id="public_project_btn" >
                                                         Public
                                                 </a>
                                         </li>
