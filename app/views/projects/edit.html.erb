@@ -36,18 +36,18 @@
                                         <p class="information">Ideal dimension: 165 px x 165 px – JPG, PNG formats</p>
                                 </div>
                         </fieldset>
-                        <fieldset class="last">
+                        <fieldset id="privacy" class="last">
                                 <span class="order">3</span>
                                 <legend>Privacy Settings</legend>
                                 <p class="description">Make your project public or limited access</p>
                                 <ul class="horizontal_list access_toolbar">
                                         <li>
-                                                <a class="access_toggle <%= "selected" unless @project.default? %>" id="private_project_btn" >
+                                                <a class="access_toggle <%= "selected" unless @project.public? %>" id="private_project_btn" >
                                                         Limited Access
                                                 </a>
                                         </li>
                                         <li>
-                                                <a class="access_toggle <%= "selected" if @project.default? %>" id="public_project_btn" >
+                                                <a class="access_toggle <%= "selected" if @project.public? %>" id="public_project_btn" >
                                                         Public
                                                 </a>
                                         </li>

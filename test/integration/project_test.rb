@@ -35,4 +35,12 @@ class ProjectTest < ActionDispatch::IntegrationTest
     assert_equal true, @project.default?
   end
 
+  test "can make project private" do
+    visit edit_portfolio_project_path(@project)
+    find("#private_project_btn").click
+    @project.reload
+
+    assert_equal false, @project.public?
+  end
+
 end
