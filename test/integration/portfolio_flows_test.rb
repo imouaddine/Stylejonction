@@ -52,15 +52,33 @@
   end
 
   test "update portfolio fonts" do
-    Font.create(:name => 'Times New Roman', :webfont => true)
-    f = Font.create(:name => 'Arial', :webfont => true)
-
+    body_font = Font.create(:name => 'Times New Roman', :webfont => true)
+    title_font = Font.create(:name => 'Arial', :webfont => true)
+    
+    title_color = "223344"
+    body_color = "994944"
+    
     visit  edit_font_portfolio_path
+    
+    page.execute_script("$('#color_picker_title_input').val('#{title_color}'); $('#color_picker_body_input').val('#{body_color}'); $('#color_picker_title_input, #color_picker_body_input').trigger('change')")
 
-    find('#title_font_field').click_link("Arial")
-
+    
+    
+    find('#title_font_field').click_link(title_font.name)
+    find('#body_font_field').click_link(body_font.name)
+     
+   
+   
+    
     @portfolio.reload
-    assert_equal f, @portfolio.title_font
+    
+    assert_equal title_font, @portfolio.title_font
+    assert_equal title_color, @portfolio.title_color
+    
+    assert_equal body_font, @portfolio.body_font
+    assert_equal body_color, @portfolio.body_color
+    
+    
   end
 
   test "update portfolio theme" do
