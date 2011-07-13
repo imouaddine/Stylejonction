@@ -64,6 +64,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     respond_to do |format|
       if @project.update_attributes(params[:project])
+        logger.info @project.inspect
         format.js
       else
         render :template => 'portfolios/upload_cover_error'

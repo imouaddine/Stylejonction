@@ -24,12 +24,14 @@
                                 <legend>Upload a cover image</legend>
                                 <p class="description">This thumbnail should represent the project.</p>
                                 <div class="first col">
-                                        <%= render 'cover' %>
+																				<figure id="cover">
+                                        	<%= render 'cover' %>
+																				</figure>
                                         <div id="upload_custom_bg_links" class="upload_custom_bg_links">
                                         </div>
                                 </div>
                                 <div class="col">
-                                        <a id="upload_custom_bg" href="#" class="upload_btn btn">Upload</a>
+                                        <a id="upload_project_cover" href="#" class="upload_btn btn">Upload</a>
                                         <a class="icon_link edit_link iframe_fancy" href="#">Edit your cover</a>
                                         <p class="information">Ideal dimension: 165 px x 165 px – JPG, PNG formats</p>
                                 </div>
@@ -85,6 +87,8 @@
 
         <% end %>
 </section>
+
+<%= photo_uploadify "#upload_project_cover", upload_cover_portfolio_project_path(:format => 'js', :id => @project.id), 'project[cover]' %>
 <% content_for :preview do %>
   <%= render  "portfolios/preview",  :action => 'edit_project'  %>
 <% end %>
