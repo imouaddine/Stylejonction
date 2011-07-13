@@ -72,7 +72,7 @@
     find("#select_theme_dark").click
     @portfolio.reload
     assert_equal "dark", @portfolio.theme
-    assert_equal true, page.have_css('#preview_content.theme_dark')
+    assert_equal true, page.has_css?('#preview_content.theme_dark')
   end
 
 end
