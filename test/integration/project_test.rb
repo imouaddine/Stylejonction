@@ -21,11 +21,18 @@ class ProjectTest < ActionDispatch::IntegrationTest
   test "can change projects title" do
     visit edit_portfolio_project_path(@project)
     fill_in "title", :with => "This is my title"
-    check("default_project")
+    check("project_default")
     @project.reload
 
     assert_equal "This is my title", @project.title
   end
 
+  test "can make project default" do
+    visit edit_portfolio_project_path(@project)
+    check("project_default")
+    @project.reload
+
+    assert_equal true, @project.default?
+  end
 
 end

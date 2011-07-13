@@ -4,27 +4,21 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
 
   events:
     "change #title": "update"
+    "change #project_default": "update"
 
   initialize: ()->
     @project = @options.model
 
   update: (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+
     title = $("#title").val()
-    @options.model.save({'title' : title},
+    default_project = $("#project_default").is(":checked")
+    @options.model.save({'title' : title, 'default' : default_project},
       success: ->
         #console.log "SAVED"
       error: ->
         #console.log 'ERROR'
     )
-
-    # e.preventDefault()
-    # e.stopPropagation()
-
-    # @options.model.save(
-    #   {'title' : title},
-    #   success: ->
-    #     #console.log "SAVED"
-    #   error: ->
-    #     #console.log 'ERROR'
-    # )
 
