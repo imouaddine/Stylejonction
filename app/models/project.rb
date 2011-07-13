@@ -1,15 +1,15 @@
 class Project < ActiveRecord::Base
 
-  attr_accessible :title, :default
+  attr_accessible :title, :default, :public
 
   validates_presence_of :title
   belongs_to :portfolio
 
   has_many :invitations, :dependent => :destroy
-  
+
   attr_accessible :cover
-  
-  
+
+
   scope :default, where(:default => true)
   mount_uploader :cover, CoverUploader
 
