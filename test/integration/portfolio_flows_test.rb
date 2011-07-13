@@ -51,7 +51,7 @@
     assert_equal @portfolio.background.display_mode, "tile"
   end
 
-  test "edit_font portfolio page" do
+  test "update portfolio fonts" do
     Font.create(:name => 'Times New Roman', :webfont => true)
     f = Font.create(:name => 'Arial', :webfont => true)
 
@@ -63,18 +63,37 @@
     assert_equal f, @portfolio.title_font
   end
 
-  test "editing theme works" do
+  test "update portfolio theme" do
     @portfolio.theme = "light"
     @portfolio.save
 
     visit  edit_layout_portfolio_path
-
     find("#select_theme_dark").click
-    @portfolio.reload
-    assert_equal "dark", @portfolio.theme
     
+    @portfolio.reload
+    
+    assert_equal "dark", @portfolio.theme
     assert_equal true, page.has_css?('#preview_content.theme_dark')
 
   end
+  
+  test "update portfolio layout" do
+    @portfolio.layout = "left"
+    @portfolio.save
+
+    visit  edit_layout_portfolio_path
+    find("#layout_link_top").click
+    
+    @portfolio.reload
+    
+    assert_equal "top", @portfolio.layout
+    assert_equal true, page.has_css?('#preview_content.layout_top')
+
+  end
+  
+  
+  
+  
+  
 
 end
