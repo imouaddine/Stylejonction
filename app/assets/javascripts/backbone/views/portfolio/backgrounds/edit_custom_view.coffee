@@ -6,6 +6,9 @@ class Stylejonction.Views.Backgrounds.EditCustomView extends Backbone.View
     
   
   initialize: ()->
+    @portfolio = @options.portfolio
+    @background =  @options.model
+    
     #fancybox
     @.init_fancybox()
     #@.init_jcrop()
@@ -26,15 +29,15 @@ class Stylejonction.Views.Backgrounds.EditCustomView extends Backbone.View
       padding: 0
       
   updateBgDisplayMode: (e)->
+    
     e.preventDefault()
     e.stopPropagation()
+    portfolio = @portfolio
     target = $(e.currentTarget)
-    @options.model.fetch(
-      success: (e)->
-        e.set({'display_mode': target.val() })
-        e.save(
-          success: (ee)->
-            
-        )
-        
+    @background.save(
+       {'display_mode': target.val() },
+       success: (model)->
+         portfolio.trigger("backgroundChanged", model)
     )
+    
+   

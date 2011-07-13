@@ -24,8 +24,17 @@
   display: none;
 }
 
-.cover_background{
+.stretch_background{
   @include background-size(cover);
+  background-repeat: repeat ;
+}
+.original_background{
+  @include background-size(none);
+  background-repeat: repeat;
+}
+.tile_background{
+  @include background-size(none);
+  background-repeat: repeat;
 }
 /*** BOUTONS **/
 .btn{

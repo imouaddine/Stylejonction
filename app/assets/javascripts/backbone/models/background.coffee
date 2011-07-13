@@ -33,17 +33,20 @@ class Stylejonction.Models.CustomBackground extends Stylejonction.Models.Backgro
   render: (element)->
      super 
      display_mode = @.get("display_mode")
+    
      switch display_mode
       when 'original'  
-        element.css("background-size", "auto")
-        element.css("background-repeat", "none") 
-        element.removeClass("cover_background")
+        element.addClass("original_background")
+        element.removeClass("stretch_background")
+        element.removeClass("tile_background")
       when 'stretch'  
-        element.addClass("cover_background")
+        element.addClass("stretch_background")
+        element.removeClass("original_background")
+        element.removeClass("tile_background")
       when 'tile'  
-        element.removeClass("cover_background")
-        element.css("background-size", "auto") 
-        element.css("background-repeat", "repeat") 
+        element.addClass("tile_background")
+        element.removeClass("stretch_background")
+        element.removeClass("original_background")
 
 class Stylejonction.Models.BackgroundFactory
   create: (type, background)->

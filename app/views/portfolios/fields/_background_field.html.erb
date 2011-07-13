@@ -38,15 +38,11 @@
             :background => @portfolio.custom_background,
             :visible => @portfolio.has_custom_background? || !@portfolio.has_pattern_background?,
             :show_links =>  @portfolio.has_custom_background? %>
+ 				<%= render 'backgrounds/update_pattern',
+            :background => @portfolio.pattern_background,
+ 						:visible => @portfolio.has_pattern_background? %>
 
-        <%- if @portfolio.has_pattern_background? %>
-          <%= render 'backgrounds/update_pattern',
-              :background => @portfolio.pattern_background,
- 							:visible => @portfolio.has_pattern_background?
-
- %>
-
-        <% end %>
+        
       </div>
     </div>
   </div>

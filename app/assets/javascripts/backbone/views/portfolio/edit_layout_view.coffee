@@ -36,6 +36,7 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
     e.stopPropagation()
     val = $(e.currentTarget).val()
     visibleTab = $("##{val}")
+    @.$("#update_custom_background").show()
     @.$("#custom_background_field .tabs > div").hide()
     visibleTab.show()
     if val == "update_custom_background" 
@@ -55,6 +56,9 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
     
     selected_predefined_bg = @options.model.get('predefined_background_id')
     @.saveBackground('PredefinedBackground', selected_predefined_bg)
+    
+    
+    
    
     
 
@@ -68,6 +72,11 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
      
      custom_bg = @options.model.get('custom_background_id')
      @.saveBackground('CustomBackground', custom_bg)
+     
+     $("#custom_background_input").attr('checked', 'checked');
+     @.$("#custom_background_field .tabs > div").hide()
+     $("#update_custom_background").show()
+     
 
   saveBackground: (type, background_id) ->
      portfolio = @options.model
