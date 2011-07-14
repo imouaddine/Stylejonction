@@ -15,6 +15,7 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/stylejonction
+//= require messages
 //= require_tree .
 
 

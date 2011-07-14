@@ -8,12 +8,13 @@
         <%= active_link_to 'Projects', edit_portfolio_project_path(@portfolio.projects.first), :class => "last #{className}"  %>
       <% end %>
       <ol class="hidden">
-        <%
-                                counter = 1
-                                @portfolio.projects.each do |project| %>
-                <li><%= active_link_to "<span class=\'number\'>#{++counter}</span>#{project.title}".html_safe, edit_portfolio_project_path(project) %></li>
-
-            <% end %>
+				<% @portfolio.projects.each_with_index do |project, index|  %>
+					<%= content_tag_for(:li, project) do %>
+	 					<li>
+								<%= active_link_to "<span class=\'number\'>#{index+1}</span>#{project.title}".html_safe, edit_portfolio_project_path(project) %>
+						</li>
+        <% end %>
+      <% end %>
                         <li><%= active_link_to '<span class=\'number\'> + </span> New project'.html_safe, new_portfolio_project_path %></li>
           </ol>
   </li>

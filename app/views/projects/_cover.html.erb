@@ -1,2 +1,6 @@
-<%= image_tag @project.cover.url(:thumb), :class => 'preview_uploaded_image' if @project.cover? %>
+<% if @project.cover? %>
+	<%= image_tag @project.cover.url(:thumb), :class => 'preview_uploaded_image'  %>
+<% else %>
+	<%= image_tag 'http://placehold.it/165x165', :class => 'preview_uploaded_image' %>
+<% end %>
 

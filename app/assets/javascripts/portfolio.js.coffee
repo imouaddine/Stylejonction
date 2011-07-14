@@ -2,6 +2,18 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
+  #MESSAGES
+  window.messages = new Stylejonction.Messages()
+  window.messages.hideAll()
+  for type in window.messages.types
+    if $(".#{type}.has_content").length > 0
+      window.messages.show(type)
+ 
+    
+  
+  
+  
+  #PREVIEW
   $("#preview_wrapper").draggable({ axis: "y" })
   $('#preview_wrapper').bind 'drag', (event, ui) =>
     offset = {left: 0, top: ui.offset.top}

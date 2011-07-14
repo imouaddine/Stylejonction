@@ -15,7 +15,8 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = @portfolio.projects.create(:title => 'new project')
+    next_number = @portfolio.projects.count + 1
+    @project = @portfolio.projects.create(:title => "Project #{next_number}")
     redirect_to edit_portfolio_project_path(@project)
   end
 
