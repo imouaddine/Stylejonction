@@ -1,5 +1,5 @@
 Hello,
 
-<%=  @user.full_name %> wants to invite you to his project.
+<%=  @user.email %> wants to invite you to his project.
 
-Accept invitaiton:: <%= invitation_path(@invitation) %>
+Accept invitaiton:: <%= invitation_url(@invitation, :host => "localhost:3000") %>

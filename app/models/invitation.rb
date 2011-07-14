@@ -4,7 +4,7 @@ class Invitation < ActiveRecord::Base
   belongs_to :project
 
   def invite_to(user)
-    UserMailer.project_invitation(user, email, project, self)
+    UserMailer.project_invitation(user, email, project, self).deliver
   end
 
   protected
