@@ -1,45 +1,28 @@
 class ProjectsController < ApplicationController
+  respond_to :html, :json
   before_filter :authenticate_user!, :except => [:index, :show]
   before_filter :get_portfolio
   skip_before_filter :verify_authenticity_token
 
   def index
     @projects = @portfolio.projects
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @projects }
-    end
+    respond_with(@projects)
   end
 
   def show
     @project = @portfolio.projects.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @project }
-    end
+    respond_with(@project)
   end
 
   def new
     @project = @portfolio.projects.create(:title => 'new project')
-    #temp find solution later
     redirect_to edit_portfolio_project_path(@project)
   end
 
   def create
     @project = @portfolio.projects.new(params[:project])
-
-    respond_to do |format|
-      if @project.save
-        format.html { redirect_to portfolio_project_path(@project), notice: 'Project was successfully created.' }
-        format.json { render json: @project, status: :created, location: @project }
-        format.js
-      else
-        format.html { render action: "new" }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = "Project was successfully created." if @project.save
+    respond_with(@project)
   end
 
   def edit
@@ -48,17 +31,9 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    respond_to do |format|
-      if @project.update_attributes(params[:project])
-        format.html { redirect_to portfolio_project_path(@project), notice: 'Project was successfully updated.' }
-        format.json { render json: @project}
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = "Project was successfully updated" if @project.update_attributes(params[:project])
+    respond_with(@project)
   end
-
 
   def upload_cover
     @project = Project.find(params[:id])
@@ -74,7 +49,6 @@ class ProjectsController < ApplicationController
 
   def invite
     @project = Project.find(params[:id])
-
     respond_to do |format|
       if params[:email].present?
         email = params[:email]

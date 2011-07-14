@@ -1,16 +1,14 @@
 class PortfoliosController < ApplicationController
+  respond_to :html, :json
+
   before_filter :get_portfolio
   before_filter :authenticate_user!, :except => [:show]
-
 
   skip_before_filter :verify_authenticity_token
 
 
   def show
-    respond_to do |format|
-      format.html
-      format.json { render json: @portfolio }
-    end
+    respond_with @portfolio
   end
 
   def publish
@@ -35,15 +33,10 @@ class PortfoliosController < ApplicationController
   end
 
   def update
-   
     if params[:background].present?
       @portfolio.background = PredefinedBackground.find(params[:background][:id])
     end
-    
-    
-      
-    
-    
+
     respond_to do |format|
       if @portfolio.update_attributes(params[:portfolio])
         format.html { redirect_to edit_layout_portfolio_path, notice: 'Portfolio was successfully updated.' }
