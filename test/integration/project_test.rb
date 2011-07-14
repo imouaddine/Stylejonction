@@ -43,4 +43,24 @@ class ProjectTest < ActionDispatch::IntegrationTest
     assert_equal false, @project.public?
   end
 
+  test "can send invitation" do
+    visit edit_portfolio_project_path(@project)
+    fill_in "invitation0", :with => "anemail@email.com"
+    find("#send_invites").click
+
+    @project.reload
+
+    assert_equal "anemail@email.com", Invitation.last.email
+  end
+
+  test "sends invite only once for each email" do
+    visit edit_portfolio_project_path(@project)
+    before_count = Invitation.count
+    fill_in "invitation0", :with => "stacho@email.com"
+    fill_in "invitation1", :with => "stacho@email.com"
+    find("#send_invites").click
+
+    assert_equal before_count + 1, Invitation.count
+  end
+
 end
