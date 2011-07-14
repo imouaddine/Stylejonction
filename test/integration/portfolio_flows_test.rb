@@ -79,6 +79,13 @@
     assert_equal body_color, @portfolio.body_color
     
     
+    #It doesn't work as expected
+    #within("#preview_content") do
+      #assert_equal true, page.has_content?(title_font.name)
+      #assert_equal true, page.has_content?(body_font.name)
+    #end
+    
+    
   end
 
   test "update portfolio theme" do

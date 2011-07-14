@@ -30,6 +30,8 @@ Stylejonction::Application.routes.draw do
   end
 
   resources :invitations, :only => [:show]
+  resources :fonts, :only => [:show]
+  
 
  #match "portfolio/:id" => "portfolios#show"
  match '#/:page' => 'pages#:page', :as => :page

@@ -2,5 +2,7 @@
 	<% if(cover.thumb) { %>
 		<img src="<%= (cover.thumb.url) %>" alt="<%= title %>" ></img>
 	<% } %>
-	<figurecaption><%= title %></figurecaption>
+	<figurecaption class="title">
+		<%= title %>
+	</figurecaption>
 </figure>

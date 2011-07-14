@@ -5,16 +5,20 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
 
 
   initialize: ()->
-    _.bindAll(this, 'addOneProject', 'addAllProjects', 'render', 'update', 'updateBackground')
+    _.bindAll(this, 'addOneProject', 'addAllProjects', 'render', 'update', 'updateBackground', 'updateBodyFont', 'updateTitleFont')
     @portfolio = @options.portfolio
     @projects = @options.projects
     @background = @options.background
+    @body_font = @options.body_font
+    @title_font = @options.title_font 
     
-
-
+    
     @options.portfolio.bind 'change', @.update
     @options.projects.bind  'add',     @.addOneProject
     @options.portfolio.bind 'backgroundChanged', @.updateBackground
+    @options.body_font.bind 'change', @.updateBodyFont
+    @options.title_font.bind 'change', @.updateTitleFont
+    
    
 
   addOneProject: (project) ->
@@ -36,15 +40,48 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
       $("#preview_content").addClass("theme_#{theme}");
     
 
+    if @portfolio.hasChanged('body_font_id')
+      @options.body_font = new Stylejonction.Models.Font({id: @portfolio.get('body_font_id')}) 
+      @options.body_font.bind 'change', @.updateBodyFont
+      @options.body_font.fetch()
+      
+    if @portfolio.hasChanged('title_font_id')
+      @options.title_font = new Stylejonction.Models.Font({id: @portfolio.get('title_font_id')}) 
+      @options.title_font.bind 'change', @.updateTitleFont
+      @options.title_font.fetch()
+     
+    
+    
+
   updateBackground: (background)->
     @background = background
     @background.render($("#preview"))
+    
+  updateBodyFont: (font)->
+    @.$("#preview_content .content").css("fontFamily", font.get('name'))
+    @.addFontUrl(font)
+     
+    
+  updateTitleFont: (font) ->
+    @.$("#preview_content .title").css("fontFamily", font.get('name'))
+    @.addFontUrl(font)
+    
+        
+    
+  addFontUrl: (font) ->
+    if font.has('url')
+      font_url = font.get('url')
+      if $("link[href='#{font_url}']").length == 0
+        $('head').append("<link  href='#{font_url}' type='text/css' />");
+      
     
   render: ->
     $(this.el).html(this.template(@options.portfolio.toJSON()))
     @background.render( $("#preview") )
     @addAllProjects()
     @.update()
+    @.updateBodyFont(@.body_font)
+    @.updateTitleFont(@.title_font)
     return this
 
 

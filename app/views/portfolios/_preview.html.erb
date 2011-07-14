@@ -12,8 +12,10 @@
 			portfolio: <%= @portfolio.to_json.html_safe -%>, 
 			background: <%= @portfolio.background.to_json.html_safe -%>, 
 			projects: <%= @portfolio.projects.to_json.html_safe -%>,
+			body_font: <%= @portfolio.body_font.to_json.html_safe -%>,
+			title_font: <%= @portfolio.title_font.to_json.html_safe -%>,
 			<% if @project.present? %>
-			project: <%= @project.to_json.html_safe  -%>,
+				project: <%= @project.to_json.html_safe  -%>,
 			<% end %>
 			action : '<%= action -%>'
 		});

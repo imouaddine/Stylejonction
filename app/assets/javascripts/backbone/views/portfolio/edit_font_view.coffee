@@ -19,9 +19,11 @@ class Stylejonction.Views.Portfolios.EditFontView extends Backbone.View
     target = $(e.currentTarget)
     newFont = target.data('id')
     @.$("#title_font_field .select_font").removeClass("selected")
-    @options.model.save({'title_font_id': newFont},
+    @options.model.save(
+      {'title_font_id': newFont},
       success: -> 
         $(e.currentTarget).addClass("selected")
+        
       error: ->
         debug.error 'An error has occcured while trying to update the title font #{newFont}'
     )
