@@ -77,7 +77,10 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if params[:email].present?
-        @project.invite(params[:email])
+        email = params[:email]
+        if did_not_send_to?(email)
+          @project.invite(params[:email])
+        end
         format.html { redirect_to portfolio_project_path(@project), notice: "#{params[:email]} has been invited to your project" }
         format.json { head :ok }
       else
@@ -95,5 +98,14 @@ class ProjectsController < ApplicationController
       format.html { redirect_to portfolio_path }
       format.json { head :ok }
     end
+  end
+
+  private
+
+  def did_not_send_to?(email)
+    invite = Invitation.find_by_email(email) rescue nil
+    return true if invite.nil?
+    return true if invite.used?
+    return false
   end
 end

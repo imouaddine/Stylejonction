@@ -7,6 +7,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     "change #project_default": "update"
     "click #public_project_btn": "update_visibility_public"
     "click #private_project_btn": "update_visibility_private"
+    "click #send_invites": "send_invites"
 
   initialize: ()->
     @project = @options.model
@@ -32,6 +33,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
         success: ->
           @.$("#public_project_btn").addClass("selected")
         error: ->
+          console.log("error")
     )
 
   update_visibility_private: (e) ->
@@ -39,8 +41,20 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     e.stopPropagation()
     @.$("#public_project_btn").removeClass("selected")
     @options.model.save({'public' : false},
-        success: ->
-          @.$("#private_project_btn").addClass("selected")
-        error: ->
+       success: ->
+         @.$("#private_project_btn").addClass("selected")
+       error: ->
     )
 
+  send_invites: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+
+    in0 = $("#invitation0").val()
+    in1 = $("#invitation1").val()
+    in2 = $("#invitation2").val()
+    in3 = $("#invitation3").val()
+
+    for i in [in0, in1, in2, in3]
+      if i isnt ""
+        $.post("/portfolio/projects/"+ @options.model.id+"/invite", { email: i } )
