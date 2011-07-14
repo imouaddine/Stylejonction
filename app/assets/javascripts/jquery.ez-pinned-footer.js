@@ -29,8 +29,12 @@
 			// Set CSS attributes for positioning footer
 			$(this).css("position","fixed");
 			$(this).css("width",wW + "px");
-			$(this).css("top",wH - fH + "px");
+			$(this).css("top", wH - fH + "px");
+			
 			$("body").css("height",(bH + mB) + "px");
+			
+			
+		
 		}
 	};
 	

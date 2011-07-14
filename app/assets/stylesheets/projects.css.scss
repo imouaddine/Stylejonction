@@ -7,20 +7,26 @@
 @import "mixins";
 
 .edit_project{
+  header{
+    margin: 0;
+  }
   >form {
     width: 640px;
     margin: 20px;
-    margin-left: 60px;
-    padding: 0;
+    margin-left: 50px;
+    padding: 0px !important;
     @include border-radius(10px);
     @include fancy-border;
   }
+  .upload_image_section{
+    margin-top: 10px;
+  }
   fieldset{
+    margin: 10px 0;
     @include fancy-border-bottom;
     padding: 5px 20px 20px ;
-    margin: 0;
     .order{
-      margin-left: -60px;
+      margin-left: -45px;
     }
     legend{
       margin-top: 15px;
@@ -64,6 +70,7 @@
     margin-top: 20px;
   }
   .access_toggle{
+     cursor: pointer;
      display: block;
      height: 53px;
      @include link_colors($grey-color);

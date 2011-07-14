@@ -1,41 +1,45 @@
 <%= render('/portfolios/sidebar') %>
 <section id="edit_project" class="edit_project edit">
-        <%= form_for(@project, :url => url_for_action(@project)) do |f| %>
-        <ul class="tabs horizontal_list">
-                <li><a href="#" class="active left" >Project properties</a></li>
-                <li><a class="right" href="#">Content</a></li>
-        </ul>
+	<%= form_for(@project, :url => url_for_action(@project)) do |f| %>
+		<header>
+      <ul class="tabs horizontal_list">
+      	<li><a href="#" class="active left" >Project properties</a></li>
+        <li><a class="right" href="#">Content</a></li>
+      </ul>
+		</header>
         <div>
-                <div class="tab_content" id="edit_project_properties">
-                        <!-- Project Title !-->
-                        <fieldset id="project_title">
-                                <span class="order">1</span>
-                                <legend>Project title</legend>
-                                <p class="description">Give your project a catchy title. (ex.: Spring 2011 Streetwear Designs)</p>
-                                <%= text_field_tag 'title', @project.title, :placeholder => 'Enter project title here' %>
-                                <div>
-                                        <%= f.check_box 'default'  %>
-                                        <%= f.label 'default', "<em>Make this your default project.</em> Will become the cover project for your portfolio.".html_safe %>
-                                </div>
-                        </fieldset>
-                        <!-- Project Title !-->
-                        <fieldset id="project_cover">
-                                <span class="order">2</span>
-                                <legend>Upload a cover image</legend>
-                                <p class="description">This thumbnail should represent the project.</p>
-                                <div class="first col">
-                                                                                                                                                                <figure id="cover">
-                                                <%= render 'cover' %>
-                                                                                                                                                                </figure>
-                                        <div id="upload_custom_bg_links" class="upload_custom_bg_links">
-                                        </div>
-                                </div>
-                                <div class="col">
-                                        <a id="upload_project_cover" href="#" class="upload_btn btn">Upload</a>
-                                        <a class="icon_link edit_link iframe_fancy" href="#">Edit your cover</a>
-                                        <p class="information">Ideal dimension: 165 px x 165 px – JPG, PNG formats</p>
-                                </div>
-                        </fieldset>
+         	<div class="tab_content" id="edit_project_properties">
+               <!-- Project Title !-->
+                <fieldset id="project_title">
+                		<span class="order">1</span>
+                   	<legend>Project title</legend>
+                     <p class="description">Give your project a catchy title. (ex.: Spring 2011 Streetwear Designs)</p>
+                     <%= text_field_tag 'title', @project.title, :placeholder => 'Enter project title here' %>
+                     <div>
+                             <%= f.check_box 'default'  %>
+                             <%= f.label 'default', "<em>Make this your default project.</em> Will become the cover project for your portfolio.".html_safe %>
+                     </div>
+                 </fieldset>
+                  <!-- Project Title !-->
+                  <fieldset id="project_cover">
+                       <span class="order">2</span>
+                       <legend>Upload a cover image</legend>
+                       <p class="description">This thumbnail should represent the project.</p>
+								 			 <section class="upload_image_section">
+                       	 <div class="first col">  
+                       	 		<figure id="cover">
+          										<%= render 'cover' %>
+														</figure>
+                          	<div id="upload_custom_bg_links" class="upload_custom_bg_links">
+	 														<a class="icon_link edit_link iframe_fancy" href="#">Edit your cover</a>
+                          	</div>
+                        	</div>
+                        	<div class="col">
+                           <a id="upload_project_cover" href="#" class="upload_btn btn">Upload</a>
+                           <p class="information">Ideal dimension: 165 px x 165 px – JPG, PNG formats</p>
+                        	</div>
+											 </section>
+                  </fieldset>
                         <fieldset id="privacy" class="last">
                                 <span class="order">3</span>
                                 <legend>Privacy Settings</legend>
@@ -52,7 +56,7 @@
                                                 </a>
                                         </li>
                                 </ul>
-                                <div id="private_project">
+                                <div id="private_project" class="<%= 'hidden' if @project.public? %>">
                                         <div class="col left">
                                                 <div id="invitation_list">
                                                      <%- 4.times do |i| %>
@@ -74,7 +78,8 @@
                                                 <a id="send_invites" class="btn" href="#">invite</a>
                                         </div>
                                 </div>
-                                <div id="public_project">
+																
+                                <div id="public_project" class="<%= 'hidden' unless @project.public? %>">
                                 </div>
                         </fieldset>
                 </div>

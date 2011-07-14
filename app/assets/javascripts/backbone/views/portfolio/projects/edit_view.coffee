@@ -28,22 +28,31 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
   update_visibility_public: (e) ->
     e.preventDefault()
     e.stopPropagation()
+  
+    @.$("#public_project").slideDown("medium")
+    @.$("#private_project").slideUp("medium")
+     
     @.$("#private_project_btn").removeClass("selected")
     @options.model.save({'public' : true},
         success: ->
           @.$("#public_project_btn").addClass("selected")
         error: ->
-          console.log("error")
+          debug.error 'An error has occurred while making the project public'
     )
 
   update_visibility_private: (e) ->
     e.preventDefault()
     e.stopPropagation()
+  
+    @.$("#private_project").slideDown("medium")
+    @.$("#public_project").slideUp("medium")
+    
     @.$("#public_project_btn").removeClass("selected")
     @options.model.save({'public' : false},
        success: ->
          @.$("#private_project_btn").addClass("selected")
        error: ->
+         debug.error 'An error has occurred while making the project private'
     )
 
   send_invites: (e)->
