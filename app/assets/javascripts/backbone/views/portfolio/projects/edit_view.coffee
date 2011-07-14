@@ -29,8 +29,8 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
   
-    @.$("#public_project").slideDown("medium")
-    @.$("#private_project").slideUp("medium")
+    @.$("#public_project").show("medium")
+    @.$("#private_project").hide("medium")
      
     @.$("#private_project_btn").removeClass("selected")
     @options.model.save({'public' : true},
@@ -44,8 +44,8 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
   
-    @.$("#private_project").slideDown("medium")
-    @.$("#public_project").slideUp("medium")
+    @.$("#private_project").show("medium")
+    @.$("#public_project").hide("medium")
     
     @.$("#public_project_btn").removeClass("selected")
     @options.model.save({'public' : false},

@@ -84,11 +84,11 @@
      }
      
   }
-  #private_project_btn{
+  #send_invites{
     margin-right: 0px;
+    margin:20px 0 0 160px;
   }
   #private_project {
-    
     .left.col{
       @include column(9);
       input{
