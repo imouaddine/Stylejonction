@@ -23,7 +23,14 @@
 .hidden{
   display: none;
 }
-
+.iviewer
+{
+    width: 165px;
+    height: 165px;
+     @include box-shadow(0 0 5px rgba(#000, 0.1) );
+     border: 1px solid #b4b4b4;
+    position: relative;
+}
 .stretch_background{
   @include background-size(cover);
   background-repeat: repeat ;
@@ -36,6 +43,7 @@
   @include background-size(none);
   background-repeat: repeat;
 }
+
 /*** BOUTONS **/
 .btn{
   background: url('images/blue_btn_bg.png') repeat-x;

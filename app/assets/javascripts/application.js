@@ -8,6 +8,7 @@
 //= require jquery_ujs
 //= require debug
 //= require swfobject
+//= require jquery.mousewheel.min
 //= require colorpicker
 //= require jquery.uploadify.v2.1.0.min
 //= require underscore

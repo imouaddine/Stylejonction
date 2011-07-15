@@ -19,6 +19,7 @@ Stylejonction::Application.routes.draw do
         member do
          post 'invite'
          match 'upload_cover'
+         get 'edit_cover'
         end
       end
       resource :background, :except => [:destroy, :new, :create] do

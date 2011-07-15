@@ -28,10 +28,14 @@
 								 			 <section class="upload_image_section">
                        	 <div class="first col">  
                        	 		<figure id="cover">
-          										<%= render 'cover' %>
+          										<%= render 'cover', :cover => @project.cover %>
 														</figure>
                           	<div id="upload_custom_bg_links" class="upload_custom_bg_links">
-	 														<a class="icon_link edit_link iframe_fancy" href="#">Edit your cover</a>
+															<%= link_to  "Edit your cover", 
+																						edit_cover_portfolio_project_path(@project), 
+																						:class => "icon_link edit_link iframe_fancy",
+																						:id => 'edit_project_cover' %>
+	 													
                           	</div>
                         	</div>
                         	<div class="col">

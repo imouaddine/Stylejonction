@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
   before_filter :get_portfolio
   skip_before_filter :verify_authenticity_token
 
+
   def index
     @projects = @portfolio.projects
     respond_with(@projects)
@@ -35,7 +36,14 @@ class ProjectsController < ApplicationController
     flash[:notice] = "Project was successfully updated" if @project.update_attributes(params[:project])
     respond_with(@project)
   end
-
+  
+  def edit_cover
+    @project = Project.find(params[:id])
+    respond_to do |format|
+      format.html{  render :layout => "modal" }
+    end
+  end
+  
   def upload_cover
     @project = Project.find(params[:id])
     respond_to do |format|

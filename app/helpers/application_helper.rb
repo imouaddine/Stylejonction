@@ -1,4 +1,32 @@
 module ApplicationHelper
+  
+  def iviewer(element, image_path, fit_button)
+    %Q{
+       <script type='text/javascript'>
+           $('#{element}').iviewer({
+              src: '#{image_path}',
+              initCallback: function ()
+              {
+                  var object = this;
+                  $('#{fit_button}').change(function(){
+                    
+                    if( $(this).is(':checked') ){
+                      object.fit();
+                    }
+                    else{
+                      object.zoom_by(1);
+                    }
+                      
+                  }); 
+            
+              }
+              
+           });
+      </script>
+      
+     }.gsub(/[\n ]+/, ' ').strip.html_safe
+     
+  end
   def photo_uploadify(element_selector, script_path, fileDataName)
      # Putting the uploadify trigger script in the helper gives us
      # full access to the view and native rails objects without having

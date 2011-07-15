@@ -1,0 +1,22 @@
+<div  id="edit_cover">
+	<section class="fancybox">
+		<header>
+			<h1 class="icon_link edit_link">Edit your thumbnail</h1>
+		</header>
+		<div class="content">
+			<div class="left_col">
+					<figure id="cover_editor" class="iviewer">
+					
+					</figure>
+			</div>
+			<div class="right_col">
+				<p class="description">Drag your image to adjust</p>
+				<div>
+					<%= check_box_tag 'scale_to_fit', 1, false %>
+					<%= label_tag 'scale_to_fit'%>
+			</div>
+		</div>
+		
+	</section>
+</div>
+<%= iviewer "#cover_editor", @project.cover.url(:thumb), "#scale_to_fit"  %>

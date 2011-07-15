@@ -3,15 +3,28 @@ Stylejonction.Views.Projects ||= {}
 class Stylejonction.Views.Projects.EditView extends Backbone.View
 
   events:
-    "change #title": "update"
-    "change #project_default": "update"
-    "click #public_project_btn": "update_visibility_public"
-    "click #private_project_btn": "update_visibility_private"
-    "click #send_invites": "send_invites"
+    "change #title":                "update"
+    "change #project_default":      "update"
+    "click #public_project_btn":    "update_visibility_public"
+    "click #private_project_btn":   "update_visibility_private"
+    "click #send_invites":          "send_invites"
+    
 
   initialize: ()->
     @project = @options.model
-
+    @.init_fancybox()
+    
+  init_fancybox: ()->
+   
+    $(".iframe_fancy").fancybox
+      hideOnContentClick: false,
+      showCloseButton: true,
+      padding: 0,
+      onComplete: @.on_fancybox_complete
+      
+  on_fancybox_complete: ()->
+    edit_project_cover = new Stylejonction.Views.Projects.EditCoverView({el: "body"})
+    
   update: (e) ->
     e.preventDefault()
     e.stopPropagation()
@@ -67,3 +80,9 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     for i in [in0, in1, in2, in3]
       if i isnt ""
         $.post("/portfolio/projects/"+ @options.model.id+"/invite", { email: i } )
+        
+  edit_project_cover: ()->
+    edit_project_cover = new Stylejonction.Views.Projects.EditCoverView({el: "body"})
+    
+    
+    
