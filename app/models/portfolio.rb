@@ -65,7 +65,6 @@ class Portfolio < ActiveRecord::Base
     self.predefined_background = self.background
     self.custom_background = CustomBackground.create(:user => self.user)
     self.pattern_background = PatternBackground.create( :pattern => Pattern.first, :color => '000000')
-    self.projects << Project.create(:title => "First project")
     self.layout = LAYOUTS.first
     if Font.count > 0
       self.title_font = Font.first

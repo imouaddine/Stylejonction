@@ -74,15 +74,11 @@ class PortfolioTest < ActiveSupport::TestCase
     assert_equal "PredefinedBackground", portfolio.background_type
     assert_equal "left", portfolio.layout
     assert_equal portfolio.theme, "light"
-    #assert_equal "First project", portfolio.projects.first.title
     assert_equal Font.first, portfolio.title_font
     assert_equal Font.first, portfolio.body_font
     assert_not_nil portfolio.predefined_background
     assert_not_nil portfolio.pattern_background
     assert_not_nil portfolio.custom_background
-
-
-    #assert_equla "#5d5d5d", portfolio.font.color
   end
 
   test "has_custom_background return good value" do
