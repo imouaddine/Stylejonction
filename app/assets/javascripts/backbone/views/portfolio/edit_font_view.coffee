@@ -2,7 +2,6 @@ Stylejonction.Views.Portfolios ||= {}
 
 class Stylejonction.Views.Portfolios.EditFontView extends Backbone.View 
   events:
-   
     "click  #title_font_field .select_font":          "updateTitleFont"
     "click  #body_font_field .select_font":           "updateBodyFont"
     "change  #color_picker_title_input":              "updateTitleColor"

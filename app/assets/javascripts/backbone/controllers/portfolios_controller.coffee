@@ -5,11 +5,8 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
     @portfolio = new Stylejonction.Models.Portfolio(options.portfolio)
     @projects = new Stylejonction.Collections.ProjectsCollection()
     @projects.url = @projects.url.replace ':portfolio_id', @portfolio.id
-    @background = new Stylejonction.Models.BackgroundFactory().create( @portfolio.get('background_type'), options.background )
-    @body_font = new Stylejonction.Models.Font(options.body_font)
-    @title_font = new Stylejonction.Models.Font(options.title_font)
-
     @projects.refresh options.projects
+   
     @action = "this." + options.action+'()'
 
   routes:
@@ -25,7 +22,7 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
 
   edit_font_portfolio: ->
 
-    @view = new Stylejonction.Views.Portfolios.EditFontView(model: @portfolio, body_font: @body_font, title_font: @title_font, el: '#edit_portfolio_font')
+    @view = new Stylejonction.Views.Portfolios.EditFontView(model: @portfolio, el: '#edit_portfolio_font')
 
   edit_project: ->
     @project = @projects.get(@options.project.id)
@@ -36,9 +33,6 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
     @previewView = new Stylejonction.Views.Portfolios.PreviewView(
       projects: @projects,
       portfolio: @portfolio,
-      background: @background,
-      body_font: @body_font,
-      title_font: @title_font
     )
     $("#preview").html(@previewView.render().el)
 

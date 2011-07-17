@@ -8,18 +8,14 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
     _.bindAll(this, 'addOneProject', 'addAllProjects', 'render', 'update', 'updateBackground', 'updateBodyFont', 'updateTitleFont')
     @portfolio = @options.portfolio
     @projects = @options.projects
-    @background = @options.background
-    @body_font = @options.body_font
-    @title_font = @options.title_font 
     
+  
     
-    @options.portfolio.bind 'change', @.update
-    @options.projects.bind  'add',     @.addOneProject
-    @options.portfolio.bind 'backgroundChanged', @.updateBackground
-    @options.body_font.bind 'change', @.updateBodyFont
-    @options.title_font.bind 'change', @.updateTitleFont
-    
-   
+    @portfolio.bind 'change', @.update
+    @projects.bind  'add',     @.addOneProject
+    @portfolio.bind 'backgroundChanged', @.updateBackground
+    @portfolio.body_font.bind 'change', @.updateBodyFont
+    @portfolio.title_font.bind 'change', @.updateTitleFont
 
   addOneProject: (project) ->
     @view = new Stylejonction.Views.Projects.PreviewProjectItemView({project: project})
@@ -41,21 +37,21 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
     
 
     if @portfolio.hasChanged('body_font_id')
-      @options.body_font = new Stylejonction.Models.Font({id: @portfolio.get('body_font_id')}) 
-      @options.body_font.bind 'change', @.updateBodyFont
-      @options.body_font.fetch()
+      @portfolio.body_font = new Stylejonction.Models.Font({id: @portfolio.get('body_font_id')}) 
+      @portfolio.body_font.bind 'change', @.updateBodyFont
+      @portfolio.body_font.fetch()
       
     if @portfolio.hasChanged('title_font_id')
-      @options.title_font = new Stylejonction.Models.Font({id: @portfolio.get('title_font_id')}) 
-      @options.title_font.bind 'change', @.updateTitleFont
-      @options.title_font.fetch()
+      @portfolio.title_font = new Stylejonction.Models.Font({id: @portfolio.get('title_font_id')}) 
+      @portfolio.title_font.bind 'change', @.updateTitleFont
+      @portfolio.title_font.fetch()
      
     
     
 
   updateBackground: (background)->
-    @background = background
-    @background.render($("#preview"))
+    @portfolio.background = background
+    @portfolio.background.render($("#preview"))
     
   updateBodyFont: (font)->
     @.$("#preview_content .content").css("fontFamily", font.get('name'))
@@ -77,11 +73,11 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
     
   render: ->
     $(this.el).html(this.template(@options.portfolio.toJSON()))
-    @background.render( $("#preview") )
+    @portfolio.background.render( $("#preview") )
     @addAllProjects()
     @.update()
-    @.updateBodyFont(@.body_font)
-    @.updateTitleFont(@.title_font)
+    @.updateBodyFont(@portfolio.body_font)
+    @.updateTitleFont(@portfolio.title_font)
     return this
 
 
