@@ -37,7 +37,7 @@ class Stylejonction.Views.Backgrounds.EditPatternView extends Backbone.View
       debug.error 'Error. Portfolio object of EditPatternView is not valid'
       
     if @background not instanceof Stylejonction.Models.PatternBackground
-      debug.error 'Error. Background object of EditPatternView should PatternBackground'
+      debug.error "Error. Background object of EditPatternView should PatternBackground #{this.background}"
      
     
     

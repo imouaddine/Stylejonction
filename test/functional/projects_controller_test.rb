@@ -18,7 +18,7 @@ class ProjectsControllerTest < ActionController::TestCase
   test "should get new when user is authenticated" do
     sign_in @user
     get :new, :portfolio_id => 1
-    assert_response :redirect
+    assert_response :success
   end
 
   test "should destroy project" do

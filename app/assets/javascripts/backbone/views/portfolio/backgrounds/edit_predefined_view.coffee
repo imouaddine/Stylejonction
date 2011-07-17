@@ -37,11 +37,12 @@ class Stylejonction.Views.Backgrounds.EditPredefinedView extends Backbone.View
     @.$(".image_link").removeClass("selected")
     @.$("li").removeClass("selected")
     
-    @options.model.save({'background_id': newBackground, 'predefined_background_id':  newBackground, 'background_type': 'PredefinedBackground'}, 
+    @options.model.save(
+      { 'background_id': newBackground, 'predefined_background_id':  newBackground, 'background_type': 'PredefinedBackground'}, 
       success: (model) -> 
         $(e.currentTarget).parent().addClass("selected")
         $(e.currentTarget).addClass("selected")
-        background = new Stylejonction.Models.CustomBackground({id:model.get('background_id')})
+        background = new Stylejonction.Models.CustomBackground( { id: model.get('background_id') } )
         background.fetch(
           success: ->
             model.trigger("backgroundChanged", background)

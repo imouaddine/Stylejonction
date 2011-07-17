@@ -11,6 +11,7 @@ class Stylejonction.Views.Projects.PreviewProjectItemView extends Backbone.View
     
     
   render: ->
+    console.log @project.toJSON()
     $(this.el).html(this.template(@project.toJSON()))
     
     

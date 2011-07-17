@@ -3,7 +3,7 @@ class Stylejonction.Views.Projects.EditCoverView extends Backbone.View
   
   initialize: (options)->
     @project = options.project
-    @cover = options.cover
+    @cover = @project.cover
       
   events:
     "click #submit" : "submit"

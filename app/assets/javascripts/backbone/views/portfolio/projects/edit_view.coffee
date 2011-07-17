@@ -12,7 +12,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
 
   initialize: ()->
     @project = @options.model
-    @cover = @options.cover
+    @cover = @project.cover
     @.init_fancybox()
 
   init_fancybox: ()->
@@ -23,7 +23,8 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
       onComplete: @.on_fancybox_complete
 
   on_fancybox_complete: ()->
-    edit_cover_view = new Stylejonction.Views.Projects.EditCoverView({el: "body", project: window.controller.project, cover: window.controller.cover})
+    #have to use window.controller due to scope issue. 
+    edit_cover_view = new Stylejonction.Views.Projects.EditCoverView({el: "body", project: window.controller.project})
 
   update: (e) ->
     e.preventDefault()
@@ -34,8 +35,8 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     @options.model.save({'title' : title, 'default' : default_project},
       success: ->
         #console.log "SAVED"
-      error: ->
-        #console.log 'ERROR'
+      error: (e)->
+        debug.error "An error has occured while updating project #{e.get('title')}."
     )
 
   update_visibility_public: (e) ->

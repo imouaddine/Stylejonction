@@ -6,16 +6,19 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
 
   initialize: ()->
     _.bindAll(this, 'addOneProject', 'addAllProjects', 'render', 'update', 'updateBackground', 'updateBodyFont', 'updateTitleFont')
+    
     @portfolio = @options.portfolio
     @projects = @options.projects
     
-  
+    @body_font = @portfolio.body_font
+    @title_font = @portfolio.body_font
+    @background = @portfolio.background
     
     @portfolio.bind 'change', @.update
     @projects.bind  'add',     @.addOneProject
     @portfolio.bind 'backgroundChanged', @.updateBackground
-    @portfolio.body_font.bind 'change', @.updateBodyFont
-    @portfolio.title_font.bind 'change', @.updateTitleFont
+    @body_font.bind 'change', @.updateBodyFont
+    @title_font.bind 'change', @.updateTitleFont
 
   addOneProject: (project) ->
     @view = new Stylejonction.Views.Projects.PreviewProjectItemView({project: project})
@@ -42,16 +45,16 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
       @portfolio.body_font.fetch()
       
     if @portfolio.hasChanged('title_font_id')
-      @portfolio.title_font = new Stylejonction.Models.Font({id: @portfolio.get('title_font_id')}) 
-      @portfolio.title_font.bind 'change', @.updateTitleFont
-      @portfolio.title_font.fetch()
+      @title_font = new Stylejonction.Models.Font({id: @portfolio.get('title_font_id')}) 
+      @title_font.bind 'change', @.updateTitleFont
+      @title_font.fetch()
      
     
     
 
   updateBackground: (background)->
-    @portfolio.background = background
-    @portfolio.background.render($("#preview"))
+    @background = background
+    @background.render($("#preview"))
     
   updateBodyFont: (font)->
     @.$("#preview_content .content").css("fontFamily", font.get('name'))
@@ -73,11 +76,11 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
     
   render: ->
     $(this.el).html(this.template(@options.portfolio.toJSON()))
-    @portfolio.background.render( $("#preview") )
+    @background.render($("#preview"))
     @addAllProjects()
     @.update()
-    @.updateBodyFont(@portfolio.body_font)
-    @.updateTitleFont(@portfolio.title_font)
+    @.updateBodyFont(@body_font)
+    @.updateTitleFont(@title_font)
     return this
 
 
