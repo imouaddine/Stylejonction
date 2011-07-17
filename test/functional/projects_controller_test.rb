@@ -4,10 +4,10 @@ class ProjectsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   def setup
-     @user = Factory(:user)
-     @request.host = "#{@user.username}.stylejonction.com"
-     @portfolio = @user.portfolio
-     @project = Factory.create(:project, :portfolio => @portfolio)
+    @user = Factory(:user)
+    @request.host = "#{@user.username}.stylejonction.com"
+    @portfolio = @user.portfolio
+    @project = Factory.create(:project, :portfolio => @portfolio)
   end
 
   test "should get index" do
@@ -49,6 +49,11 @@ class ProjectsControllerTest < ActionController::TestCase
     end
   end
 
-
+  # test "should be able to create new project " do
+  #   # TODO: move this to integration once it works
+  #   sign_in @user
+  #   post ::portfolio_id => @portfolio.id, :project => { :title => "This is awesome" }
+  #   assert_equal "This is awesome", Project.last.title
+  # end
 
 end
