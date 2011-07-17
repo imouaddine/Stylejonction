@@ -16,7 +16,6 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     @.init_fancybox()
 
   init_fancybox: ()->
-
     $(".iframe_fancy").fancybox
       hideOnContentClick: false,
       showCloseButton: true,
