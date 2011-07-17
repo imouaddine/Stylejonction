@@ -10,7 +10,8 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
     Factory.create :font
     @user = loggin
     @portfolio = @user.portfolio
-    @project = @portfolio.projects.first
+    @project = Factory.create(:project, :portfolio => @portfolio)
+   
     change_subdomain_to(@user.username)
   end
 
