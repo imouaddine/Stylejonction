@@ -1,1 +1,3 @@
-<%= image_tag cover.thumb_url, :class => 'preview_uploaded_image cropbox'  %>
+<%-  if cover && cover.thumb_url %>
+  <%= image_tag cover.thumb_url, :class => 'preview_uploaded_image cropbox'  %>
+<% end %>

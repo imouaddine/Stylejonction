@@ -8,24 +8,24 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     "click #public_project_btn":    "update_visibility_public"
     "click #private_project_btn":   "update_visibility_private"
     "click #send_invites":          "send_invites"
-    
+
 
   initialize: ()->
     @project = @options.model
     @cover = @options.cover
     @.init_fancybox()
-    
+
   init_fancybox: ()->
-   
+
     $(".iframe_fancy").fancybox
       hideOnContentClick: false,
       showCloseButton: true,
       padding: 0,
       onComplete: @.on_fancybox_complete
-      
+
   on_fancybox_complete: ()->
     edit_cover_view = new Stylejonction.Views.Projects.EditCoverView({el: "body", project: window.controller.project, cover: window.controller.cover})
-    
+
   update: (e) ->
     e.preventDefault()
     e.stopPropagation()
@@ -42,10 +42,10 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
   update_visibility_public: (e) ->
     e.preventDefault()
     e.stopPropagation()
-  
+
     @.$("#public_project").show("medium")
     @.$("#private_project").hide("medium")
-     
+
     @.$("#private_project_btn").removeClass("selected")
     @options.model.save({'public' : true},
         success: ->
@@ -57,10 +57,10 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
   update_visibility_private: (e) ->
     e.preventDefault()
     e.stopPropagation()
-  
+
     @.$("#private_project").show("medium")
     @.$("#public_project").hide("medium")
-    
+
     @.$("#public_project_btn").removeClass("selected")
     @options.model.save({'public' : false},
        success: ->
@@ -81,8 +81,8 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     for i in [in0, in1, in2, in3]
       if i isnt ""
         $.post("/portfolio/projects/"+ @options.model.id+"/invite", { email: i } )
-        
-  
-    
-    
-    
+
+
+
+
+

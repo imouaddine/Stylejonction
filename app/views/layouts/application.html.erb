@@ -16,16 +16,16 @@
         <%= yield :header %>
 </head>
 <body>
-	
+
   <div id="wrapper" >
     <section id="page" role="main">
-    	<header id="header">
+        <header id="header">
          <nav id="toolbar">
             <ul class="secondary_links">
               <li> Questions? </li>
-	            <li><a href="#">FAQ</a></li>
-	            <li><a href="#"> Agent Online</a></li>
-	            <li><a href="#">Contact us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#"> Agent Online</a></li>
+                    <li><a href="#">Contact us</a></li>
             </ul>
             <ul class="login_links">
               <%= render 'devise/menu/registration_items' %>
@@ -33,15 +33,15 @@
             </ul>
          </nav>
          <div id="logo">
-         		<%= link_to image_tag('images/logo.png'), '/' %>
+                        <%= link_to image_tag('images/logo.png'), '/' %>
          </div>
          <h1 id="page_title">
              <%- if user_signed_in? -%>
-             		<em><%= current_user.username %></em>'s portfolio
+                        <em><%= current_user.username %></em>'s portfolio
              <% end %>
- 					</h1>
-           
-						
+                                        </h1>
+
+
       </header>
                          <%- if user_signed_in? %>
                                 <nav id="main_nav">
@@ -64,12 +64,12 @@
 
     </section>
   </div>
-	
+
   <% [:notice, :warning, :error].each do |type| %>
- 		<div class="<%= type %> message <%= 'has_content' unless flash[type].to_s == '' %>">
-	 			<%= flash[type] %>
-		</div>
+                <div class="<%= type %> message <%= 'has_content' unless flash[type].to_s == '' %>">
+                                <%= flash[type] %>
+                </div>
  <% end %>
-  
+
 </body>
 </html>

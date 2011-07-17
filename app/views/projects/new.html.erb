@@ -1,14 +1,8 @@
-
-
 <%=  render('portfolios/sidebar') %>
 
 <section id="edit">
-	<%= render 'form' %>
+        <%= render 'form' %>
 </section>
 <% content_for :preview do %>
   <%= render  "portfolios/preview",  :action => 'new_project'  %>
 <% end %>
-
-
-
-

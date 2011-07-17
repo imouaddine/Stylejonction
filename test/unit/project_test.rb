@@ -26,29 +26,29 @@ class ProjectTest < ActiveSupport::TestCase
     project = Project.new
     assert ! project.default?
   end
-  
+
+
+  test "project upload" do
+    user = Factory(:user)
+    4.times do |i|
+      project = user.portfolio.projects.create(:title => "Project #{i}")
+      project.cover.image.store!(File.open(File.join(Rails.root, "public/assets/images/projects/#{i}.jpg")))
+      project.save!
+      assert project.cover.image.url
+    end
+  end
+
+
   test "is image set when created" do
-    project = Project.new(:title => 'New project')
-    
+    project = Project.create(:title => 'New project')
     assert project.cover.thumb_format, "thumb should be created on initialization"
     assert project.cover.original_format, "original should be created on initialization"
-    
     assert_equal true, project.cover.save
     assert_equal true, project.save, project.errors.inspect
-    
     project.reload
-     
-   
-   
     assert_equal 165, project.cover.thumb_format.width
     assert_equal 165, project.cover.thumb_format.height
-    
-  
-    
-  end 
-  
-  
-
+  end
 
   test "can change projects visibility" do
     project = Factory.create(:project)

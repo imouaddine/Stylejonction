@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
 
   THUMB_FORMAT_DIMENSIONS = { :width => 165, :height => 165 }
 
-  attr_accessible :title, :default, :public
+  attr_accessible :title, :default, :public, :cover_id
 
   validates_presence_of :title
   belongs_to :portfolio
@@ -12,7 +12,7 @@ class Project < ActiveRecord::Base
 
   scope :default, where(:default => true)
 
-  after_initialize :after_initialize
+  after_create :add_default_cover
 
   def set_to_default
     if portfolio.present?
@@ -30,8 +30,7 @@ class Project < ActiveRecord::Base
   end
 
   private
-    def after_initialize
-
+    def add_default_cover
       if self.cover.nil?
          self.cover = Image.new
          self.cover.set_thumb_dimension( THUMB_FORMAT_DIMENSIONS[:width], THUMB_FORMAT_DIMENSIONS[:height] )
