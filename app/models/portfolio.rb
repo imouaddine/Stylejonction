@@ -4,7 +4,7 @@ class Portfolio < ActiveRecord::Base
   THEMES = %w{light dark}
   LAYOUTS = %w{left top right bottom}
 
-  
+
   attr_accessible(:id, :layout, :theme, :created_at, :updated_at, :user_id,
                   :background_id, :title_font_id, :body_font_id,
                   :body_color, :background_type, :published, :title_color,
@@ -13,7 +13,7 @@ class Portfolio < ActiveRecord::Base
 
   validates_inclusion_of :layout, :in => LAYOUTS, :message => "Layout % should be one of #{LAYOUTS}"
   validates_inclusion_of :theme, :in => THEMES, :message => "Theme  %s should be one of #{THEMES}"
-  
+
   belongs_to :user
   has_many :projects, :dependent => :destroy
   belongs_to :title_font, :class_name => "Font", :foreign_key => "title_font_id"
@@ -55,7 +55,7 @@ class Portfolio < ActiveRecord::Base
   end
 
 
- 
+
 
   private
 
@@ -65,7 +65,7 @@ class Portfolio < ActiveRecord::Base
     self.predefined_background = self.background
     self.custom_background = CustomBackground.create(:user => self.user)
     self.pattern_background = PatternBackground.create( :pattern => Pattern.first, :color => '000000')
-    #self.projects << Project.create(:title => "First project")
+    self.projects << Project.create(:title => "First project")
     self.layout = LAYOUTS.first
     if Font.count > 0
       self.title_font = Font.first

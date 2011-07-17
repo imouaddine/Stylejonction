@@ -3,8 +3,7 @@ require 'test_helper'
 class InvitationsControllerTest < ActionController::TestCase
   def setup
     @user = Factory.create(:user)
-    @project = Project.create(:title => "First")
-    @user.portfolio.projects << @project
+    @project = @user.portfolio.projects.first
   end
 
   test "invitation gets created and routing works" do

@@ -49,7 +49,4 @@ Factory.define :pattern_background do |f|
 end
 
 Factory.define :image do |p|
-  
 end
-
-
