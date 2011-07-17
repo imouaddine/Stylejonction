@@ -17,7 +17,9 @@ h2. Dependencies
 To use this application, you will need:
 
 * The Ruby language (version 1.8.7 or 1.9.2)
-* Rails (version 3.0.4 or newer)
+* Rails (version 3.1)
+* RMagick
+* PostGre
 
 h2. Installing the Application
 

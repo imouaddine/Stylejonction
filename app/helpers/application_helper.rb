@@ -1,26 +1,39 @@
 module ApplicationHelper
   
-  def iviewer(element, image_path, fit_button)
+  def iviewer(element, image_path, fit_button, image_format)
     %Q{
        <script type='text/javascript'>
+          image_format = eval(#{image_format});
+          image_format.scale_to_fit = Boolean(image_format.scale_to_fit);
+          zoom_val = image_format.scale_to_fit? 'fit' : 100;
+          
            $('#{element}').iviewer({
               src: '#{image_path}',
+              update_on_resize: false,
+              ui_disabled: false,
+              zoom: zoom_val,
               initCallback: function ()
               {
-                  var object = this;
-                  $('#{fit_button}').change(function(){
-                    
-                    if( $(this).is(':checked') ){
-                      object.fit();
-                    }
-                    else{
-                      object.zoom_by(1);
-                    }
-                      
-                  }); 
-            
+                var object = this;
+                object.zoom_by(1);
+                top = -parseFloat(image_format.crop_y);
+                left = -parseFloat(image_format.crop_x);
+                $("#cover_editor img").css("top", top);
+                $("#cover_editor img").css("left", left);
+                
+                $('#{fit_button}').change(function(){
+                  if( $(this).is(':checked') ){
+                    object.fit();
+                  }
+                  else{
+                    object.zoom_by(1);
+                  }
+                });
+                
+               
+                 
+                
               }
-              
            });
       </script>
       

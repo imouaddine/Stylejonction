@@ -48,4 +48,8 @@ Factory.define :pattern_background do |f|
   f.color "#ccc333"
 end
 
+Factory.define :image do |p|
+  
+end
+
 

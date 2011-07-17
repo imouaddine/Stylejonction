@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class CoverUploader < CarrierWave::Uploader::Base
+class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
 
@@ -23,10 +23,37 @@ class CoverUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  version :thumb do
-      process :resize_to_limit => [165, 165]
+  version :editable_thumb do
+    process :scale_thumb
   end
-
+  
+  version :thumb do
+    process :scale_thumb
+    process :crop_thumb
+  end
+  
+  def scale_thumb
+    manipulate! do |image|
+      if self.model.thumb_format.scale_to_fit?
+        image.resize_to_fit self.model.thumb_format.width, self.model.thumb_format.height
+      else
+        width = image.columns 
+        height = image.rows 
+        scale = [width, height].min / self.model.thumb_format.height
+        image.resize_to_fit(width / scale, height/scale) 
+      end
+    end
+  end
+  
+  def crop_thumb
+    if !self.model.thumb_format.scale_to_fit?
+      manipulate! do |image|
+        image.crop(self.model.thumb_format.crop_x, self.model.thumb_format.crop_y, self.model.thumb_format.width, self.model.thumb_format.height)
+      end
+    end
+  end
+  
+  
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list

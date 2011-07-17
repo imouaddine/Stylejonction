@@ -1,8 +1,8 @@
 class CustomBackground < ActiveRecord::Base
   
-   attr_accessible :display_mode, :background, :user_id
+  attr_accessible :display_mode, :background, :user_id
    
-   mount_uploader :background, BackgroundUploader
+  mount_uploader :background, BackgroundUploader
    
   DISPLAY_MODES = %w{tile stretch original}
   

@@ -15,7 +15,7 @@ class Portfolio < ActiveRecord::Base
   validates_inclusion_of :theme, :in => THEMES, :message => "Theme  %s should be one of #{THEMES}"
   
   belongs_to :user
-  has_many :projects
+  has_many :projects, :dependent => :destroy
   belongs_to :title_font, :class_name => "Font", :foreign_key => "title_font_id"
   belongs_to :body_font, :class_name => "Font", :foreign_key => "body_font_id"
   belongs_to :background, :polymorphic => true
@@ -65,7 +65,7 @@ class Portfolio < ActiveRecord::Base
     self.predefined_background = self.background
     self.custom_background = CustomBackground.create(:user => self.user)
     self.pattern_background = PatternBackground.create( :pattern => Pattern.first, :color => '000000')
-    self.projects << Project.create(:title => "First project")
+    #self.projects << Project.create(:title => "First project")
     self.layout = LAYOUTS.first
     if Font.count > 0
       self.title_font = Font.first

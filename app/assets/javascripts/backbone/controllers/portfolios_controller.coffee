@@ -24,14 +24,16 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
     @view = new Stylejonction.Views.Portfolios.EditLayoutView(model: @portfolio, el: '#edit_portfolio_layout')
 
   edit_font_portfolio: ->
+    
     @view = new Stylejonction.Views.Portfolios.EditFontView(model: @portfolio, body_font: @body_font, title_font: @title_font, el: '#edit_portfolio_font')
 
   edit_project: ->
     @project = @projects.get(@options.project.id)
-    @view = new Stylejonction.Views.Projects.EditView(model: @project, el: '#edit_project_properties')
+    @cover = new Stylejonction.Models.Image(@.options.cover)
+    @view = new Stylejonction.Views.Projects.EditView(model: @project, cover: @cover, el: '#edit_project_properties')
 
 
-
+  
   add_preview: ->
     @previewView = new Stylejonction.Views.Portfolios.PreviewView(
       projects: @projects, 

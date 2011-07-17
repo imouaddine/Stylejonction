@@ -17,6 +17,7 @@
 //= require backbone_datalink
 //= require backbone/stylejonction
 //= require messages
+//= require jquery.iviewer
 //= require_tree .
 
 

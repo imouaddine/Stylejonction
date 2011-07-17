@@ -10,6 +10,7 @@ User.delete_all
 PredefinedBackground.delete_all
 Portfolio.delete_all
 Font.delete_all
+Project.delete_all
 
 puts 'SETTING UP ADMIN LOGIN'
 user = User.create! :username => 'imouaddine', :first_name => 'Imad', :last_name =>'Mouaddine', :email => 'imad@ecomstrategy.ca', :password => 'pass', :password_confirmation => 'pass', :admin => true
@@ -68,13 +69,14 @@ user.portfolio.title_font = Font.first
 user.portfolio.body_font = Font.first
 
 puts "Create portfolio project"
+
 4.times do |i|
   project = user.portfolio.projects.create(:title => "Project #{i}")
-  project.cover.store!(File.open(File.join(Rails.root, "public/assets/images/projects/#{i}.jpg")))
-  project.save!
+  project.cover.image.store!(File.open(File.join(Rails.root, "public/assets/images/projects/#{i}.jpg")))
+  project.cover.save
+  project.save
+  puts "project saved #{project.cover.thumb_url}"
 end
-
-
 
 user.save
 

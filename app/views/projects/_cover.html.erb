@@ -1,6 +1,1 @@
-<% if cover.present? %>
-	<%= image_tag cover.url(:thumb), :class => 'preview_uploaded_image cropbox'  %>
-<% else %>
-	<%= image_tag 'http://placehold.it/165x165', :class => 'preview_uploaded_image' %>
-<% end %>
-
+<%= image_tag cover.thumb_url, :class => 'preview_uploaded_image cropbox'  %>

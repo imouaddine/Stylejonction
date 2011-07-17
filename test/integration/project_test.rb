@@ -34,7 +34,18 @@ class ProjectTest < ActionDispatch::IntegrationTest
 
     assert_equal true, @project.default?
   end
-
+  test "project upload" do
+    4.times do |i|
+      project = @user.portfolio.projects.create(:title => "Project #{i}")
+      project.image.image.store!(File.open(File.join(Rails.root, "public/assets/images/projects/#{i}.jpg")))
+      project.save!
+      assert project.image.image.url
+    end
+    
+    
+    
+    
+  end
   test "can make project private" do
     visit edit_portfolio_project_path(@project)
     find("#private_project_btn").click

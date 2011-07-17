@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
   before_filter :get_portfolio
   skip_before_filter :verify_authenticity_token
 
+  
 
   def index
     @projects = @portfolio.projects
@@ -32,30 +33,11 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @project = Project.find(params[:id])
+    @project = @portfolio.projects.find(params[:id])
     flash[:notice] = "Project was successfully updated" if @project.update_attributes(params[:project])
     respond_with(@project)
   end
   
-  def edit_cover
-    @project = Project.find(params[:id])
-    respond_to do |format|
-      format.html{  render :layout => "modal" }
-    end
-  end
-  
-  def upload_cover
-    @project = Project.find(params[:id])
-    respond_to do |format|
-      if @project.update_attributes(params[:project])
-        logger.info @project.inspect
-        format.js
-      else
-        render :template => 'portfolios/upload_cover_error'
-      end
-    end
-  end
-
   def invite
     @project = Project.find(params[:id])
     respond_to do |format|

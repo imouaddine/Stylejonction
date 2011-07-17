@@ -1,18 +1,19 @@
 class Project < ActiveRecord::Base
-
+  
+  THUMB_FORMAT_DIMENSIONS = { :width => 165, :height => 165 }
+  
   attr_accessible :title, :default, :public
 
   validates_presence_of :title
   belongs_to :portfolio
 
   has_many :invitations, :dependent => :destroy
-
-  attr_accessible :cover
-
+  belongs_to :cover, :class_name => "Image", :foreign_key => "cover_id", :dependent => :destroy
 
   scope :default, where(:default => true)
-  mount_uploader :cover, CoverUploader
 
+  after_initialize :after_initialize
+   
   def set_to_default
     if portfolio.present?
       portfolio.projects.each do |p|
@@ -23,8 +24,20 @@ class Project < ActiveRecord::Base
     self.default = true
     self.save
   end
-
+  
+  
+ 
   def invite(email)
     invitations.create(:email => email).invite_to(portfolio.user)
   end
+  
+  private
+    def after_initialize
+     
+      if self.cover.nil?
+         self.cover = Image.new
+         self.cover.set_thumb_dimension( THUMB_FORMAT_DIMENSIONS[:width], THUMB_FORMAT_DIMENSIONS[:height] )
+         self.cover.save!
+      end
+    end
 end

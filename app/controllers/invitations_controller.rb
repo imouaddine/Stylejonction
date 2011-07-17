@@ -1,4 +1,7 @@
 class InvitationsController < ApplicationController
+  
+  before_filter :authenticate_user!
+  
   def show
     @invite = Invitation.find(params[:id])
 

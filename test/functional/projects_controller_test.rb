@@ -7,6 +7,7 @@ class ProjectsControllerTest < ActionController::TestCase
      @user = Factory(:user)
      @request.host = "#{@user.username}.stylejonction.com"
      @portfolio = @user.portfolio
+     @project = Factory.create(:project, :portfolio => @portfolio)
   end
 
   test "should get index" do
@@ -23,7 +24,7 @@ class ProjectsControllerTest < ActionController::TestCase
   test "should destroy project" do
     sign_in @user
     assert_difference('Project.count', -1) do
-      delete :destroy, :portfolio_id => @portfolio.id, :id => @portfolio.projects.first
+      delete :destroy, :portfolio_id => @portfolio.id, :id => @project.id
     end
   end
 
@@ -47,5 +48,7 @@ class ProjectsControllerTest < ActionController::TestCase
       post :invite, :email => "myemail@email.com", :id => @portfolio.projects.first
     end
   end
+  
+  
 
 end

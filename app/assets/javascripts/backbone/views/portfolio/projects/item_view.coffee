@@ -8,12 +8,9 @@ class Stylejonction.Views.Projects.PreviewProjectItemView extends Backbone.View
     _.bindAll(this, 'render');
     @project.bind('change', this.render);
     @project.bind('all', this.render);
-    #console.log @project
-    #console.log 'PreviewProjectItemView INTIIALIZE'
     
     
   render: ->
-    #console.log 'PreviewProjectItemView RENDER'
     $(this.el).html(this.template(@project.toJSON()))
     
     

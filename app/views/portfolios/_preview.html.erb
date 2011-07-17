@@ -16,6 +16,7 @@
 			title_font: <%= @portfolio.title_font.to_json.html_safe -%>,
 			<% if @project.present? %>
 				project: <%= @project.to_json.html_safe  -%>,
+				cover: <%= @project.cover.to_json.html_safe  -%>,
 			<% end %>
 			action : '<%= action -%>'
 		});

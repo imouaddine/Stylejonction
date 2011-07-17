@@ -12,6 +12,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
 
   initialize: ()->
     @project = @options.model
+    @cover = @options.cover
     @.init_fancybox()
     
   init_fancybox: ()->
@@ -23,7 +24,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
       onComplete: @.on_fancybox_complete
       
   on_fancybox_complete: ()->
-    edit_project_cover = new Stylejonction.Views.Projects.EditCoverView({el: "body"})
+    edit_cover_view = new Stylejonction.Views.Projects.EditCoverView({el: "body", project: window.controller.project, cover: window.controller.cover})
     
   update: (e) ->
     e.preventDefault()
@@ -81,8 +82,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
       if i isnt ""
         $.post("/portfolio/projects/"+ @options.model.id+"/invite", { email: i } )
         
-  edit_project_cover: ()->
-    edit_project_cover = new Stylejonction.Views.Projects.EditCoverView({el: "body"})
+  
     
     
     
