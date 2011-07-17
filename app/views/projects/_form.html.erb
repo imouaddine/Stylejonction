@@ -1,4 +1,4 @@
-<%= form_for(@project, :url => url_for_action(@project)) do |f| %>
+<%= form_for(@project, :url => url_for_action(@project), :html => {:multipart => true} ) do |f| %>
   <% if @project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>

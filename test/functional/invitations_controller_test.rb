@@ -4,7 +4,7 @@ class InvitationsControllerTest < ActionController::TestCase
   def setup
     @user = Factory.create(:user)
     @invited_user = Factory.create(:user, :email => "ignacy@email.com")
-    @project = @user.portfolio.projects.first
+    @project = Factory.create(:project, :portfolio => @user.portfolio)
   end
 
   test "invitation gets created and routing works" do

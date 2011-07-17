@@ -21,6 +21,13 @@
         <% end %>
         <li><%= active_link_to '<span class=\'number\'> + </span> New project'.html_safe, new_portfolio_project_path %></li>
       </ol>
+
+      <%- if @portfolio.projects.empty? %>
+        <ol>
+          <li><%= active_link_to '<span class=\'number\'> + </span> New project'.html_safe, new_portfolio_project_path %></li>
+        </ol>
+      <% end %>
+
     </li>
   </ul>
 </nav>

@@ -4,8 +4,6 @@ class ProjectsController < ApplicationController
   before_filter :get_portfolio
   skip_before_filter :verify_authenticity_token
 
-
-
   def index
     @projects = @portfolio.projects
     respond_with(@projects)
@@ -19,13 +17,14 @@ class ProjectsController < ApplicationController
   def new
     next_number = @portfolio.projects.count + 1
     @project = @portfolio.projects.new(:title => "Project #{next_number}")
+    @project.cover = Image.new
     #redirect_to edit_portfolio_project_path(@project)
   end
 
   def create
     @project = @portfolio.projects.new(params[:project])
     flash[:notice] = "Project was successfully created." if @project.save
-    respond_with(@project)
+    redirect_to  portfolio_project_path(@project)
   end
 
   def edit
