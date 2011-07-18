@@ -13,13 +13,12 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
   initialize: ()->
     _.bindAll(this, 'showCover', 'on_fancybox_complete')
     @project = @options.model
-    
+
     @cover = @project.cover
-   
+
     @cover.bind 'change', @.showCover
-    
     $("#edit_project").tabs()
-    
+
     @.init_fancybox()
 
   init_fancybox: ()->
@@ -32,14 +31,14 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
   on_fancybox_complete: ()->
     @edit_cover_view = new Stylejonction.Views.Images.EditView({image: @cover})
     @edit_cover_view.bind 'change', @.showCover
-    
+
   update: (e) ->
     e.preventDefault()
     e.stopPropagation()
-    
+
     title = $(e.currentTarget).val()
     default_project = $("#project_default").is(":checked")
-   
+
     @options.model.set({'title' : title, 'default' : default_project})
 
   update_visibility_public: (e) ->
@@ -51,10 +50,10 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
 
     @.$("#private_project_btn").removeClass("selected")
     @.$("#public_project_btn").addClass("selected")
-    
+
     @project.set( {'public' : true} )
     $("#project_public").val('t')
-   
+
 
   update_visibility_private: (e) ->
     e.preventDefault()
@@ -65,7 +64,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
 
     @.$("#public_project_btn").removeClass("selected")
     @.$("#private_project_btn").addClass("selected")
-    
+
     @project.set({'public' : false})
     $("#project_public").val('f')
 
@@ -81,16 +80,16 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     for i in [in0, in1, in2, in3]
       if i isnt ""
         $.post("/portfolio/projects/"+ @options.model.id+"/invite", { email: i } )
-  
+
   cover_changed: (e)->
     @project.fetch()
-    
+
   showCover: (cover)->
     @project.cover = cover;
     @project.trigger('change')
     #force loading image from the server using timestamp
     timestamp = new Date().getTime();
-    
+
     $("#cover img").attr('src', "#{cover.toJSON().image.thumb.url}?#{timestamp}")
 
 
