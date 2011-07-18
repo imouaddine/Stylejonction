@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  has_one :portfolio, :dependent => :destroy
+  has_many :portfolios, :dependent => :destroy
   has_many :custom_backgrounds
 
   after_create :create_default_portfolio
@@ -19,10 +19,13 @@ class User < ActiveRecord::Base
     portfolio.projects.default.first
   end
 
+  def portfolio
+    portfolios.first
+  end
+
   private
 
   def create_default_portfolio
-    self.portfolio = Portfolio.new(:user => self, :theme => "light")
-    self.portfolio.save!
+    self.portfolios << Portfolio.create(:user => self, :theme => "light")
   end
 end

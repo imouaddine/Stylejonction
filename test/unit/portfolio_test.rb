@@ -94,7 +94,7 @@ class PortfolioTest < ActiveSupport::TestCase
      portfolio = Factory.create(:portfolio)
      assert_equal portfolio.has_custom_background?, false
 
-     user = Factory(:user)
+     user = portfolio.user
      portfolio.background = Factory.create(:custom_background, :user => user )
      assert_equal portfolio.has_custom_background?, true
 

@@ -4,12 +4,12 @@ Factory.define :user do |u|
   u.username "user"
   u.password "password"
   u.password_confirmation "password"
-  u.email "imad@ecomstrategy.ca"
+  u.sequence(:email) { |n| "imad#{n}@ecomstrategy.ca" }
   u.admin false
-  u.association :portfolio
 end
 
 Factory.define :portfolio do |p|
+  p.association :user
   p.theme "light"
   p.layout "left"
 end
