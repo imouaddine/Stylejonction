@@ -26,25 +26,26 @@ class ImageUploader < CarrierWave::Uploader::Base
   version :editable_thumb do
     process :scale_thumb
   end
-  
+
   version :thumb do
     process :scale_thumb
     process :crop_thumb
   end
-  
+
   def scale_thumb
     manipulate! do |image|
+      puts self.model.inspect
       if self.model.thumb_format.scale_to_fit?
         image.resize_to_fit self.model.thumb_format.width, self.model.thumb_format.height
       else
-        width = image.columns 
-        height = image.rows 
+        width = image.columns
+        height = image.rows
         scale = [width, height].min / self.model.thumb_format.height
-        image.resize_to_fit(width / scale, height/scale) 
+        image.resize_to_fit(width / scale, height/scale)
       end
     end
   end
-  
+
   def crop_thumb
     if !self.model.thumb_format.scale_to_fit?
       manipulate! do |image|
@@ -52,8 +53,8 @@ class ImageUploader < CarrierWave::Uploader::Base
       end
     end
   end
-  
-  
+
+
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list

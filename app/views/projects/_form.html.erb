@@ -15,20 +15,19 @@
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>
+<% end %>
 
+<%= form_for(@image, :url => images_upload_path, :html => { :multipart => true }) do |ff| %>
   <div class="field">
                 <div id="cover">
-                        <%= render '/images/thumb', :image => @project.cover %>
+                        <%= render '/images/thumb', :image => @image %>
                 </div>
-    <%= f.label :cover %><br />
-    <%= f.file_field :cover %>
+                <%= ff.file_field :image %>
   </div>
 
-  <%= submit_tag 'Create' %>
+  <%= submit_tag 'Send' %>
 
 <% end %>
 
 
-<% if !@project.new_record? %>
-  <%= photo_uploadify( "#project_cover", upload_cover_portfolio_project_path(:format => 'js', :id => @project.id), 'project[cover]') %>
-<% end %>
+<%= photo_uploadify "#upload_project_cover", "#cover", images_upload_path(:format => 'html', :id => @project.cover), 'image[image]' %>

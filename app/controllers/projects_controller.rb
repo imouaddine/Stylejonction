@@ -13,21 +13,21 @@ class ProjectsController < ApplicationController
     @project = @portfolio.projects.find(params[:id])
     respond_to do |format|
       format.json {render :text => @project.to_json(:include => :cover) }
-      format.html 
+      format.html
     end
-    
+
   end
 
   def new
     next_number = @portfolio.projects.count + 1
     @project = @portfolio.projects.new(:title => "Project #{next_number}")
-    @project.cover = Image.new
+    @image = Image.new
     #redirect_to edit_portfolio_project_path(@project)
   end
 
   def create
     @project = @portfolio.projects.new(params[:project])
-    flash[:notice] = "Project was successfully created." if @project.save
+    flash[:notice] = "Project was successfully created." if @project.save!
     redirect_to  portfolio_project_path(@project)
   end
 
