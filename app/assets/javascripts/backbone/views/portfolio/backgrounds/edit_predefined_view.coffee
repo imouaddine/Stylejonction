@@ -33,25 +33,20 @@ class Stylejonction.Views.Backgrounds.EditPredefinedView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
     target = $(e.currentTarget)
-    newBackground = target.data('id')
+    newBackgroundId = target.data('id')
     @.$(".image_link").removeClass("selected")
     @.$("li").removeClass("selected")
     
-    @options.model.save(
-      { 'background_id': newBackground, 'predefined_background_id':  newBackground, 'background_type': 'PredefinedBackground'}, 
-      success: (model) -> 
+    portfolio = @options.model
+    background = new Stylejonction.Models.CustomBackground( { id: newBackgroundId } )
+    
+    background.fetch(
+      success: (newBackground) ->
         $(e.currentTarget).parent().addClass("selected")
         $(e.currentTarget).addClass("selected")
-        background = new Stylejonction.Models.CustomBackground( { id: model.get('background_id') } )
-        background.fetch(
-          success: ->
-            model.trigger("backgroundChanged", background)
-        )
-        
-      error: ->
-        alert 'Something wrong happened'
+        portfolio.trigger("backgroundChanged", newBackground)
     )
-  
+    
   validatesParams: ()->
     if @options.model not instanceof Stylejonction.Models.Portfolio
       debug.error 'Error. Portfolio object of PredefinedView is not valid'

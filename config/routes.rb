@@ -7,7 +7,7 @@ Stylejonction::Application.routes.draw do
 
  constraints(Subdomain) do
     match '/' => 'portfolios#edit_layout'
-
+    
     resource :portfolio, :except => [:destroy, :new] do
       member do
         get 'edit_layout'
@@ -31,6 +31,9 @@ Stylejonction::Application.routes.draw do
   end
 
   resources :invitations, :only => [:show]
+  
+  resources :predefined_backgrounds, :only => [:show]
+  
   resources :fonts, :only => [:show]
   resources :images do
     member do 

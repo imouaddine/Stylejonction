@@ -12,9 +12,6 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
   
   initialize: (e)->
     @portfolio = @options.model
-    #
-    #
-    
     
     #Edit pattern view 
     @.pattern_view = new Stylejonction.Views.Backgrounds.EditPatternView(
@@ -36,7 +33,6 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
       model: @portfolio, 
       el: '#predefined_background_field'
     )
-    
     #Color pickers
     #jcrop
   
@@ -51,10 +47,10 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
     visibleTab.show()
     if val == "update_custom_background" 
       custom_bg = @options.model.get('custom_background_id')
-      @.saveBackground('CustomBackground', custom_bg)
+      #@.saveBackground('CustomBackground', custom_bg)
     else
       pattern_bg_id = @options.model.get('pattern_background_id')
-      @.saveBackground('PatternBackground', pattern_bg_id)
+      #@.saveBackground('PatternBackground', pattern_bg_id)
   
   showPredefinedBackgroundSection: (e)->
     e.preventDefault()

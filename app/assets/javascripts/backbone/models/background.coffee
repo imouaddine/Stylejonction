@@ -1,6 +1,9 @@
 class Stylejonction.Models.Background extends Backbone.Model
-  paramRoot: 'background'
-  url: '/portfolio/background.json'
+  paramRoot: 'predefined_backgrounds'
+  url: '/predefined_backgrounds/:id'
+  
+  initialize: ()->
+    @.url = @.url.replace ':id', @.id
 
   background_url: ()->
     @.get('background').url
