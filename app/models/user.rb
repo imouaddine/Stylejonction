@@ -20,7 +20,11 @@ class User < ActiveRecord::Base
   end
 
   def portfolio
-    portfolios.first
+    portfolios.find_by_published(false)
+  end
+
+  def published_portfolio
+    portfolios.find_by_published(true)
   end
 
   private

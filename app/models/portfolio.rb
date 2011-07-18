@@ -42,6 +42,8 @@ class Portfolio < ActiveRecord::Base
     published = true
     if user.portfolios.count == 1
       clone
+    else
+      update_draft
     end
     save!
   end
@@ -62,9 +64,6 @@ class Portfolio < ActiveRecord::Base
     self.background.present? && self.background_type == 'PredefinedBackground'
   end
 
-
-
-
   private
 
   def set_default_attributes
@@ -84,7 +83,16 @@ class Portfolio < ActiveRecord::Base
   def clone
     draft = Portfolio.new( :layout => self.layout,
                            :theme  => self.theme)
+    set_draft_attributes(draft)
+  end
 
+  def update_draft
+    portfolios = user.portfolios
+    draft = (portfolios - [self]).first
+    set_draft_attributes(draft)
+  end
+
+  def set_draft_attributes(draft)
     draft.background            = self.background
     draft.user                  = self.user
     draft.title_font            = self.title_font

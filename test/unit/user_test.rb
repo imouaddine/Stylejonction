@@ -69,9 +69,8 @@ class UserTest < ActiveSupport::TestCase
     @user.portfolio.update_attribute(:layout, "top")
 
     @user.portfolio.publish!
-
     assert @user.portfolios.all? { |p| p.layout == "top" }, "Both layouts == top"
+    assert_equal false, @user.portfolio.published?
   end
-
 
 end
