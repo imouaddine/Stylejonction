@@ -15,14 +15,12 @@
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>
-<% end %>
 
-<%= form_for(@image, :url => images_upload_path, :html => { :multipart => true }) do |ff| %>
   <div class="field">
-                <div id="cover">
-                        <%= render '/images/thumb', :image => @image %>
-                </div>
-                <%= ff.file_field :image %>
+    <div id="cover">
+      <%= render '/images/thumb', :image => @image %>
+    </div>
+    <%= file_field_tag 'cover[image]' %>
   </div>
 
   <%= submit_tag 'Send' %>

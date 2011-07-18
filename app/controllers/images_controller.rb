@@ -16,7 +16,7 @@ class ImagesController < ApplicationController
     if params[:id].present?
       @image = Image.find(params[:id])
     else
-      @image = Image.new
+      @image = Image.create(params[:image])
     end
 
      respond_to do |format|

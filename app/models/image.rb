@@ -8,6 +8,7 @@ class Image < ActiveRecord::Base
   belongs_to :original_format, :class_name => "ImageFormat", :foreign_key => "original_format_id"
 
   after_initialize :create_formats
+  after_create :create_formats
 
   validates :thumb_format, :presence => true
   validates :original_format, :presence => true

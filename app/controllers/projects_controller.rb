@@ -20,14 +20,13 @@ class ProjectsController < ApplicationController
 
   def new
     next_number = @portfolio.projects.count + 1
-    @project = @portfolio.projects.new(:title => "Project #{next_number}")
-    @image = Image.new
-    #redirect_to edit_portfolio_project_path(@project)
+    @project = @portfolio.projects.create(:title => "Project #{next_number}")
+    redirect_to edit_portfolio_project_path(@project)
   end
 
   def create
-    @project = @portfolio.projects.new(params[:project])
-    flash[:notice] = "Project was successfully created." if @project.save!
+    @project = @portfolio.projects.create(params[:project])
+    flash[:notice] = "Project was successfully created." if @project.valid?
     redirect_to  portfolio_project_path(@project)
   end
 
