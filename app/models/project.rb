@@ -12,7 +12,7 @@ class Project < ActiveRecord::Base
 
   scope :default, where(:default => true)
 
-  after_create :add_default_cover
+  after_initialize :add_default_cover
 
   def set_to_default
     if portfolio.present?

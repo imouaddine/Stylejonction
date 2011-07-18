@@ -25,9 +25,9 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = @portfolio.projects.create(params[:project])
-    flash[:notice] = "Project was successfully created." if @project.valid?
-    redirect_to  portfolio_project_path(@project)
+    next_number = @portfolio.projects.count + 1
+    @project = @portfolio.projects.create(:title => "Project #{next_number}")
+    redirect_to edit_portfolio_project_path(@project)
   end
 
   def edit

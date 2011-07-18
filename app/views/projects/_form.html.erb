@@ -27,5 +27,6 @@
 
 <% end %>
 
-
-<%= photo_uploadify "#upload_project_cover", "#cover", images_upload_path(:format => 'html', :id => @project.cover), 'image[image]' %>
+<% if !@project.new_record? %>
+  <%= photo_uploadify( "#project_cover", upload_cover_portfolio_project_path(:format => 'js', :id => @project.id), 'project[cover]') %>
+<% end %>

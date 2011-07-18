@@ -15,10 +15,10 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     _.bindAll(this, 'showCover', 'on_fancybox_complete')
     @project = @options.model
     @cover = @project.cover
-   
+
     @cover.bind 'change', @.showCover
-    
-    
+
+
     @.init_fancybox()
 
   init_fancybox: ()->
@@ -31,7 +31,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
   on_fancybox_complete: ()->
     @edit_cover_view = new Stylejonction.Views.Images.EditView({image: @cover})
     @edit_cover_view.bind 'change', @.showCover
-    
+
 
   update: (e) ->
     e.preventDefault()
@@ -88,16 +88,16 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     for i in [in0, in1, in2, in3]
       if i isnt ""
         $.post("/portfolio/projects/"+ @options.model.id+"/invite", { email: i } )
-  
+
   cover_changed: (e)->
     @project.fetch()
-    
+
   showCover: (cover)->
     @project.cover = cover;
     @project.trigger('change')
     #force loading image from the server using timestamp
     timestamp = new Date().getTime();
-    
+
     $("#cover img").attr('src', "#{cover.toJSON().image.thumb.url}?#{timestamp}")
 
 
