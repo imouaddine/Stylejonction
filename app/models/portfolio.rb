@@ -34,7 +34,10 @@ class Portfolio < ActiveRecord::Base
   end
 
   def publish!
-    self.published = true
+    published = true
+    if user.portfolios.count == 1
+      clone
+    end
     save!
   end
 
@@ -71,6 +74,26 @@ class Portfolio < ActiveRecord::Base
       self.body_font = Font.first
     end
     save!
+  end
+
+  def clone
+    draft = Portfolio.new( :layout => self.layout,
+                           :theme  => self.theme)
+
+    draft.background            = self.background
+    draft.user                  = self.user
+    draft.title_font            = self.title_font
+    draft.body_font             = self.body_font
+    draft.body_color            = self.body_color
+    draft.background_type       = self.background_type
+    draft.title_color           = self.title_color
+    draft.background            = self.background
+    draft.custom_background     = self.custom_background
+    draft.pattern_background    = self.pattern_background
+    draft.predefined_background = self.predefined_background
+    draft.published             = false
+
+    draft.save!
   end
 
 end
