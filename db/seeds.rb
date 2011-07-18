@@ -63,7 +63,7 @@ Font.create(
 
 
 
-user.portfolio = Portfolio.create( :theme => Portfolio::THEMES.first, :layout => Portfolio::LAYOUTS.first )
+user.portfolios << Portfolio.create( :theme => Portfolio::THEMES.first, :layout => Portfolio::LAYOUTS.first )
 user.portfolio.background = PredefinedBackground.first
 user.portfolio.title_font = Font.first
 user.portfolio.body_font = Font.first

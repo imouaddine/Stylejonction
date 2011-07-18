@@ -3,7 +3,9 @@ require 'test_helper'
 class PortfolioTest < ActiveSupport::TestCase
 
   def setup
-    @portfolio = Factory :portfolio
+    @user = Factory.create(:user)
+    id = @user.portfolio.id
+    @portfolio = Portfolio.find(id)
   end
 
   test "can create a test object from fg" do
@@ -38,9 +40,7 @@ class PortfolioTest < ActiveSupport::TestCase
 
   test "can't undo publishing" do
     @portfolio.publish!
-    @portfolio.reload
     @portfolio.published = false
-    @portfolio.save
 
     assert_equal true, @portfolio.published?
   end
