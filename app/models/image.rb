@@ -2,11 +2,12 @@ class Image < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   attr_accessible :image
-  
-  
+
+
   belongs_to :thumb_format, :class_name => "ImageFormat", :foreign_key => "thumb_format_id"
   belongs_to :original_format, :class_name => "ImageFormat", :foreign_key => "original_format_id"
-  after_initialize :after_initialize
+
+  after_initialize :create_formats
 
   validates :thumb_format, :presence => true
   validates :original_format, :presence => true
@@ -41,9 +42,14 @@ class Image < ActiveRecord::Base
   end
 
   protected
-  def after_initialize
-    self.create_thumb_format(:name => "thumb") unless self.thumb_format.present?
-    self.create_original_format(:name => "original") unless self.original_format.present?
-  end
 
+  def create_formats
+    unless self.thumb_format.present?
+      self.thumb_format = ImageFormat.create!(:name => "thumb")
+    end
+
+    unless self.original_format.present?
+      self.original_format = ImageFormat.create!(:name => "original")
+    end
+  end
 end

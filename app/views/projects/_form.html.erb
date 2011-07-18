@@ -7,17 +7,17 @@
         <li><a class="right" href="#edit_project_content">Content</a></li>
       </ul>
     </header>
-		<section class="tab_content" id="edit_project_properties">
-			<%= render 'form_properties' ,:f => f %>
-		</section>
-		<section class="tab_content" id="edit_project_content">
-			<%= render 'form_content' ,:f => f %>
-		</section>
-    
-		<footer>
-			<%= f.hidden_field :public %>
-			<%= submit_tag 'Save project', :class => 'btn' %>
-		</footer>
+    <section class="tab_content" id="edit_project_properties">
+      <%= render 'form_properties' ,:f => f %>
+    </section>
+    <section class="tab_content" id="edit_project_content">
+      <%= render 'form_content' ,:f => f %>
+    </section>
+
+    <footer>
+      <%= f.hidden_field :public %>
+      <%= submit_tag 'Save project', :class => 'btn' %>
+    </footer>
   <% end %>
 </section>
 

@@ -13,21 +13,24 @@ class ProjectsController < ApplicationController
     @project = @portfolio.projects.find(params[:id])
     respond_to do |format|
       format.json {render :text => @project.to_json(:include => :cover) }
-      format.html 
+      format.html
     end
-    
+
   end
 
   def new
     next_number = @portfolio.projects.count + 1
-    #Temporary to make test pass, I found a solution to respect REST paradigm
-    @project = @portfolio.projects.create(:title => "Project #{next_number}", :cover =>  Image.new)
-    redirect_to edit_portfolio_project_path(@project)
+    # Temporary to make test pass, I found a solution to respect REST paradigm
+    # @project = @portfolio.projects.create(:title => "Project #{next_number}", :cover =>  Image.new)
+    # redirect_to edit_portfolio_project_path(@project)
+    @project = @portfolio.projects.new(:title => "Project #{next_number}")
+    @image = Image.new
+    #redirect_to edit_portfolio_project_path(@project)
   end
 
   def create
     @project = @portfolio.projects.new(params[:project])
-    flash[:notice] = "Project was successfully created." if @project.save
+    flash[:notice] = "Project was successfully created." if @project.save!
     redirect_to  portfolio_project_path(@project)
   end
 
