@@ -34,7 +34,7 @@ class Portfolio < ActiveRecord::Base
   end
 
   def publish!
-    published = true
+    self.published = true
     if user.portfolios.count == 1
       clone
     else
@@ -44,7 +44,7 @@ class Portfolio < ActiveRecord::Base
   end
 
   def published=(value)
-    unless published?
+    if value
       write_attribute(:published, value)
     end
   end

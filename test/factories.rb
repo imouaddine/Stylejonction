@@ -12,6 +12,7 @@ Factory.define :portfolio do |p|
   p.association :user
   p.theme "light"
   p.layout "left"
+  p.published false
 end
 
 Factory.define :project do |p|
