@@ -34,7 +34,6 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   def scale_thumb
     manipulate! do |image|
-      puts self.model.inspect
       if self.model.thumb_format.scale_to_fit?
         image.resize_to_fit self.model.thumb_format.width, self.model.thumb_format.height
       else
