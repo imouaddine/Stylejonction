@@ -3,14 +3,17 @@ class Stylejonction.Views.Projects.PreviewProjectItemView extends Backbone.View
   tagName:  "li",
   
   
+  
   initialize: ->
     @project = @options.project
-    _.bindAll(this, 'render');
-    @project.bind('change', this.render);
-    @project.bind('all', this.render);
+    _.bindAll(this, 'render')
+    @project.bind('change', this.render)
+   
+    @project.bind('all', this.render)
     
     
   render: ->
+    debug.log @project
     $(this.el).html(this.template(@project.toJSON(true)))
     return this
   

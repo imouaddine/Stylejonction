@@ -1,6 +1,6 @@
 <figure class="project_cover">
 	<% if(cover.image.thumb) { %>
-		<img src="<%= (cover.image.thumb.url) %>" alt="<%= title %>" ></img>
+		<img src="<%= (cover.image.thumb.url) %>?timestamp=<%= new Date().getTime() %>" alt="<%= title %>" ></img>
 	<% } %>
 	<figurecaption class="title">
 		<%= title %>

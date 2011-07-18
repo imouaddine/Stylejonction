@@ -4,4 +4,6 @@ class Stylejonction.Models.Image extends Stylejonction.Models.Base
   
   initialize: ()->
     super
+    @parent = null
+    
    

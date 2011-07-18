@@ -8,6 +8,7 @@ class Stylejonction.Models.Project extends  Stylejonction.Models.Base
     super
     @.url = @.url.replace ':id', @.id
     @cover = new Stylejonction.Models.Image(options.cover)
+    @cover.parent = this
     @ignored_attributes = ['cover']
 
 class Stylejonction.Collections.ProjectsCollection extends Backbone.Collection

@@ -11,7 +11,11 @@ class ProjectsController < ApplicationController
 
   def show
     @project = @portfolio.projects.find(params[:id])
-    respond_with(@project)
+    respond_to do |format|
+      format.json {render :text => @project.to_json(:include => :cover) }
+      format.html 
+    end
+    
   end
 
   def new

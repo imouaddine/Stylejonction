@@ -9,25 +9,28 @@ class ImagesController < ApplicationController
       format.html
     end
   end
-  def update
+  
+ 
+  
+  def upload
+     @selector  = params[:selector]
      @image = Image.find(params[:id])
      respond_to do |format|
        if @image.update_attributes(params[:image])
-         format.js 
+         format.html { render :layout => false }
          format.json {render :json => @image}
        else
-         format.js {render :template => 'portfolios/upload_cover_error'}
+         format.html 
          format.json {render :json => @image.errors }
        end
      end
-  end
-   
+  end 
    
   def crop
      @image = Image.find(params[:id])
      respond_to do |format|
        if @image.crop(params[:x], params[:y])
-         format.json { head :ok }
+         format.json { render :json => @image  }
        else 
          format.json { @image.thumb_format.errors.inspect }
        end
@@ -38,7 +41,7 @@ class ImagesController < ApplicationController
      @image = Image.find(params[:id])
      respond_to do |format|
         if @image.scale_to_fit
-          format.json { head :ok }
+          format.json { render :json => @image  }
         else 
           format.json { @image.errors.inspect }
         end

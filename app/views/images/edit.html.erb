@@ -1,11 +1,11 @@
-<div  id="edit_cover">
+<div  id="edit_image">
 	<section class="fancybox">
 		<header>
 			<h1 class="icon_link edit_link">Edit your thumbnail</h1>
 		</header>
 		<div class="content">
 			<div class="left_col">
-					<figure id="cover_editor" class="iviewer">
+					<figure id="image_editor" class="iviewer">
 					
 					</figure>
 			</div>
@@ -17,9 +17,10 @@
 			</div>
 		</div>
 		<footer>
-			<a href="#" id="submit" >Submit</a>
+			<a class="btn" href="#" id="submit" >Submit</a>
+			<a class="btn cancel" href="#" id="cancel" >Cancel</a>
 		</footer>
 		
 	</section>
 </div>
-<%= iviewer "#cover_editor", @image.image.url(:editable_thumb), "#scale_to_fit", @image.thumb_format.to_json.html_safe  %>
+<%= iviewer "#image_editor", @image.image.url(:editable_thumb), "#scale_to_fit", @image.thumb_format.to_json.html_safe  %>

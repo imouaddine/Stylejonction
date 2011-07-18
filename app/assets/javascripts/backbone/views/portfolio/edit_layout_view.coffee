@@ -8,9 +8,12 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
     "change .custom_background_toggle"                    : "toggleCustomBackgroundSection"
     "click  #layout_field .image_link"                    : "updateLayout"
     "click  .select_theme"                                :  "updateTheme"
+    
   
   initialize: (e)->
     @portfolio = @options.model
+    #
+    #
     
     
     #Edit pattern view 

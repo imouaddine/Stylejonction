@@ -1,6 +1,9 @@
 class Image < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
+  attr_accessible :image
+  
+  
   belongs_to :thumb_format, :class_name => "ImageFormat", :foreign_key => "thumb_format_id"
   belongs_to :original_format, :class_name => "ImageFormat", :foreign_key => "original_format_id"
   after_initialize :after_initialize

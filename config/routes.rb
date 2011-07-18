@@ -34,6 +34,7 @@ Stylejonction::Application.routes.draw do
   resources :fonts, :only => [:show]
   resources :images do
     member do 
+       post 'upload'
        match 'crop'
        match 'scale_to_fit'
     end

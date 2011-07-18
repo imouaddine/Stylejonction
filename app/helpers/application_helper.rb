@@ -6,7 +6,7 @@ module ApplicationHelper
           image_format = eval(#{image_format});
           image_format.scale_to_fit = Boolean(image_format.scale_to_fit);
           zoom_val = image_format.scale_to_fit? 'fit' : 100;
-          
+         
            $('#{element}').iviewer({
               src: '#{image_path}',
               update_on_resize: false,
@@ -40,7 +40,7 @@ module ApplicationHelper
      }.gsub(/[\n ]+/, ' ').strip.html_safe
      
   end
-  def photo_uploadify(element_selector, script_path, fileDataName)
+  def photo_uploadify(element_selector, image_selector, script_path, fileDataName)
      # Putting the uploadify trigger script in the helper gives us
      # full access to the view and native rails objects without having
      # to set javascript variables.
@@ -62,6 +62,7 @@ module ApplicationHelper
 
      <script type='text/javascript'>
        $(document).ready(function() {
+         var image_selector = $('#{image_selector}');
          $('#{element_selector}').uploadify({
            script          : '#{script_path}',
            fileDataName    : '#{fileDataName}',
@@ -79,7 +80,7 @@ module ApplicationHelper
              '#{session_key_name}' : encodeURIComponent('#{u(cookies[session_key_name])}'),
              'authenticity_token'  : encodeURIComponent('#{u(form_authenticity_token)}')
            },
-           onComplete      : function(a, b, c, response){  eval(response) }
+           onComplete : function(a, b, c, response){  if(image_selector.length > 0) image_selector.html(response).trigger('change'); else eval(response); }
          });
        });
      </script>
@@ -94,6 +95,12 @@ module ApplicationHelper
        else
           link_to(body, url, html_options)
        end
+   end
+   
+   def thumb_image_tag(image,  html_options = {})
+     if image && image.thumb_url
+        image_tag image.thumb_url, html_options 
+     end
    end
    
 end

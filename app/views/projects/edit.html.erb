@@ -28,7 +28,7 @@
           <section class="upload_image_section">
             <div class="first col">
               <figure id="cover">
-                <%= render 'cover', :cover => @project.cover %>
+                <%= render '/images/thumb', :image => @project.cover %>
               </figure>
               <div id="upload_custom_bg_links" class="upload_custom_bg_links">
                 <%= link_to  "Edit your cover", edit_image_path(@project.cover), :class => "icon_link edit_link iframe_fancy", :id => 'edit_project_cover' %>
@@ -92,7 +92,7 @@
   <% end %>
 </section>
 
-<%= photo_uploadify "#upload_project_cover", image_path(:format => 'js', :id => @project.cover), 'image[image]' %>
+<%= photo_uploadify "#upload_project_cover", "#cover", upload_image_path(:format => 'html', :id => @project.cover), 'image[image]' %>
 <% content_for :preview do %>
   <%= render  "portfolios/preview",  :action => 'edit_project'  %>
 <% end %>
