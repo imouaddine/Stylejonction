@@ -63,5 +63,35 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
 
     assert_equal before_count + 1, Invitation.count
   end
+  
+  test "can scale to fit project cover" do
+     @project.cover.thumb_format.update_attribute(:scale_to_fit, false)
+     visit edit_portfolio_project_path(@project)
+     find("#edit_project_cover").click
+     
+     check "Scale to fit"
+     
+     find("#submit").click
+     
+     @project.reload
+     
+     assert_equal @project.cover.thumb_format.scale_to_fit, true
+    
+  end
+  test "can scale to fit project cover" do
+     @project.cover.thumb_format.update_attribute(:scale_to_fit, false)
+     visit edit_portfolio_project_path(@project)
+     find("#edit_project_cover").click
+     
+     check "Scale to fit"
+     
+     find("#submit").click
+     
+     @project.reload
+     
+     assert_equal @project.cover.thumb_format.scale_to_fit, true
+  end
+  
+  
 
 end

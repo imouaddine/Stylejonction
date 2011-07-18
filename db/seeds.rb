@@ -74,6 +74,7 @@ puts "Create portfolio project"
   project = user.portfolio.projects.create(:title => "Project #{i}")
   project.cover.image.store!(File.open(File.join(Rails.root, "public/assets/images/projects/#{i}.jpg")))
   project.cover.save
+  project.cover.image.recreate_versions!
   project.save
   puts "project saved #{project.cover.thumb_url}"
 end
