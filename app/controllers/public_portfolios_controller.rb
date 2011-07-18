@@ -4,7 +4,11 @@ class PublicPortfoliosController < ApplicationController
 
   def show
     @portfolio = Portfolio.find(params[:id])
-    respond_with @portfolio
+    if @portfolio.published?
+      respond_with @portfolio
+    else
+      redirect_to "/"
+    end
   end
 
 end
