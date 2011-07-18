@@ -36,7 +36,7 @@
                         <%= link_to image_tag('images/logo.png'), '/' %>
          </div>
          <h1 id="page_title">
-             <%- if user_signed_in? -%>
+             <%- if user_signed_in? && request.subdomain == current_user.username -%>
                         <em><%= current_user.username %></em>'s portfolio
              <% end %>
                                         </h1>
