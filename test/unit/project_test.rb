@@ -27,7 +27,6 @@ class ProjectTest < ActiveSupport::TestCase
     assert ! project.default?
   end
 
-
   test "project upload" do
     user = Factory(:user)
     4.times do |i|
@@ -37,7 +36,6 @@ class ProjectTest < ActiveSupport::TestCase
       assert project.cover.image.url
     end
   end
-
 
   test "is image set when created" do
     project = Project.create(:title => 'New project')
@@ -93,5 +91,31 @@ class ProjectTest < ActiveSupport::TestCase
 
     assert_equal 1, Invitation.count
     assert ! Invitation.first.used?, "Invitation shouldn't be used"
+  end
+
+
+  test "copy gets created along with the project, they are both unpublished " do
+    Project.destroy_all
+    p1 = Project.create(:title => "one")
+
+    assert_equal Project.count, 2
+    assert_equal Project.first.published?, false
+    assert_equal Project.last.published?, false
+
+    assert_equal Project.first.project_copy, Project.last
+  end
+
+  test "project gets a default cover before saving " do
+    # Just to be sure:
+    Image.destroy_all
+    Project.destroy_all
+
+    p = Project.new(:title => "Give me a cover!!")
+    assert_equal true, p.cover.nil?
+    p.save
+    assert_equal false, p.cover.nil?
+    assert_equal 1, Image.count, "Same image for each copy"
+    assert_equal 2, Project.count
+    assert_equal Project.first.cover, Project.last.cover, "Should be identical"
   end
 end
