@@ -17,7 +17,7 @@ class Portfolio < ActiveRecord::Base
   validates_inclusion_of :theme, :in => THEMES, :message => "Theme  %s should be one of #{THEMES}"
 
   belongs_to :user
-  has_many :projects, :dependent => :destroy
+  has_many :projects, :dependent => :destroy, :after_add => :add_also_project_copy, :conditions => { :published => true }
   belongs_to :title_font, :class_name => "Font", :foreign_key => "title_font_id"
   belongs_to :body_font, :class_name => "Font", :foreign_key => "body_font_id"
   belongs_to :background, :polymorphic => true
@@ -109,4 +109,9 @@ class Portfolio < ActiveRecord::Base
     draft.save!
   end
 
+  def add_also_project_copy(project)
+    unless projects.include? project.project_copy
+      projects << project.project_copy
+    end
+  end
 end

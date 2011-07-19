@@ -20,16 +20,13 @@ class ProjectsController < ApplicationController
 
   def new
     next_number = @portfolio.projects.count + 1
-    # Temporary to make test pass, I found a solution to respect REST paradigm
-    # @project = @portfolio.projects.create(:title => "Project #{next_number}", :cover =>  Image.new)
-    # redirect_to edit_portfolio_project_path(@project)
     @project = @portfolio.projects.new(:title => "Project #{next_number}")
-    @image = Image.new
+    respond_with(@project)
   end
 
   def create
     next_number = @portfolio.projects.count + 1
-    @project = @portfolio.projects.create(:title => "Project #{next_number}")
+    @project = @portfolio.projects.create(params[:project])
     redirect_to edit_portfolio_project_path(@project)
   end
 

@@ -143,4 +143,13 @@ class PortfolioTest < ActiveSupport::TestCase
   end
 
 
+  test "sees only one of projects in a project/project_copy pair" do
+    portfolio = Factory.create(:portfolio)
+
+    portfolio.projects << Project.create(:title => "Fun fun fun!")
+
+    assert_equal Project.count, 2
+    assert_equal Project.last.project_copy, Project.first
+    assert_equal portfolio.projects.count, 1
+  end
 end
