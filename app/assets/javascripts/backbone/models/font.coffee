@@ -1,4 +1,4 @@
-class Stylejonction.Models.Font extends Stylejonction.Models.Base
+class Stylejonction.Models.Font extends Backbone.Model
   paramRoot: 'font'
   url: '/fonts/:id.json'
   

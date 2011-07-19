@@ -8,7 +8,7 @@ class Stylejonction.Models.Portfolio  extends  Stylejonction.Models.Base
     
   initialize: (options)->
     super
-    @.url = @.url.replace ':id', @.id
+    
     
     @body_font = new Stylejonction.Models.Font(options.body_font)
     @title_font = new Stylejonction.Models.Font(options.title_font)

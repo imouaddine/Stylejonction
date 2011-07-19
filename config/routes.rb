@@ -18,20 +18,19 @@ Stylejonction::Application.routes.draw do
       resources :projects  do
         member do
          post 'invite'
-         
-        
         end
       end
-      resource :background, :except => [:destroy, :new, :create] do
-        member do
-           match 'upload'
-        end
-      end
+      
+      
    end
   end
-
-  resources :invitations, :only => [:show]
   
+  resources :invitations, :only => [:show]
+  resources :custom_backgrounds, :only => [:edit, :update] do
+    collection do
+     post 'upload'
+    end
+  end
   resources :predefined_backgrounds, :only => [:show]
   
   resources :fonts, :only => [:show]

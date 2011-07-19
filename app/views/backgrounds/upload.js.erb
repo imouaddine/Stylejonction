@@ -1,3 +1,0 @@
-$('.background_preview').html('<%= background_image_tag @portfolio.background %>'); 
-$("#upload_custom_bg_links").show();
-window.controller.portfolio.trigger('backgroundChanged', new Stylejonction.Models.CustomBackground(<%= @portfolio.background.to_json.html_safe -%>));

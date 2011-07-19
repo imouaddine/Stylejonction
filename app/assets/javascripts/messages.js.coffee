@@ -1,10 +1,8 @@
-
 class Stylejonction.Messages
   constructor: ()->
     @.types = ['notice','warning','error']
     $('.message').click ->
       $(this).animate({top: -$(this).outerHeight()}, 500)
-      
     
   hideAll: ()->
     messageHeights = new Array()

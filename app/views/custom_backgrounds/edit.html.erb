@@ -1,0 +1,33 @@
+<div  id="edit_background">
+	<%= form_for(@background, :url => url_for_action(@background)) do |f| %>
+	<section class="fancybox" id="edit_own_background">
+		<header>
+			<h1 class="icon_link edit_link">Edit your background</h1>
+		</header>
+		<div class="content">
+				<div class="left_col">
+						<%= render 'thumbnail', :background => @background %>
+				</div>
+				<div class="right_col">
+					<p class="description">Drag your image to adjust</p>
+					<div>
+						<%= f.radio_button :display_mode, 'original'  %>
+						<%= f.label :display_mode_original, 'Orginal format' %>
+						<br>
+						<%= f.radio_button :display_mode, 'tile'  %>
+						<%= f.label :display_mode_tile, 'Tile' %>
+						<br>
+						<%= f.radio_button :display_mode, 'stretch'  %>
+						<%= f.label :display_mode_stretch, 'Stretch to fit' %>
+					</div>
+				
+					<p class="information hidden">Original image is <em>1024px x 768px</em></p>
+				</div>
+		</div>
+		<footer>
+			<%= submit_tag 'Save', :class  => 'btn', :id => 'submit' %>
+			<%= link_to 'Cancel', '#', :id => 'cancel', :class => 'btn' %>
+		</footer>
+	</section>
+	<% end %>
+</div>

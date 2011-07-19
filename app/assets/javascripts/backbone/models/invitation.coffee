@@ -1,7 +1,7 @@
-class Stylejonction.Models.Invitation extends Stylejonction.Models.Base
+class Stylejonction.Models.Invitation extends Backbone.Model
    paramRoot: 'invitation'
    url: "/portfolio/projects/:id/invite"
 
    initialize: ()->
      super
-     @.url = @.url.replace ':id', @.id
+    

@@ -38,6 +38,10 @@
   }
   figure#cover{
     width: 165px;
+    .preview_uploaded_image{
+      max-width: 165px;
+      max-height: 165px;
+    }
   }
   .tabs{
     li{

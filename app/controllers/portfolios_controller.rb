@@ -33,13 +33,10 @@ class PortfoliosController < ApplicationController
   end
 
   def update
-    if params[:background].present?
-      @portfolio.background = PredefinedBackground.find(params[:background][:id])
-    end
-
+    
     respond_to do |format|
       if @portfolio.update_attributes(params[:portfolio])
-        format.html { redirect_to edit_layout_portfolio_path, notice: 'Portfolio was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Portfolio was successfully updated.' }
         format.json { render json: @portfolio }
       else
         format.html { render action: "show" }

@@ -38,12 +38,16 @@ class Stylejonction.Views.Backgrounds.EditPredefinedView extends Backbone.View
     @.$("li").removeClass("selected")
     
     portfolio = @options.model
-    background = new Stylejonction.Models.CustomBackground( { id: newBackgroundId } )
+    background = new Stylejonction.Models.PredefinedBackground( { id: newBackgroundId } )
+   
+    $(e.currentTarget).parent().addClass("selected")
+    $(e.currentTarget).addClass("selected")
+    $("#portfolio_background_id").val(newBackgroundId)
+    $("#portfolio_background_type").val("PredefinedBackground")
+    $("#portfolio_predefined_background_id").val(newBackgroundId)
     
     background.fetch(
       success: (newBackground) ->
-        $(e.currentTarget).parent().addClass("selected")
-        $(e.currentTarget).addClass("selected")
         portfolio.trigger("backgroundChanged", newBackground)
     )
     

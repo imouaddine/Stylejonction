@@ -4,13 +4,13 @@ class Stylejonction.Views.Portfolios.EditFontView extends Backbone.View
   events:
     "click  #title_font_field .select_font":          "updateTitleFont"
     "click  #body_font_field .select_font":           "updateBodyFont"
-    "change  #color_picker_title_input":              "updateTitleColor"
-    "change  #color_picker_body_input":               "updateBodyColor"
+    "change  #portfolio_title_color":              "updateTitleColor"
+    "change  #portfolio_body_color":               "updateBodyColor"
     
     
   initialize: ()->
-    init_colorpicker('#color_picker_title')
-    init_colorpicker('#color_picker_body')
+    init_colorpicker('#color_picker_title', "#portfolio_title_color")
+    init_colorpicker('#color_picker_body', "#portfolio_body_color")
     
   updateTitleFont: (e)->
     e.preventDefault()
@@ -18,14 +18,9 @@ class Stylejonction.Views.Portfolios.EditFontView extends Backbone.View
     target = $(e.currentTarget)
     newFont = target.data('id')
     @.$("#title_font_field .select_font").removeClass("selected")
-    @options.model.save(
-      {'title_font_id': newFont},
-      success: -> 
-        $(e.currentTarget).addClass("selected")
-        
-      error: ->
-        debug.error 'An error has occcured while trying to update the title font #{newFont}'
-    )
+    @options.model.set({'title_font_id': newFont})
+    $(e.currentTarget).addClass("selected")
+    $("#portfolio_title_font_id").val(newFont)
 
 
   updateBodyFont: (e)->
@@ -34,33 +29,22 @@ class Stylejonction.Views.Portfolios.EditFontView extends Backbone.View
     target = $(e.currentTarget)
     newFont = target.data('id')
     @.$("#body_font_field .select_font").removeClass("selected")
-    @options.model.save({'body_font_id': newFont},
-      success: -> 
-        $(e.currentTarget).addClass("selected")
-      error: ->
-        debug.error 'An error has occcured while trying to update the body font #{newFont}'
-    )
+    $(e.currentTarget).addClass("selected")
+    @options.model.set({'body_font_id': newFont})
+    $("#portfolio_body_font_id").val(newFont)
+    
   updateTitleColor: (e)->
     e.preventDefault()
     e.stopPropagation()
     target = $(e.currentTarget)
     newColor = target.val()
-    @options.model.save(
-      {'title_color': newColor},
-      error: ->
-        debug.error 'An error has occcured while trying to update the title color #{newColor}'
-        
-      
-    )
+    @options.model.set({'title_color': newColor})
+   
 
   updateBodyColor: (e)->
     e.preventDefault()
     e.stopPropagation()
     target = $(e.currentTarget)
     newColor = target.val()
-    @options.model.save(
-      {'body_color': newColor},
-      error: ->
-        debug.error 'An error has occcured while trying to update the body color #{newColor}'
-        
-    )
+    @options.model.set({'body_color': newColor})
+   

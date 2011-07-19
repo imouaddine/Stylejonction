@@ -5,12 +5,19 @@
 
   <%= form_for(@portfolio, :url => portfolio_path) do |f| %>
 
-		<%= render ('portfolios/fields/background_field') %>
+		<%= render ('portfolios/fields/background_field'), :form => f %>
 		
 		<%= render ('portfolios/fields/layout_field') %>
 		
 		<%= render ('portfolios/fields/theme_field') %>
 		
+	
+
+	
+		<%= f.hidden_field :layout %>
+		<%= f.hidden_field :theme %>
+		
+	
 		<%= submit_tag 'Save' %>
 		
 	<% end %>

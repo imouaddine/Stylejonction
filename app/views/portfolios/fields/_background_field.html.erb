@@ -3,7 +3,10 @@
   <legend>Background image</legend>
   <p class="description">Select a background from the gallery or create your own background</p>
   <div>
-    <%= render 'backgrounds/predefined_background_field', :visible => @portfolio.has_predefined_background? %>
+    <%= render 'portfolios/fields/backgrounds/predefined/form', 
+							:visible => @portfolio.has_predefined_background?, 
+							:form => form,
+							:selected => @portfolio.predefined_background %>
     <div id="custom_background_field" class="field box background_field <%= 'hidden' if @portfolio.has_predefined_background? %>">
       <div>
         <a class="toggle_btn" href="#">
@@ -19,7 +22,8 @@
                   'update_custom_background',
                   @portfolio.has_custom_background?,
                   :id => "custom_background_input",
-                  :class => 'custom_background_toggle'   %>
+                  :class => 'custom_background_toggle'
+									   %>
               <label for="custom_background_input" >Upload your image</label>
             </li>
             <li>
@@ -27,18 +31,22 @@
                   'update_pattern_background',
                   @portfolio.has_pattern_background?,
                   :id => "pattern_background_input",
-                  :class => 'custom_background_toggle'    %>
+                  :class => 'custom_background_toggle'
+									    %>
               <label for="pattern_background_input">Choose a colour & pattern</label>
             </li>
           </ul>
         </div>
       </div>
       <div class="tabs">
-        <%= render 'backgrounds/update_custom',
+        <%= render 'portfolios/fields/backgrounds/custom/form',
+						:form => form,
             :background => @portfolio.custom_background,
             :visible => @portfolio.has_custom_background? || !@portfolio.has_pattern_background?,
             :show_links =>  @portfolio.has_custom_background? %>
- 				<%= render 'backgrounds/update_pattern',
+
+ 				<%= render 'portfolios/fields/backgrounds/pattern/form',
+						:form => form,
             :background => @portfolio.pattern_background,
  						:visible => @portfolio.has_pattern_background? %>
 
@@ -47,6 +55,8 @@
     </div>
   </div>
 </fieldset>
+	<%= form.hidden_field :background_id %>
+	<%= form.hidden_field :background_type %>
 
 
-<%= photo_uploadify "#upload_custom_bg", nil, upload_portfolio_background_path(:format => 'js'), 'background[background]' %>
+<%= photo_uploadify "#upload_custom_bg", nil, upload_custom_backgrounds_path(:format => 'js'), 'background[background]' %>

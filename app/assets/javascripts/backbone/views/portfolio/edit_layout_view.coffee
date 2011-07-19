@@ -11,7 +11,9 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
     
   
   initialize: (e)->
+    _.bindAll(this, 'updateCustomBackground')
     @portfolio = @options.model
+    @portfolio.bind 'backgroundChanged', @.updateCustomBackground
     
     #Edit pattern view 
     @.pattern_view = new Stylejonction.Views.Backgrounds.EditPatternView(
@@ -19,8 +21,6 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
         portfolio: @portfolio, 
         el: 'body'
     )
-   
-    
     #Edit background view 
     @.custom_view = new Stylejonction.Views.Backgrounds.EditCustomView(
       model: @portfolio.custom_background, 
@@ -33,37 +33,55 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
       model: @portfolio, 
       el: '#predefined_background_field'
     )
-    #Color pickers
-    #jcrop
+   
   
        
   toggleCustomBackgroundSection: (e)->
     e.preventDefault()
     e.stopPropagation()
+    
+    @.$("#custom_background_field .tabs > section").hide()
+    
     val = $(e.currentTarget).val()
+    type = $(e.currentTarget).data('type')
     visibleTab = $("##{val}")
-    @.$("#update_custom_background").show()
-    @.$("#custom_background_field .tabs > div").hide()
     visibleTab.show()
-    if val == "update_custom_background" 
-      custom_bg = @options.model.get('custom_background_id')
-      #@.saveBackground('CustomBackground', custom_bg)
-    else
-      pattern_bg_id = @options.model.get('pattern_background_id')
-      #@.saveBackground('PatternBackground', pattern_bg_id)
-  
+   
+    switch val
+      when 'update_custom_background'
+        id = @portfolio.custom_background.get('id')
+        $("#portfolio_background_id").val(id)
+        $("#portfolio_custom_background_id").val(id)
+        $("#portfolio_background_type").val("CustomBackground")
+        @portfolio.trigger("backgroundChanged", @portfolio.custom_background)
+      when 'update_pattern_background'
+        id = @portfolio.pattern_background.get('id')
+        $("#portfolio_background_id").val(id)
+        $("#portfolio_pattern_background_id").val(id)
+        $("#portfolio_background_type").val("PatternBackground")
+        @portfolio.trigger("backgroundChanged", @portfolio.pattern_background)
+    
+    
+    
+    
+    
+    
+    
   showPredefinedBackgroundSection: (e)->
-    e.preventDefault()
-    e.stopPropagation()
+      e.preventDefault()
+      e.stopPropagation()
     
-    $("#predefined_background_field").css("margin-left", '0')
-    $("#custom_background_field").css("margin-left", '-9999px')
-    $("#layout_field").addClass("move_to_top")
-    
-    selected_predefined_bg = @options.model.get('predefined_background_id')
-    @.saveBackground('PredefinedBackground', selected_predefined_bg)
+      $("#predefined_background_field").css("margin-left", '0')
+      $("#custom_background_field").css("margin-left", '-9999px')
+      $("#layout_field").addClass("move_to_top")
     
     
+      id = @portfolio.predefined_background.get('id')
+      $("#portfolio_background_id").val(id)
+      $("#portfolio_predefined_background_id").val(id)
+      $("#portfolio_background_type").val("PredefinedBackground")
+      
+      @portfolio.trigger("backgroundChanged", @portfolio.predefined_background)
     
    
     
@@ -76,12 +94,16 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
      $("#custom_background_field").css("margin-left", '0');
      $("#layout_field").removeClass("move_to_top"); 
      
-     custom_bg = @options.model.get('custom_background_id')
-     @.saveBackground('CustomBackground', custom_bg)
-     
      $("#custom_background_input").attr('checked', 'checked');
-     @.$("#custom_background_field .tabs > div").hide()
+     @.$("#custom_background_field .tabs > section").hide()
      $("#update_custom_background").show()
+     
+     id = @portfolio.custom_background.get('id')
+     $("#portfolio_background_id").val(id)
+     $("#portfolio_custom_background_id").val(id)
+     $("#portfolio_background_type").val("CustomBackground")
+     
+     @portfolio.trigger("backgroundChanged", @portfolio.custom_background)
      
 
   saveBackground: (type, background_id) ->
@@ -106,17 +128,39 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
      )
      
      
-       
+  updateCustomBackground: (e)->
+    @portfolio.background = e
+    switch e.type
+      when "PredefinedBackground"
+        background_attr = "#portfolio_predefined_background_id" 
+        @portfolio.predefined_background = e
+      when "CustomBackground"
+        background_attr = "#portfolio_custom_background_id" 
+        @portfolio.custom_background = e
+        custom_background_id = e.get('id')
+        $("#upload_custom_bg_links .edit_link").attr('href', "/custom_backgrounds/#{custom_background_id}/edit")
+      when "PatternBackground"
+        background_attr = "#portfolio_pattern_background_id" 
+        @portfolio.pattern_background = e
+    
+    $(background_attr).val(e.get('id')) 
+    $("#portfolio_background_id").val(e.get('id'))
+    $("#portfolio_background_type").val(e.type)
+    
+    
+    
+    
+        
   updateLayout: (e) ->
     e.preventDefault()
     e.stopPropagation()
     target = $(e.currentTarget)
     newLayout = target.data('id')
     @.$("#layout_field .image_link").removeClass("selected")
-    @options.model.save({'layout': newLayout}, 
-      success: -> 
-        $(e.currentTarget).addClass("selected")
-    )
+    $(e.currentTarget).addClass("selected")
+    @options.model.set({'layout': newLayout})
+    $("#portfolio_layout").val(newLayout)
+    
     
   updateTheme: (e) ->
     e.preventDefault()
@@ -124,10 +168,9 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
     target = $(e.currentTarget)
     newTheme = target.data('id')
     @.$("#theme_field .select_theme").removeClass("selected")
-    @options.model.save({'theme': newTheme},
-      success: -> 
-        $(e.currentTarget).addClass("selected")
-    )
+    $(e.currentTarget).addClass("selected")
+    @options.model.set({'theme': newTheme})
+    $("#portfolio_theme").val(newTheme)
   
   
   

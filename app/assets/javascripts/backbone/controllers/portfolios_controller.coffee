@@ -1,14 +1,12 @@
-class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
-
+class Stylejonction.Controllers.PortfoliosController extends Backbone.Router
+  
   initialize: (options) ->
     @options = options
     @portfolio = new Stylejonction.Models.Portfolio(options.portfolio)
-    
     @projects = new Stylejonction.Collections.ProjectsCollection()
     @projects.url = @projects.url.replace ':portfolio_id', @portfolio.id
-    @projects.refresh options.projects
-   
-    @action = "this." + options.action+'()'
+    @projects.reset options.projects
+    @action = "this.#{options.action}()"
 
   routes:
     ".*": "default"
@@ -19,14 +17,12 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Controller
     @add_preview()
 
   edit_layout_portfolio: ->
-  
     @view = new Stylejonction.Views.Portfolios.EditLayoutView(
       model: @portfolio
       el: '#edit_portfolio_layout'
     )
 
   edit_font_portfolio: ->
-    
     @view = new Stylejonction.Views.Portfolios.EditFontView(model: @portfolio, el: '#edit_portfolio_font')
 
   edit_project: ->

@@ -17,9 +17,7 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
     @portfolio.bind 'change', @.update
     @projects.bind  'add',     @.addOneProject
     @portfolio.bind 'backgroundChanged', @.updateBackground
-    @body_font.bind 'change', @.updateBodyFont
-    @title_font.bind 'change', @.updateTitleFont
-
+  
   addOneProject: (project) ->
     @view = new Stylejonction.Views.Projects.PreviewProjectItemView({project: project})
     @.$("#projects_list").append(@view.render().el)
@@ -31,13 +29,12 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
     if @portfolio.hasChanged('layout')
       layout = @portfolio.get('layout')
       $("#preview_content").removeClass(className) for className in ['layout_left', 'layout_right', 'layout_top', 'layout_bottom']
-      $("#preview_content").addClass("layout_#{layout}");
+      $("#preview_content").addClass("layout_#{layout}")
     
     if @portfolio.hasChanged('theme')
       $("#preview_content").removeClass(className) for className in ['theme_light', 'theme_dark']
       theme = @portfolio.get('theme')
-      $("#preview_content").addClass("theme_#{theme}");
-    
+      $("#preview_content").addClass("theme_#{theme}")
 
     if @portfolio.hasChanged('body_font_id')
       @portfolio.body_font = new Stylejonction.Models.Font({id: @portfolio.get('body_font_id')}) 

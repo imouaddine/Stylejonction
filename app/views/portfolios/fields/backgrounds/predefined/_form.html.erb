@@ -1,4 +1,4 @@
-<div id="predefined_background_field" class="field box background_field <%= 'hidden' unless  visible %>">
+<section  id="predefined_background_field" class="field box background_field <%= 'hidden' unless  visible %>">
 	<div class="own_background">
 			<a class="toggle_btn" id="toggle_btn" href="#">CREATE<br>YOUR OWN</a>
 			<span class="title">Custom</span>
@@ -7,8 +7,8 @@
 	<ul class="horizontal_list background_list">
 	    <%- if @backgrounds.present? %>
 				<% @backgrounds.each do |background| %>
-					<li class='<%= 'selected' if @portfolio.predefined_background == background  %>' >
-						<a class='image_link <%= 'selected' if @portfolio.predefined_background == background  %>' data-id='<%= background.id %>' href="#" class="image_link" style="background-image: url(<%= background.background.url(:preview) %>)">
+					<li class='<%= 'selected' if selected == background  %>' >
+						<a class='image_link <%= 'selected' if selected == background  %>' data-id='<%= background.id %>' href="#" class="image_link" style="background-image: url(<%= background.background.url(:preview) %>)">
 						
 							<span class="image_overlay"></span>
 						</a>
@@ -22,4 +22,7 @@
 		<a id="left_scroll_bg" href="#" class="left_scroll" ></a>
 		<a id="right_scroll_bg"  href="#" class="right_scroll" ></a>
 	</div>
-</div>
+
+</section>
+
+<%= form.hidden_field :predefined_background_id %>

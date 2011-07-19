@@ -1,8 +1,10 @@
 Stylejonction.Views.Backgrounds ||= {}
 
 class Stylejonction.Views.Backgrounds.EditCustomView extends Backbone.View
+  
   events:
-    "change input[name='display_mode']"    : "updateBgDisplayMode"
+    "click #submit"    : "submit"
+    "click #cancel"    : "cancel"
     
   
   initialize: ()->
@@ -10,18 +12,11 @@ class Stylejonction.Views.Backgrounds.EditCustomView extends Backbone.View
     @background =  @options.model
     
     @.validatesParams()
+   
     #fancybox
     @.init_fancybox()
-    #@.init_jcrop()
+   
 
-
-
-
-
-
-  init_jcrop: ()->
-    $('.cropbox').Jcrop
-       aspectRatio: 0
     
   init_fancybox: ()->
     $(".iframe_fancy").fancybox
@@ -29,17 +24,24 @@ class Stylejonction.Views.Backgrounds.EditCustomView extends Backbone.View
       showCloseButton: true,
       padding: 0
       
-  updateBgDisplayMode: (e)->
-    
+  submit: (e)->
     e.preventDefault()
     e.stopPropagation()
     portfolio = @portfolio
-    target = $(e.currentTarget)
-    @background.save(
-       {'display_mode': target.val() },
+    newDisplayMode = @.$("#edit_background input[type='radio']:checked").val()
+    @portfolio.custom_background.save(
+       {'display_mode': newDisplayMode },
        success: (model)->
          portfolio.trigger("backgroundChanged", model)
     )
+   
+    $.fancybox.close()
+    
+  cancel: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    $.fancybox.close()
+    
   validatesParams: ()->
     if @portfolio not instanceof Stylejonction.Models.Portfolio
       debug.error 'Error. Portfolio object of EditCustomView is not valid'

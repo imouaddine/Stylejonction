@@ -32,14 +32,7 @@ class BackgroundsController < ApplicationController
   end
   
   def upload
-     params[:background][:user_id] = @portfolio.user.id
-    
-     if !@portfolio.has_custom_background?
-        @portfolio.background_type = 'CustomBackground'
-        @background = CustomBackground.create
-     else
-       @background = @portfolio.background
-     end
+      @background = CustomBackground.new
       respond_with do |format|
         if @background.update_attributes(params[:background])
             @portfolio.save

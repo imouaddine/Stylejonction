@@ -1,10 +1,12 @@
 <section class="upload_custom_bg <%= 'hidden' unless visible %> upload_image_section" id="update_custom_background">
 		<div class="first col">
 			<figure>
-				<%= render 'backgrounds/preview', :background => background %>
+				<%= render 'custom_backgrounds/thumbnail', :background => background %>
 			</figure>
 			<div id="upload_custom_bg_links" class="upload_custom_bg_links">
-				<a class="icon_link edit_link iframe_fancy" href="<%= edit_portfolio_background_path %>">Edit your background</a>
+				<%= link_to "Edit your background", edit_custom_background_path(background) , :class => "icon_link edit_link iframe_fancy" %>
+				
+				<a class= href="#"></a>
 				<!--<a class="icon_link remove_link hidden" href="#">Remove</a> -->
 			</div>
 		</div>
@@ -13,3 +15,4 @@
 			<p class="information">Ideal dimension: 1024 px x 768 px – JPG, PNG formats</p>
 		</div>
 </section>
+<%= form.hidden_field :custom_background_id %>

@@ -1,10 +1,12 @@
-<div class="<%= 'hidden' unless visible %>" id="update_pattern_background">
+<section class="<%= 'hidden' unless visible %>" id="update_pattern_background">
+	<%= form.fields_for :pattern_background do |pattern_background_fields| %>
   <p class="description"> Click <em>boxes</em> to customize</p>
   <ul>
     <li>
       <div class="color_picker " id="background_pattern_color_picker">
         <div class="panel" style="background-color: #<%= background.color %>"></div>
-        <input type="hidden" id="background_pattern_color_picker_input" value="<%= background.color %>" ></input>
+				<%= pattern_background_fields.hidden_field :color  %>
+       
       </div>
     </li>
     <li class="text">&</li>
@@ -23,4 +25,6 @@
       </div>
     </li>
   </ul>
-</div>
+ <% end %>
+</section>
+<%= form.hidden_field :pattern_background_id %>

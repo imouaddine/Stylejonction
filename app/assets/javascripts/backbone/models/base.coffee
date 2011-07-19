@@ -1,6 +1,7 @@
 class Stylejonction.Models.Base extends Backbone.Model
   initialize: ()->
     @ignored_attributes = new Array()
+    @.url = @.url.replace ':id', @.id
     
   toJSON: (includeIgnoreAttributes) ->
     
