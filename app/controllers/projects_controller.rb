@@ -26,18 +26,20 @@ class ProjectsController < ApplicationController
 
   def create
     next_number = @portfolio.projects.count + 1
-    @project = @portfolio.projects.create(params[:project])
+    @project = @portfolio.projects.new(params[:project])
+    flash[:notice] = "Project was successfully created" if @project.save!
     redirect_to edit_portfolio_project_path(@project)
   end
 
   def edit
     @project = @portfolio.projects.find(params[:id])
+    respond_with(@project)
   end
 
   def update
     @project = @portfolio.projects.find(params[:id])
     flash[:notice] = "Project was successfully updated" if @project.update_attributes(params[:project])
-    redirect_to  edit_portfolio_project_path(@project)
+    redirect_to edit_portfolio_project_path(@project)
   end
 
   def invite
