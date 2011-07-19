@@ -56,11 +56,12 @@ class Project < ActiveRecord::Base
       other.project_copy_id = self.id
       other.portfolio_id = self.portfolio_id
       other.cover_id = self.cover_id
-      other.default = false
-      other.public = false
+      other.default = self.default
+      other.public = self.public
       other.published = false
       other.save
       self.project_copy = other
+      self.published = true
       save
     end
   end
