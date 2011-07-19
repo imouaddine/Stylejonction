@@ -94,13 +94,13 @@ class ProjectTest < ActiveSupport::TestCase
   end
 
 
-  test "copy gets created along with the project, they are both unpublished " do
+  test "copy gets created along with the project, one is unpublished " do
     Project.destroy_all
     p1 = Project.create(:title => "one")
 
     assert_equal Project.count, 2
-    assert_equal Project.first.published?, false
-    assert_equal Project.last.published?, false
+    assert_equal p1.project_copy.published?, false
+    assert_equal p1.published?, true
 
     assert_equal Project.first.project_copy, Project.last
   end

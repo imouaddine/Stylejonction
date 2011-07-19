@@ -105,7 +105,7 @@ class Portfolio < ActiveRecord::Base
   end
 
   def add_also_project_copy(project)
-    unless projects.include? project.project_copy
+    if project.project_copy && !(projects.include? project.project_copy)
       projects << project.project_copy
     end
   end
