@@ -50,10 +50,10 @@ class ProjectsControllerTest < ActionController::TestCase
   end
 
   test "should be able to create new project " do
-    # TODO: move this to integration once it works
     sign_in @user
-    post :portfolio_id => @portfolio.id, :project => { :title => "This is awesome" }
+    post :create, :portfolio_id => @portfolio.id, :project => { :title => "This is awesome" }
     assert_equal "This is awesome", Project.last.title
+    assert_equal "This is awesome", Project.last.project_copy.title
   end
 
 end
