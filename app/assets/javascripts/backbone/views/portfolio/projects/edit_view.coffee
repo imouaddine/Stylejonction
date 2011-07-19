@@ -9,7 +9,6 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     "click #send_invites":          "send_invites"
     "change #cover"                 :"cover_changed"
 
-
   initialize: ()->
     _.bindAll(this, 'showCover', 'on_fancybox_complete')
     @project = @options.model
