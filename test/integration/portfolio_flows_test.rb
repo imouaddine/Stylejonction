@@ -28,7 +28,7 @@
   test "edit_layout portfolio page" do
     
     @portfolio.background = Factory (:pattern_background)
-    @portfolio.save
+    assert @portfolio.save, @portfolio.errors.inspect
     
     background = Factory( :predefined_background )
     
@@ -36,12 +36,11 @@
 
     find(".image_link[@data-id='#{background.id}']").click
 
-    click_button 'Save'
+    click_button 'Save portfolio'
     
     @portfolio.reload
     
-    #why it's not working
-    #assert_equal background, @portfolio.background
+    assert_equal background, @portfolio.background
 
   end
   
@@ -53,42 +52,54 @@
 
      find("#layout_link_top").click
 
-     click_button 'Save'
+     click_button 'Save portfolio'
      
      @portfolio.reload
      
-     #why it's not working
-     #assert_equal @portfolio.layout, 'top'
+     assert_equal @portfolio.layout, 'top'
 
    end
    
-   test "update theme portfolio page" do
-      @portfolio.theme = 'light'
-      @portfolio.save
+   test "update portfolio theme" do
+     @portfolio.theme = "light"
+     @portfolio.save
 
-      visit  edit_layout_portfolio_path
+     visit  edit_layout_portfolio_path
 
-      find("#select_theme_dark").click
+     click_link "DARK"
 
-      click_button 'Save'
+     assert_equal true, page.has_css?('#preview_content.theme_dark')
+
+     click_button 'Save portfolio'
+
+     @portfolio.reload
+
      
-      #why it's not working
-      #assert_equal @portfolio.theme, 'dark'
+     assert_equal @portfolio.theme, "dark"
 
-    end
+   end
+   
 
   test "update display mode of custom background" do
     @portfolio.background = Factory( :custom_background, :user => @user )
-    assert_equal @portfolio.save, true
-    @portfolio.reload
+    assert @portfolio.save, @portfolio.errors.inspect
+   
     visit  edit_layout_portfolio_path
 
-
+    choose('Upload your image')
+  
     find("#upload_custom_bg_links .edit_link").click
-    find("#edit_own_background input[@value='tile']").click
-    @portfolio.background.reload
-
-    assert_equal @portfolio.background.display_mode, "tile"
+    
+    within("#edit_own_background") do
+      choose('Tile')
+      click_button 'Save'
+    end
+   
+    click_button 'Save portfolio'
+    
+    @portfolio.reload
+    
+    assert_equal "tile", @portfolio.background.display_mode
   end
 
   test "update portfolio fonts" do
@@ -100,7 +111,7 @@
     
     visit  edit_font_portfolio_path
     
-    page.execute_script("$('#color_picker_title_input').val('#{title_color}'); $('#color_picker_body_input').val('#{body_color}'); $('#color_picker_title_input, #color_picker_body_input').trigger('change')")
+    page.execute_script("$('#portfolio_title_color').val('#{title_color}'); $('#portfolio_body_color').val('#{body_color}');")
 
     
     
@@ -108,7 +119,7 @@
     find('#body_font_field').click_link(body_font.name)
      
    
-   
+    click_button 'Save portfolio'
     
     @portfolio.reload
     
@@ -128,19 +139,7 @@
     
   end
 
-  test "update portfolio theme" do
-    @portfolio.theme = "light"
-    @portfolio.save
 
-    visit  edit_layout_portfolio_path
-    find("#select_theme_dark").click
-    
-    @portfolio.reload
-    
-    assert_equal "dark", @portfolio.theme
-    assert_equal true, page.has_css?('#preview_content.theme_dark')
-
-  end
   
   test "update portfolio layout" do
     @portfolio.layout = "left"
@@ -149,10 +148,15 @@
     visit  edit_layout_portfolio_path
     find("#layout_link_top").click
     
+    assert_equal true, page.has_css?('#preview_content.layout_top')
+    
+    click_button 'Save portfolio'
+    
     @portfolio.reload
     
+    
     assert_equal "top", @portfolio.layout
-    assert_equal true, page.has_css?('#preview_content.layout_top')
+    
 
   end
   

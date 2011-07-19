@@ -6,7 +6,6 @@ class Stylejonction.Models.Project extends  Stylejonction.Models.Base
 
   initialize: (options)->
     super
-    @.url = @.url.replace ':id', @.id
     @cover = new Stylejonction.Models.Image(options.cover)
     @cover.parent = this
     @ignored_attributes = ['cover']

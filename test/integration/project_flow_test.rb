@@ -21,9 +21,11 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
 
   test "can change projects title" do
     visit edit_portfolio_project_path(@project)
-    fill_in "title", :with => "This is my title"
+    fill_in "project_title", :with => "This is my title"
     find("#project_title").check("project_default")
-
+    
+    click_button 'Save project'
+    
     @project.reload
 
     assert_equal "This is my title", @project.title
@@ -32,6 +34,9 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
   test "can make project default" do
     visit edit_portfolio_project_path(@project)
     check("project_default")
+    
+    click_button 'Save project'
+     
     @project.reload
 
     assert_equal true, @project.default?
@@ -40,6 +45,7 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
   test "can make project private" do
     visit edit_portfolio_project_path(@project)
     find("#privacy").find("#private_project_btn").click
+    click_button 'Save project'
     @project.reload
     assert_equal false, @project.public?
   end

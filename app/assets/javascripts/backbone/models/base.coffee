@@ -3,8 +3,7 @@ class Stylejonction.Models.Base extends Backbone.Model
     @ignored_attributes = new Array()
     @.url = @.url.replace ':id', @.id
     
-  toJSON: (includeIgnoreAttributes) ->
-    
+  toJSON: (includeIgnoreAttributes = false) ->
     return _.clone(@attributes) if includeIgnoreAttributes
     #TO ignore associations
     attributes = _.clone(@attributes)

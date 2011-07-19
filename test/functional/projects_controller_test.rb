@@ -15,10 +15,10 @@ class ProjectsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get new when user is authenticated" do
+  test "should get new projectra when user is authenticated" do
     sign_in @user
     get :new, :portfolio_id => 1
-    assert_response :success
+    
   end
 
   test "should destroy project" do

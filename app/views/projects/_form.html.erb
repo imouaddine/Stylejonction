@@ -1,6 +1,6 @@
 <%= render('/portfolios/sidebar') %>
 <section id="edit_project" class="edit_project edit">
-  <%= form_for(@project, :url => edit_portfolio_project_path(@project)) do |f| %>
+  <%= form_for(@project, :url => portfolio_project_path(@project) ) do |f| %>
     <header>
       <ul class="tabs horizontal_list">
         <li><a href="#" class="active left" >Project properties</a></li>
@@ -90,7 +90,7 @@
     </div>
 		<footer>
 			<%= f.hidden_field :public %>
-			<%= submit_tag 'Save' %>
+			<%= submit_tag 'Save project' %>
 		</footer>
   <% end %>
 </section>

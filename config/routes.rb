@@ -26,11 +26,7 @@ Stylejonction::Application.routes.draw do
   end
   
   resources :invitations, :only => [:show]
-  resources :custom_backgrounds, :only => [:edit, :update] do
-    collection do
-     post 'upload'
-    end
-  end
+  resources :custom_backgrounds, :only => [:edit, :update, :create] 
   resources :predefined_backgrounds, :only => [:show]
   
   resources :fonts, :only => [:show]

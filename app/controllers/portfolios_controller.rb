@@ -33,7 +33,6 @@ class PortfoliosController < ApplicationController
   end
 
   def update
-    
     respond_to do |format|
       if @portfolio.update_attributes(params[:portfolio])
         format.html { redirect_to :back, notice: 'Portfolio was successfully updated.' }

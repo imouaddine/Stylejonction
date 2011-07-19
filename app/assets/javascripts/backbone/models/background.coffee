@@ -3,6 +3,7 @@ class Stylejonction.Models.Background extends Stylejonction.Models.Base
   url: ''
   
   initialize: ()->
+    super
     @.url = @.url.replace ':id', @.id
 
   background_url: ()->

@@ -21,6 +21,15 @@ class PortfolioTest < ActiveSupport::TestCase
     assert_equal @font, @portfolio.body_font
 
   end
+  
+  test "test portfolio validation" do 
+    @portfolio.theme = 1
+    assert_equal false, @portfolio.save, "Saving should fail when theme has not a valid value"
+     
+    @portfolio.layout = "south"
+    assert_equal  false, @portfolio.save
+     
+  end
   test "can change portfolio state to published" do
     @portfolio.publish!
     @portfolio.reload

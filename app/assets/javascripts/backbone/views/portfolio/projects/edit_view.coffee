@@ -17,6 +17,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     @cover = @project.cover
    
     @cover.bind 'change', @.showCover
+    
     @.init_fancybox()
 
   init_fancybox: ()->
