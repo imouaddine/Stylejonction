@@ -14,7 +14,7 @@
           <span class="order">1</span>
           <legend>Project title</legend>
           <p class="description">Give your project a catchy title. (ex.: Spring 2011 Streetwear Designs)</p>
-          <%= text_field_tag 'title', @project.title, :placeholder => 'Enter project title here' %>
+          <%= f.text_field 'title', { :placeholder => @project.title } %>
           <div>
             <%= f.check_box 'default'  %>
             <%= f.label 'default', "<em>Make this your default project.</em> Will become the cover project for your portfolio.".html_safe %>

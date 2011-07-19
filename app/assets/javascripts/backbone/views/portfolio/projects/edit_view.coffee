@@ -2,24 +2,23 @@ Stylejonction.Views.Projects ||= {}
 
 class Stylejonction.Views.Projects.EditView extends Backbone.View
 
-  # events:
-  #   "change #title":                "update"
-  #   "change #project_default":      "update"
-  #   "click #public_project_btn":    "update_visibility_public"
-  #   "click #private_project_btn":   "update_visibility_private"
-  #   "click #send_invites":          "send_invites"
-  #   "change #cover"                 :"cover_changed"
+  events:
+    #"change #title":                "update"
+    #"change #project_default":      "update"
+    "click #public_project_btn":    "update_visibility_public"
+    "click #private_project_btn":   "update_visibility_private"
+    "click #send_invites":          "send_invites"
+    #"change #cover"                 :"cover_changed"
 
 
   initialize: ()->
     _.bindAll(this, 'showCover', 'on_fancybox_complete')
     @project = @options.model
     @cover = @project.cover
-
     @cover.bind 'change', @.showCover
-
-
     @.init_fancybox()
+
+
 
   init_fancybox: ()->
     $(".iframe_fancy").fancybox
