@@ -23,7 +23,7 @@ class ProjectsControllerTest < ActionController::TestCase
 
   test "should destroy project" do
     sign_in @user
-    assert_difference('Project.count', -1) do
+    assert_difference('Project.count', -2) do
       delete :destroy, :portfolio_id => @portfolio.id, :id => @project.id
     end
   end
@@ -36,7 +36,7 @@ class ProjectsControllerTest < ActionController::TestCase
 
     invitation_count = Invitation.count
 
-    assert_difference('Project.count', -1) do
+    assert_difference('Project.count', -2) do
       delete :destroy, :portfolio_id => @portfolio.id, :id => @portfolio.projects.first
     end
     assert_equal (invitation_count - 2), Invitation.count
