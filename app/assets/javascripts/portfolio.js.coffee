@@ -8,11 +8,9 @@ $ ->
   for type in window.messages.types
     if $(".#{type}.has_content").length > 0
       window.messages.show(type)
- 
-    
-  
-  
-  
+
+
+
   #PREVIEW
   $("#preview_wrapper").draggable({ axis: "y" })
   $('#preview_wrapper').bind 'drag', (event, ui) =>
@@ -21,15 +19,15 @@ $ ->
     $("#preview_wrapper").height( window.document_height - ui.offset.top )
     newHeight = window.document_height - ui.offset.top
     $("#preview").height( newHeight )
-    
+
     delta =  ui.position.top - ui.originalPosition.top
     if( (delta > 0 && newHeight < 50) || ( (newHeight + 100) >=   window.document_height && delta < 0  ) )
       return false
-    
-  $("#dragger").dblclick -> 
+
+  $("#dragger").dblclick ->
     $("#preview_wrapper").height(window.initialHeight)
-    $("#preview_wrapper").animate({top: initialOffset.top}, 1000) 
-  
+    $("#preview_wrapper").animate({top: initialOffset.top}, 1000)
+
 $(window).bind "load", () ->
     $("#preview_wrapper").pinFooter()
     window.initialOffset = $("#preview_wrapper").offset()
@@ -38,7 +36,7 @@ $(window).bind "load", () ->
 
 $(window).bind "resize", ()->
     $("#preview_wrapper").pinFooter()
-    
+
 window.init_colorpicker = (element, input) ->
   $(element).ColorPicker
        onChange: (hsb, hex, rgb) ->
@@ -50,20 +48,19 @@ window.init_colorpicker = (element, input) ->
      	   $(input).trigger("change")
    .bind 'keyup', () =>
    	  $(this).ColorPickerSetColor(this.value)
-  
 
-    
-  
 
-  
-    
-      
-   
-    
-    
-    
-      
 
-  
 
-  
+
+
+
+
+
+
+
+
+
+
+
+

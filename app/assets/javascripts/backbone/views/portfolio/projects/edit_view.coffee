@@ -2,7 +2,7 @@ Stylejonction.Views.Projects ||= {}
 class Stylejonction.Views.Projects.EditView extends Backbone.View
 
   events:
-    "change #project_title":          "update"
+    "change #project_title":        "update"
     "change #project_default":      "update"
     "click #public_project_btn":    "update_visibility_public"
     "click #private_project_btn":   "update_visibility_private"
@@ -11,11 +11,13 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
 
   initialize: ()->
     _.bindAll(this, 'showCover', 'on_fancybox_complete')
-    @project = @options.model
-
-    @cover = @project.cover
-    @cover.bind 'change', @.showCover
     $("#edit_project").tabs()
+    @project = @options.model
+    if @project.cover?
+      @cover = @project.cover
+    else
+      @cover = new Stylejonction.Models.Image({})
+    @cover.bind 'change', @.showCover
 
 
   init_fancybox: ()->
