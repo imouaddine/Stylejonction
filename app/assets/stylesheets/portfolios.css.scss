@@ -45,16 +45,15 @@ label{
 }
 form {
   fieldset{
-    margin: 10px;
+    margin: 30px;
     position: relative;
-    padding-left: span(1);
     margin-bottom: 40px;
     .order{
       display: block;
       position: absolute;
       left: 0;
       top: 0;
-      margin-left: -20px;
+      left: -40px;
       background: transparent url('images/circle_bg.png') repeat-x;
       width: 30px;
       height: 30px;

@@ -18,6 +18,8 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
    
     @cover.bind 'change', @.showCover
     
+    $("#edit_project").tabs()
+    
     @.init_fancybox()
 
   init_fancybox: ()->
