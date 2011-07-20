@@ -152,9 +152,10 @@ class PortfolioTest < ActiveSupport::TestCase
     assert_equal portfolio.projects.count, 1
   end
 
-  test "when the portfolio is published one project is published if theres none" do
+  test "when the portfolio is published one project is published if there's none" do
     portfolio = Factory.create(:portfolio)
-    portfolio.projects << Project.create(:title => "Publish me")
+    portfolio.projects << Project.create(:title => "Publish me", :public => false)
+    assert_equal 2, Project.count
     assert_equal 2, portfolio.projects.count
   end
 
