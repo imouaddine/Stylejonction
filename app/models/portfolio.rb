@@ -21,6 +21,7 @@ class Portfolio < ActiveRecord::Base
   has_many :published_projects, :class_name => "Project", :conditions => { :published => true }
   belongs_to :title_font, :class_name => "Font", :foreign_key => "title_font_id"
   belongs_to :body_font, :class_name => "Font", :foreign_key => "body_font_id"
+
   belongs_to :background, :polymorphic => true
   belongs_to :predefined_background
   belongs_to :custom_background

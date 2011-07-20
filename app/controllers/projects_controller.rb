@@ -33,12 +33,12 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = @portfolio.projects.find(params[:id])
+    find_project
     respond_with(@project)
   end
 
   def update
-    @project = @portfolio.projects.find(params[:id])
+    find_project
     check_defaultness
     flash[:notice] = "Project was successfully updated" if @project.update_attributes(params[:project])
     redirect_to edit_portfolio_project_path(@project)
@@ -84,8 +84,13 @@ class ProjectsController < ApplicationController
     set_to_default = params[:project][:default]
     if !@project.default? && set_to_default
       params[:project].delete(:default)
-      @porject.make_default
+      @project.make_default
     end
+  end
+
+  def find_project
+    p = Project.find(params[:id])
+    @project = p.published? ? p.project_copy : p
   end
 
 end
