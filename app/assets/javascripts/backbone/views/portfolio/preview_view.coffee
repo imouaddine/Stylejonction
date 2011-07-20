@@ -45,9 +45,13 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
       @title_font = new Stylejonction.Models.Font({id: @portfolio.get('title_font_id')}) 
       @title_font.bind 'change', @.updateTitleFont
       @title_font.fetch()
-     
-    
-    
+      
+    if @portfolio.hasChanged('title_color')
+      @.updateTitleColor(@portfolio.get('title_color') )
+      
+    if @portfolio.hasChanged('body_color')
+      @.updateBodyColor(@portfolio.get('body_color') )
+      
 
   updateBackground: (background)->
     @background = background
@@ -61,6 +65,15 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
   updateTitleFont: (font) ->
     @.$("#preview_content .title").css("fontFamily", font.get('name'))
     @.addFontUrl(font)
+    
+  updateTitleColor: (title_color) ->
+    @.$("#preview_content .title").css("color", "##{title_color}")
+    
+  updateBodyColor: (body_color) ->
+    @.$("#preview_content .content").css("color", "##{body_color}")
+    
+    
+
     
         
     
@@ -78,6 +91,8 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
     @.update()
     @.updateBodyFont(@body_font)
     @.updateTitleFont(@title_font)
+    @.updateTitleColor(@portfolio.get('title_color') )
+    @.updateBodyColor(@portfolio.get('body_color') )
     return this
 
 
