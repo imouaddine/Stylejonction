@@ -17,7 +17,8 @@ class Portfolio < ActiveRecord::Base
   validates_inclusion_of :theme, :in => THEMES, :message => "Theme  %s should be one of #{THEMES}"
 
   belongs_to :user
-  has_many :projects, :dependent => :destroy, :after_add => :add_also_project_copy, :conditions => { :published => true }
+  has_many :projects, :dependent => :destroy, :after_add => :add_also_project_copy, :conditions => { :published => false }
+  has_many :published_projects, :class_name => "Project", :conditions => { :published => true }
   belongs_to :title_font, :class_name => "Font", :foreign_key => "title_font_id"
   belongs_to :body_font, :class_name => "Font", :foreign_key => "body_font_id"
   belongs_to :background, :polymorphic => true

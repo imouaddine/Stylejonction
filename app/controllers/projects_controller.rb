@@ -28,6 +28,7 @@ class ProjectsController < ApplicationController
     next_number = @portfolio.projects.count + 1
     @project = @portfolio.projects.new(params[:project])
     flash[:notice] = "Project was successfully created" if @project.save!
+    @project.make_default if @project.default?
     redirect_to edit_portfolio_project_path(@project)
   end
 
@@ -38,6 +39,7 @@ class ProjectsController < ApplicationController
 
   def update
     @project = @portfolio.projects.find(params[:id])
+    check_defaultness
     flash[:notice] = "Project was successfully updated" if @project.update_attributes(params[:project])
     redirect_to edit_portfolio_project_path(@project)
   end
@@ -77,4 +79,13 @@ class ProjectsController < ApplicationController
     return true if invite.used?
     return false
   end
+
+  def check_defaultness
+    set_to_default = params[:project][:default]
+    if !@project.default? && set_to_default
+      params[:project].delete(:default)
+      @porject.make_default
+    end
+  end
+
 end

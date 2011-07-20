@@ -19,16 +19,12 @@ class Project < ActiveRecord::Base
 
   scope :default, where(:default => true)
 
-
-  def set_to_default
+  def make_default
     if portfolio.present?
-      portfolio.projects.each do |p|
-        p.update_attribute(:default, false)
-      end
+      portfolio.projects.each { |p| p.update_attribute(:default, false) }
+      portfolio.published_projects.each { |p| p.update_attribute(:default, false) }
     end
-
-    self.default = true
-    self.save
+    self.update_attribute(:default, true)
   end
 
   def invite(email)
@@ -40,7 +36,7 @@ class Project < ActiveRecord::Base
   def add_default_cover
     self.cover = Image.create
     self.cover.set_thumb_dimension( THUMB_FORMAT_DIMENSIONS[:width],
-                                      THUMB_FORMAT_DIMENSIONS[:height] )
+                                    THUMB_FORMAT_DIMENSIONS[:height] )
     self.cover.save!
   end
 

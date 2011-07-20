@@ -16,7 +16,9 @@ class User < ActiveRecord::Base
   end
 
   def default_project
-    portfolio.projects.default.first
+    in_published = portfolio.published_projects.find_by_default(true)
+    in_drafts = portfolio.projects.find_by_default(true)
+    return in_published || in_drafts
   end
 
   def portfolio

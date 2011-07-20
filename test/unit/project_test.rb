@@ -70,16 +70,17 @@ class ProjectTest < ActiveSupport::TestCase
     user = Factory.create(:user)
 
     p1 = Project.create(:title => "one", :default => true)
-    p2 = Project.create(:title => "two")
+    p2 = Project.create(:title => "two", :default => false)
 
     user.portfolio.projects << p1
     user.portfolio.projects << p2
 
-    p2.set_to_default
+    p2.make_default
     p1.reload
 
-    assert_equal p2, user.default_project
     assert_equal false, p1.default?
+    assert_equal Project.default.count, 1
+    assert_equal p2, user.default_project
   end
 
   test "can invite someone to the project" do

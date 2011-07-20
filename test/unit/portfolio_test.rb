@@ -91,15 +91,15 @@ class PortfolioTest < ActiveSupport::TestCase
   end
 
   test "has_custom_background return good value" do
-     portfolio = Factory.create(:portfolio)
-     assert_equal portfolio.has_custom_background?, false
+    portfolio = Factory.create(:portfolio)
+    assert_equal portfolio.has_custom_background?, false
 
-     user = portfolio.user
-     portfolio.background = Factory.create(:custom_background, :user => user )
-     assert_equal portfolio.has_custom_background?, true
+    user = portfolio.user
+    portfolio.background = Factory.create(:custom_background, :user => user )
+    assert_equal portfolio.has_custom_background?, true
 
-     portfolio.background = Factory.create(:pattern_background)
-     assert_equal portfolio.has_custom_background?, false
+    portfolio.background = Factory.create(:pattern_background)
+    assert_equal portfolio.has_custom_background?, false
   end
 
   test "validate custome background " do
@@ -145,11 +145,30 @@ class PortfolioTest < ActiveSupport::TestCase
 
   test "sees only one of projects in a project/project_copy pair" do
     portfolio = Factory.create(:portfolio)
-
     portfolio.projects << Project.create(:title => "Fun fun fun!")
 
     assert_equal Project.count, 2
     assert_equal Project.last.project_copy, Project.first
     assert_equal portfolio.projects.count, 1
   end
+
+  test "when the portfolio is published one project is published if theres none" do
+    portfolio = Factory.create(:portfolio)
+    portfolio.projects << Project.create(:title => "Publish me")
+    assert_equal 2, portfolio.projects.count
+  end
+
+
+  # test "when the portfolio is published project copies are made the same" do
+  #   portfolio = Factory.create(:portfolio)
+  #   portfolio.projects << Project.create(:title => "Publish me")
+  #   portfolio.projects.first.title = "title has changed"
+  #   portfolio.projects.first.save
+
+  #   portfolio.publish!
+
+  #   assert_equals portfolio.projects.first.published?, true
+  #   assert_equals portfolio.projects.first.project_copy.title, "title has changed"
+  #   assert_equals portfolio.projects.first.project_copy.published?, false
+  # end
 end
