@@ -155,21 +155,27 @@ class PortfolioTest < ActiveSupport::TestCase
   test "when the portfolio is published one project is published if there's none" do
     portfolio = Factory.create(:portfolio)
     portfolio.projects << Project.create(:title => "Publish me", :public => false)
+
+    portfolio.publish!
+
     assert_equal 2, Project.count
-    assert_equal 2, portfolio.projects.count
+    assert_equal Project.first.project_copy, Project.last
+    assert_equal 1, portfolio.projects.count
   end
 
 
-  # test "when the portfolio is published project copies are made the same" do
-  #   portfolio = Factory.create(:portfolio)
-  #   portfolio.projects << Project.create(:title => "Publish me")
-  #   portfolio.projects.first.title = "title has changed"
-  #   portfolio.projects.first.save
+  test "when the portfolio is published project copies are made the same" do
+    portfolio = Factory.create(:portfolio)
+    portfolio.projects << Project.create(:title => "Publish me")
 
-  #   portfolio.publish!
+    p1 = portfolio.projects.first
+    p1.title = "title has changed"
+    p1.save!
 
-  #   assert_equals portfolio.projects.first.published?, true
-  #   assert_equals portfolio.projects.first.project_copy.title, "title has changed"
-  #   assert_equals portfolio.projects.first.project_copy.published?, false
-  # end
+    portfolio.publish!
+
+    assert_equal portfolio.published_projects.first.title, "title has changed"
+    assert_equal portfolio.projects.first.title, "title has changed"
+    assert_equal portfolio.projects.first.project_copy.published?, true
+  end
 end

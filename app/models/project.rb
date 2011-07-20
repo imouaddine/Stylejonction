@@ -31,6 +31,10 @@ class Project < ActiveRecord::Base
     invitations.create(:email => email).invite_to(portfolio.user)
   end
 
+  def sync_with_draft
+    update_projects_copy
+  end
+
   private
 
   def add_default_cover
@@ -60,5 +64,14 @@ class Project < ActiveRecord::Base
       self.published = true
       save
     end
+  end
+
+  def update_projects_copy
+    other = project_copy
+    self.title = other.title
+    self.cover_id = other.cover_id
+    self.default = other.default
+    self.public = other.public
+    self.save
   end
 end

@@ -45,6 +45,7 @@ class Portfolio < ActiveRecord::Base
       clone
     else
       update_draft
+      update_projects
     end
     save!
   end
@@ -114,5 +115,9 @@ class Portfolio < ActiveRecord::Base
     if project.project_copy && !(projects.include? project.project_copy)
       projects << project.project_copy
     end
+  end
+
+  def update_projects
+    published_projects.map(&:sync_with_draft)
   end
 end
