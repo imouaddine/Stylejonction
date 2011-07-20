@@ -10,7 +10,8 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
     Factory.create :font
     @user = loggin
     @portfolio = @user.portfolio
-    @project = Factory.create(:project, :portfolio => @portfolio)
+    @portfolio.projects.create(:title => "A title")
+    @project = @portfolio.projects.first
 
     change_subdomain_to(@user.username)
   end
@@ -37,6 +38,7 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "can make project private" do
+    flunk("This is failing because of the tabs not working right now")
     visit edit_portfolio_project_path(@project)
     find("#privacy").find("#private_project_btn").click
     click_button 'Save project'
@@ -45,6 +47,7 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "can send invitation" do
+    flunk("This is failing because of the tabs not working right now")
     @project.update_attribute(:public, false)
     visit edit_portfolio_project_path(@project)
     fill_in "invitation0", :with => "anemail@email.com"
@@ -54,28 +57,30 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "sends invite only once for each email" do
+    flunk("This is working in browser, but failing in test, probably will work when the tabs are done")
     @project.update_attribute(:public, false)
+
     visit edit_portfolio_project_path(@project)
     before_count = Invitation.count
     fill_in "invitation0", :with => "stacho@email.com"
     fill_in "invitation1", :with => "stacho@email.com"
     find("#send_invites").click
-
     assert_equal before_count + 1, Invitation.count
   end
 
   test "can scale to fit project cover" do
-     @project.cover.thumb_format.update_attribute(:scale_to_fit, false)
-     visit edit_portfolio_project_path(@project)
-     find("#edit_project_cover").click
+    flunk("This is failing because of the changed logic of covers or because of the tabs")
+    @project.cover.thumb_format.update_attribute(:scale_to_fit, false)
+    visit edit_portfolio_project_path(@project)
+    find("#edit_project_cover").click
 
-     check "Scale to fit"
+    check "Scale to fit"
 
-     find("#submit").click
+    find("#submit").click
 
-     @project.reload
+    @project.reload
 
-     assert_equal @project.cover.thumb_format.scale_to_fit, true
+    assert_equal @project.cover.thumb_format.scale_to_fit, true
 
   end
 
