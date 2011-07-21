@@ -11,15 +11,13 @@
 		
 		<%= render ('portfolios/fields/theme_field') %>
 		
-	
 
 	
 		<%= f.hidden_field :layout %>
 		<%= f.hidden_field :theme %>
-		
-	
-		<%= submit_tag 'Save portfolio' %>
-		
+		<footer>
+			<%= submit_tag 'Save portfolio', :class=> 'btn' %>
+		</footer>
 	<% end %>
 	
 	

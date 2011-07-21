@@ -80,6 +80,8 @@ class Portfolio < ActiveRecord::Base
     self.theme = THEMES.first
     self.predefined_background = self.background
     self.custom_background = CustomBackground.create(:user => self.user)
+    self.custom_background.background.store!(File.open(File.join(Rails.root, "public/assets/images/placeholders/portfolio_custom_bg.jpg")))
+    self.custom_background.save
     self.pattern_background = PatternBackground.create( :pattern => Pattern.first, :color => '000000')
     self.layout = LAYOUTS.first
     if Font.count > 0

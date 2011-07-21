@@ -7,6 +7,8 @@ class Stylejonction.Views.Backgrounds.EditPatternView extends Backbone.View
   initialize: ()->
     init_colorpicker('#background_pattern_color_picker', '#portfolio_pattern_background_attributes_color')
     
+    $("#pattern_dialog").dialog()
+    
     @portfolio = @options.portfolio
     @background = @options.model
     

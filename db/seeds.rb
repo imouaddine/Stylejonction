@@ -8,19 +8,30 @@
 
 User.delete_all
 PredefinedBackground.delete_all
+PatternBackground.delete_all
+CustomBackground.delete_all
 Portfolio.delete_all
 Font.delete_all
 Project.delete_all
+Pattern.delete_all
 
-puts 'SETTING UP ADMIN LOGIN'
-user = User.create! :username => 'imouaddine', :first_name => 'Imad', :last_name =>'Mouaddine', :email => 'imad@ecomstrategy.ca', :password => 'pass', :password_confirmation => 'pass', :admin => true
 
-puts "create some backgrounds"
+
+puts "create some predefined backgrounds"
 10.times do |i|
   b = PredefinedBackground.create(:name => "Background #{i}")
   b.background.store!(File.open(File.join(Rails.root, "public/assets/images/predefined_backgrounds/#{i}.jpg")))
   b.save!
 end
+
+puts "create some pattern background"
+7.times do |i|
+  p = Pattern.create
+  p.pattern.store!(File.open(File.join(Rails.root, "public/assets/images/pattern_backgrounds/#{i}.png")))
+  p.pattern.recreate_versions!
+  p.save!
+end
+
 
 
 puts "Create standard fonts"
@@ -63,22 +74,23 @@ Font.create(
 
 
 
-user.portfolios << Portfolio.create( :theme => Portfolio::THEMES.first, :layout => Portfolio::LAYOUTS.first )
-user.portfolio.background = PredefinedBackground.first
-user.portfolio.title_font = Font.first
-user.portfolio.body_font = Font.first
+
+puts 'CREATE ADMIN LOGIN'
+
+user = User.create! :username => 'imouaddine', :first_name => 'Imad', :last_name =>'Mouaddine', :email => 'imad@ecomstrategy.ca', :password => 'pass', :password_confirmation => 'pass', :admin => true
 
 puts "Create portfolio project"
 
 4.times do |i|
   project = user.portfolio.projects.create(:title => "Project #{i}")
   project.cover.image.store!(File.open(File.join(Rails.root, "public/assets/images/projects/#{i}.jpg")))
-  project.cover.save
   project.cover.image.recreate_versions!
+  project.cover.save
   project.save
-  puts "project saved #{project.cover.thumb_url}"
+  #puts "project saved #{project.cover.thumb_url}"
 end
 
+user.portfolios << Portfolio.create
 user.save
 
 puts 'New user created: ' << user.full_name

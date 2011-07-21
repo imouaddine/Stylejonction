@@ -4,13 +4,13 @@ class Stylejonction.Models.Background extends Stylejonction.Models.Base
   
   initialize: ()->
     super
-    @.url = @.url.replace ':id', @.id
 
   background_url: ()->
     @.get('background').url
   
   render: (element)->
     url = @.background_url()
+    throw 'Url of background cannot be null' if url == null
     element.css("background-image", "url(#{url})")
 
 class Stylejonction.Models.PredefinedBackground extends Stylejonction.Models.Background
@@ -33,12 +33,22 @@ class Stylejonction.Models.PatternBackground extends Stylejonction.Models.Backgr
    
   render: (element)->
     color = @.get('color')
-    element.css("background-image", 'none')
+    @pattern_id = @.get('pattern_id')
+    @pattern = new Stylejonction.Models.Pattern({id: @pattern_id})
+    @pattern.fetch(
+      success: (pattern)->
+        pattern_url = pattern.get('pattern').url
+        element.css("background-image", "url(#{pattern_url})")
+      error: ->
+        debug.error "Cannot load pattern #{pattern_id}"
+    )
     element.css("background-color", "##{color}")
   
   initialize: ->
     super
     @type = "PatternBackground"
+   
+   
     
 class Stylejonction.Models.CustomBackground extends Stylejonction.Models.Background
   paramRoot: 'custom_backgrounds'

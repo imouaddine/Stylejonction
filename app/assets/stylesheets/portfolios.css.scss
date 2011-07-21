@@ -10,6 +10,21 @@
 @import "helpers";
 @import "compass/reset";
 
+
+/*** FONT FACE *******/
+@font-face{
+  font-family: 'LeagueGothicRegular';
+  src: url('../fonts/League_Gothic-webfont.eot');
+  src: url('../fonts/League_Gothic-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/League_Gothic-webfont.woff') format('woff'),
+       url('../fonts/League_Gothic-webfont.ttf') format('truetype'),
+       url('../fonts/League_Gothic-webfont.svg#LeagueGothicRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
 /*** LINKS & TYPES *******/
 body{
    background: #f2f2f2 url('images/grid_bg.png') repeat left top fixed;
@@ -134,6 +149,7 @@ form {
     height: $height;
     @include container;
     a{
+      letter-spacing: 0.03em;
       @include link-colors(#a8a8a8, $grey-color);
       &.active{
          @include unstyled-link;

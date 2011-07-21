@@ -29,6 +29,7 @@ Stylejonction::Application.routes.draw do
   resources :invitations, :only => [:show]
   resources :custom_backgrounds, :only => [:edit, :update, :create]
   resources :predefined_backgrounds, :only => [:show]
+  resources :patterns, :only => [:show]
 
   resources :fonts, :only => [:show]
   resources :images do

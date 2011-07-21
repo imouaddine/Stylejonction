@@ -11,7 +11,7 @@
     </li>
     <li class="text">&</li>
     <li>
-      <div class="pattern panel">
+      <div class="pattern panel" style="background-image:<%= "url(#{background.pattern.pattern.url(:pattern)})" %>">
       </div>
       +
       <div id="pattern_preview" class="pattern_preview panel" style="background-color: #<%= background.color %>">
@@ -21,10 +21,16 @@
       =
     </li>
     <li>
-      <div id="final_preview" class="preview panel" style="background-color: #<%= background.color %>;" >
+      <div id="final_preview" class="preview panel" style="background-image:<%= "url(#{background.pattern.pattern.url(:pattern)})" %>; background-color: #<%= background.color %>;" >
       </div>
     </li>
   </ul>
  <% end %>
+<section id="pattern_dialog" class="dialog">
+<% Pattern.all.each do |pattern|  %>
+	<%= image_tag pattern.pattern.url(:pattern) , :class => 'preview_uploaded_image' %>
+<% end %>
+</section>
 </section>
 <%= form.hidden_field :pattern_background_id %>
+

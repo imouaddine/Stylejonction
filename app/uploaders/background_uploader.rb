@@ -6,7 +6,7 @@ class BackgroundUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -20,7 +20,10 @@ class BackgroundUploader < CarrierWave::Uploader::Base
   # def scale(width, height)
   #   # do something
   # end
-
+  version :pattern do 
+    process :resize_to_limit => [25, 25]
+  end
+  
   version :preview do 
     process :resize_to_limit => [160, 125]
   end

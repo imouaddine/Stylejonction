@@ -30,6 +30,7 @@ class Stylejonction.Routers.PortfoliosRouter extends Backbone.Router
     @view = new Stylejonction.Views.Projects.EditView(model: @project, el: '#edit_project_properties')
 
   add_preview: ->
+   
     @previewView = new Stylejonction.Views.Portfolios.PreviewView(
       projects: @projects,
       portfolio: @portfolio

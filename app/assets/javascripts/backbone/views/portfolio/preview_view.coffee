@@ -54,7 +54,7 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
 
 
 
-
+  #triggered when background changed
   updateBackground: (background)->
     @background = background
     @background.render($("#preview"))
@@ -84,7 +84,7 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
   render: ->
     $(this.el).html(this.template(@options.portfolio.toJSON()))
     # This causes a js render error, I have no idea why
-    # @background.render($("#preview"))
+    @background.render($("#preview"))
     @addAllProjects()
     @.update()
     @.updateBodyFont(@body_font)

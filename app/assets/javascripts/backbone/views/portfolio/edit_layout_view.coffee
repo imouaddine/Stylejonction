@@ -40,8 +40,10 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
     
+    #hide tabs
     @.$("#custom_background_field .tabs > section").hide()
     
+    #display selected background section
     val = $(e.currentTarget).val()
     type = $(e.currentTarget).data('type')
     visibleTab = $("##{val}")
@@ -53,24 +55,22 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
         $("#portfolio_background_id").val(id)
         $("#portfolio_custom_background_id").val(id)
         $("#portfolio_background_type").val("CustomBackground")
+        
         @portfolio.trigger("backgroundChanged", @portfolio.custom_background)
+      
       when 'update_pattern_background'
         id = @portfolio.pattern_background.get('id')
         $("#portfolio_background_id").val(id)
         $("#portfolio_pattern_background_id").val(id)
         $("#portfolio_background_type").val("PatternBackground")
+    
         @portfolio.trigger("backgroundChanged", @portfolio.pattern_background)
-    
-    
-    
-    
-    
     
     
   showPredefinedBackgroundSection: (e)->
       e.preventDefault()
       e.stopPropagation()
-    
+      #We're using margin instead of display:none as workaround to be able to display the carousel correctly
       $("#predefined_background_field").css("margin-left", '0')
       $("#custom_background_field").css("margin-left", '-9999px')
       $("#layout_field").addClass("move_to_top")
@@ -104,28 +104,6 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
      $("#portfolio_background_type").val("CustomBackground")
      
      @portfolio.trigger("backgroundChanged", @portfolio.custom_background)
-     
-
-  saveBackground: (type, background_id) ->
-     portfolio = @options.model
-     backgroundFactory = @backgroundFactory
-     
-     background_attr = "predefined_background_id" if type == "PredefinedBackground"
-     background_attr = "custom_background_id" if type == "CustomBackground"
-     background_attr = "pattern_background_id" if type == "PatternBackground"
-     
-     portfolio.save(
-        {
-          "background_id": background_id, 
-          "background_type": type
-        },
-        success: ->
-          background = backgroundFactory.create( portfolio.get('background_type'), {id: background_id} )
-          background.fetch(
-            success: (newBackground) ->
-              portfolio.trigger("backgroundChanged", newBackground)
-          )
-     )
      
      
   updateCustomBackground: (e)->
