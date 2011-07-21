@@ -2,19 +2,19 @@
 
 <div> Portofilo id: <%= @portfolio.id %> </div>
 
-<%- unless @portfolio.published? -%>
+<%- unless @portfolio.published? || (current_user != @portfolio.user) -%>
   <%= form_tag(publish_portfolio_path, :method => :put) do %>
     <%= submit_tag("Publish") %>
   <% end %>
 <% end %>
 
 <ul>
-	<li> layout: <%= @portfolio.layout %> </li>
+        <li> layout: <%= @portfolio.layout %> </li>
   <li> theme: <%= @portfolio.theme || "-" %> </li>
   <%- if @portfolio.title_font.present? %>
     <li> font: <%= @portfolio.title_font.name %> </li>
   <% end %>
-	<%- if @portfolio.body_font.present? %>
+        <%- if @portfolio.body_font.present? %>
     <li> font: <%= @portfolio.body_font.name %> </li>
   <% end %>
    <%- if @portfolio.background.present? %>
@@ -23,4 +23,3 @@
   <li> published? <%= @portfolio.published? %> </li>
 </ul>
 <%= link_to_function "test js", '$(this).html("js works")' %>
-

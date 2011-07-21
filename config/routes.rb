@@ -5,7 +5,6 @@ Stylejonction::Application.routes.draw do
 
   match "/users" => "users#index"
 
-  resources :public_portfolios
 
   constraints(Subdomain) do
     match '/' => 'portfolios#edit_layout'
