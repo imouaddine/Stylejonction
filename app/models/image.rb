@@ -39,6 +39,10 @@ class Image < ActiveRecord::Base
     self.image.recreate_versions!
   end
 
+  def sync_with_draft
+    update_cover_copy
+  end
+
   private
 
   def create_cover_copy
@@ -62,4 +66,13 @@ class Image < ActiveRecord::Base
     self.create_thumb_format(:name => "thumb") unless self.thumb_format.present?
     self.create_original_format(:name => "original") unless self.original_format.present?
   end
+
+  def update_cover_copy
+    other = cover_copy
+    self.image = other.image
+    self.thumb_format_id = other.thumb_format_id
+    self.original_format_id = other.original_format_id
+    self.save
+  end
+
 end

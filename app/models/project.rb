@@ -29,6 +29,7 @@ class Project < ActiveRecord::Base
 
   def sync_with_draft
     update_projects_copy
+    self.cover.sync_with_draft
   end
 
   private
@@ -59,6 +60,7 @@ class Project < ActiveRecord::Base
       self.project_copy = other
       self.published = true
       save
+      self.cover.sync_with_draft
     end
   end
 

@@ -10,8 +10,8 @@ class Portfolio < ActiveRecord::Base
                   :body_color, :background_type, :published, :title_color,
                   :background, :custom_background_id,
                   :pattern_background_id, :predefined_background_id, :pattern_background_attributes)
-                  
-  
+
+
 
   validates_inclusion_of :layout, :in => LAYOUTS, :message => "Layout % should be one of #{LAYOUTS}"
   validates_inclusion_of :theme, :in => THEMES, :message => "Theme  %s should be one of #{THEMES}"
@@ -35,7 +35,7 @@ class Portfolio < ActiveRecord::Base
   validates :predefined_background_id, :predefined_background => true, :unless => lambda { |p| p.predefined_background_id.nil? }
   validates :pattern_background_id, :pattern_background => true, :unless => lambda { |p| p.pattern_background_id.nil? }
 
-  
+
   def has_saved_project?
     projects.present? && !projects.first.new_record?
   end

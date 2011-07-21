@@ -129,4 +129,5 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal p.cover.published?, true
     assert_equal p.cover.cover_copy.published?, false
   end
+
 end

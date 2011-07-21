@@ -152,18 +152,6 @@ class PortfolioTest < ActiveSupport::TestCase
     assert_equal portfolio.projects.count, 1
   end
 
-  test "when the portfolio is published one project is published if there's none" do
-    portfolio = Factory.create(:portfolio)
-    portfolio.projects << Project.create(:title => "Publish me", :public => false)
-
-    portfolio.publish!
-
-    assert_equal 2, Project.count
-    assert_equal Project.first.project_copy, Project.last
-    assert_equal 1, portfolio.projects.count
-  end
-
-
   test "when the portfolio is published project copies are made the same" do
     portfolio = Factory.create(:portfolio)
     portfolio.projects << Project.create(:title => "Publish me")
@@ -177,6 +165,17 @@ class PortfolioTest < ActiveSupport::TestCase
     assert_equal portfolio.published_projects.first.title, "title has changed"
     assert_equal portfolio.projects.first.title, "title has changed"
     assert_equal portfolio.projects.first.project_copy.published?, true
+  end
+
+  test "when the portfolio is published both coovers are made the same" do
+    portfolio = Factory.create(:portfolio)
+    portfolio.projects << Project.create(:title => "Publish me")
+    cover = portfolio.projects.first.cover
+    cover.thumb_format = ImageFormat.create(:name => "thumb", :height => 10, :width => 20)
+    cover.save
+
+    portfolio.publish!
+    assert_equal cover.thumb_format, cover.cover_copy.thumb_format
   end
 
 end
