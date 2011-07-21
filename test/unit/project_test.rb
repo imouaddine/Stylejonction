@@ -115,8 +115,18 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal true, p.cover.nil?
     p.save
     assert_equal false, p.cover.nil?
-    assert_equal 1, Image.count, "Same image for each copy"
+    assert_equal 2, Image.count, "Cover and cover copy"
     assert_equal 2, Project.count
-    assert_equal Project.first.cover, Project.last.cover, "Should be identical"
+    assert_equal Project.first.cover, Project.last.cover.cover_copy, "Should be identical"
+  end
+
+
+  test "sees only one of cover/cover_copy pair" do
+    p = Project.create(:title => "Project with a cover")
+
+    assert_equal false, p.cover.nil?
+    assert_equal Image.last.cover_copy, Image.first
+    assert_equal p.cover.published?, true
+    assert_equal p.cover.cover_copy.published?, false
   end
 end
