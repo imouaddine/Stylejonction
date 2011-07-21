@@ -128,6 +128,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    mocha (0.9.12)
     multi_json (1.0.3)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -203,6 +204,7 @@ DEPENDENCIES
   fog
   jquery-rails
   launchy
+  mocha
   pg
   rails!
   rails-backbone

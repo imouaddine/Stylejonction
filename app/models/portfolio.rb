@@ -41,14 +41,20 @@ class Portfolio < ActiveRecord::Base
   end
 
   def publish!
-    self.published = true
-    if user.portfolios.count == 1
-      clone
-    else
-      update_draft
-      update_projects
+    self.transaction do
+      begin
+        self.published = true
+        if user.portfolios.count == 1
+          clone
+        else
+          update_draft
+          update_projects
+        end
+        save
+      rescue
+        logger.fatal "Wasn't able to publish Portfolio ##{self.id}"
+      end
     end
-    save!
   end
 
   def published=(value)
@@ -109,7 +115,7 @@ class Portfolio < ActiveRecord::Base
     draft.predefined_background = self.predefined_background
     draft.published             = false
 
-    draft.save!
+    draft.save
   end
 
   def add_also_project_copy(project)

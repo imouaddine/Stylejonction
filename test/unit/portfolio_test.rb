@@ -155,7 +155,6 @@ class PortfolioTest < ActiveSupport::TestCase
   test "when the portfolio is published project copies are made the same" do
     portfolio = Factory.create(:portfolio)
     portfolio.projects << Project.create(:title => "Publish me")
-
     p1 = portfolio.projects.first
     p1.title = "title has changed"
     p1.save!
@@ -173,9 +172,23 @@ class PortfolioTest < ActiveSupport::TestCase
     cover = portfolio.projects.first.cover
     cover.thumb_format = ImageFormat.create(:name => "thumb", :height => 10, :width => 20)
     cover.save
-
     portfolio.publish!
     assert_equal cover.thumb_format, cover.cover_copy.thumb_format
   end
 
+
+  test "when something goes wrong changes are rolled back " do
+    portfolio = Factory.create(:portfolio)
+    portfolio.projects << Project.create(:title => "Publish me")
+    p1 = portfolio.projects.first
+    p1.title = "title has changed"
+    p1.save!
+
+    portfolio.expects(:save).raises
+    portfolio.publish!
+    portfolio.reload
+    assert_equal portfolio.published?, false
+    assert_equal portfolio.published_projects.first.title, "title has changed"
+    assert_equal portfolio.projects.first.title, "title has changed"
+  end
 end

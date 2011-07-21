@@ -23,6 +23,7 @@ gem 'fog'
 group :development, :test do
   gem 'autotest-rails'
   gem 'autotest'
+  gem 'mocha'
   gem 'sqlite3'
   gem "rails-footnotes", ">= 3.7"
   gem "factory_girl"
