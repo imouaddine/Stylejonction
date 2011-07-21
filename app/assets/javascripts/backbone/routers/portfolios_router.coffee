@@ -1,4 +1,4 @@
-class Stylejonction.Controllers.PortfoliosController extends Backbone.Router
+class Stylejonction.Routers.PortfoliosRouter extends Backbone.Router
 
   initialize: (options) ->
     @options = options
@@ -10,8 +10,6 @@ class Stylejonction.Controllers.PortfoliosController extends Backbone.Router
 
   routes:
     ".*": "default"
-    "projects/:i/edit" : "edit_project"
-    "projects/new" : "edit_project"
 
   default: ->
     eval(@action)

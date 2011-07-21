@@ -3,10 +3,10 @@
 #= require ./models/base
 #= require_tree ./models
 #= require_tree ./views
-#= require_tree ./controllers
+#= require_tree ./routers
 
 window.Stylejonction =
   Models: {}
   Collections: {}
-  Controllers: {}
+  Routers: {}
   Views: {}

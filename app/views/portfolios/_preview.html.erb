@@ -8,7 +8,7 @@
 </div>
 <script type="text/javascript">
   $(function() {
-    window.controller = new Stylejonction.Controllers.PortfoliosController({
+    window.router = new Stylejonction.Routers.PortfoliosRouter({
 			portfolio: <%= @portfolio.to_json(:include => [:body_font, :title_font, :background, :custom_background, :predefined_background, :pattern_background]).html_safe -%>, 
 			projects: <%= @portfolio.projects.to_json(:include => :cover).html_safe -%>,
 			<% if @project.present? %>
@@ -16,6 +16,6 @@
 			<% end %>
 			action : '<%= action -%>'
 		});
-    Backbone.history.start();
+   
   });
 </script>

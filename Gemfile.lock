@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: b0dbaf83ff2ea7477bccca9c91ada1186ef4c8f1
+  revision: 4fc07dbdc8146bb7ea6039779af6b0fef2196abb
   specs:
     capybara (1.0.0)
       mime-types (>= 1.16)
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: a719ec0c2deeee33159291f00349d3be788d27fb
+  revision: 9a6b96a61a74761ec9fcd6bbf7e895b61029fb93
   branch: 3-1-stable
   specs:
     actionmailer (3.1.0.rc4)
@@ -62,10 +62,10 @@ GIT
 
 GIT
   remote: https://github.com/chriseppstein/compass.git
-  revision: 0c1342746e5e34905c0a215f4c943e0fb0b3524e
+  revision: 2c1fcfcad708875d10db65740aabf417abc636a6
   branch: rails31
   specs:
-    compass (0.11.3.rails.0.0c13427)
+    compass (0.11.3.rails.0.2c1fcfc)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
@@ -74,7 +74,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     ZenTest (4.5.0)
-    active_link_to (0.0.9)
+    active_link_to (0.0.10)
     arel (2.1.3)
     autotest (4.4.6)
       ZenTest (>= 4.4.1)
@@ -84,7 +84,7 @@ GEM
     builder (3.0.0)
     carrierwave (0.5.6)
       activesupport (~> 3.0)
-    childprocess (0.1.9)
+    childprocess (0.2.0)
       ffi (~> 1.0.6)
     chunky_png (1.2.0)
     coffee-script (2.2.0)
@@ -191,7 +191,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_link_to
+  active_link_to (~> 0.0.10)
   autotest
   autotest-rails
   capybara!

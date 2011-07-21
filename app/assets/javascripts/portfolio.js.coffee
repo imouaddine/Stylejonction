@@ -33,6 +33,7 @@ $(window).bind "load", () ->
     window.initialOffset = $("#preview_wrapper").offset()
     window.initialHeight = $("#preview_wrapper").height()
     window.document_height = $(document).height();
+    Backbone.history.start();
 
 $(window).bind "resize", ()->
     $("#preview_wrapper").pinFooter()

@@ -38,7 +38,7 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "can make project private" do
-    flunk("This is failing because of the tabs not working right now")
+    
     visit edit_portfolio_project_path(@project)
     find("#privacy").find("#private_project_btn").click
     click_button 'Save project'
@@ -47,7 +47,7 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "can send invitation" do
-    flunk("This is failing because of the tabs not working right now")
+    
     @project.update_attribute(:public, false)
     visit edit_portfolio_project_path(@project)
     fill_in "invitation0", :with => "anemail@email.com"
@@ -57,7 +57,7 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "sends invite only once for each email" do
-    flunk("This is working in browser, but failing in test, probably will work when the tabs are done")
+   
     @project.update_attribute(:public, false)
 
     visit edit_portfolio_project_path(@project)
