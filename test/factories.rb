@@ -33,8 +33,8 @@ Factory.define :predefined_background do |f|
   f.background "imp.gif"
 end
 
-Factory.define :pattern do |p|
-  p.pattern "imp.gif"
+Factory.define :pattern do |f|
+  f.pattern "imp.gif"
 end
 
 Factory.define :custom_background do |f|

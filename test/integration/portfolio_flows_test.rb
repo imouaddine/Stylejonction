@@ -101,7 +101,37 @@
     
     assert_equal "tile", @portfolio.background.display_mode
   end
-
+  test "update portfolio pattern background" do
+    background = Factory (:pattern_background)
+    @portfolio.pattern_background = background
+    @portfolio.save
+    
+    pattern = Factory (:pattern)
+    
+    visit  edit_layout_portfolio_path
+    choose('Upload your image')
+    
+    choose('Choose a colour & pattern')
+    
+    find("#pattern_btn").click
+    
+    within("#pattern_dialog") do
+      find(".pattern_link[@data-id='#{pattern.id}']").click
+    end
+    
+    find("#pattern_btn").click
+    
+    
+    click_button 'Save portfolio'
+    
+    @portfolio.reload
+    
+    assert_equal background, @portfolio.background
+    assert_equal pattern, @portfolio.background.pattern
+    
+    
+    
+  end
   test "update portfolio fonts" do
     body_font = Font.create(:name => 'Times New Roman', :webfont => true)
     title_font = Font.create(:name => 'Arial', :webfont => true)
