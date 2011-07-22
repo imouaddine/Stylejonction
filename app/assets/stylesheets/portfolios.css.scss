@@ -344,7 +344,7 @@ form {
   background: transparent;
 }
 
-#fancybox-content, .fancybox{
+#fancybox-content, .fancybox, .ui-dialog{
   @include border-radius(5px);
   border-width: 1px;
   border: 1px solid #f2f2f2;
@@ -573,6 +573,7 @@ form #custom_background_field{
       }
    }
    .pattern{
+     cursor: pointer;
      background:  url('images/pattern_bg.png') repeat;
    }
    .panel{
@@ -597,6 +598,7 @@ form #custom_background_field{
      }
    }
  }
+ 
 #layout_field{
   $item-width: 112px;
   $item-height: 119px;
@@ -745,4 +747,18 @@ form .font_field{
 }
 .jcarousel-clip {
   overflow: hidden;
+}
+.pattern_dialog{
+   display: none;
+  .panel{
+    width: 107px;
+    height: 77px;
+    margin: 10px;
+    display: block;
+    background-repeat: repeat;
+    @include border-radius(5px);
+    @include fancy-box-shadow;
+    
+  }
+  
 }

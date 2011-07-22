@@ -32,21 +32,17 @@ class Stylejonction.Models.PatternBackground extends Stylejonction.Models.Backgr
   url: '/pattern_backgrounds/:id'
    
   render: (element)->
+    console.log @pattern
     color = @.get('color')
-    @pattern_id = @.get('pattern_id')
-    @pattern = new Stylejonction.Models.Pattern({id: @pattern_id})
-    @pattern.fetch(
-      success: (pattern)->
-        pattern_url = pattern.get('pattern').url
-        element.css("background-image", "url(#{pattern_url})")
-      error: ->
-        debug.error "Cannot load pattern #{pattern_id}"
-    )
+    element.css("background-image", "url(#{@pattern.get('pattern').url})")
     element.css("background-color", "##{color}")
   
-  initialize: ->
+  initialize: (options)->
     super
     @type = "PatternBackground"
+    @pattern = new Stylejonction.Models.Pattern()
+    
+   
    
    
     

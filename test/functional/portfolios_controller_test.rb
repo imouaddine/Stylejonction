@@ -8,11 +8,18 @@ class PortfoliosControllerTest < ActionController::TestCase
     Factory.create(:font)
     @user = Factory(:user)
     @request.host = "#{@user.username}.stylejonction.com"
+    
+    
+   
   end
 
   test "should deny access to edit_layout " do
+    
+   
+     
     get :edit_layout
     assert_redirected_to new_user_session_path
+    
   end
 
   test "should deny access to edit_font " do

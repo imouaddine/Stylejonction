@@ -3,6 +3,12 @@ class Stylejonction.Routers.PortfoliosRouter extends Backbone.Router
   initialize: (options) ->
     @options = options
     @portfolio = new Stylejonction.Models.Portfolio(options.portfolio)
+    @portfolio.pattern_background.pattern = new Stylejonction.Models.Pattern(options.pattern)
+    if @portfolio.get('background_type') == 'PatternBackground'
+      @portfolio.background.pattern = @portfolio.pattern_background.pattern
+      
+      
+      
     @projects = new Stylejonction.Collections.ProjectsCollection()
     @projects.url = @projects.url.replace ':portfolio_id', @portfolio.id
     @projects.reset options.projects
@@ -30,7 +36,6 @@ class Stylejonction.Routers.PortfoliosRouter extends Backbone.Router
     @view = new Stylejonction.Views.Projects.EditView(model: @project, el: '#edit_project_properties')
 
   add_preview: ->
-   
     @previewView = new Stylejonction.Views.Portfolios.PreviewView(
       projects: @projects,
       portfolio: @portfolio

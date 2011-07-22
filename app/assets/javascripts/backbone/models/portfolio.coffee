@@ -8,8 +8,6 @@ class Stylejonction.Models.Portfolio  extends  Stylejonction.Models.Base
     
   initialize: (options)->
     super
-    
-    
     @body_font = new Stylejonction.Models.Font(options.body_font)
     @title_font = new Stylejonction.Models.Font(options.title_font)
     @background = new Stylejonction.Models.BackgroundFactory().create( @.get('background_type'), options.background)

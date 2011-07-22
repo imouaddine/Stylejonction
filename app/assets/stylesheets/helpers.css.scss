@@ -27,6 +27,10 @@
 .hidden{
   display: none;
 }
+.panel{
+  display: block;
+}
+
 .iviewer
 {
     width: 165px;
@@ -130,3 +134,4 @@
 
 /** JQUERY UI **/
 .ui-tabs-hide{display: none}
+
