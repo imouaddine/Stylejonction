@@ -16,15 +16,15 @@
 				<dl class="webfonts">
 					<dt>Standard</dt>
 					<dd>
-						<% @webfonts.each  do |font| %>
+						<% @webfonts.title_font.each  do |font| %>
 							<%= font_link @portfolio, font, @portfolio.title_font == font %> 
 						<% end %>
 					</dd>
 				</dl>
-				<dl class="non_webfonts">
+				<dl class="non_webfonts fonts">
 						<dt>Something new</dt>
 						<dd>
-								<% @non_webfonts.each  do |font| %>
+								<% @non_webfonts.title_font.each  do |font| %>
 									<%= font_link @portfolio, font, @portfolio.title_font == font  %> 
 								<% end %>
 						</dd>
@@ -35,7 +35,7 @@
 							
 			   			<div class="panel" style="background-color: #<%= @portfolio.title_color %>"></div>
 			   	</div>
-					<div class="color_picker_label">
+					<div class="color_picker_label" style="width: auto">
 						Color
 					</div>
 					
@@ -50,15 +50,15 @@
 				<dl class="webfonts">
 					<dt>Standard</dt>
 					<dd>
-						<% @webfonts.each  do |font| %>
+						<% @webfonts.body_font.each  do |font| %>
 							<%= font_link @portfolio, font, @portfolio.body_font == font %> 
 						<% end %>
 					</dd>
 				</dl>
-				<dl class="non_webfonts">
+				<dl class="non_webfonts fonts">
 						<dt>Something new</dt>
 						<dd>
-								<% @non_webfonts.each  do |font| %>
+								<% @non_webfonts.body_font.each  do |font| %>
 									<%= font_link @portfolio, font, @portfolio.body_font == font  %> 
 								<% end %>
 						</dd>
@@ -68,7 +68,7 @@
 							<%= f.hidden_field :body_color  %>
 							<div style="background-color: #<%= @portfolio.body_color %>"></div>
 						</div>
-				 		<div class="color_picker_label">
+				 		<div class="color_picker_label" style="width: auto">
 							Color
 						</div>
 				
@@ -77,7 +77,9 @@
 	</fieldset>
 	<%= f.hidden_field :body_font_id %>
 	<%= f.hidden_field :title_font_id %>
-	<%= submit_tag 'Save portfolio' %>
+	<footer>
+		<%= submit_tag 'Save portfolio', :class => 'btn' %>
+	</footer>
 <% end %>
 </section>
 <% content_for :preview do %>

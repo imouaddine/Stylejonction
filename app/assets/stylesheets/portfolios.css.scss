@@ -721,6 +721,9 @@ form .font_field{
       @include unstyled-link;
     }
   }
+  .fonts dd{
+    @include column-count(2)
+  }
   .webfonts{
     @include column(5);
   }
@@ -732,6 +735,7 @@ form .font_field{
     @include clearfix;
     @include fancy-border-top (#d1d1d1, rgba(white, 0.6));
     padding: 10px 20px;
+    width: 100%;
   }
   .color_picker{
     @include column(5);
@@ -746,8 +750,11 @@ form .font_field{
      @include column(5, true);
      line-height: 25px;
    }
+   
 }
-
+section.edit_portfolio_font{
+  width: 650px;
+}
 .colorpicker_field{
   input.text, input.title, input[type="email"], input[type="text"], input[type="password"]{
      width: 30px;

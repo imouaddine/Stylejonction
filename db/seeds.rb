@@ -35,42 +35,89 @@ end
 
 
 puts "Create standard fonts"
-Font.create(:name => 'Times New Roman', :webfont => true);
-Font.create(:name => 'Arial', :webfont => true);
-Font.create(:name => 'Verdana', :webfont => true);
-Font.create(:name => 'Georgia', :webfont => true);
+Font.create(
+  :name => 'Times New Roman',
+  :webfont => true, 
+  :title_font => true, 
+  :body_font => true
+);
+Font.create(
+  :name => 'Arial', 
+  :webfont => true, 
+  :title_font => true, 
+  :body_font => true, 
+  :title_suggested => true, 
+  :body_suggested => true
+);
+Font.create(:name => 'Verdana', :webfont => true, :title_font => true, :body_font => true);
+Font.create(:name => 'Georgia', :webfont => true, :title_font => true, :body_font => true);
 
 puts "Create google fonts"
 Font.create(
   :name => 'Playfair Display',
   :provider => "Google web fonts",
-  :url => 'http://fonts.googleapis.com/css?family=Playfair+Display&v1'
+  :url => 'http://fonts.googleapis.com/css?family=Playfair+Display&v1',
+  :title_font => true, 
+  :body_font => true
 );
 Font.create(
-  :name => 'PT Serif',
+  :name => 'Serif6 Beta',
   :provider => "Google web fonts",
-  :url => 'http://fonts.googleapis.com/css?family=PT+Serif:400,400italic&v2'
+  :url => 'http://fonts.googleapis.com/css?family=PT+Serif:400,400italic&v2',
+  :title_font => true, 
+  :body_font => true
 );
 Font.create(
   :name => 'Kameron',
   :provider => "Google web fonts",
-  :url => 'http://fonts.googleapis.com/css?family=Kameron&v2'
+  :url => 'http://fonts.googleapis.com/css?family=Kameron&v2',
+  :title_font => true, 
+  :body_font => true
 );
-Font.create(
-  :name => 'Nunito',
-  :provider => "Google web fonts",
-  :url => 'http://fonts.googleapis.com/css?family=Nunito&v2'
-);
+
 Font.create(
   :name => 'Dancing Script',
   :provider => "Google web fonts",
-  :url => 'http://fonts.googleapis.com/css?family=Dancing+Script&v2'
+  :url => 'http://fonts.googleapis.com/css?family=Dancing+Script&v2',
+  :title_font => true, 
+  :body_font => false
 );
 Font.create(
-  :name => 'Kreon',
+  :name => 'NIXIE ONE',
   :provider => "Google web fonts",
-  :url => 'http://fonts.googleapis.com/css?family=Kreon&v2'
+  :url => 'http://fonts.googleapis.com/css?family=Nixie+One&v2',
+  :title_font => true, 
+  :body_font => false
 );
+#Junction :title_font => true, :body_font => true
+#League Gothic :title_font => true, :body_font => false
+#Fallend Display :title_font => true, :body_font => false
+#Quicksand :title_font => true, :body_font => false
+#PT Sans Narrow  :title_font => false, :body_font => true, :body_suggested => true
+Font.create(
+  :name => 'Nunito',
+  :provider => "Google web fonts",
+  :url => 'http://fonts.googleapis.com/css?family=Nunito&v2',
+  :title_font => true,
+  :body_font => true
+);
+Font.create(
+  :name => 'Lato',
+  :provider => "Google web fonts",
+  :url => 'http://fonts.googleapis.com/css?family=Lato&v2',
+  :title_font => true,
+  :body_font => true
+  
+);
+Font.create(
+  :name => 'Metrophobic',
+  :provider => "Google web fonts",
+  :url => 'http://fonts.googleapis.com/css?family=Metrophobic&v2',
+  :title_font => true,
+  :body_font => true
+);
+
+
 
 
 
