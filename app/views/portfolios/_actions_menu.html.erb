@@ -1,30 +1,37 @@
 <nav id="portfolio_menu" class="actions_menu">
   <ul>
-    <li><%= active_link_to 'Layout', edit_layout_portfolio_path %></li>
-    <li><%= active_link_to 'Fonts', edit_font_portfolio_path %></li>
+    <li><%= active_link_to 'Layout', edit_layout_portfolio_path, :class => 'menu_link' %></li>
+    <li><%= active_link_to 'Fonts', edit_font_portfolio_path, :class => 'menu_link' %></li>
     <li class="last <%=  'active' if controller.controller_name == 'projects'  %>">
       <%- if @portfolio.has_saved_project? -%>
         <% className = 'active' if controller.controller_name == 'projects'  %>
-        <%= active_link_to 'Projects', edit_portfolio_project_path(@portfolio.projects.first), :class => "last #{className}"  %>
+        <%= active_link_to 'Projects', edit_portfolio_project_path(@portfolio.projects.first), :class => "menu_link last #{className}"  %>
       <% end %>
       <ol class="hidden">
         <% @portfolio.projects.each_with_index do |project, index|  %>
           <%= content_tag_for(:li, project) do %>
-            <li>
+           
               <% if project.new_record? %>
-                <%= active_link_to "<span class=\'number\'>#{index+1}</span>#{project.title}".html_safe, new_portfolio_project_path(project) %>
+                <%= active_link_to "<span class=\'number\'>#{index+1}</span>#{project.title}".html_safe, new_portfolio_project_path(project), :class => 'project_link menu_link' %>
+							
               <% else %>
-                <%= active_link_to "<span class=\'number\'>#{index+1}</span>#{project.title}".html_safe, edit_portfolio_project_path(project) %>
+                <%= active_link_to "<span class=\'number\'>#{index+1}</span>#{project.title}".html_safe, edit_portfolio_project_path(project), :class => 'project_link menu_link'  %>
+								<%= link_to  'delete', 
+														  portfolio_project_path(project), 
+														  :class => 'remove_link icon_link',
+															:method => :delete,
+															:title => 'Delete project',
+															:confirm => "Are you sure you want to delete this project?"  %>
               <% end %>
-            </li>
+            
           <% end %>
         <% end %>
-        <li><%= active_link_to '<span class=\'number\'> + </span> New project'.html_safe, new_portfolio_project_path %></li>
+        <li><%= link_to '<span class=\'number\'> + </span> New project'.html_safe, new_portfolio_project_path, :class => 'project_link menu_link' %></li>
       </ol>
 
       <%- if @portfolio.projects.empty? %>
         <ol>
-          <li><%= active_link_to '<span class=\'number\'> + </span> New project'.html_safe, new_portfolio_project_path %></li>
+          <li><%= active_link_to '<span class=\'number\'> + </span> New project'.html_safe, new_portfolio_project_path, :class => 'project_link menu_link' %></li>
         </ol>
       <% end %>
 

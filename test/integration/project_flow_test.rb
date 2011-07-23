@@ -83,6 +83,19 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
     assert_equal @project.cover.thumb_format.scale_to_fit, true
 
   end
+  test "can delete project" do
+
+     visit edit_portfolio_project_path(@project)
+     assert_difference("Project.count", -2) do
+       within "#project_#{@project.id}" do
+         page.evaluate_script('window.confirm = function() { return true; }')
+         find(".remove_link").click()
+       end
+      
+     end
+  end
+  
+
 
 
 

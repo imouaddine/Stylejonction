@@ -19,6 +19,7 @@ Factory.define :project do |p|
   p.sequence(:title) { |n| "Title #{n}" }
   p.association :portfolio
   p.association :cover, :factory => :image
+  p.default false
 end
 
 Factory.define :font do |f|

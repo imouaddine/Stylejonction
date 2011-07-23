@@ -261,8 +261,12 @@ form {
 #portfolio_menu{
   margin-top: 40px;
   font-size: 14px;
-
-  a{
+  position: relative;
+  li{
+    position: relative;
+  }
+  a.menu_link{
+     position: relative;
     //@include link-colors(#757575);
     @include single-text-shadow;
     height: 40px;
@@ -275,19 +279,32 @@ form {
      font-weight: bold;
      background: #ededed;
      @include link-colors($blue-color);
+     
    }
+   
    &.last{
      border-bottom: 0;
      @include single-box-shadow(false, 0, 0, 0);
    }
   }
+  .remove_link{
+     position: absolute;
+     width: 30px;
+     height: 30px;
+     right: 0px;
+     top: 5px;
+     text-indent: -9999px;
+    
+   }
   .active {
     ol{
       display: block;
       li{
         clear: both;
         @include clearfix;
+        
       }
+     
       a{
         text-align: left;
         padding-left: 10px;

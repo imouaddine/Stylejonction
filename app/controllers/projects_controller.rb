@@ -64,9 +64,19 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-
+    
+    if @user.portfolio.projects.count > 0
+      #if delete project is default, make the first one the default
+      if @project.default?
+        @user.portfolio.projects.first.make_default
+      end
+      @project = @user.portfolio.projects.last
+      redirection_path =  edit_portfolio_project_path(@project)
+    else 
+      redirection_path =  edit_layout_portfolio_path(@project)
+    end
     respond_to do |format|
-      format.html { redirect_to portfolio_path }
+      format.html { redirect_to redirection_path, notice: "Project #{@project.title} has been deleted successfully" }
       format.json { head :ok }
     end
   end
