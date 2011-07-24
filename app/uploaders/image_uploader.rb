@@ -39,7 +39,11 @@ class ImageUploader < CarrierWave::Uploader::Base
       else
         width = image.columns
         height = image.rows
-        scale = [width, height].min / self.model.thumb_format.height
+
+        thumb_height = self.model.thumb_format.height
+        thumb_height = 165 unless thumb_height
+
+        scale = [width, height].min / thumb_height
         image.resize_to_fit(width / scale, height/scale)
       end
     end
@@ -48,7 +52,12 @@ class ImageUploader < CarrierWave::Uploader::Base
   def crop_thumb
     if !self.model.thumb_format.scale_to_fit?
       manipulate! do |image|
-        image.crop(self.model.thumb_format.crop_x, self.model.thumb_format.crop_y, self.model.thumb_format.width, self.model.thumb_format.height)
+
+        #TODO fix me: I want to make the cover work fast then
+        # I'll fix the defaults
+        #image.crop(self.model.thumb_format.crop_x, self.model.thumb_format.crop_y, self.model.thumb_format.width, self.model.thumb_format.height)
+
+        image.crop(10, 10, 165, 165)
       end
     end
   end

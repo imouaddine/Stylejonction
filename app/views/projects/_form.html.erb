@@ -21,9 +21,9 @@
   <% end %>
 </section>
 
-<%- if !@project.new_record? %>
-  <%= photo_uploadify "#upload_project_cover", "#cover", upload_image_path(:format => 'html', :id => @project.cover), 'image[image]' %>
-<% end %>
+<!-- <%- if !@project.new_record? %> -->
+<!--   <%= photo_uploadify "#upload_project_cover", "#cover", upload_image_path(:format => 'html', :id => @project.cover), 'image[image]' %> -->
+<!-- <% end %> -->
 <% content_for :preview do %>
   <%= render  "portfolios/preview",  :action => 'edit_project'  %>
 <% end %>
