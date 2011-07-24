@@ -21,6 +21,7 @@ class ProjectsController < ApplicationController
   def new
     next_number = @portfolio.projects.count + 1
     @project = @portfolio.projects.new(:title => "Project #{next_number}")
+    @project.cover = Image.new
     respond_with(@project)
   end
 
@@ -30,7 +31,7 @@ class ProjectsController < ApplicationController
     flash[:notice] = "Project was successfully created" if @project.save!
     @project.make_default if @project.default?
 
-    @project = @project.project_copy unless @project.published?
+    @project = @project.project_copy if @project.published?
     redirect_to edit_portfolio_project_path(@project)
   end
 
