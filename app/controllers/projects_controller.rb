@@ -29,6 +29,8 @@ class ProjectsController < ApplicationController
     @project = @portfolio.projects.new(params[:project])
     flash[:notice] = "Project was successfully created" if @project.save!
     @project.make_default if @project.default?
+
+    @project = @project.project_copy unless @project.published?
     redirect_to edit_portfolio_project_path(@project)
   end
 
@@ -64,7 +66,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-    
+
     if @user.portfolio.projects.count > 0
       #if delete project is default, make the first one the default
       if @project.default?
@@ -72,7 +74,7 @@ class ProjectsController < ApplicationController
       end
       @project = @user.portfolio.projects.last
       redirection_path =  edit_portfolio_project_path(@project)
-    else 
+    else
       redirection_path =  edit_layout_portfolio_path(@project)
     end
     respond_to do |format|
