@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   THUMB_FORMAT_DIMENSIONS = { :width => 165, :height => 165 }
 
   attr_accessible :title, :default, :public, :cover_id, :cover
+  attr_reader :cover_name
 
   validates_presence_of :title
   
@@ -55,7 +56,7 @@ class Project < ActiveRecord::Base
 
   def create_project_copy_and_cover
     if self.project_copy.nil?
-      add_default_cover
+      add_default_cover if self.cover.blank?
       other = Project.new
       other.title = self.title
       other.project_copy_id = self.id

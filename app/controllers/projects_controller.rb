@@ -22,12 +22,16 @@ class ProjectsController < ApplicationController
     next_number = @portfolio.projects.count + 1
     @project = @portfolio.projects.new(:title => "Project #{next_number}")
     @project.cover = Image.new
+    @cover = @project.cover
     respond_with(@project)
   end
 
   def create
     next_number = @portfolio.projects.count + 1
+    cover = params[:project].delete(:cover)
+
     @project = @portfolio.projects.new(params[:project])
+    cover.present? ? create_cover : find_and_assign_cover(params[:project][:cover_name])
     flash[:notice] = "Project was successfully created" if @project.save!
     @project.make_default if @project.default?
 
@@ -37,12 +41,14 @@ class ProjectsController < ApplicationController
 
   def edit
     find_project
+    @cover = @project.cover
     respond_with(@project)
   end
 
   def update
     find_project
     check_defaultness
+    update_cover
     flash[:notice] = "Project was successfully updated" if @project.update_attributes(params[:project])
     redirect_to edit_portfolio_project_path(@project)
   end
@@ -106,4 +112,22 @@ class ProjectsController < ApplicationController
     @project = p.published? ? p.project_copy : p
   end
 
+  def create_cover
+    @project.cover = Image.new
+    @project.cover.set_thumb_dimension(165, 165)
+    @project.cover.image = cover[:image]
+  end
+
+  def update_cover
+    cover = params[:project].delete(:cover)
+    @project.cover.image = cover[:image]
+    @project.cover.save
+  end
+
+  def find_and_assign_cover(cover_name)
+    cover = Image.where(:image => cover_name).order("created_at").last rescue nil
+    if cover
+      @project.cover = cover
+    end
+  end
 end

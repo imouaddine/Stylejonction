@@ -1,81 +1,84 @@
-  <!-- Project Title !-->
-  <fieldset id="project_title">
-    <span class="order">1</span>
-                <div class="inner">
-        <legend>Project title</legend>
-      <p class="description">Give your project a catchy title. (ex.: Spring 2011 Streetwear Designs)</p>
-      <%= f.text_field 'title', :placeholder => 'Enter project title here' %>
-      <div>
-        <%= f.check_box 'default'  %>
-        <%= f.label 'default', "<em>Make this your default project.</em> Will become the cover project for your portfolio.".html_safe %>
-        </div>
-                </div>
-  </fieldset>
-  <!-- Project Title !-->
-  <fieldset id="project_cover">
-    <span class="order">2</span>
-                <div class="inner">
-                        <legend>Upload a cover image</legend>
-        <p class="description">This thumbnail should represent the project.</p>
-      <section class="upload_image_section">
-        <div class="first col">
-          <figure id="cover">
-            <%= render '/images/thumb', :image => @project.cover %>
-          </figure>
-          <div id="upload_custom_bg_links" class="upload_custom_bg_links">
-          <%- if !@project.new_record? %>
-            <%= link_to  "Edit your cover", edit_image_path(@project.cover), :class => "icon_link edit_link iframe_fancy", :id => 'edit_project_cover' %>
-           <% end %>
-          </div>
-        </div>
-        <div class="col">
-          <a id="upload_project_cover" href="#" class="upload_btn btn">Upload</a>
-          <p class="information">Ideal dimension: 165 px x 165 px – JPG, PNG formats</p>
-        </div>
-      </section>
-                </div>
-  </fieldset>
-  <fieldset id="privacy" class="last">
-    <span class="order">3</span>
-                <div class="inner">
-                        <legend>Privacy Settings</legend>
-        <p class="description">Make your project public or limited access</p>
-      <ul class="horizontal_list access_toolbar">
-        <li>
-          <a class="access_toggle <%= "selected" unless @project.public? %>" id="private_project_btn" >
-            Limited Access
-          </a>
-        </li>
-        <li>
-          <a class="access_toggle <%= "selected" if @project.public? %>" id="public_project_btn" >
-            Public
-          </a>
-        </li>
-      </ul>
-      <div id="private_project" class="<%= 'hidden' if @project.public? %>">
-        <div class="col left">
-          <div id="invitation_list">
-            <%- 4.times do |i| %>
-              <%= text_field_tag "invitation#{i}", set_default(i), :placeholder => 'enter the email address here ...' %>
-            <% end %>
-          </div>
-          <a  href="#" >
-            <span class="number"> + </span>
-            Issue more invites</a>
-        </div>
-        <div class="col right">
-          <p>
-            <em>Invited guests will be granted access for 48hs.</em>
-          </p>
-          <p class="description">
-            Simply enter a valid email address and
-            send the Invite.
-          </p>
-          <a id="send_invites" class="btn" href="#">invite</a>
-        </div>
-      </div>
+<!-- Project Title !-->
+<fieldset id="project_title">
+  <span class="order">1</span>
+  <div class="inner">
+    <legend>Project title</legend>
+    <p class="description">Give your project a catchy title. (ex.: Spring 2011 Streetwear Designs)</p>
+    <%= f.text_field 'title', :placeholder => 'Enter project title here' %>
+    <div>
+      <%= f.check_box 'default'  %>
+      <%= f.label 'default', "<em>Make this your default project.</em> Will become the cover project for your portfolio.".html_safe %>
+    </div>
+  </div>
+</fieldset>
+<!-- Project Title !-->
+<fieldset id="project_cover">
+  <span class="order">2</span>
+  <div class="inner">
+    <legend>Upload a cover image</legend>
+    <p class="description">This thumbnail should represent the project.</p>
+    <section class="upload_image_section">
+      <div class="first col">
+        <figure id="cover">
+          <%= render '/images/thumb', :image => @project.cover %>
+        </figure>
+        <div id="upload_custom_bg_links" class="upload_custom_bg_links">
+          <%#= f.file_field 'cover[image]' %>
+          <%= f.hidden_field :cover_name %>
 
-      <div id="public_project" class="<%= 'hidden' unless @project.public? %>">
+          <%- if !@project.cover.present? %>
+            <%= link_to  "Edit your cover", edit_image_path(@project.cover), :class => "icon_link edit_link iframe_fancy", :id => 'edit_project_cover' %>
+          <% end %>
+        </div>
       </div>
-                </div>
-  </fieldset>
+      <div class="col">
+        <a id="upload_project_cover" href="#" class="upload_btn btn">Upload</a>
+        <p class="information">Ideal dimension: 165 px x 165 px – JPG, PNG formats</p>
+      </div>
+    </section>
+  </div>
+</fieldset>
+<fieldset id="privacy" class="last">
+  <span class="order">3</span>
+  <div class="inner">
+    <legend>Privacy Settings</legend>
+    <p class="description">Make your project public or limited access</p>
+    <ul class="horizontal_list access_toolbar">
+      <li>
+        <a class="access_toggle <%= "selected" unless @project.public? %>" id="private_project_btn" >
+          Limited Access
+        </a>
+      </li>
+      <li>
+        <a class="access_toggle <%= "selected" if @project.public? %>" id="public_project_btn" >
+          Public
+        </a>
+      </li>
+    </ul>
+    <div id="private_project" class="<%= 'hidden' if @project.public? %>">
+      <div class="col left">
+        <div id="invitation_list">
+          <%- 4.times do |i| %>
+            <%= text_field_tag "invitation#{i}", set_default(i), :placeholder => 'enter the email address here ...' %>
+          <% end %>
+        </div>
+        <a  href="#" >
+          <span class="number"> + </span>
+          Issue more invites</a>
+      </div>
+      <div class="col right">
+        <p>
+          <em>Invited guests will be granted access for 48hs.</em>
+        </p>
+        <p class="description">
+          Simply enter a valid email address and
+          send the Invite.
+        </p>
+        <a id="send_invites" class="btn" href="#">invite</a>
+      </div>
+    </div>
+
+    <div id="public_project" class="<%= 'hidden' unless @project.public? %>">
+    </div>
+  </div>
+</fieldset>
