@@ -30,8 +30,7 @@ class ProjectsController < ApplicationController
     next_number = @portfolio.projects.count + 1
     cover = params[:project].delete(:cover)
     @project = @portfolio.projects.new(params[:project])
-    create_cover
-
+    create_cover if cover
     flash[:notice] = "Project was successfully created" if @project.save!
     @project.make_default if @project.default?
 

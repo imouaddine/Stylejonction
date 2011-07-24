@@ -47,7 +47,7 @@ class Project < ActiveRecord::Base
 
   def create_project_copy_and_cover
     if self.project_copy.nil?
-      #add_default_cover
+      add_default_cover if self.cover.blank?
       other = Project.new
       other.title = self.title
       other.project_copy_id = self.id

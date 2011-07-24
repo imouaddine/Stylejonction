@@ -23,7 +23,7 @@ class ProjectsControllerTest < ActionController::TestCase
 
   test "should destroy project" do
     sign_in @user
-    
+
     assert_difference('Project.count', -2) do
       delete :destroy, :portfolio_id => @portfolio.id, :id => @project.id
     end
@@ -31,16 +31,16 @@ class ProjectsControllerTest < ActionController::TestCase
   end
   test "make first project default after destroying an old default project" do
      sign_in @user
-     
+
      @project.make_default
-     
+
      Factory.create(:project, :portfolio => @portfolio)
-     
+
      assert_difference('Project.count', -2) do
          delete :destroy, :portfolio_id => @portfolio.id, :id => @project.id
      end
      assert @user.portfolio.projects.first.default?
-  
+
   end
   test "destroy on project removes all project invitations" do
     sign_in @user
