@@ -8,6 +8,7 @@ class CreateProjects < ActiveRecord::Migration
       t.boolean :public, :default => true
       t.boolean :published, :default => false
       t.integer :project_copy_id
+      
       t.timestamps
     end
   end

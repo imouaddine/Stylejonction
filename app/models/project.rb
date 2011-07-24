@@ -5,12 +5,20 @@ class Project < ActiveRecord::Base
   attr_accessible :title, :default, :public, :cover_id, :cover
 
   validates_presence_of :title
+  
+  #Belongs to association
   belongs_to :portfolio
-
-  has_many :invitations, :dependent => :destroy
   belongs_to :cover, :class_name => "Image", :foreign_key => "cover_id", :dependent => :destroy
-
   belongs_to :project_copy, :class_name => "Project", :foreign_key => "project_copy_id", :dependent => :destroy
+  
+  #Has one to association
+  has_one :document_block, :dependent => :destroy
+  has_one :gallery, :dependent => :destroy
+  has_one :text_block, :dependent => :destroy
+  
+  #Has_many association
+  has_many :invitations, :dependent => :destroy
+  
   after_create :create_project_copy_and_cover
 
   scope :default, where(:default => true)

@@ -1,4 +1,8 @@
 Stylejonction::Application.routes.draw do
+  
+
+
+
   require 'subdomain'
 
   devise_for :users
@@ -30,6 +34,10 @@ Stylejonction::Application.routes.draw do
   resources :custom_backgrounds, :only => [:edit, :update, :create]
   resources :predefined_backgrounds, :only => [:show]
   resources :patterns, :only => [:show]
+  resources :text_blocks
+  resources :document_blocks
+  resources :galleries
+  
 
   resources :fonts, :only => [:show]
   resources :images do

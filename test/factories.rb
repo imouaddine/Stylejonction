@@ -53,3 +53,19 @@ end
 
 Factory.define :image do |p|
 end
+
+Factory.define :document_block do |f|
+  f.title "Document Block"
+  f.association :project
+end
+
+Factory.define :gallery do |f|
+  f.title "Gallery 1"
+  f.association :project
+end
+
+Factory.define :text_block do |t|
+  t.title "Title of the block"
+  t.body  "Lorem Ipsum "
+  t.association :project
+end

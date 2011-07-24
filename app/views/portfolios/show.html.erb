@@ -1,5 +1,6 @@
 <h2> VIEW PORTFOLIO</h2>
 
+<div><%= debug current_user.portfolios.inspect %>
 <div> Portofilo id: <%= @portfolio.id %> </div>
 
 <%- unless @portfolio.published? || (current_user != @portfolio.user) -%>
