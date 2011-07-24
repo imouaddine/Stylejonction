@@ -13,7 +13,10 @@ class PortfoliosController < ApplicationController
 
   def publish
     @portfolio.publish!
-    redirect_to action: "show", notice: "Portfolio was published"
+    respond_to do |format|
+      format.html { redirect_to :back, notice: "Portfolio published" }
+      format.json { render json: @portfolio }
+    end
   end
 
   def edit_layout

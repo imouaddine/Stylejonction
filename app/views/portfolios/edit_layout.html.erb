@@ -5,26 +5,31 @@
 
   <%= form_for(@portfolio, :url => portfolio_path) do |f| %>
 
-		<%= render ('portfolios/fields/background_field'), :form => f %>
-		
-		<%= render ('portfolios/fields/layout_field') %>
-		
-		<%= render ('portfolios/fields/theme_field') %>
-		
+    <%= render ('portfolios/fields/background_field'), :form => f %>
 
-	
-		<%= f.hidden_field :layout %>
-		<%= f.hidden_field :theme %>
-		<footer>
-			<%= submit_tag 'Save portfolio', :class=> 'btn' %>
-		</footer>
-	<% end %>
-	
-	
+    <%= render ('portfolios/fields/layout_field') %>
+
+    <%= render ('portfolios/fields/theme_field') %>
+
+
+
+    <%= f.hidden_field :layout %>
+    <%= f.hidden_field :theme %>
+    <footer>
+      <%= submit_tag 'Save portfolio', :class=> 'btn' %>
+    </footer>
+  <% end %>
+
+  <%- unless @portfolio.published? || (current_user != @portfolio.user) -%>
+    <%= form_tag(publish_portfolio_path, :method => :put) do %>
+      <%= submit_tag "Publish", :class => 'btn' %>
+    <% end %>
+  <% end %>
+
 </section>
+
+
 
 <% content_for :preview do %>
   <%= render  "preview",  :action => 'edit_layout_portfolio'  %>
 <% end %>
-
-
