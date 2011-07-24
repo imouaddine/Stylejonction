@@ -23,17 +23,18 @@
           <%= render '/images/thumb', :image => @project.cover %>
         </figure>
         <div id="upload_custom_bg_links" class="upload_custom_bg_links">
-          <%= f.file_field 'cover[image]' %>
+          <%#= f.file_field 'cover[image]' %>
+          <%= f.hidden_field :cover_name %>
 
-          <%- if !@project.new_record? %>
+          <%- if !@project.cover.present? %>
             <%= link_to  "Edit your cover", edit_image_path(@project.cover), :class => "icon_link edit_link iframe_fancy", :id => 'edit_project_cover' %>
           <% end %>
         </div>
       </div>
-      <!-- <div class="col"> -->
-      <!--   <a id="upload_project_cover" href="#" class="upload_btn btn">Upload</a> -->
-      <!--   <p class="information">Ideal dimension: 165 px x 165 px – JPG, PNG formats</p> -->
-      <!-- </div> -->
+      <div class="col">
+        <a id="upload_project_cover" href="#" class="upload_btn btn">Upload</a>
+        <p class="information">Ideal dimension: 165 px x 165 px – JPG, PNG formats</p>
+      </div>
     </section>
   </div>
 </fieldset>

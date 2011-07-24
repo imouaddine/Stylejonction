@@ -29,8 +29,9 @@ class ProjectsController < ApplicationController
   def create
     next_number = @portfolio.projects.count + 1
     cover = params[:project].delete(:cover)
+
     @project = @portfolio.projects.new(params[:project])
-    create_cover if cover
+    cover.present? ? create_cover : find_and_assign_cover(params[:project][:cover_name])
     flash[:notice] = "Project was successfully created" if @project.save!
     @project.make_default if @project.default?
 
@@ -121,5 +122,12 @@ class ProjectsController < ApplicationController
     cover = params[:project].delete(:cover)
     @project.cover.image = cover[:image]
     @project.cover.save
+  end
+
+  def find_and_assign_cover(cover_name)
+    cover = Image.where(:image => cover_name).order("created_at").last rescue nil
+    if cover
+      @project.cover = cover
+    end
   end
 end

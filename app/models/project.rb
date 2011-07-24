@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   THUMB_FORMAT_DIMENSIONS = { :width => 165, :height => 165 }
 
   attr_accessible :title, :default, :public, :cover_id, :cover
+  attr_reader :cover_name
 
   validates_presence_of :title
   belongs_to :portfolio

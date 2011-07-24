@@ -6,6 +6,7 @@ class CreateImages < ActiveRecord::Migration
       t.integer :thumb_format_id
       t.integer :original_format_id
       t.boolean :published, :default => false
+      t.timestamps
     end
     create_table(:image_formats) do |t|
       t.integer :height

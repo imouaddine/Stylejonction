@@ -1,12 +1,12 @@
 module ApplicationHelper
-  
+
   def iviewer(element, image_path, fit_button, image_format)
     %Q{
        <script type='text/javascript'>
           image_format = eval(#{image_format});
           image_format.scale_to_fit = Boolean(image_format.scale_to_fit);
           zoom_val = image_format.scale_to_fit? 'fit' : 100;
-         
+
            $('#{element}').iviewer({
               src: '#{image_path}',
               update_on_resize: false,
@@ -20,7 +20,7 @@ module ApplicationHelper
                 left = -parseFloat(image_format.crop_x);
                 $("#cover_editor img").css("top", top);
                 $("#cover_editor img").css("left", left);
-                
+
                 $('#{fit_button}').change(function(){
                   if( $(this).is(':checked') ){
                     object.fit();
@@ -29,16 +29,16 @@ module ApplicationHelper
                     object.zoom_by(1);
                   }
                 });
-                
-               
-                 
-                
+
+
+
+
               }
            });
       </script>
-      
+
      }.gsub(/[\n ]+/, ' ').strip.html_safe
-     
+
   end
   def photo_uploadify(element_selector, image_selector, script_path, fileDataName)
      # Putting the uploadify trigger script in the helper gives us
@@ -54,7 +54,7 @@ module ApplicationHelper
      # ScriptData:
      #   Sets the http headers to accept javascript plus adds
      #   the session key and authenticity token for XSS protection.
-     #   The "FlashSessionCookieMiddleware" rack module deconstructs these 
+     #   The "FlashSessionCookieMiddleware" rack module deconstructs these
      #   parameters into something Rails will actually use.
 #/portfolio/projects/#{@project.id}/upload_cover.js
      session_key_name = Rails.application.config.session_options[:key]
@@ -80,14 +80,18 @@ module ApplicationHelper
              '#{session_key_name}' : encodeURIComponent('#{u(cookies[session_key_name])}'),
              'authenticity_token'  : encodeURIComponent('#{u(form_authenticity_token)}')
            },
-           onComplete : function(a, b, c, response){  if(image_selector.length > 0) image_selector.html(response).trigger('change'); else eval(response); }
+           onComplete : function(a, b, c, response){  if(image_selector.length > 0) {
+                                                          image_selector.html(response).trigger('change');
+                                                          $('#project_cover_name').val(c.name);
+                                                       }
+                                                      else eval(response); }
          });
        });
      </script>
      }.gsub(/[\n ]+/, ' ').strip.html_safe
    end
-   
-   
+
+
    def section_link(body, url, html_options = {})
        if html_options[:action] == @current_action and html_options[:controller] == @current_controller
           html_options[:class] = 'selected'
@@ -96,11 +100,11 @@ module ApplicationHelper
           link_to(body, url, html_options)
        end
    end
-   
+
    def thumb_image_tag(image,  html_options = {})
      if image && image.thumb_url
-        image_tag image.thumb_url, html_options 
+        image_tag image.thumb_url, html_options
      end
    end
-   
+
 end
