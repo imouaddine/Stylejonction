@@ -10,12 +10,11 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = @portfolio.projects.find(params[:id])
+    @project = get_project(params[:id])
     respond_to do |format|
       format.json {render :text => @project.to_json(:include => :cover) }
       format.html
     end
-
   end
 
   def new
@@ -28,27 +27,21 @@ class ProjectsController < ApplicationController
 
   def create
     next_number = @portfolio.projects.count + 1
-    cover = params[:project].delete(:cover)
-
     @project = @portfolio.projects.new(params[:project])
-    cover.present? ? create_cover : find_and_assign_cover(params[:project][:cover_name])
     flash[:notice] = "Project was successfully created" if @project.save!
-    @project.make_default if @project.default?
-
-    @project = @project.project_copy if @project.published?
     redirect_to edit_portfolio_project_path(@project)
   end
 
   def edit
-    find_project
+    @project = get_project(params[:id])
     @cover = @project.cover
     respond_with(@project)
   end
 
   def update
-    find_project
+    @project = get_project(params[:id])
     check_defaultness
-    update_cover
+    #update_cover
     flash[:notice] = "Project was successfully updated" if @project.update_attributes(params[:project])
     redirect_to edit_portfolio_project_path(@project)
   end
@@ -73,7 +66,6 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-
     if @user.portfolio.projects.count > 0
       #if delete project is default, make the first one the default
       if @project.default?
@@ -84,6 +76,7 @@ class ProjectsController < ApplicationController
     else
       redirection_path =  edit_layout_portfolio_path(@project)
     end
+    
     respond_to do |format|
       format.html { redirect_to redirection_path, notice: "Project #{@project.title} has been deleted successfully" }
       format.json { head :ok }
@@ -91,6 +84,10 @@ class ProjectsController < ApplicationController
   end
 
   private
+  
+  def get_project(project_id)
+    @portfolio.projects.find(project_id)
+  end
 
   def did_not_send_to?(email)
     invite = Invitation.find_by_email(email) rescue nil
@@ -107,10 +104,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def find_project
-    p = Project.find(params[:id])
-    @project = p.published? ? p.project_copy : p
-  end
+
 
   def create_cover
     @project.cover = Image.new

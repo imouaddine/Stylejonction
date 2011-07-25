@@ -129,15 +129,17 @@ user = User.create! :username => 'imouaddine', :first_name => 'Imad', :last_name
 puts "Create portfolio project"
 
 4.times do |i|
-  project = user.portfolio.projects.create(:title => "Project #{i}")
+  project = user.portfolio.projects.new(:title => "Project #{i}")
   project.cover.image.store!(File.open(File.join(Rails.root, "public/assets/images/projects/#{i}.jpg")))
   project.cover.image.recreate_versions!
   project.cover.save
   project.save
-  #puts "project saved #{project.cover.thumb_url}"
+  puts "project saved #{project.cover.thumb_url}"
+  
 end
 
-user.portfolios << Portfolio.create
+
 user.save
+user.portfolio.publish!
 
 puts 'New user created: ' << user.full_name

@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  has_many :portfolios, :dependent => :destroy
+  has_one :portfolio, :dependent => :destroy
   has_many :custom_backgrounds
 
   after_create :create_default_portfolio
@@ -21,17 +21,10 @@ class User < ActiveRecord::Base
     return in_published || in_drafts
   end
 
-  def portfolio
-    portfolios.find_by_published(false)
-  end
-
-  def published_portfolio
-    portfolios.find_by_published(true)
-  end
-
+ 
   private
 
   def create_default_portfolio
-    self.portfolios << Portfolio.create(:user => self, :theme => "light")
+    self.portfolio = Portfolio.create(:user => self, :theme => "light")
   end
 end

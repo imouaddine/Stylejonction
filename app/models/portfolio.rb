@@ -1,6 +1,6 @@
 class Portfolio < ActiveRecord::Base
   include BackgroundValidator
-
+  
   THEMES = %w{light dark}
   LAYOUTS = %w{left top right bottom}
 
@@ -11,14 +11,12 @@ class Portfolio < ActiveRecord::Base
                   :background, :custom_background_id,
                   :pattern_background_id, :predefined_background_id, :pattern_background_attributes)
 
-
-
   validates_inclusion_of :layout, :in => LAYOUTS, :message => "Layout % should be one of #{LAYOUTS}"
   validates_inclusion_of :theme, :in => THEMES, :message => "Theme  %s should be one of #{THEMES}"
 
   belongs_to :user
-  has_many :projects, :dependent => :destroy, :after_add => :add_also_project_copy, :conditions => { :published => false }
-  has_many :published_projects, :class_name => "Project", :conditions => { :published => true }
+  has_many :projects, :dependent => :destroy
+  
   belongs_to :title_font, :class_name => "Font", :foreign_key => "title_font_id"
   belongs_to :body_font, :class_name => "Font", :foreign_key => "body_font_id"
 
@@ -26,7 +24,7 @@ class Portfolio < ActiveRecord::Base
   belongs_to :predefined_background
   belongs_to :custom_background
   belongs_to :pattern_background
-
+  
   accepts_nested_attributes_for :pattern_background
 
   after_create :set_default_attributes
@@ -34,29 +32,17 @@ class Portfolio < ActiveRecord::Base
   validates :custom_background_id, :custom_background => true, :unless => lambda { |p| p.custom_background_id.nil? }
   validates :predefined_background_id, :predefined_background => true, :unless => lambda { |p| p.predefined_background_id.nil? }
   validates :pattern_background_id, :pattern_background => true, :unless => lambda { |p| p.pattern_background_id.nil? }
-
-
+  
+  def publish!
+    self.published = true
+    self.save
+  end
+  
+  
   def has_saved_project?
     projects.present? && !projects.first.new_record?
   end
-
-  def publish!
-    self.transaction do
-      begin
-        self.published = true
-        if user.portfolios.count == 1
-          clone
-        else
-          update_draft
-          update_projects
-        end
-        save
-      rescue
-        logger.fatal "Wasn't able to publish Portfolio ##{self.id}"
-      end
-    end
-  end
-
+ 
   def published=(value)
     if value
       write_attribute(:published, value)
@@ -74,7 +60,7 @@ class Portfolio < ActiveRecord::Base
   end
 
   private
-
+  
   def set_default_attributes
     self.background = PredefinedBackground.first if (PredefinedBackground.count > 0)
     self.theme = THEMES.first
@@ -90,43 +76,8 @@ class Portfolio < ActiveRecord::Base
     end
     save!
   end
+  
 
-  def clone
-    draft = Portfolio.new( :layout => self.layout,
-                           :theme  => self.theme)
-    set_draft_attributes(draft)
-  end
-
-  def update_draft
-    portfolios = user.portfolios
-    draft = (portfolios - [self]).first
-    set_draft_attributes(draft)
-  end
-
-  def set_draft_attributes(draft)
-    draft.background            = self.background
-    draft.user                  = self.user
-    draft.title_font            = self.title_font
-    draft.body_font             = self.body_font
-    draft.body_color            = self.body_color
-    draft.background_type       = self.background_type
-    draft.title_color           = self.title_color
-    draft.background            = self.background
-    draft.custom_background     = self.custom_background
-    draft.pattern_background    = self.pattern_background
-    draft.predefined_background = self.predefined_background
-    draft.published             = false
-
-    draft.save
-  end
-
-  def add_also_project_copy(project)
-    if project.project_copy && !(projects.include? project.project_copy)
-      projects << project.project_copy
-    end
-  end
-
-  def update_projects
-    published_projects.map(&:sync_with_draft)
-  end
+ 
+ 
 end

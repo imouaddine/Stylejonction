@@ -11,8 +11,6 @@
 
     <%= render ('portfolios/fields/theme_field') %>
 
-
-
     <%= f.hidden_field :layout %>
     <%= f.hidden_field :theme %>
     <footer>
@@ -20,11 +18,7 @@
     </footer>
   <% end %>
 
-  <%- unless @portfolio.published? || (current_user != @portfolio.user) -%>
-    <%= form_tag(publish_portfolio_path, :method => :put) do %>
-      <%= submit_tag "Publish", :class => 'btn' %>
-    <% end %>
-  <% end %>
+ 
 
 </section>
 

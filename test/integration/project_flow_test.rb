@@ -86,7 +86,7 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
   test "can delete project" do
 
      visit edit_portfolio_project_path(@project)
-     assert_difference("Project.count", -2) do
+     assert_difference("Project.count", -1) do
        within "#project_#{@project.id}" do
          page.evaluate_script('window.confirm = function() { return true; }')
          find(".remove_link").click()

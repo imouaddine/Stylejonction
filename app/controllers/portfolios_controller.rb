@@ -8,7 +8,9 @@ class PortfoliosController < ApplicationController
 
 
   def show
+    @projects = @portfolio.projects
     respond_with @portfolio
+    
   end
 
   def publish

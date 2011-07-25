@@ -17,14 +17,6 @@
     PredefinedBackground.delete_all
   end
 
-
-  test "supports js" do
-    visit portfolio_path
-    click_link "test js"
-
-    assert_equal true, page.has_content?("js works")
-  end
-
   test "edit_layout portfolio page" do
     
     @portfolio.background = Factory (:pattern_background)
@@ -133,8 +125,9 @@
     
   end
   test "update portfolio fonts" do
-    body_font = Font.create(:name => 'Times New Roman', :webfont => true)
-    title_font = Font.create(:name => 'Arial', :webfont => true)
+    
+    body_font = Font.create(:name => 'Times New Roman', :webfont => true, :body_font => true)
+    title_font = Font.create(:name => 'Arial', :webfont => true, :title_font => true)
     
     title_color = "223344"
     body_color = "994944"

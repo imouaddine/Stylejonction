@@ -135,11 +135,13 @@ class PortfoliosControllerTest < ActionController::TestCase
 
   test "can publish a portfolio" do
     sign_in @user
-    assert_equal false, @user.published_portfolio.present?
+    @user.portfolio.published = false
+    @user.portfolio.save
+    
     @request.env["HTTP_REFERER"] = "http://whwhwhh"
     put :publish
     @user.reload
-    assert_equal true, @user.published_portfolio.present?
+    assert_equal true, @user.portfolio.published?
   end
 
 end

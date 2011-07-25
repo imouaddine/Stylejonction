@@ -2,7 +2,7 @@ class CreateImages < ActiveRecord::Migration
   def up
     create_table(:images) do |t|
       t.string  :image
-      t.integer :cover_copy_id
+      t.integer :image_copy_id 
       t.integer :thumb_format_id
       t.integer :original_format_id
       t.boolean :published, :default => false

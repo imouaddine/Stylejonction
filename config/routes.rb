@@ -1,14 +1,14 @@
 Stylejonction::Application.routes.draw do
   
 
-
-
   require 'subdomain'
-
+  
   devise_for :users
+ 
+   
 
   match "/users" => "users#index"
-
+  
 
   constraints(Subdomain) do
     match '/' => 'portfolios#edit_layout'
@@ -20,25 +20,21 @@ Stylejonction::Application.routes.draw do
         post 'upload_background'
         put 'publish'
       end
-      resources :projects  do
+      resources :projects, :except => [:index]  do
         member do
           post 'invite'
         end
       end
-
-
     end
   end
-
-  resources :invitations, :only => [:show]
+  
   resources :custom_backgrounds, :only => [:edit, :update, :create]
   resources :predefined_backgrounds, :only => [:show]
   resources :patterns, :only => [:show]
-  resources :text_blocks
-  resources :document_blocks
-  resources :galleries
-  
-
+  resources :text_blocks, :only => [:edit, :update]
+  resources :document_blocks, :only => [:edit, :update]
+  resources :galleries, :only => [:edit, :update]
+  resources :invitations, :only => [:show]
   resources :fonts, :only => [:show]
   resources :images do
     member do

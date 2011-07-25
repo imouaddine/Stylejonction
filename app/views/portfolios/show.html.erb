@@ -1,15 +1,10 @@
 <h2> VIEW PORTFOLIO</h2>
 
-<div><%= debug current_user.portfolios.inspect %>
-<div> Portofilo id: <%= @portfolio.id %> </div>
 
-<%- unless @portfolio.published? || (current_user != @portfolio.user) -%>
-  <%= form_tag(publish_portfolio_path, :method => :put) do %>
-    <%= submit_tag("Publish") %>
-  <% end %>
-<% end %>
+<section>
 
 <ul>
+
         <li> layout: <%= @portfolio.layout %> </li>
   <li> theme: <%= @portfolio.theme || "-" %> </li>
   <%- if @portfolio.title_font.present? %>
@@ -21,6 +16,11 @@
    <%- if @portfolio.background.present? %>
     <li> background: <%= @portfolio.background.name %> </li>
   <% end %>
-  <li> published? <%= @portfolio.published? %> </li>
+  
 </ul>
-<%= link_to_function "test js", '$(this).html("js works")' %>
+<ul>
+
+</ul>
+</section>
+
+

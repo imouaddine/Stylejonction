@@ -44,6 +44,7 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal true, project.cover.save
     assert_equal true, project.save, project.errors.inspect
     project.reload
+    assert project.cover, project.inspect
     assert_equal 165, project.cover.thumb_format.width
     assert_equal 165, project.cover.thumb_format.height
   end
@@ -66,22 +67,7 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.default?
   end
 
-  test "if user has 2 projects setting one to default changes the other one" do
-    user = Factory.create(:user)
-
-    p1 = Project.create(:title => "one", :default => true)
-    p2 = Project.create(:title => "two", :default => false)
-
-    user.portfolio.projects << p1
-    user.portfolio.projects << p2
-
-    p2.make_default
-    p1.reload
-
-    assert_equal false, p1.default?
-    assert_equal Project.default.count, 1
-    assert_equal p2, user.default_project
-  end
+  
 
   test "can invite someone to the project" do
     user = Factory.create(:user)
@@ -95,16 +81,7 @@ class ProjectTest < ActiveSupport::TestCase
   end
 
 
-  test "copy gets created along with the project, one is unpublished " do
-    Project.destroy_all
-    p1 = Project.create(:title => "one")
-
-    assert_equal Project.count, 2
-    assert_equal p1.project_copy.published?, false
-    assert_equal p1.published?, true
-
-    assert_equal Project.first.project_copy, Project.last
-  end
+  
 
   test "project gets a default cover before saving " do
     # Just to be sure:
@@ -112,22 +89,13 @@ class ProjectTest < ActiveSupport::TestCase
     Project.destroy_all
 
     p = Project.new(:title => "Give me a cover!!")
-    assert_equal true, p.cover.nil?
-    p.save
+
+    assert_equal p.save, true, p.errors.inspect
     assert_equal false, p.cover.nil?
-    assert_equal 2, Image.count, "Cover and cover copy"
-    assert_equal 2, Project.count
-    assert_equal Project.first.cover, Project.last.cover.cover_copy, "Should be identical"
+    assert_equal 1, Image.count
+    assert_equal 1, Project.count
+    
   end
 
-
-  test "sees only one of cover/cover_copy pair" do
-    p = Project.create(:title => "Project with a cover")
-
-    assert_equal false, p.cover.nil?
-    assert_equal Image.last.cover_copy, Image.first
-    assert_equal p.cover.published?, true
-    assert_equal p.cover.cover_copy.published?, false
-  end
 
 end

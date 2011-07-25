@@ -38,13 +38,6 @@ class PortfolioTest < ActiveSupport::TestCase
     assert_equal true, @portfolio.published?
   end
 
-  test "can't undo publishing" do
-    @portfolio.publish!
-    @portfolio.published = false
-
-    assert_equal true, @portfolio.published?
-  end
-
   test "predefined background association works" do
     portfolio = Factory.create(:portfolio)
     background = Factory.create(:predefined_background)
@@ -143,52 +136,7 @@ class PortfolioTest < ActiveSupport::TestCase
   end
 
 
-  test "sees only one of projects in a project/project_copy pair" do
-    portfolio = Factory.create(:portfolio)
-    portfolio.projects << Project.create(:title => "Fun fun fun!")
+ 
 
-    assert_equal Project.count, 2
-    assert_equal Project.last.project_copy, Project.first
-    assert_equal portfolio.projects.count, 1
-  end
-
-  test "when the portfolio is published project copies are made the same" do
-    portfolio = Factory.create(:portfolio)
-    portfolio.projects << Project.create(:title => "Publish me")
-    p1 = portfolio.projects.first
-    p1.title = "title has changed"
-    p1.save!
-
-    portfolio.publish!
-
-    assert_equal portfolio.published_projects.first.title, "title has changed"
-    assert_equal portfolio.projects.first.title, "title has changed"
-    assert_equal portfolio.projects.first.project_copy.published?, true
-  end
-
-  test "when the portfolio is published both coovers are made the same" do
-    portfolio = Factory.create(:portfolio)
-    portfolio.projects << Project.create(:title => "Publish me")
-    cover = portfolio.projects.first.cover
-    cover.thumb_format = ImageFormat.create(:name => "thumb", :height => 10, :width => 20)
-    cover.save
-    portfolio.publish!
-    assert_equal cover.thumb_format, cover.cover_copy.thumb_format
-  end
-
-
-  test "when something goes wrong changes are rolled back " do
-    portfolio = Factory.create(:portfolio)
-    portfolio.projects << Project.create(:title => "Publish me")
-    p1 = portfolio.projects.first
-    p1.title = "title has changed"
-    p1.save!
-
-    portfolio.expects(:save).raises
-    portfolio.publish!
-    portfolio.reload
-    assert_equal portfolio.published?, false
-    assert_equal portfolio.published_projects.first.title, "title has changed"
-    assert_equal portfolio.projects.first.title, "title has changed"
-  end
+  
 end

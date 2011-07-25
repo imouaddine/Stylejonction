@@ -1,20 +1,20 @@
 class Image < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   attr_accessible :image
-  belongs_to :thumb_format, :class_name => "ImageFormat", :foreign_key => "thumb_format_id"
-  belongs_to :original_format, :class_name => "ImageFormat", :foreign_key => "original_format_id"
-
-  after_initialize :create_formats
+  belongs_to :thumb_format, :class_name => "ImageFormat", :foreign_key => "thumb_format_id", :dependent => :destroy
+  belongs_to :original_format, :class_name => "ImageFormat", :foreign_key => "original_format_id", :dependent => :destroy
+  
+  before_validation :create_formats, :if => Proc.new {|f| f.new_record?}
+  
+ 
+  
   validates :thumb_format, :presence => true
   validates :original_format, :presence => true
-
-  belongs_to :cover_copy, :class_name => "Image", :foreign_key => "cover_copy_id", :dependent => :destroy
-  after_create :create_cover_copy
-
+  
+    
   def set_thumb_dimension(width, height)
-    self.thumb_format.width = width
-    self.thumb_format.height = height
-    self.thumb_format.save
+    self.thumb_format = ImageFormat.new if self.thumb_format.nil?
+    self.thumb_format.update_attributes(:width => width, :height => height)
   end
 
   def thumb_url
@@ -39,40 +39,17 @@ class Image < ActiveRecord::Base
     self.image.recreate_versions!
   end
 
-  def sync_with_draft
-    update_cover_copy
-  end
 
   private
 
-  def create_cover_copy
-    if self.cover_copy.nil?
-      other = Image.new
-      other.image = self.image
-      other.cover_copy_id = self.id
-      other.thumb_format_id = self.thumb_format_id
-      other.original_format_id = self.original_format_id
-      other.published = false
-      other.save
-      self.cover_copy = other
-      self.published = true
-      save
-    end
-  end
 
   protected
+    def create_formats
+      if self.new_record?
+        self.thumb_format = ImageFormat.create(:name => "thumb") unless self.thumb_format.present?
+        self.original_format = ImageFormat.create(:name => "original") unless self.original_format.present?
+      end
+    end
 
-  def create_formats
-    self.create_thumb_format(:name => "thumb") unless self.thumb_format.present?
-    self.create_original_format(:name => "original") unless self.original_format.present?
-  end
-
-  def update_cover_copy
-    other = cover_copy
-    self.image = other.image
-    self.thumb_format_id = other.thumb_format_id
-    self.original_format_id = other.original_format_id
-    self.save
-  end
-
+  
 end

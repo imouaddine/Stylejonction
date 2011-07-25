@@ -1,0 +1,23 @@
+<h1>Listing document_blocks</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @document_blocks.each do |document_block| %>
+  <tr>
+    <td><%= document_block.title %></td>
+    <td><%= link_to 'Show', document_block %></td>
+    <td><%= link_to 'Edit', edit_document_block_path(document_block) %></td>
+    <td><%= link_to 'Destroy', document_block, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Document block', new_document_block_path %>

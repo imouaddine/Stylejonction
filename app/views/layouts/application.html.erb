@@ -37,10 +37,15 @@
          	<h1 id="page_title">
           	<%- if user_signed_in? && request.subdomain == current_user.username -%>
             	<em><%= current_user.username %></em>'s portfolio
-          	<% end %>
+						<% end %>
+					 
            </h1>
-					
-					
+						<%- if user_signed_in? && !current_user.portfolio.published? -%>
+						    <%= form_tag(publish_portfolio_path, :method => :put) do %>
+						      <%= submit_tag "Publish", :class => 'btn' %>
+						    <% end %>
+						  <% end %>
+       		  
 
       </header>
                          <%- if user_signed_in? %>

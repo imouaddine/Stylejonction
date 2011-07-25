@@ -14,6 +14,9 @@
    end
 
    test "publishing works" do
+     @portfolio.published = false
+     @portfolio.save
+      
      visit portfolio_path
      @portfolio.projects << Project.create(:title => "We're publishing something!!")
      click_button "Publish"
@@ -22,11 +25,6 @@
      @portfolio.reload
 
      assert_equal @portfolio.published?, true
-     assert_equal @portfolio.published_projects.count, 1
-     assert_equal @portfolio.projects.count, 1
-     assert_equal( @portfolio.projects.first.project_copy,
-                   @portfolio.published_projects.first)
-     assert_equal( @portfolio.published_projects.first.cover,
-                   @portfolio.projects.first.cover.cover_copy)
+   
    end
  end
