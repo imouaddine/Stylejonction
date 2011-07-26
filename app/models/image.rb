@@ -3,17 +3,15 @@ class Image < ActiveRecord::Base
   attr_accessible :image
   belongs_to :thumb_format, :class_name => "ImageFormat", :foreign_key => "thumb_format_id", :dependent => :destroy
   belongs_to :original_format, :class_name => "ImageFormat", :foreign_key => "original_format_id", :dependent => :destroy
-  
-  before_validation :create_formats, :if => Proc.new {|f| f.new_record?}
-  
- 
-  
+
+  after_initialize :create_formats
+
   validates :thumb_format, :presence => true
   validates :original_format, :presence => true
-  
-    
+
+
   def set_thumb_dimension(width, height)
-    self.thumb_format = ImageFormat.new if self.thumb_format.nil?
+    self.thumb_format = ImageFormat.create(:name => "thumb") if self.thumb_format.nil?
     self.thumb_format.update_attributes(:width => width, :height => height)
   end
 
@@ -45,11 +43,7 @@ class Image < ActiveRecord::Base
 
   protected
     def create_formats
-      if self.new_record?
         self.thumb_format = ImageFormat.create(:name => "thumb") unless self.thumb_format.present?
         self.original_format = ImageFormat.create(:name => "original") unless self.original_format.present?
-      end
     end
-
-  
 end

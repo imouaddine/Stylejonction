@@ -1,33 +1,27 @@
 class Project < ActiveRecord::Base
 
-  
   THUMB_FORMAT_DIMENSIONS = { :width => 165, :height => 165 }
 
   attr_accessible :title, :default, :public, :cover_id, :cover
   attr_reader :cover_name
-  
+
   #Vaidation
   validates_presence_of :title, :cover
 
-  
-  
   #Belongs to association
   belongs_to :portfolio
   belongs_to :cover, :class_name => "Image", :foreign_key => "cover_id", :dependent => :destroy
-  
+
   #Has one to association
   has_one :document_block, :dependent => :destroy
   has_one :gallery, :dependent => :destroy
   has_one :text_block, :dependent => :destroy
-  
+
   #Has_many association
   has_many :invitations, :dependent => :destroy
-  
-  after_initialize :add_default_cover
-  
-  
- 
-  
+
+  after_create :add_default_cover
+
   scope :published,  where(:published => true)
   scope :default, where(:default => true)
 
@@ -37,12 +31,12 @@ class Project < ActiveRecord::Base
     end
     self.update_attribute(:default, true)
   end
-  
+
   def invite(email)
     invitations.create(:email => email).invite_to(portfolio.user)
   end
-  
- 
+
+
   protected
   def add_default_cover
     if self.cover.nil?
@@ -51,6 +45,4 @@ class Project < ActiveRecord::Base
       self.cover.save
     end
   end
-
- 
 end
