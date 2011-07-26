@@ -30,7 +30,8 @@ class ProjectTest < ActiveSupport::TestCase
   test "project upload" do
     user = Factory(:user)
     4.times do |i|
-      project = user.portfolio.projects.create(:title => "Project #{i}")
+      #project = user.portfolio.projects.create(:title => "Project #{i}")1~
+      project = Project.create(:portfolio => user.portfolio, :title => "Project #{i}")
       project.cover.image.store!(File.open(File.join(Rails.root, "public/assets/images/projects/#{i}.jpg")))
       project.save!
       assert project.cover.image.url
@@ -67,11 +68,11 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.default?
   end
 
-  
+
 
   test "can invite someone to the project" do
     user = Factory.create(:user)
-    p1 = Project.create(:title => "one")
+    p1 = Project.create!(:title => "one")
     user.portfolio.projects << p1
 
     p1.invite("john@mail.ma")
@@ -79,23 +80,5 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal 1, Invitation.count
     assert ! Invitation.first.used?, "Invitation shouldn't be used"
   end
-
-
-  
-
-  test "project gets a default cover before saving " do
-    # Just to be sure:
-    Image.destroy_all
-    Project.destroy_all
-
-    p = Project.new(:title => "Give me a cover!!")
-
-    assert_equal p.save, true, p.errors.inspect
-    assert_equal false, p.cover.nil?
-    assert_equal 1, Image.count
-    assert_equal 1, Project.count
-    
-  end
-
 
 end

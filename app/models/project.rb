@@ -20,7 +20,7 @@ class Project < ActiveRecord::Base
   #Has_many association
   has_many :invitations, :dependent => :destroy
 
-  after_create :add_default_cover
+  before_validation :add_default_cover
 
   scope :published,  where(:published => true)
   scope :default, where(:default => true)
