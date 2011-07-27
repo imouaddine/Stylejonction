@@ -22,6 +22,9 @@ class ProjectsController < ApplicationController
     @project = @portfolio.projects.new(:title => "Project #{next_number}")
     @project.cover = Image.new
     @cover = @project.cover
+    @text_block = @project.text_blocks.new
+    @gallery = @project.galleries.new
+    @document_block = @project.document_blocks.new
     respond_with(@project)
   end
 
@@ -39,6 +42,10 @@ class ProjectsController < ApplicationController
   def edit
     @project = get_project(params[:id])
     @cover = @project.cover
+    @text_block = @project.text_blocks.new
+    @gallery = @project.galleries.new
+    @document_block = @project.document_blocks.new
+    
     respond_with(@project)
   end
 

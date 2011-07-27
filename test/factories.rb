@@ -61,6 +61,7 @@ end
 
 Factory.define :gallery do |f|
   f.title "Gallery 1"
+  f.display_preference "mosaic"
   f.association :project
 end
 

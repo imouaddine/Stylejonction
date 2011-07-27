@@ -1,3 +1,4 @@
+
 <fieldset id="project_title">
   <span class="order">1</span>
 	<div class="inner">
@@ -10,33 +11,30 @@
 				<li><a href="#add_files">Attached Documents</a></li>
 			</ul>
 			<section id="add_writing_section">
-				 <input type="text" placeholder="Please insert a title..." />
-				 <textarea class="richtextarea">
-				 </textarea>
-				 <footer>
-						<input type="button" class="btn" value="Cancel"></input>
-						<input type="submit" class="btn" value="Save writing"></input>
-					</footer>
+				  <%= render 'text_blocks/form' %>
 			</section>
 			<section id="add_media_section">
-				<input type="text" placeholder="Give your gallery a catchy title..." />
-				<ul>
-					<li><a href="#">Add photo</a></li>
-					<li><a href="#">Add video</a></li>
-				</ul>
-				<ul>
-					<li>
-						<a href='#'><img src="http://placeholder.net/104/62"></img></a>
-						<a href="#">Edit</a>
-						<a href="#">Remove</a>
-					
-					
-				</ul>
+					<%= render 'galleries/form' %>
 			</section>
 			<section id="add_files">
-			
+					<%= render 'document_blocks/form' %>
 			</section>
-
+	</div>
+	<div>
+	<ul>
+	<% @project.text_blocks.each  do  |text_block| %>	
+		<li>
+			<%= text_block.title %> 
+		</li>
+	<% end %>
+	<% @project.galleries.each  do  |gallery| %>	
+		<li><%= gallery.title %> </li>
+	<% end %>
+	<% @project.document_blocks.each  do  |gallery| %>	
+		<li><%= gallery.title %> </li>
+	<% end %>
+	</ul>
 	</div>
 </fieldset>
+
 	

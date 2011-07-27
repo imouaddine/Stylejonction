@@ -1,6 +1,18 @@
 Stylejonction::Application.routes.draw do
   
 
+  resources :document_blocks
+
+  resources :galleries
+
+  resources :text_blocks
+
+  get "text_blocks/create"
+
+  get "text_blocks/destroy"
+
+  get "text_blocks/update"
+
   require 'subdomain'
   
   devise_for :users
@@ -31,9 +43,9 @@ Stylejonction::Application.routes.draw do
   resources :custom_backgrounds, :only => [:edit, :update, :create]
   resources :predefined_backgrounds, :only => [:show]
   resources :patterns, :only => [:show]
-  resources :text_blocks, :only => [:edit, :update]
-  resources :document_blocks, :only => [:edit, :update]
-  resources :galleries, :only => [:edit, :update]
+  resources :text_blocks, :except => [:index]
+  resources :document_blocks, :except => [:index]
+  resources :galleries, :except => [:index]
   resources :invitations, :only => [:show]
   resources :fonts, :only => [:show]
   resources :images do

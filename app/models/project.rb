@@ -12,13 +12,16 @@ class Project < ActiveRecord::Base
   belongs_to :portfolio
   belongs_to :cover, :class_name => "Image", :foreign_key => "cover_id", :dependent => :destroy
 
-  #Has one to association
-  has_one :document_block, :dependent => :destroy
-  has_one :gallery, :dependent => :destroy
-  has_one :text_block, :dependent => :destroy
+ 
+  
 
   #Has_many association
   has_many :invitations, :dependent => :destroy
+  has_many :document_blocks, :dependent => :destroy
+  has_many :galleries, :dependent => :destroy
+  has_many :text_blocks, :dependent => :destroy
+  
+  
 
   before_validation :add_default_cover
 

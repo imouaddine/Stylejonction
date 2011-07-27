@@ -4,6 +4,7 @@ class CreateTextBlocks < ActiveRecord::Migration
       t.string :title
       t.string :body
       t.integer :project_id
+      t.integer :weight, :default => true
 
       t.timestamps
     end

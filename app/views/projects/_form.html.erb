@@ -1,6 +1,6 @@
 <%= render('/portfolios/sidebar') %>
 <section id="edit_project" class="edit_project edit">
-  <%= form_for(@project, :url => url_for_action(@project) ) do |f| %>
+ 
     <header>
       <ul class="tabs horizontal_list">
         <li><a href="#edit_project_properties" class="active left" >Project properties</a></li>
@@ -8,17 +8,14 @@
       </ul>
     </header>
                 <section class="tab_content" id="edit_project_properties">
-                        <%= render 'form_properties' ,:f => f %>
+                        <%= render 'form_properties'  %>
                 </section>
                 <section class="tab_content" id="edit_project_content">
-                        <%= render 'form_content' ,:f => f %>
+                        <%= render 'form_content'  %>
                 </section>
 
-                <footer>
-                        <%= f.hidden_field :public %>
-                        <%= submit_tag 'Save project', :class => 'btn' %>
-                </footer>
-  <% end %>
+               
+
 </section>
 
 <%= photo_uploadify "#upload_project_cover", "#cover", path_for_image_upload(@project), 'image[image]' %>

@@ -12,11 +12,28 @@ class ProjectsControllerTest < ActionController::TestCase
 
   
 
-  test "should get new projectra when user is authenticated" do
+  test "should get new project when user is authenticated" do
     sign_in @user
     get :new, :portfolio_id => 1
     assert_response :success
+    assert_not_nil assigns(:project)
+    assert_not_nil assigns(:gallery)
+    assert_not_nil assigns(:text_block)
+    assert_not_nil assigns(:document_block)
   end
+  
+  test "should get edit" do
+    sign_in @user
+    get :edit, id: @project.to_param
+    
+    assert_response :success
+    
+    assert_not_nil assigns(:project)
+    assert_not_nil assigns(:gallery)
+    assert_not_nil assigns(:text_block)
+    assert_not_nil assigns(:document_block)
+  end
+  
 
   test "should destroy project" do
     sign_in @user
