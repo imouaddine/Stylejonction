@@ -13,7 +13,8 @@ class Portfolio < ActiveRecord::Base
 
   validates_inclusion_of :layout, :in => LAYOUTS, :message => "Layout % should be one of #{LAYOUTS}"
   validates_inclusion_of :theme, :in => THEMES, :message => "Theme  %s should be one of #{THEMES}"
-
+  validates_presence_of :user
+  
   belongs_to :user
   has_many :projects, :dependent => :destroy
   
@@ -25,7 +26,7 @@ class Portfolio < ActiveRecord::Base
   belongs_to :custom_background
   belongs_to :pattern_background
   
-  accepts_nested_attributes_for :pattern_background
+  accepts_nested_attributes_for :pattern_background, :custom_background
 
   after_create :set_default_attributes
 
@@ -59,25 +60,26 @@ class Portfolio < ActiveRecord::Base
     self.background.present? && self.background_type == 'PredefinedBackground'
   end
 
-  private
+  protected
   
   def set_default_attributes
+    #set background prefefined background
     self.background = PredefinedBackground.first if (PredefinedBackground.count > 0)
-    self.theme = THEMES.first
     self.predefined_background = self.background
+    
+    #set custom background
     self.custom_background = CustomBackground.create(:user => self.user)
-    self.custom_background.background.store!(File.open(File.join(Rails.root, "public/assets/images/placeholders/portfolio_custom_bg.jpg")))
+    self.custom_background.setup_image
     self.custom_background.save
+    
+    #set pattern background
     self.pattern_background = PatternBackground.create( :pattern => Pattern.first, :color => '000000')
-    self.layout = LAYOUTS.first
+    
     if Font.count > 0
       self.title_font = Font.first
       self.body_font = Font.first
     end
+    
     save!
   end
-  
-
- 
- 
 end

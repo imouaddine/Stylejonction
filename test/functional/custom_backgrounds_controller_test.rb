@@ -10,10 +10,10 @@ class CustomBackgroundsControllerTest < ActionController::TestCase
   
    test "should access edit action" do
      sign_in @user
-     
      get :edit, :id => @background.id
      assert_response :success
      assert_not_nil assigns(:background)
+     
   end
   
   test "should access update when authenticated" do
@@ -27,16 +27,7 @@ class CustomBackgroundsControllerTest < ActionController::TestCase
       assert_not_nil assigns(:background)
   end
   
-  test "should access create when authenticated" do
-      sign_in @user
-      
-      assert_difference('CustomBackground.count') do
-        post :create, background: @background.attributes, :format => 'js'
-      end
-      
-      assert_response :success
-      assert_not_nil assigns(:background)
-  end
+ 
   
   
 end

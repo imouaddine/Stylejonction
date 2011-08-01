@@ -8,10 +8,11 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     "click #private_project_btn":   "update_visibility_private"
     "click #send_invites":          "send_invites"
     "change #cover"                 :"cover_changed"
+    "click #submit_btn"             :"submit_form"
 
   initialize: ()->
     _.bindAll(this, 'showCover', 'on_fancybox_complete')
-    $("#edit_project").tabs()
+    $("#edit_project_section").tabs()
     @project = @options.model
     if @project.cover?
       @cover = @project.cover
@@ -90,6 +91,13 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     timestamp = new Date().getTime();
 
     $("#cover img").attr('src', "#{cover.toJSON().image.thumb.url}?#{timestamp}")
+    
+    
+  submit_form: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    console.log e
+    $("form.edit_project").submit();
 
 
 

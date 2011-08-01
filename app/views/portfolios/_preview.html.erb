@@ -1,6 +1,6 @@
 <div id="preview_wrapper">	
 	<div id="separator">
-		<a id="dragger" href="#"><%= image_tag 'images/sep.png' %></a>
+		<a id="dragger" href="#"><%= image_tag '/images/sep.png' %></a>
 	</div>
 	<section id="preview" class="full_width">
 
@@ -9,14 +9,23 @@
 <script type="text/javascript">
   $(function() {
     window.router = new Stylejonction.Routers.PortfoliosRouter({
-			portfolio: <%= @portfolio.to_json(:include => [:body_font, :title_font, :background, :custom_background, :predefined_background, :pattern_background]).html_safe -%>, 
-			pattern: <%= @portfolio.pattern_background.pattern.to_json.html_safe -%>,
+			portfolio: <%= @portfolio.to_json({:include => {:body_font => {}, 
+																						:title_font => {},  
+																						:background => {},
+																						:custom_background => {:include => :image}, 
+																						:pattern_background => { :include => {:pattern => {:include => :image} }},
+																						:predefined_background => {:include => :image}}}).html_safe
+
+			-%>, 
 			projects: <%= @portfolio.projects.to_json(:include => :cover).html_safe -%>,
 			<% if @project.present? %>
 				project: <%= @project.to_json(:include => :cover).html_safe  -%>,
 			<% end %>
-			action : '<%= action -%>'
+		
+				action : <%= "'#{action}'"  %>
+
 		});
    
   });
 </script>
+

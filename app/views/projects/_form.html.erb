@@ -1,21 +1,21 @@
 <%= render('/portfolios/sidebar') %>
-<section id="edit_project" class="edit_project edit">
- 
+
+<section id="edit_project_section" class="edit_section edit_project_section" >
     <header>
       <ul class="tabs horizontal_list">
         <li><a href="#edit_project_properties" class="active left" >Project properties</a></li>
         <li><a class="right" href="#edit_project_content">Content</a></li>
       </ul>
     </header>
-                <section class="tab_content" id="edit_project_properties">
-                        <%= render 'form_properties'  %>
-                </section>
-                <section class="tab_content" id="edit_project_content">
-                        <%= render 'form_content'  %>
-                </section>
-
-               
-
+    <section class="edit_project_tab_section edit_project_properties_section" id="edit_project_properties">
+      <%= render 'form_properties'  %>
+    </section>
+    <section class="edit_project_tab_section" id="edit_project_content">
+      <%= render 'form_content'  %>
+    </section>
+    <footer>
+        <a id="submit_btn" href="#" class="btn-1 submit"><span><strong>Save project</strong></span></a>
+    </footer>
 </section>
 
 <%= photo_uploadify "#upload_project_cover", "#cover", path_for_image_upload(@project), 'image[image]' %>

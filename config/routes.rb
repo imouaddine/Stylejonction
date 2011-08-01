@@ -29,7 +29,6 @@ Stylejonction::Application.routes.draw do
       member do
         get 'edit_layout'
         get 'edit_font'
-        post 'upload_background'
         put 'publish'
       end
       resources :projects, :except => [:index]  do
@@ -40,7 +39,12 @@ Stylejonction::Application.routes.draw do
     end
   end
   
-  resources :custom_backgrounds, :only => [:edit, :update, :create]
+  resources :custom_backgrounds, :only => [:edit, :update, :create] do
+     member do
+       post 'upload'
+       get 'remove_upload'
+     end
+  end
   resources :predefined_backgrounds, :only => [:show]
   resources :patterns, :only => [:show]
   resources :text_blocks, :except => [:index]

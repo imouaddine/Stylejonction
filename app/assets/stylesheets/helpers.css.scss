@@ -13,17 +13,7 @@
   color: $grey-color;
   font-style: italic;
 }
-.edit{
-  @include column(18, true);
-  width: 745px;
-  form{
-    padding: span(1) - 10px ;
-  }
-  footer{
-    text-align: right;
-    margin-right: 50px;
-  }
-}
+
 .hidden{
   display: none;
 }
@@ -54,7 +44,7 @@
 
 /*** BOUTONS **/
 .btn{
-  background: url('images/blue_btn_bg.png') repeat-x;
+  background: url('../images/blue_btn_bg.png') repeat-x;
   @include border-radius;
   border: 1px solid #44535d;
   display: inline-block;
@@ -67,6 +57,89 @@
     @include opacity(0.96);
   }
 }
+.styled_text_field.tb4{
+  background: url(../images/tb4.gif) no-repeat left top;
+  padding: 12px 15px;
+  width: 404px;
+  height: 20px;
+  input{
+    width: 404px;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: none;
+    color: #7C7C7C;
+    &:focus{
+      border: 0;
+    }
+  }
+}
+.styled_text_field.tb5{
+  width: 291px;
+  height: 19px;
+  padding: 8px 10px;
+  background: url(../images/tb5.gif) no-repeat left top;
+  input{
+    width: 291px;
+    height: 19px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: none;
+    color: #BBB;
+     &:focus{
+        border: 0;
+      }
+  }
+}
+/*--- Custom Checkbox Buttons ---*/
+/*--- Custom Radio Buttons ---*/
+.checkbox {
+	width: 27px;
+	height: 17px;
+	display: block;
+	clear: left;
+	float: left;
+	background: url(../images/radio.gif) no-repeat;
+}
+/*--- Custom Check Box ---*/
+.check1 .checkbox,
+.check2 .checkbox {
+	width: 113px;
+	height: 69px;
+	display: block;
+	float: left;
+	margin:0 7px 0 0;
+}
+.check1 .checkbox {	background:url(../images/checkbox1.gif) no-repeat left top; }
+.check2 .checkbox {	background:url(../images/checkbox2.gif) no-repeat left top; }
+.btn-1{
+  
+  height: 41px;
+  float: right;
+  line-height: 41px;
+  padding: 0 0 0 5px;
+  background: url(../images/bg-button-type1-left.png) no-repeat left top;
+  font-size: 16px;
+  font-style: italic;
+  @include link_colors(white, white, white, white);
+  span{
+    padding: 0 5px 0 0;
+    background: url(../images/bg-button-type1-right.png) no-repeat right top;
+   
+  }
+  strong{
+    background: url(../images/bg-button-type1-center.png) repeat-x left top;
+    padding: 0 30px;
+  }
+  span, strong{
+     float: left;
+      height: 41px;
+  }
+}
 
 
 .number{
@@ -76,8 +149,8 @@
 .upload_image_section{
   figure {
     img{
-       @include box-shadow(0 0 5px rgba(#000, 0.1) );
-       border: 1px solid #b4b4b4;
+      @include box-shadow(0 0 5px rgba(#000, 0.1) );
+      border: 1px solid #b4b4b4;
     }
   }
   .col.first{
@@ -98,13 +171,13 @@
   display: block;
 }
 .edit_link{
-  background: transparent url('images/edit_icon.png') no-repeat left 0%;
+  background: transparent url('../images/icon-edit.gif') no-repeat left 0%;
 }
 .remove_link{
-  background: transparent url('images/remove_icon.png') no-repeat left 50%;
+  background: transparent url('../images/icon-x.png') no-repeat left 50%;
 }
 .more_link{
-  background: transparent url('images/remove_icon.png') no-repeat left 50%;
+  background: transparent url('../images/remove_icon.png') no-repeat left 50%;
 }
 /**** BOXES AND FRAMES ***/
 .box{

@@ -1,15 +1,12 @@
 <fieldset id="theme_field" class="theme_field">
-
-  <div class="order">3</div>
-
-  <legend>Theme</legend>
-
-  <p class="description">Select either the dark or light theme for the content boxes.
+	<%= form.hidden_field :theme %>
+	<div class="order">3</div>
+	<legend>Theme</legend>
+	<p class="description">Select either the dark or light theme for the content boxes.
     (Typically, you would use a light theme on a dark background)</p>
 
-
-  <div id="theme_field" class="field box theme_field">
-    <ul class="selection_list">
+  <div id="theme_field" class="field box theme_field content">
+    <ul class="horizontal_list selection_list">
       <li>
         <a id="select_theme_light" data-id='light' href="#"
            class="select_theme <%= 'selected' if @portfolio.theme == "light"  %>">

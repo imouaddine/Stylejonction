@@ -6,7 +6,7 @@
 	<% end %>
 <% end %>
 
-<section id="edit_portfolio_font" class="edit_portfolio_font edit">
+<section id="edit_portfolio_font" class="edit_portfolio_font edit_section">
 <%= form_for(@portfolio, :url => portfolio_path) do |f| %>
  	<fieldset class="edit_portfolio_font">
 			<div class="order">1</div>
@@ -83,6 +83,6 @@
 <% end %>
 </section>
 <% content_for :preview do %>
-  <%= render  "preview",  :action => 'edit_font_portfolio'  %>
+  <%= render  "preview",  :action => :edit_font_portfolio  %>
 <% end %>
 

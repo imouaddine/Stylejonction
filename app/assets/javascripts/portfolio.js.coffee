@@ -33,6 +33,9 @@ $(window).bind "load", () ->
     window.initialOffset = $("#preview_wrapper").offset()
     window.initialHeight = $("#preview_wrapper").height()
     window.document_height = $(document).height();
+    $("#remove_custom_background_btn").live 'ajax:success',  (evt, data, status, xhr) -> console.log data; eval(data)
+      
+    
     Backbone.history.start();
 
 $(window).bind "resize", ()->

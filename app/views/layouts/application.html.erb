@@ -18,62 +18,60 @@
 <body>
 	<div id="wrapper" >
     <section id="page" role="main">
-        <header id="header">
-         	<nav id="toolbar">
-	          <ul class="secondary_links">
-              <li> Questions? </li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#"> Agent Online</a></li>
-                    <li><a href="#">Contact us</a></li>
-            </ul>
+        <header class="header">
+         	<nav class="toolbar" id="toolbar">
+	          <p class="toolbar_links">
+                <em> Questions? </em>
+                <a href="#">FAQ</a>
+                <a href="#"> <span class="online">Agent Online</span></a>
+                <a class="last" href="#">Contact us</a>
+            </p>
             <ul class="login_links">
               <%= render 'devise/menu/registration_items' %>
               <%= render 'devise/menu/login_items' %>
             </ul>
 	        </nav>
-         	<div id="logo">
-	        	<%= link_to image_tag('images/logo.png'), '/' %>
-	        </div>
-         	<h1 id="page_title">
-          	<%- if user_signed_in? && request.subdomain == current_user.username -%>
-            	<em><%= current_user.username %></em>'s portfolio
-						<% end %>
-					 
-           </h1>
-						<%- if user_signed_in? && !current_user.portfolio.published? -%>
+	        <div class="header_center">
+	          <div class="logo">
+  	        	<%= link_to image_tag('../images/logo.png'), '/' %>
+  	        </div>
+  	        <p class="title">
+              	<%- if user_signed_in? && request.subdomain == current_user.username -%>
+                	<strong><%= current_user.username %></strong>'s portfolio /
+                	<em>Share Portfolio</em>
+    						<% end %>
+            </p>
+	           <%- if user_signed_in? && !current_user.portfolio.published? -%>
 						    <%= form_tag(publish_portfolio_path, :method => :put) do %>
 						      <%= submit_tag "Publish", :class => 'btn' %>
 						    <% end %>
-						  <% end %>
-       		  
-
+						 <% end %>
+	        </div>
       </header>
-                         <%- if user_signed_in? %>
-                                <nav id="main_nav">
-                                        <ul>
-                                                <li class="first active">
-               <%= link_to 'Portfolio', edit_layout_portfolio_path, :class => 'active' %>
-            </li>
-                                                <li><a href="#">Blog</a></li>
-                                                <li><a href="#">Resume</a></li>
-                                                <li><a href="#">Business Card</a></li>
-                                                <li class="secondary"><%= link_to('profile', edit_user_registration_path) %></li>
-                                                <li class="last secondary"><a href="#">stats</a></li>
-                                        </ul>
-                                </nav>
-                         <% end %>
-                         <div id="main">
+       <%- if user_signed_in? %>
+        <nav id="main_nav" class="main_nav">
+          <ul>
+              <li class="first active">
+                <%= link_to 'Portfolio', edit_layout_portfolio_path, :class => 'active' %>
+              </li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Resume</a></li>
+              <li><a href="#">Business Card</a></li>
+              <li class="secondary"><%= link_to('profile', edit_user_registration_path) %></li>
+              <li class="last secondary"><a href="#">stats</a></li>
+          </ul>
+         </nav>
+        <% end %>
+        <div id="main" class="main">
           <%= yield %>
-       </div>
-                                <%= yield :preview %>
-
+         </div>
+         <%= yield :preview %>
     </section>
   </div>
-
   <% [:notice, :warning, :error].each do |type| %>
-                <div class="<%= type %> message <%= 'has_content' unless flash[type].to_s == '' %>">
-                                <%= flash[type] %>
-                </div>
+    <div class="<%= type %> message <%= 'has_content' unless flash[type].to_s == '' %>">
+      <%= flash[type] %>
+    </div>
  <% end %>
 
 </body>

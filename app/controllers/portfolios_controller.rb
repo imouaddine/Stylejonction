@@ -25,6 +25,8 @@ class PortfoliosController < ApplicationController
     @layouts = Portfolio::LAYOUTS
     @backgrounds = PredefinedBackground.all
     @background = @portfolio.background
+    @patterns = Pattern.all
+    
   end
 
   def edit_font
@@ -39,6 +41,7 @@ class PortfoliosController < ApplicationController
 
   def update
     respond_to do |format|
+      
       if @portfolio.update_attributes(params[:portfolio])
         format.html { redirect_to :back, notice: 'Portfolio was successfully updated.' }
         format.json { render json: @portfolio }

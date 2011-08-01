@@ -6,7 +6,7 @@ class Stylejonction.Models.Background extends Stylejonction.Models.Base
     super
 
   background_url: ()->
-    @.get('background').url
+    @.image.display_url()
   
   render: (element)->
     url = @.background_url()
@@ -17,42 +17,44 @@ class Stylejonction.Models.PredefinedBackground extends Stylejonction.Models.Bac
   paramRoot: 'predefined_backgrounds'
   url: '/predefined_backgrounds/:id'
   
+  initialize: (options)->
+    super
+    @type = "PredefinedBackground"
+    @image = new Stylejonction.Models.Image(options.image)
+    
+    
   #against MVC pattern best practices but found it simple
   render: (element)->
     super
     element.addClass("cover_background") 
-  
-  
-  initialize: ()->
-    super
-    @type = "PredefinedBackground"
     
 class Stylejonction.Models.PatternBackground extends Stylejonction.Models.Background
   paramRoot: 'pattern_backgrounds'
   url: '/pattern_backgrounds/:id'
-   
-  render: (element)->
-    console.log @pattern
-    color = @.get('color')
-    element.css("background-image", "url(#{@pattern.get('pattern').url})")
-    element.css("background-color", "##{color}")
   
   initialize: (options)->
     super
     @type = "PatternBackground"
-    @pattern = new Stylejonction.Models.Pattern()
+    @pattern = new Stylejonction.Models.Pattern(options.pattern)
     
-   
-   
+  background_url: ()->
+    console.log @pattern.image
+    @pattern.image.get('image').display.url
+    
+  render: (element)->
+    color = @.get('color')
+    element.css("background-image", "url(#{@.background_url()})")
+    element.css("background-color", "##{color}")
    
     
 class Stylejonction.Models.CustomBackground extends Stylejonction.Models.Background
   paramRoot: 'custom_backgrounds'
   url: '/custom_backgrounds/:id'
   
-  initialize: ()->
+  initialize: (options)->
     super
     @type = "CustomBackground"
+    @image = new Stylejonction.Models.Image(options.image)
     
   render: (element)->
      super 

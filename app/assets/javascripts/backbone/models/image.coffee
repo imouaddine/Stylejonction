@@ -6,4 +6,7 @@ class Stylejonction.Models.Image extends Backbone.Model
     super
     @parent = null
     
+  display_url: ()->
+    @.get('image').display.url
+    
    

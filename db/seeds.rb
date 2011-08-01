@@ -19,20 +19,22 @@ Pattern.delete_all
 
 puts "create some predefined backgrounds"
 10.times do |i|
-  b = PredefinedBackground.create(:name => "Background #{i}")
-  b.background.store!(File.open(File.join(Rails.root, "public/assets/images/predefined_backgrounds/#{i}.jpg")))
-  b.save!
+  b = PredefinedBackground.new(:name => "Background #{i}")
+  b.upload("seeds/images/predefined_backgrounds/#{i}.jpg")
+  b.save
+  b.reload
+  
+  puts b.image.preview_url
 end
 
 puts "create some pattern background"
 7.times do |i|
-  p = Pattern.create
-  p.pattern.store!(File.open(File.join(Rails.root, "public/assets/images/pattern_backgrounds/#{i}.png")))
-  p.pattern.recreate_versions!
-  p.save!
+  p = Pattern.new
+  p.upload "seeds/images/pattern_backgrounds/#{i}.png" 
+  p.save
+  puts p.image.preview_url
+ 
 end
-
-
 
 puts "Create standard fonts"
 Font.create(
@@ -129,12 +131,10 @@ user = User.create! :username => 'imouaddine', :first_name => 'Imad', :last_name
 puts "Create portfolio project"
 
 4.times do |i|
-  project = user.portfolio.projects.new(:title => "Project #{i}", :cover => Image.new)
-  project.cover.image.store!(File.open(File.join(Rails.root, "public/assets/images/projects/#{i}.jpg")))
-  project.cover.image.recreate_versions!
-  project.cover.save
+  project = user.portfolio.projects.new(:title => "Project #{i}")
+  project.upload_cover "seeds/images/projects/#{i}.jpg"
   project.save
-  puts "project saved #{project.cover.thumb_url}"
+  puts "project saved #{project.cover.display_url}"
   
 end
 

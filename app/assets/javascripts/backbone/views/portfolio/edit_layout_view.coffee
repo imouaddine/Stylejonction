@@ -4,11 +4,11 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
   events:
     
     "click  #predefined_background_field .toggle_btn"     : "showCustomBackgroundSection"
-    "click  #custom_background_field .toggle_btn"         : "showPredefinedBackgroundSection"
+    "click  #custom_or_pattern_background_selection_field .toggle_btn"         : "showPredefinedBackgroundSection"
     "change .custom_background_toggle"                    : "toggleCustomBackgroundSection"
     "click  #layout_field .image_link"                    : "updateLayout"
     "click  .select_theme"                                :  "updateTheme"
-    
+   
   
   initialize: (e)->
     _.bindAll(this, 'updateCustomBackground')
@@ -41,7 +41,7 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
     e.stopPropagation()
     
     #hide tabs
-    @.$("#custom_background_field .tabs > section").hide()
+    @.$("#custom_or_pattern_background_selection_field .tabs > section").hide()
     
     #display selected background section
     val = $(e.currentTarget).val()
@@ -72,7 +72,7 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
       e.stopPropagation()
       #We're using margin instead of display:none as workaround to be able to display the carousel correctly
       $("#predefined_background_field").css("margin-left", '0')
-      $("#custom_background_field").css("margin-left", '-9999px')
+      $("#custom_or_pattern_background_selection_field").css("margin-left", '-9999px')
       $("#layout_field").addClass("move_to_top")
     
     
@@ -91,11 +91,11 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
      e.stopPropagation()
      
      $("#predefined_background_field").css("margin-left", '-9999px');
-     $("#custom_background_field").css("margin-left", '0');
+     $("#custom_or_pattern_background_selection_field").css("margin-left", '0');
      $("#layout_field").removeClass("move_to_top"); 
      
      $("#custom_background_input").attr('checked', 'checked');
-     @.$("#custom_background_field .tabs > section").hide()
+     @.$("#custom_or_pattern_background_selection_field .tabs > section").hide()
      $("#update_custom_background").show()
      
      id = @portfolio.custom_background.get('id')
@@ -126,7 +126,8 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
     $("#portfolio_background_type").val(e.type)
     
     
-    
+  updateEditCustomBackgroundSection:(e) ->
+    console.log e
     
         
   updateLayout: (e) ->
@@ -149,6 +150,7 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
     $(e.currentTarget).addClass("selected")
     @options.model.set({'theme': newTheme})
     $("#portfolio_theme").val(newTheme)
+  
   
   
   

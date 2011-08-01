@@ -6,11 +6,47 @@
 
 @import "mixins";
 
-.edit_project{
-  
+.edit_project_section{
+  margin-top: 40px;
   header{
-    margin: 0;
+    margin-left: 50px;
+    .tabs{
+      width: 649px;
+      height: 58px;
+      line-height: 56px;
+      padding: 2px 2px 0 2px;
+      background: url(../images/bg-tabs1.gif) no-repeat left top;
+      li{
+         &.ui-tabs-selected{
+           a{
+              border-bottom: 0px;
+              @include single-box-shadow(0, 0, 0, 0);
+              @include unstyled-link;
+              color: $pink-color;
+              background: transparent;
+           }
+        }
+        a{
+            background: #e9e9e9;
+            display: block;
+            width: 324px;
+            height: 57px;
+            line-height: 57px;
+            text-indent: 20px;
+            font-size: 1.1em;
+            @include fancy-border-bottom;
+            &.left{
+              @include fancy-border-right;
+              width: 323px;
+            }
+            &.right{
+              @include border-top-right-radius(4px);
+            }
+        }
+    }
   }
+  
+
   >form {
     width: 640px;
     margin: 20px;
@@ -25,27 +61,15 @@
       
     }
   }
+
   .inner{
     margin-left: 20px;
   }
   .upload_image_section{
     margin-top: 10px;
   }
-  fieldset{
-    margin: 20px 0;
-    @include fancy-border-bottom;
-    padding: 5px 20px 20px 0px ;
-    .order{
-    
-    }
-    legend{
-      margin-top: 0;
-    }
-    &.last{
-      border-bottom: 0px;
-      box-shadow: 0 0 0;
-    }
-  }
+ 
+ 
   figure#cover{
     width: 165px;
     .preview_uploaded_image{
@@ -53,39 +77,7 @@
       max-height: 165px;
     }
   }
-  .tabs{
-    li{
-       &.ui-tabs-selected{
-         a{
-            border-bottom: 0px;
-            @include single-box-shadow(0, 0, 0, 0);
-            @include unstyled-link;
-            color: $pink-color;
-            background: transparent;
-         }
-           
-      }
-      a{
-          background: #e9e9e9;
-          display: block;
-          width: 320px;
-          height: 60px;
-          line-height: 60px;
-          text-indent: 20px;
-          font-size: 1.1em;
-          @include fancy-border-bottom;
-         
-          &.left{
-            @include fancy-border-right;
-            width: 319px;
-          }
-          &.right{
-            @include border-top-right-radius(4px);
-          }
-         
-      }
-      
-    }
+  
   }
   .access_toolbar{
     margin-top: 20px;
@@ -109,32 +101,84 @@
     margin-right: 0px;
     margin:20px 0 0 160px;
   }
-  #private_project {
-    .left.col{
-      @include column(9);
-      input{
-        width: 290px;
-      }
-    }
-    .right.col{
-       @include column(6, true);
-    }
-    
-  }
-  
+  .submit{
+     margin: 20px 20px;
+   }
   
 }
-#private_project_btn{
-  background: url('images/limited_access_bg.png') no-repeat;
+.edit_project_tab_section{
+   border-right: 2px solid #DBDBDB;
+   border-left: 2px solid #DBDBDB;
+   background: #F2F2F2;
+   margin-left: 50px;
+   width: 649px;
+   form{
+     padding:0;
+     margin: 0;
+     fieldset{
+       padding: 20px;
+       margin: 0;
+       @include fancy-border-bottom;
+        
+       legend{
+           margin-top: 0;
+       }
+       &.last{
+          @include fancy-border-bottom;
+       }
+     }
+     footer{
+         width: 100%;
+         height: 40px;
+         
+         padding: 10px 0; 
+         
+     }
+   }
+   p{
+    margin-top: 10px;
+   }
+}
+.private_project_btn{
+  background: url('../images/limited_access_bg.png') no-repeat;
   height: 53px;
   &.selected{
-    background: url('images/limited_access_bg_sel.png') no-repeat;
+    background: url('../images/limited_access_bg_sel.png') no-repeat;
   }
  
 }
-#public_project_btn{
-  background: url('images/limited_access_bg.png') no-repeat;
+.public_project_btn{
+  background: url('../images/limited_access_bg.png') no-repeat;
   &.selected{
-    background: url('images/public_access_bg_sel.png') no-repeat;
+    background: url('../images/public_access_bg_sel.png') no-repeat;
   }
 }
+.invitation_text_fields{
+  .top{
+    width: 312px;
+    height: 5px;
+    margin: 0 0 -3px 0;
+    background: url(../images/top1.gif) no-repeat left top;
+  }
+  .bottom{
+    width: 312px;
+    height: 5px;
+    margin: -2px 0 5px 0;
+    background: url(../images/bottom1.gif) no-repeat left top;
+  }
+}
+.private_project_section {
+   .left.col{
+     @include column(9);
+     input{
+       width: 290px;
+     }
+   }
+   .right.col{
+      @include column(6, true);
+     
+        color: #53646F;
+     
+   }
+   
+ }

@@ -1,15 +1,20 @@
  <%= form_for(@project, :url => url_for_action(@project) ) do |f| %>
+ <div class="hidden_fields">
+  <%= f.hidden_field :public %>
+ </div>
 <!-- Project Title !-->
 <fieldset id="project_title">
   <span class="order">1</span>
   <div class="inner">
     <legend>Project title</legend>
     <p class="description">Give your project a catchy title. (ex.: Spring 2011 Streetwear Designs)</p>
-    <%= f.text_field 'title', :placeholder => 'Enter project title here' %>
-    <div>
-      <%= f.check_box 'default'  %>
-      <%= f.label 'default', "<em>Make this your default project.</em> Will become the cover project for your portfolio.".html_safe %>
-    </div>
+    <p class="styled_text_field tb4">
+      <%= f.text_field 'title', :placeholder => 'Enter project title here' %>
+    </p>
+    <p>
+      <%= f.check_box "default", :class => "styled"  -%>
+      <%= f.label "default", "<strong>Make this your default project.</strong><em> Will become the cover project for your portfolio.</em>".html_safe %>
+    </p>
   </div>
 </fieldset>
 <!-- Project Title !-->
@@ -20,9 +25,9 @@
     <p class="description">This thumbnail should represent the project.</p>
     <section class="upload_image_section">
       <div class="first col">
-        <figure id="cover">
-          <%= render '/images/thumb', :image => @project.cover %>
-        </figure>
+        <div id="cover">
+					<%= image_preview @project.cover %>
+        </div>
         <div id="upload_custom_bg_links" class="upload_custom_bg_links">
           <%#= f.file_field 'cover[image]' %>
           <%= f.hidden_field :cover_name %>
@@ -46,45 +51,49 @@
     <p class="description">Make your project public or limited access</p>
     <ul class="horizontal_list access_toolbar">
       <li>
-        <a class="access_toggle <%= "selected" unless @project.public? %>" id="private_project_btn" >
+        <a class="private_project_btn access_toggle <%= "selected" unless @project.public? %>" id="private_project_btn" >
           Limited Access
         </a>
       </li>
       <li>
-        <a class="access_toggle <%= "selected" if @project.public? %>" id="public_project_btn" >
+        <a class="public_project_btn access_toggle <%= "selected" if @project.public? %>" id="public_project_btn" >
           Public
         </a>
       </li>
     </ul>
-    <div id="private_project" class="<%= 'hidden' if @project.public? %>">
+    <section id="private_project" class="private_project_section <%= 'hidden' if @project.public? %>">
       <div class="col left">
-        <div id="invitation_list">
+        <div class="invitation_text_fields" id="invitation_list">
+          <div class="top"></div>
           <%- 4.times do |i| %>
-            <%= text_field_tag "invitation#{i}", set_default(i), :placeholder => 'enter the email address here ...' %>
+            <div class="styled_text_field tb5"><%= text_field_tag "invitation#{i}", set_default(i), :placeholder => 'enter the email address here ...' %></div>
           <% end %>
+          <div class="bottom"></div>
         </div>
+        
         <a  href="#" >
           <span class="number"> + </span>
           Issue more invites</a>
       </div>
       <div class="col right">
         <p>
-          <em>Invited guests will be granted access for 48hs.</em>
+          <strong>Invited guests will be granted access for 48hs.</strong>
         </p>
         <p class="description">
           Simply enter a valid email address and
           send the Invite.
         </p>
-        <a id="send_invites" class="btn" href="#">invite</a>
+        <a id="send_invites" class="btn-1" href="#">
+          <span>
+            <strong>invite</strong>
+          </span>
+        </a>
       </div>
-    </div>
+    </section>
 
-    <div id="public_project" class="<%= 'hidden' unless @project.public? %>">
-    </div>
+    <section id="public_project" class="public_project_section <%= 'hidden' unless @project.public? %>">
+    </section>
   </div>
 </fieldset>
- <footer>
-          <%= f.hidden_field :public %>
-          <%= submit_tag 'Save project', :class => 'btn' %>
-  </footer>
+
 <% end %>

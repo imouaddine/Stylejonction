@@ -9,7 +9,7 @@
 			<% else %>
 				<% path = new_portfolio_project_path %>
 			<% end %>
-      <%= active_link_to 'Projects', path, :class => "menu_link last #{className}"  %>
+      <%= active_link_to 'Projects', path, :class => "menu_link has_children last #{className}"  %>
       <ol class="hidden">
         <% @portfolio.projects.each_with_index do |project, index|  %>
           <%= content_tag_for(:li, project) do %>
@@ -26,7 +26,7 @@
               <% end %>
           <% end %>
         <% end %>
-        <li><%= active_link_to '<span class=\'number\'> + </span> New project'.html_safe, new_portfolio_project_path, :class => 'project_link menu_link' %></li>
+        <li><%= active_link_to '<span class=\'number\'> + </span> New project'.html_safe, new_portfolio_project_path, :class => 'project_link menu_link last' %></li>
       </ol>
     </li>
   </ul>

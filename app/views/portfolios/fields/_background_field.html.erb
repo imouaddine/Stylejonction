@@ -1,21 +1,25 @@
 <fieldset id="background_field" class="background_field edit_portfolio_bg">
+	<div class="hidden_fields">
+		<%= form.hidden_field :background_id %>
+		<%= form.hidden_field :background_type %>
+	</div>
   <div class="order">1</div>
   <legend>Background image</legend>
   <p class="description">Select a background from the gallery or create your own background</p>
-  <div>
-    <%= render 'portfolios/fields/backgrounds/predefined/form', 
-							:visible => @portfolio.has_predefined_background?, 
+  <div class="content">
+    <%= render '/predefined_backgrounds/portfolio_field', 
 							:form => form,
+							:visible => @portfolio.has_predefined_background?, 
 							:selected => @portfolio.predefined_background %>
-    <div id="custom_background_field" class="field box background_field <%= 'hidden' if @portfolio.has_predefined_background? %>">
+							
+							
+    <div id="custom_or_pattern_background_selection_field"  class="field box background_field <%= 'hidden' if @portfolio.has_predefined_background? %>">
       <div>
         <a class="toggle_btn" href="#">
           <small>CHOOSE FROM </small><br>GALLERY
         </a>
         <div class="user_selection">
-          <p class="description">
-            Select <em>one</em> of the following options for your background.
-          </p>
+          <p class="description">Select <em>one</em> of the following options for your background.</p>
           <ul class="horizontal_list">
             <li>
               <%= radio_button_tag 'bg',
@@ -23,8 +27,8 @@
                   @portfolio.has_custom_background?,
                   :id => "custom_background_input",
                   :class => 'custom_background_toggle'
-									   %>
-              <label for="custom_background_input" >Upload your image</label>
+							%>
+							<%= label_tag "custom_background_input", "Upload your image"  %>
             </li>
             <li>
               <%= radio_button_tag 'bg',
@@ -32,31 +36,25 @@
                   @portfolio.has_pattern_background?,
                   :id => "pattern_background_input",
                   :class => 'custom_background_toggle'
-									    %>
-              <label for="pattern_background_input">Choose a colour & pattern</label>
+							%>
+							<%= label_tag "pattern_background_input", "Choose a colour & pattern"  %>
             </li>
           </ul>
-        </div>
+        </div><!-- end of user_selection !-->
       </div>
       <div class="tabs">
-        <%= render 'portfolios/fields/backgrounds/custom/form',
+        <%= render '/custom_backgrounds/portfolio_edit',
 						:form => form,
             :background => @portfolio.custom_background,
             :visible => @portfolio.has_custom_background? || !@portfolio.has_pattern_background?,
             :show_links =>  @portfolio.has_custom_background? %>
 
- 				<%= render 'portfolios/fields/backgrounds/pattern/form',
+ 				<%= render '/pattern_backgrounds/portfolio_field',
 						:form => form,
             :background => @portfolio.pattern_background,
  						:visible => @portfolio.has_pattern_background? %>
-
-        
       </div>
     </div>
-  </div>
+  </div><!-- end of custom_or_pattern_background_selection_field !-->
 </fieldset>
-	<%= form.hidden_field :background_id %>
-	<%= form.hidden_field :background_type %>
 
-
-<%= photo_uploadify "#upload_custom_bg", nil, custom_backgrounds_path(:format => 'js'), 'background[background]' %>

@@ -5,12 +5,12 @@
 
    def setup
      b = PredefinedBackground.create(:name => "Background sadasdasd")
-    b.background.store!(File.open(File.join(Rails.root, "public/assets/images/predefined_backgrounds/2.jpg")))
-    b.save!
-    Factory.create :font
-    @user = loggin
-    @portfolio = @user.portfolio
-    change_subdomain_to(@user.username)
+     b.upload "test/fixtures/images/1.jpg"
+     b.save!
+     Factory.create :font
+     @user = loggin
+     @portfolio = @user.portfolio
+     change_subdomain_to(@user.username)
   end
 
   def teardown

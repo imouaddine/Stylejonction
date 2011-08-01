@@ -7,7 +7,10 @@ class PortfolioTest < ActiveSupport::TestCase
     id = @user.portfolio.id
     @portfolio = Portfolio.find(id)
   end
-
+  test "user association" do
+    assert @portfolio.user
+    assert_equal @portfolio.user, @user
+  end
   test "can create a test object from fg" do
     assert @portfolio.valid?
   end
@@ -70,7 +73,8 @@ class PortfolioTest < ActiveSupport::TestCase
     Factory.create(:predefined_background)
     Factory.create(:font)
 
-    portfolio = Portfolio.create!
+    portfolio =  Factory.create(:portfolio)
+    
     portfolio.reload
 
     assert_equal "PredefinedBackground", portfolio.background_type
@@ -90,8 +94,8 @@ class PortfolioTest < ActiveSupport::TestCase
     user = portfolio.user
     portfolio.background = Factory.create(:custom_background, :user => user )
     assert_equal portfolio.has_custom_background?, true
-
-    portfolio.background = Factory.create(:pattern_background)
+    
+    portfolio.background = Factory.create(:pattern_background, :pattern => Pattern.new)
     assert_equal portfolio.has_custom_background?, false
   end
 

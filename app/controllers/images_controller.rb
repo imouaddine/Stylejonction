@@ -47,12 +47,13 @@ class ImagesController < ApplicationController
   def scale_to_fit
      @image = Image.find(params[:id])
      respond_to do |format|
-        if @image.scale_to_fit
+        if @image.scale_to_fit(true)
           format.json { render :json => @image  }
         else
           format.json { @image.errors.inspect }
         end
       end
   end
+ 
 
 end

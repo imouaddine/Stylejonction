@@ -1,29 +1,22 @@
 <%= render('sidebar') %>
-<% #@portfolio.custom_background.background.dimensions %>
 
-<section id="edit_portfolio_layout" class="edit edit_portfolio_layout">
-
+<section id="edit_portfolio_layout" class="edit_section edit_portfolio_layout">
   <%= form_for(@portfolio, :url => portfolio_path) do |f| %>
 
     <%= render ('portfolios/fields/background_field'), :form => f %>
 
-    <%= render ('portfolios/fields/layout_field') %>
+    <%= render ('portfolios/fields/layout_field'), :form => f %>
 
-    <%= render ('portfolios/fields/theme_field') %>
+    <%= render ('portfolios/fields/theme_field'), :form => f %>
 
-    <%= f.hidden_field :layout %>
-    <%= f.hidden_field :theme %>
     <footer>
       <%= submit_tag 'Save portfolio', :class=> 'btn' %>
     </footer>
-  <% end %>
 
- 
+  <% end %>
 
 </section>
 
-
-
 <% content_for :preview do %>
-  <%= render  "preview",  :action => 'edit_layout_portfolio'  %>
+  <%= render  :partial => "preview", :locals => {:action => :edit_layout_portfolio}    %>
 <% end %>

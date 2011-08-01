@@ -6,7 +6,7 @@
 		</header>
 		<div class="content">
 				<div class="left_col">
-						<%= render 'thumbnail', :background => @background %>
+						<%= image_edit @background.image %>
 				</div>
 				<div class="right_col">
 					<p class="description">Drag your image to adjust</p>
@@ -20,7 +20,6 @@
 						<%= f.radio_button :display_mode, 'stretch'  %>
 						<%= f.label :display_mode_stretch, 'Stretch to fit' %>
 					</div>
-				
 					<p class="information hidden">Original image is <em>1024px x 768px</em></p>
 				</div>
 		</div>

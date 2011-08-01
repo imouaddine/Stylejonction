@@ -1,0 +1,13 @@
+<section id="update_custom_background" class="<%= 'hidden' unless visible %> upload_image_section custom_background_section" >
+	  <div class="hidden_fields">
+			<%= form.hidden_field :custom_background_id %>
+		</div>
+		<div  class="first col" id="preview_custom_background">
+			<%= render '/custom_backgrounds/portfolio_edit_image', :background => background %>
+		</div>
+		<div class="col">
+			<a id="upload_custom_bg" href="#" class="upload_btn btn">Upload</a>
+			<p class="information">Ideal dimension: 1024 px x 768 px – JPG, PNG formats</p>
+		</div>
+</section>
+<%= photo_uploadify "#upload_custom_bg", nil, upload_custom_background_path(background , :format => 'js'), 'custom_background[image][image]' %>

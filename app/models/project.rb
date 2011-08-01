@@ -1,12 +1,12 @@
 class Project < ActiveRecord::Base
-
-  THUMB_FORMAT_DIMENSIONS = { :width => 165, :height => 165 }
+  
+  COVER_DIMENSIONS = { :width => 165, :height => 165 }
 
   attr_accessible :title, :default, :public, :cover_id, :cover
   attr_reader :cover_name
 
   #Vaidation
-  validates_presence_of :title, :cover
+  validates_presence_of :title, :cover, :portfolio
 
   #Belongs to association
   belongs_to :portfolio
@@ -21,9 +21,9 @@ class Project < ActiveRecord::Base
   has_many :galleries, :dependent => :destroy
   has_many :text_blocks, :dependent => :destroy
   
-  
+  before_validation :setup_cover, :if => Proc.new{|f| f.cover.blank? }
 
-  before_validation :add_default_cover
+
 
   scope :published,  where(:published => true)
   scope :default, where(:default => true)
@@ -38,14 +38,21 @@ class Project < ActiveRecord::Base
   def invite(email)
     invitations.create(:email => email).invite_to(portfolio.user)
   end
-
-
-  protected
-  def add_default_cover
-    if self.cover.nil?
-      self.cover = Image.new
-      self.cover.set_thumb_dimension( THUMB_FORMAT_DIMENSIONS[:width], THUMB_FORMAT_DIMENSIONS[:height] )
-      self.cover.save
-    end
+  
+  def upload_cover(file)
+    self.setup_cover
+    self.cover.upload(file)
+    self.cover.save
   end
+  
+  
+  def setup_cover
+    self.cover = Image.new(:dir => "#{portfolio.user.username}/projects" )
+    self.cover.preview_format.update_attributes(COVER_DIMENSIONS)
+    self.cover.edit_format.update_attributes(COVER_DIMENSIONS)
+    self.cover.display_format.update_attributes(COVER_DIMENSIONS)
+    self.cover.save  
+  end
+  
+  
 end

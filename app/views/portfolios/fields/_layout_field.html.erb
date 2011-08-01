@@ -1,8 +1,11 @@
-<fieldset id="layout_field" class="<%= 'move_to_top' if @portfolio.has_predefined_background? %>">
+<fieldset id="layout_field" class="layout_field <%= 'move_to_top' if @portfolio.has_predefined_background? %>">
+	<div class="hidden_fields"> 
+		<%= form.hidden_field :layout %>
+	</div>
 	<div class="order">2</div>
 	<legend>Layout</legend>
 	<p class="description">Select from the following layouts.</p>
-	<div  class="field box layout_field">
+	<div  class="field box layout_field content">
 		<ul class="horizontal_list">
 				<% @layouts.each do |layout| %>
 					<li>

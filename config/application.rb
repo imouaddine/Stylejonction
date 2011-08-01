@@ -19,6 +19,7 @@ module Stylejonction
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += %W(#{config.root}/app/middleware/)
 
     config.generators do |g|
@@ -47,5 +48,7 @@ module Stylejonction
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    config.assets.paths << "#{Rails.root}/app/assets/images"
+    config.assets.paths << "#{Rails.root}/app/assets/fonts"
   end
 end

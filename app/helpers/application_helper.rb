@@ -67,7 +67,8 @@ module ApplicationHelper
            script          : '#{script_path}',
            fileDataName    : '#{fileDataName}',
            uploader        : '/uploadify/uploadify.swf',
-           cancelImg       : '/assets/images/cancel.png',
+           cancelImg       : '/images/cancel.png',
+           buttonImg        : '/images/upload_btn.png',
            fileDesc        : 'Upload',
            fileExt         : '*.png;*.jpg;*.gif',
            sizeLimit       : #{10.megabytes},
@@ -75,6 +76,8 @@ module ApplicationHelper
            multi           : false,
            auto            : true,
            buttonText      : 'Upload',
+           width            : 76,
+           height   : 40,
            scriptData      : {
              '_http_accept': 'application/javascript',
              '#{session_key_name}' : encodeURIComponent('#{u(cookies[session_key_name])}'),
@@ -84,7 +87,11 @@ module ApplicationHelper
                                                           image_selector.html(response).trigger('change');
                                                           $('#project_cover_name').val(c.name);
                                                        }
-                                                      else eval(response); }
+                                                      else {
+                                                        console.log(response);
+                                                        eval(response.replace(/'/g, "\'"));
+                                                      }
+                                                  }
          });
        });
      </script>
@@ -101,10 +108,6 @@ module ApplicationHelper
        end
    end
 
-   def thumb_image_tag(image,  html_options = {})
-     if image && image.thumb_url
-        image_tag image.thumb_url, html_options
-     end
-   end
+   
 
 end

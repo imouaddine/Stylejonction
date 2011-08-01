@@ -21,6 +21,23 @@ class CustomBackgroundsController < ApplicationController
     end
   end
   
+  def upload 
+     @background = CustomBackground.find(params[:id])
+     respond_with do |format|
+       if @background.image.update_attribute(:image,  params[:custom_background][:image][:image])
+         format.js
+       end
+     end
+  end
+  def remove_upload
+      @background = CustomBackground.find(params[:id])
+      respond_with do |format|
+        if  @background.image.remove_file!
+          format.js { render :template => '/custom_backgrounds/upload' }
+          format.json { render json: @background }
+        end
+     end
+  end
   def create
     @background = CustomBackground.new(params[:background])
     @background.user = current_user

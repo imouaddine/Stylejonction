@@ -18,8 +18,9 @@ end
 Factory.define :project do |p|
   p.sequence(:title) { |n| "Title #{n}" }
   p.association :portfolio
-  p.association :cover, :factory => :image
+ 
   p.default false
+  p.public false
 end
 
 Factory.define :font do |f|
@@ -31,16 +32,13 @@ end
 
 Factory.define :predefined_background do |f|
   f.name "PredefinedBlob"
-  f.background "imp.gif"
 end
 
 Factory.define :pattern do |f|
-  f.pattern "imp.gif"
+  
 end
-
 Factory.define :custom_background do |f|
   f.name "CustomBack"
-  f.background "img.jpg"
   f.display_mode "original"
   f.association :user
 end
@@ -51,8 +49,10 @@ Factory.define :pattern_background do |f|
   f.color "#ccc333"
 end
 
-Factory.define :image do |p|
+Factory.define :image do |f|
+  f.dir "test"
 end
+
 
 Factory.define :document_block do |f|
   f.title "Document Block"

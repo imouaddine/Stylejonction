@@ -11,7 +11,7 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
     @projects = @options.projects
 
     @body_font = @portfolio.body_font
-    @title_font = @portfolio.body_font
+    @title_font = @portfolio.title_font
     @background = @portfolio.background
 
     @portfolio.bind 'change', @.update
@@ -56,7 +56,6 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
 
   #triggered when background changed
   updateBackground: (background)->
-    console.log background
     @background = background
     @background.render($("#preview"))
 
