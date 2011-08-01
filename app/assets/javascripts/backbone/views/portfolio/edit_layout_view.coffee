@@ -55,7 +55,6 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
         $("#portfolio_background_id").val(id)
         $("#portfolio_custom_background_id").val(id)
         $("#portfolio_background_type").val("CustomBackground")
-        
         @portfolio.trigger("backgroundChanged", @portfolio.custom_background)
       
       when 'update_pattern_background'
@@ -63,7 +62,6 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
         $("#portfolio_background_id").val(id)
         $("#portfolio_pattern_background_id").val(id)
         $("#portfolio_background_type").val("PatternBackground")
-    
         @portfolio.trigger("backgroundChanged", @portfolio.pattern_background)
     
     

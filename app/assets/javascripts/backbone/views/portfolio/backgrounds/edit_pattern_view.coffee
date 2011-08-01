@@ -59,7 +59,11 @@ class Stylejonction.Views.Backgrounds.EditPatternView extends Backbone.View
     
     $("#portfolio_pattern_background_attributes_pattern_id").val(pattern_id)
     
-    @background.pattern.set({ id: pattern_id, pattern: {url: pattern_url} })
+    @background.pattern.set({ id: pattern_id })
+    #hack not the best method but it's easy
+    @background.pattern.image.get('image').display.url = target.data('url')
+    
+
     @.$("#update_pattern_background .pattern").css("background-image", "url(#{pattern_url})" )
     @.$("#final_preview").css("background-image",  "url(#{pattern_url})" )
     

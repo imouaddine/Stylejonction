@@ -5,7 +5,13 @@ class PredefinedBackground < ActiveRecord::Base
   has_many :portfolios, :as => :background
   
   attr_accessible :name
-  
+  def as_json(options={})
+    super(
+             :include => [:image]
+             
+    )
+ end
+ 
   protected
   def setup_image
     if self.image.nil?

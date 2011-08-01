@@ -43,6 +43,7 @@ class Stylejonction.Models.PatternBackground extends Stylejonction.Models.Backgr
     
   render: (element)->
     color = @.get('color')
+    
     element.css("background-image", "url(#{@.background_url()})")
     element.css("background-color", "##{color}")
    

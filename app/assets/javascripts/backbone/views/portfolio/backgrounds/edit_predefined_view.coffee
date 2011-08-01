@@ -48,6 +48,7 @@ class Stylejonction.Views.Backgrounds.EditPredefinedView extends Backbone.View
     
     background.fetch(
       success: (newBackground) ->
+        newBackground.image = new Stylejonction.Models.Image(newBackground.get('image'))
         portfolio.trigger("backgroundChanged", newBackground)
     )
     

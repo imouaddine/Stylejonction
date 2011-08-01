@@ -56,6 +56,7 @@ class Stylejonction.Views.Portfolios.PreviewView extends Backbone.View
 
   #triggered when background changed
   updateBackground: (background)->
+    console.log background
     @background = background
     @background.render($("#preview"))
 
