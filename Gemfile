@@ -8,7 +8,7 @@ gem 'uglifier'
 gem 'jquery-rails'
 gem "devise", "= 1.3.3"
 
-gem 'compass', git: 'https://github.com/chriseppstein/compass.git', branch: 'rails31'
+gem 'compass', :git =>  'https://github.com/chriseppstein/compass.git', :branch => 'rails31'
 
 gem "active_link_to", "~> 0.0.10"
 
