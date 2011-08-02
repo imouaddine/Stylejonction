@@ -438,7 +438,17 @@ form {
     font-size: 13px;
   }
 }
-
+#fancybox-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    background: url(../images/fancy_close.png) no-repeat center center;
+    cursor: pointer;
+    z-index: 9999999;
+    display: none;
+}
 /** FORM  ELEMNTS**/
 
 //Background field
@@ -846,4 +856,9 @@ section.edit_portfolio_font{
     
   }
   
+}
+.edit_modal{
+  footer{
+    padding: 10px 20px;
+  }
 }
