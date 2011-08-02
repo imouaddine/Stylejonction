@@ -13,7 +13,7 @@ class CustomBackgroundsController < ApplicationController
   def update
     @background = CustomBackground.find(params[:id])
     respond_with do |format|
-      if @background.update_attributes(params[:custom_backgrounds])
+      if @background.update_attributes(params[:custom_background])
         format.json { render json: @background }
       else
         format.json { render json: @background.errors, status: :unprocessable_entity }

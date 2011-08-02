@@ -49,13 +49,14 @@ class Stylejonction.Models.PatternBackground extends Stylejonction.Models.Backgr
    
     
 class Stylejonction.Models.CustomBackground extends Stylejonction.Models.Background
-  paramRoot: 'custom_backgrounds'
+  paramRoot: 'custom_background'
   url: '/custom_backgrounds/:id'
   
   initialize: (options)->
     super
     @type = "CustomBackground"
     @image = new Stylejonction.Models.Image(options.image)
+    @ignored_attributes = ['image']
     
   render: (element)->
      super 

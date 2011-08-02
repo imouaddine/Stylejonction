@@ -5,8 +5,9 @@ class ProjectFlowTest < ActionDispatch::IntegrationTest
 
   def setup
     b = PredefinedBackground.create(:name => "Background sadasdasd")
-    b.background.store!(File.open(File.join(Rails.root, "public/assets/images/predefined_backgrounds/2.jpg")))
-    b.save!
+    b.upload "test/fixtures/images/1.jpg"
+    b.save
+    
     Factory.create :font
     @user = loggin
     @portfolio = @user.portfolio

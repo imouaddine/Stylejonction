@@ -68,11 +68,6 @@ class Stylejonction.Views.Backgrounds.EditPatternView extends Backbone.View
     @.$("#final_preview").css("background-image",  "url(#{pattern_url})" )
     
     @portfolio.trigger 'backgroundChanged', @background
-    
-    
-    
-    
-  
       
     
     

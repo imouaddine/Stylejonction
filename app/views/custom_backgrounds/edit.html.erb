@@ -24,8 +24,17 @@
 				</div>
 		</div>
 		<footer>
-			<%= submit_tag 'Save', :class  => 'btn', :id => 'submit' %>
-			<%= link_to 'Cancel', '#', :id => 'cancel', :class => 'btn' %>
+		  <a href="#" id="save_btn" class="btn-1">
+  	    <span><strong>Save</strong></span>
+  	  </a>
+	  
+		  <a id="cancel_btn" href="#" class="btn-2">
+		    <span>
+		      <strong>Cancel</strong>
+		    </span>
+		  </a>
+		  
+			
 		</footer>
 	</section>
 	<% end %>

@@ -3,8 +3,8 @@ Stylejonction.Views.Backgrounds ||= {}
 class Stylejonction.Views.Backgrounds.EditCustomView extends Backbone.View
   
   events:
-    "click #submit"    : "submit"
-    "click #cancel"    : "cancel"
+    "click #save_btn"      : "save"
+    "click #cancel_btn"    : "cancel"
     
   
   initialize: ()->
@@ -24,11 +24,15 @@ class Stylejonction.Views.Backgrounds.EditCustomView extends Backbone.View
       showCloseButton: true,
       padding: 0
       
-  submit: (e)->
+  save: (e)->
     e.preventDefault()
     e.stopPropagation()
     portfolio = @portfolio
+    
+    
     newDisplayMode = @.$("#edit_background input[type='radio']:checked").val()
+    console.log(newDisplayMode);
+    
     @portfolio.custom_background.save(
        {'display_mode': newDisplayMode },
        success: (model)->

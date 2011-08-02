@@ -116,8 +116,10 @@
 }
 .check1 .checkbox {	background:url(../images/checkbox1.gif) no-repeat left top; }
 .check2 .checkbox {	background:url(../images/checkbox2.gif) no-repeat left top; }
+
+
+///BUTONS 
 .btn-1{
-  
   height: 41px;
   float: right;
   line-height: 41px;
@@ -140,7 +142,31 @@
       height: 41px;
   }
 }
-
+.btn-2{
+  @include link_colors(white, white, white, white);
+  height: 42px;
+  float: right;
+  line-height: 41px;
+  padding: 0 0 0 6px;
+  background: url(../images/bg-button-type2-left.png) no-repeat left top;
+  font-size: 16px;
+  color: white;
+  margin: 0 11px 0 0;
+  span {
+      padding:0 6px 0 0;
+      background:url(../images/bg-button-type2-right.png) no-repeat right top;
+  }
+  strong {
+      background:url(../images/bg-button-type2-center.png) repeat-x left top;
+      padding:0 30px;
+  }
+  span,
+  strong{
+      float:left;
+      height:42px;
+  }
+ 
+}
 
 .number{
   color: $pink-color;
