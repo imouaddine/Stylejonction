@@ -10,7 +10,7 @@ class Image < ActiveRecord::Base
        :maximum => 5.megabytes.to_i 
      }
      
-  attr_accessible :image, :dir, :edit_format, :preview_format, :display_format, :empty
+  attr_accessible :image, :dir, :edit_format, :preview_format, :display_format, :empty, :editable, :scale_to_fit
   
   belongs_to  :edit_format, :foreign_key => 'edit_format_id',  :class_name => "ImageFormat", 
               :dependent => :destroy,  :autosave => true
@@ -67,21 +67,25 @@ class Image < ActiveRecord::Base
     self.remove_image!
     self.uploaded = false
   end
+  
   def crop(x, y)
     self.image_formats.each do |image_format|
       if image_format.croppable?
         image_format.crop(x,y)
       end
     end
+    self.scale_to_fit = false
     self.image.recreate_versions!
   end
-  def scale_to_fit(value)
-    self.image_formats.each do |image_format|
-      image_format.scale_to_fit = value
-      image_format.save
+ 
+  def scale_to_fit=(value)
+    if value != self.scale_to_fit
+      super(value)
+      self.image.recreate_versions!
     end
-    self.image.recreate_versions!
   end
+  
+  
   protected
     def create_formats
       self.edit_format = ImageFormat.new(:format => 'edit', :croppable => false) if self.edit_format.nil?

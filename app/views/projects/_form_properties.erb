@@ -1,4 +1,4 @@
- <%= form_for(@project, :url => url_for_action(@project) ) do |f| %>
+ <%= form_for(@project, :url => url_for_action(@project)) do |f| %>
  <div class="hidden_fields">
   <%= f.hidden_field :public %>
  </div>
@@ -26,15 +26,14 @@
     <section class="upload_image_section">
       <div class="first col">
         <div id="cover">
-					<%= image_preview @project.cover %>
+          <%= render 'images/preview', :image => @project.cover %>
+			
         </div>
         <div id="upload_custom_bg_links" class="upload_custom_bg_links">
           <%#= f.file_field 'cover[image]' %>
           <%= f.hidden_field :cover_name %>
 
-          <%- if !@project.cover.present? %>
-            <%= link_to  "Edit your cover", edit_image_path(@project.cover), :class => "icon_link edit_link iframe_fancy", :id => 'edit_project_cover' %>
-          <% end %>
+         
         </div>
       </div>
       <div class="col">

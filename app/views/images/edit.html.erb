@@ -1,3 +1,4 @@
+<%= form_for(@image) do |f| %>
 <div  id="edit_image">
 	<section class="fancybox">
 		<header>
@@ -12,8 +13,8 @@
 			<div class="right_col">
 				<p class="description">Drag your image to adjust</p>
 				<div>
-					<%= check_box_tag 'scale_to_fit', 1, @image.thumb_format.scale_to_fit? %>
-					<%= label_tag 'scale_to_fit'%>
+					<%= f.check_box :scale_to_fit %>
+					<%= f.label :scale_to_fit %>
 			</div>
 		</div>
 		<footer>
@@ -23,4 +24,5 @@
 		
 	</section>
 </div>
-<%= iviewer "#image_editor", @image.image.url(:editable_thumb), "#scale_to_fit", @image.thumb_format.to_json.html_safe  %>
+<%= iviewer("#image_editor", @image.edit_url, "#image_scale_to_fit",  @image.to_json(:include => :display_format).html_safe)  %> 
+<% end %>

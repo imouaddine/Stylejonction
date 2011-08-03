@@ -19,7 +19,7 @@ class ImageTest < ActiveSupport::TestCase
     assert @image.preview_format, "preview format should be created on initialization"
    
    
-    assert_equal false, @image.preview_format.scale_to_fit?
+    assert_equal false, @image.scale_to_fit?
     
   end
   test "test upload image" do

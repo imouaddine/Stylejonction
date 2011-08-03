@@ -29,19 +29,17 @@ class ImagesControllerTest < ActionController::TestCase
 
     assert_equal @image.display_format.crop_x, 10.3
     assert_equal @image.display_format.crop_y, 11.44
-    assert_equal @image.display_format.scale_to_fit?, false
+    assert_equal @image.scale_to_fit?, false
   end
 
   test "should scale image" do
-
-     
-
-     post :scale_to_fit, :id => @image.id, :scale_to_fit => true, :format => 'json'
+    
+     post :update, :id => @image.id, :image => {scale_to_fit: true}, :format => 'json'
      assert_response :success
 
      @image.reload
-     #not fully implemented
-     #assert_equal @image.display_format.scale_to_fit?, true
+   
+     assert_equal @image.scale_to_fit?, true
   end
 
 

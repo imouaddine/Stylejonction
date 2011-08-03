@@ -1,11 +1,13 @@
 module ApplicationHelper
 
-  def iviewer(element, image_path, fit_button, image_format)
+  def iviewer(element, image_path, fit_button, image)
     %Q{
        <script type='text/javascript'>
-          image_format = eval(#{image_format});
-          image_format.scale_to_fit = Boolean(image_format.scale_to_fit);
-          zoom_val = image_format.scale_to_fit? 'fit' : 100;
+          image = eval(#{image});
+          image_format = image.display_format;
+         
+          image.scale_to_fit = Boolean(image.scale_to_fit);
+          zoom_val = image.scale_to_fit ? 'fit' : 100;
 
            $('#{element}').iviewer({
               src: '#{image_path}',
@@ -16,10 +18,11 @@ module ApplicationHelper
               {
                 var object = this;
                 object.zoom_by(1);
-                top = -parseFloat(image_format.crop_y);
-                left = -parseFloat(image_format.crop_x);
-                $("#cover_editor img").css("top", top);
-                $("#cover_editor img").css("left", left);
+                crop_top = -parseFloat(image_format.crop_y);
+                crop_left = -parseFloat(image_format.crop_x);
+                
+                $("#image_editor img").css("top", crop_top);
+                $("#image_editor img").css("left", crop_left);
 
                 $('#{fit_button}').change(function(){
                   if( $(this).is(':checked') ){
@@ -29,10 +32,6 @@ module ApplicationHelper
                     object.zoom_by(1);
                   }
                 });
-
-
-
-
               }
            });
       </script>
@@ -84,7 +83,7 @@ module ApplicationHelper
              'authenticity_token'  : encodeURIComponent('#{u(form_authenticity_token)}')
            },
            onComplete : function(a, b, c, response){  if(image_selector.length > 0) {
-                                                          image_selector.html(response).trigger('change');
+                                                          image_selector.html(response);
                                                           $('#project_cover_name').val(c.name);
                                                        }
                                                       else {

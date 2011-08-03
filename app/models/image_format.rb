@@ -17,14 +17,9 @@ class ImageFormat < ActiveRecord::Base
    def crop(x, y)
       self.crop_x = x
       self.crop_y = y
-      self.scale_to_fit = false
       self.save
-      
     end
 
-    def scale_to_fit(value)
-      self.scale_to_fit = value
-      self.save
-    end
+  
 
 end

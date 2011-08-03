@@ -47,7 +47,7 @@ class Project < ActiveRecord::Base
   
   
   def setup_cover
-    self.cover = Image.new(:dir => "#{portfolio.user.username}/projects" )
+    self.cover = Image.new(:dir => "#{portfolio.user.username}/projects", :editable => true )
     self.cover.preview_format.update_attributes(COVER_DIMENSIONS)
     self.cover.edit_format.update_attributes(COVER_DIMENSIONS)
     self.cover.display_format.update_attributes(COVER_DIMENSIONS)

@@ -17,21 +17,18 @@ class Stylejonction.Views.Images.EditView extends Backbone.View
 
     x = -object.x;
     y = -object.y;
-   
-    if $("#scale_to_fit").is(":checked")
-          $.post( 
-            "#{@image.url}#{@image.id}/scale_to_fit.json"
-            { scale_to_fit: true }
-             @.updateAndClose
-             
-            
-          )
-        else
-          $.post(
-            "#{@image.url}#{@image.id}/crop.json"
-            {x: x, y: y }
-            @.updateAndClose
-          )
+    console.log @image
+    if $("#image_scale_to_fit").is(":checked")
+      @image.save(
+        {scale_to_fit: true }
+        success: -> @.updateAndClose
+      )
+    else
+      $.post(
+        "#{@image.url}/crop.json"
+        {x: x, y: y }
+        @.updateAndClose
+      )
   
   
   updateAndClose: (data) ->

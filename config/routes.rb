@@ -56,7 +56,6 @@ Stylejonction::Application.routes.draw do
     member do
       post 'upload'
       match 'crop'
-      match 'scale_to_fit'
     end
   end
 

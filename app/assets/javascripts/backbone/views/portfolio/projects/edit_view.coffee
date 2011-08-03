@@ -12,6 +12,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
 
   initialize: ()->
     _.bindAll(this, 'showCover', 'on_fancybox_complete')
+    
     $("#edit_project_section").tabs()
     @project = @options.model
     if @project.cover?
@@ -19,6 +20,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     else
       @cover = new Stylejonction.Models.Image({})
     @cover.bind 'change', @.showCover
+    @.init_fancybox()
 
 
   init_fancybox: ()->
@@ -90,14 +92,14 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     #force loading image from the server using timestamp
     timestamp = new Date().getTime();
 
-    $("#cover img").attr('src', "#{cover.toJSON().image.thumb.url}?#{timestamp}")
+    $("#cover img").attr('src', "#{cover.toJSON().image.display.url}?#{timestamp}")
     
     
   submit_form: (e)->
     e.preventDefault()
     e.stopPropagation()
     console.log e
-    $("form.edit_project").submit();
+    $("form.edit_project, form.new_project").submit();
 
 
 

@@ -20,7 +20,8 @@ class ProjectsController < ApplicationController
   def new
     next_number = @portfolio.projects.count + 1
     @project = @portfolio.projects.new(:title => "Project #{next_number}")
-    @project.cover = Image.new
+    @project.cover = Image.new(:dir => 'project')
+    @project.setup_cover
     @cover = @project.cover
     @text_block = @project.text_blocks.new
     @gallery = @project.galleries.new
@@ -45,7 +46,6 @@ class ProjectsController < ApplicationController
     @text_block = @project.text_blocks.new
     @gallery = @project.galleries.new
     @document_block = @project.document_blocks.new
-    
     respond_with(@project)
   end
 

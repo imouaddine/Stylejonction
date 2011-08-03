@@ -1,3 +1,5 @@
-<figure class="preview_image">
-	<%= preview_image_tag image %>
-</figure>
+<%= image_preview image %>
+<% if !image.image.nil? %>
+  <%= link_to "Edit", 
+		  edit_image_path(image), :class => "icon_link edit_link iframe_fancy" %>
+<% end %>
