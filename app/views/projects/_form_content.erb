@@ -35,5 +35,24 @@
 	</ul>
 	</div>
 </fieldset>
+<fieldset class="organize_project_content">
+  <span class="order">2</span>
+  <div class="inner">
+    <legend>Organize your content</legend>
+    <p class="description">
+      Use the arrows to change the order in which the contents will be displayed.
+    </p>
+    <ul class="organize-list">
+      <% @project.elements.each  do  |element| %>	
+        <% if !element.new_record? %>
+          <li><%= render element %></li>
+        <% end %>
+    	<% end %>             
+    </ul>
+  
+  </div>
+  
+
+</fieldset>
 
 	

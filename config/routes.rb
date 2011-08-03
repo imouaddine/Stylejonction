@@ -1,9 +1,16 @@
 Stylejonction::Application.routes.draw do
   
 
+  
+
+ 
+
   resources :document_blocks
 
-  resources :galleries
+  resources :galleries do 
+    resources :videos
+    resources :photos
+  end
 
   resources :text_blocks
 

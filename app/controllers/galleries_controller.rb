@@ -16,9 +16,9 @@ class GalleriesController < ApplicationController
   # GET /galleries/new.json
   def new
     @gallery = Gallery.new
-
+    
     respond_to do |format|
-      format.html # new.html.erb
+      format.html{ redirect_to edit_portfolio_project_path(params[:project_id])+"?new_gallery=1" }
       format.json { render json: @gallery }
     end
   end
@@ -26,17 +26,17 @@ class GalleriesController < ApplicationController
   # GET /galleries/1/edit
   def edit
     @gallery = Gallery.find(params[:id])
-    redirect_to edit_portfolio_project_path(@gallery.project)
+    redirect_to edit_portfolio_project_path(@gallery.project)+"?gallery_id=#{@gallery.id}"
   end
 
   # POST /galleries
   # POST /galleries.json
   def create
     @gallery = Gallery.new(params[:gallery])
-
+   
     respond_to do |format|
       if @gallery.save
-        format.html { redirect_to edit_portfolio_project_path(@gallery.project), notice: 'Gallery was successfully created.' }
+        format.html { redirect_to edit_portfolio_project_path(@gallery.project)+"?gallery_id=#{@gallery.id}", notice: 'Gallery was successfully created.' }
         format.json { render json: @gallery, status: :created, location: @gallery }
       else
         format.html { render action: "new" }
@@ -68,7 +68,7 @@ class GalleriesController < ApplicationController
     @gallery.destroy
 
     respond_to do |format|
-      format.html { redirect_to edit_portfolio_project_path(@gallery.project) }
+      format.html{ redirect_to edit_portfolio_project_path(params[:project_id])+"?new_gallery=1" }
       format.json { head :ok }
     end
   end

@@ -41,10 +41,27 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    @selected_tab = 0
+    @content_selected_tab = 0
     @project = get_project(params[:id])
     @cover = @project.cover
     @text_block = @project.text_blocks.new
-    @gallery = @project.galleries.new
+    
+    
+    
+    if params[:gallery_id]
+      @gallery = @project.galleries.find(params[:gallery_id])
+      @selected_tab = 1
+      @content_selected_tab = 1
+    else
+      @gallery = @project.galleries.new
+    end
+    if params[:new_gallery]
+      @selected_tab = 1
+      @content_selected_tab = 1
+    end
+    
+    
     @document_block = @project.document_blocks.new
     respond_with(@project)
   end

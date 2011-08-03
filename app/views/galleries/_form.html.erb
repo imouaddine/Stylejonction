@@ -7,18 +7,35 @@
   <p class="styled_text_field tb2 field">
     <%= f.text_field :title, :placeholder => "Give your gallery a catchy title" %>
   </p>
+  <% if !@gallery.new_record?  %>
+  <div class="add-buttons">
+      <a href="<%= new_gallery_photo_path(@gallery) %>" id="various1" class="first fltlft ifancy_frame">+ Add a photo</a>
+      <a href="<%= new_gallery_video_path(@gallery) %>" id="various2" class="fltrt ifancy_frame">+ Add a video</a>
+  </div>   
+  <% end %>                        
   <div class="display_preferences_field left field">
     <legend>Display preferences</legend>
     <p class="description">Display your gallery as a slideshow or mosaic</p>
     <div>
-        <a class="preference_link mosaic_link" href="#" data-val="mosaic" id="mosaic_link">
+        <a  class="preference_link mosaic_link <%= 'selected' if @gallery.display_preference == 'mosaic' %>"  href="#" data-val="mosaic" id="mosaic_link">
         </a>
-        <a class="preference_link slideshow_link" href="#" data-val="slideshow" id="slideshow_link">
+        <a class="preference_link slideshow_link <%= 'selected' if @gallery.display_preference == 'slideshow' %>" href="#" data-val="slideshow" id="slideshow_link">
         </a>
    </div>
   </div> 
   <p class="right actions" >
-    <a id="save_gallery_btn" href="#" class="btn-1"><span><strong>Save gallery</strong></span></a>
+    
+    <a id="save_gallery_btn" href="#" class="btn-1"><span><strong>
+      <% if !@gallery.new_record?  %>
+        Save gallery
+      <% else %>
+        Create gallery
+      <% end %>
+    </strong></span></a>
+    <% if !@gallery.new_record?  %>
+    
+      <a id="save_gallery_btn" href="<%= new_gallery_path+"?project_id=#{@project.id}" %>" class="btn-2"><span><strong>Cancel</strong></span></a>
+    <% end %>
   </p>
  
  

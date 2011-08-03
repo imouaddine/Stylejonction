@@ -253,4 +253,68 @@
   .actions{
     margin-top: 70px;
   }
+  .add-buttons {
+      clear:both;
+      overflow:hidden;
+      width:100%;
+      padding:30px 0 15px 0;
+      text-align:center;
+      line-height:44px;
+      a {
+          display: block;
+          float: left;
+          width:288px;
+          height:44px;
+          color:#53646f;
+          background:url(../images/add-buttons.gif) no-repeat;
+          background-position:0 0;
+          &.first{
+            margin-right: 20px;
+          }
+          &:hover {
+              background-position:0 -44px;
+              color:#fff;
+          }
+      }
+  }
+  
+}
+.organize-list {
+  clear: both;
+  overflow: hidden;
+  li{
+    width:594px;
+    height:44px;
+    clear:both;
+    line-height:44px;
+    background:url(../images/bg-organize-list.png) no-repeat left top;
+    p{
+    margin-top: 0;
+     &.bg1{
+       background: url(../images/bg1.png) no-repeat left top;
+     } 
+     &.bg2{
+       background: url(../images/bg2.png) no-repeat left top;
+     }
+     &.bg3{
+        background: url(../images/bg3.png) no-repeat left top;
+     }
+    }
+  }
+  .left{
+    padding: 0 0 0 20px;
+  }
+  .right {
+    padding: 7px 2px 0 0;
+    line-height: 30px;
+    a {
+      padding: 0 15px 0 12px;
+      height: 30px;
+      float: left;
+      color: #5D5D5D;
+      background: url(../images/bg-organize-list-devider.gif) repeat-y right top;
+    }
+  }
+  
+ 
 }

@@ -14,4 +14,5 @@ module ProjectsHelper
   def set_default(i)
     "imad@ecomstrategy.ca" if i == 0
   end
+
 end

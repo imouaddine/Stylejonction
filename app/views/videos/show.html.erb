@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Caption:</b>
+  <%= @video.caption %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @video.url %>
+</p>
+
+<p>
+  <b>Gallery:</b>
+  <%= @video.gallery_id %>
+</p>
+
+<p>
+  <b>Weight:</b>
+  <%= @video.weight %>
+</p>
+
+<p>
+  <b>Provider name:</b>
+  <%= @video.provider_name %>
+</p>
+
+<p>
+  <b>Thumbnail width:</b>
+  <%= @video.thumbnail_width %>
+</p>
+
+<p>
+  <b>Thumbnail height:</b>
+  <%= @video.thumbnail_height %>
+</p>
+
+<p>
+  <b>Thumbnail url:</b>
+  <%= @video.thumbnail_url %>
+</p>
+
+<p>
+  <b>Html:</b>
+  <%= @video.html %>
+</p>
+
+
+<%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Back', videos_path %>

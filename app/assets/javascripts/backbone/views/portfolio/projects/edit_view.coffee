@@ -14,8 +14,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
   initialize: ()->
     _.bindAll(this, 'showCover', 'on_fancybox_complete')
     
-    $("#edit_project_section").tabs()
-    $("#add_project_content_section").tabs()
+    
     @project = @options.model
     if @project.cover?
       @cover = @project.cover

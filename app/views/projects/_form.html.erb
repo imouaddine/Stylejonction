@@ -23,3 +23,8 @@
 <% content_for :preview do %>
   <%= render  "portfolios/preview",  :action => 'edit_project'  %>
 <% end %>
+<script>
+$("#edit_project_section").tabs({selected: <%= @selected_tab %> });
+$("#add_project_content_section").tabs({selected: <%= @content_selected_tab %> })
+
+</script>

@@ -45,7 +45,10 @@ class Project < ActiveRecord::Base
     self.cover.save
   end
   
-  
+  def elements
+    elements = self.galleries | self.document_blocks | self.text_blocks
+    elements
+  end
   def setup_cover
     self.cover = Image.new(:dir => "#{portfolio.user.username}/projects", :editable => true )
     self.cover.preview_format.update_attributes(COVER_DIMENSIONS)
