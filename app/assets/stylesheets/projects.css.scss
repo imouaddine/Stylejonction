@@ -112,21 +112,22 @@
    background: #F2F2F2;
    margin-left: 50px;
    width: 649px;
+    fieldset{
+      padding: 20px;
+      margin: 0;
+      @include fancy-border-bottom;
+       
+      legend{
+          margin-top: 0;
+      }
+      &.last{
+         @include fancy-border-bottom;
+      }
+    }
    form{
      padding:0;
      margin: 0;
-     fieldset{
-       padding: 20px;
-       margin: 0;
-       @include fancy-border-bottom;
-        
-       legend{
-           margin-top: 0;
-       }
-       &.last{
-          @include fancy-border-bottom;
-       }
-     }
+    
      footer{
          width: 100%;
          height: 40px;
@@ -182,3 +183,37 @@
    }
    
  }
+.add_project_content{
+  
+  .tabs1{
+    width: 100%;
+    height: 72px;
+    clear: both;
+    overflow: hidden;
+    li{
+      text-align: center;
+      line-height: 43px;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 0 9px 0 0;
+      &.last{padding:0; a{ margin-right: 0}}
+      a{
+        width: 192px;
+        height: 55px;
+        float: left;
+        color: #5D5D5D;
+        background: url(../images/bg-tabs2.png) no-repeat;
+        background-position: 0 0;
+        margin-right: 5px;
+      }
+      &.ui-state-active a, & a:hover{
+       
+          background-position:0 -55px;
+          color:#fff;
+       
+      }
+     
+    }
+  }
+  
+}

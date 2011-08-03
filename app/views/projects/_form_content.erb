@@ -1,14 +1,13 @@
-
-<fieldset id="project_title">
+<fieldset class="add_project_content">
   <span class="order">1</span>
 	<div class="inner">
   	<legend>Add content</legend>
     <p class="description">Choose from the following content elements. Add as many different types of content to your project as you desire.</p>
-		<section id="add_project_content">
-			<ul>
+		<section id="add_project_content_section" >
+			<ul  class="tabs1">
 				<li><a href="#add_writing_section">Writing</a></li>
 				<li><a href="#add_media_section">Photos & Videos</a></li>
-				<li><a href="#add_files">Attached Documents</a></li>
+				<li><a href="#add_documents_section">Attached Documents</a></li>
 			</ul>
 			<section id="add_writing_section">
 				  <%= render 'text_blocks/form' %>
@@ -16,7 +15,7 @@
 			<section id="add_media_section">
 					<%= render 'galleries/form' %>
 			</section>
-			<section id="add_files">
+			<section id="add_documents_section">
 					<%= render 'document_blocks/form' %>
 			</section>
 	</div>

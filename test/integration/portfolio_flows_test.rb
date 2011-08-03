@@ -18,7 +18,7 @@
   test "edit_layout portfolio page" do
     
     @portfolio.background = Factory (:pattern_background)
-    @pattern.upload("test/fixtures/images/1.jpg")
+    e@pattern.upload("test/fixtures/images/1.jpg")
     assert @portfolio.save, @portfolio.errors.inspect
     
     b = PredefinedBackground.create(:name => "Background sadasdasd")
