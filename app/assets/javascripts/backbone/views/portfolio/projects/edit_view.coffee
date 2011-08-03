@@ -9,6 +9,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     "click #send_invites":          "send_invites"
     "change #cover"                 :"cover_changed"
     "click #submit_btn"             :"submit_form"
+   
 
   initialize: ()->
     _.bindAll(this, 'showCover', 'on_fancybox_complete')
@@ -22,6 +23,8 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
       @cover = new Stylejonction.Models.Image({})
     @cover.bind 'change', @.showCover
     @.init_fancybox()
+    
+    @edit_gallery_view = new Stylejonction.Views.EditGalleryView({el: "#edit_gallery_section" })
 
 
   init_fancybox: ()->
@@ -101,6 +104,9 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     e.stopPropagation()
     console.log e
     $("form.edit_project, form.new_project").submit();
+    
+    
+  
 
 
 

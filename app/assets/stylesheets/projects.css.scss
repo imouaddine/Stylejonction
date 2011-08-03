@@ -217,3 +217,40 @@
   }
   
 }
+.preference_link{
+   background-repeat: no-repeat;
+    width: 113px;
+    height: 69px;
+    display: block;
+    float: left;
+    margin: 0 7px 0 0;
+}
+.mosaic_link{
+  background-image: url(../images/checkbox1.gif);
+  background-position: 0 0;
+  &:hover{
+    background-position: 0 -69px;
+  }
+  &.selected{
+     background-position: 0 -138px;
+  }
+}
+.slideshow_link{
+  background-image: url(../images/checkbox2.gif);
+ 
+  background-position: 0 0;
+  &:hover{
+    background-position: 0 -69px;
+  }
+  &.selected{
+     background-position: 0 -138px;
+  }
+}
+.gallery_section{
+  .field{
+    margin-top: 20px;
+  }
+  .actions{
+    margin-top: 70px;
+  }
+}
