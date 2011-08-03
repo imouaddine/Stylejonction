@@ -1,33 +1,17 @@
-<%= form_for(@photo) do |f| %>
-  <% if @photo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
-
-      <ul>
-      <% @photo.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+<section id="edit_photo_section">
+  <%= form_for(@photo, :url => project_gallery_path(params[:gallery_id])) do |f| %>
+  
+  <header>
+  	  <h1 class="plus"><strong>Add</strong> a photo to your gallery</h1>
+  </header>
+  <div class="content">
+    <p class="ta1">
+       <%= f.text_area :caption, :placeholder => "Photo caption (optional) ...", :cols => 5, :row =>5 %>
+    </p>
+    
+  </div>
+  <footer>
+    <a href="#" class="btn-1" id="save_photo" ><span><strong>Save</span></strong></a>
+  </footer>
   <% end %>
-
-  <div class="field">
-    <%= f.label :caption %><br />
-    <%= f.text_field :caption %>
-  </div>
-  <div class="field">
-    <%= f.label :gallery_id %><br />
-    <%= f.number_field :gallery_id %>
-  </div>
-  <div class="field">
-    <%= f.label :image_id %><br />
-    <%= f.number_field :image_id %>
-  </div>
-  <div class="field">
-    <%= f.label :weight %><br />
-    <%= f.number_field :weight %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</section>

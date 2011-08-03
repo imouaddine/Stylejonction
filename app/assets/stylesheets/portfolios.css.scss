@@ -422,6 +422,7 @@ fieldset{
     @include fancy-border-bottom;
   }
   .content{
+    
     @include clearfix;
     padding: 10px;
     line-height: 30px;
@@ -435,7 +436,15 @@ fieldset{
   h1{
     color: #5d5d5d;
     font-size: 13px;
+    &.plus{
+      background: url(../images/icon-plus.png) no-repeat left center;
+      padding: 0 0 0 20px;
+    }
   }
+  .btn-1{
+    margin-right: 20px;
+  }
+  
 }
 #fancybox-close {
     position: absolute;

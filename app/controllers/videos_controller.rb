@@ -1,4 +1,9 @@
 class VideosController < ApplicationController
+  
+  layout "modal"
+  before_filter :authenticate_user!, :except => [:index, :show]
+    
+    
   # GET /videos
   # GET /videos.json
   def index

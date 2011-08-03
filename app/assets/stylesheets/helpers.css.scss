@@ -156,6 +156,28 @@
 .check2 .checkbox {	background:url(../images/checkbox2.gif) no-repeat left top; }
 
 
+.ta1 {
+  width: 435px;
+  height: 40px;
+  padding: 15px;
+  margin: 22px 0;
+  background: url(../images/ta1.png) no-repeat left top;
+  textarea{
+    width: 435px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #7C7C7C;
+  }
+}
+
+
+
 ///BUTONS 
 
 .btn-1{

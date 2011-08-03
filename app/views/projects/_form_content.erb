@@ -19,21 +19,6 @@
 					<%= render 'document_blocks/form' %>
 			</section>
 	</div>
-	<div>
-	<ul>
-	<% @project.text_blocks.each  do  |text_block| %>	
-		<li>
-			<%= text_block.title %> 
-		</li>
-	<% end %>
-	<% @project.galleries.each  do  |gallery| %>	
-		<li><%= gallery.title %> </li>
-	<% end %>
-	<% @project.document_blocks.each  do  |gallery| %>	
-		<li><%= gallery.title %> </li>
-	<% end %>
-	</ul>
-	</div>
 </fieldset>
 <fieldset class="organize_project_content">
   <span class="order">2</span>
@@ -49,10 +34,8 @@
         <% end %>
     	<% end %>             
     </ul>
-  
   </div>
-  
-
 </fieldset>
+
 
 	

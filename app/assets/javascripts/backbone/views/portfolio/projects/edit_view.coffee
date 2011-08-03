@@ -14,7 +14,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
   initialize: ()->
     _.bindAll(this, 'showCover', 'on_fancybox_complete')
     
-    
+    $(".organize-list").sortable();
     @project = @options.model
     if @project.cover?
       @cover = @project.cover
@@ -23,7 +23,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     @cover.bind 'change', @.showCover
     @.init_fancybox()
     
-    @edit_gallery_view = new Stylejonction.Views.EditGalleryView({el: "#edit_gallery_section" })
+    @edit_gallery_view = new Stylejonction.Views.Projects.EditGalleryView({el: "#edit_gallery_section" })
 
 
   init_fancybox: ()->

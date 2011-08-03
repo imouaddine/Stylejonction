@@ -1,3 +1,5 @@
 class Photo < ActiveRecord::Base
   belongs_to :image, :dependent => :destroy
+  
+  belongs_to :gallery, :dependent => :destroy
 end

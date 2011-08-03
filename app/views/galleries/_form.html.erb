@@ -9,8 +9,8 @@
   </p>
   <% if !@gallery.new_record?  %>
   <div class="add-buttons">
-      <a href="<%= new_gallery_photo_path(@gallery) %>" id="various1" class="first fltlft ifancy_frame">+ Add a photo</a>
-      <a href="<%= new_gallery_video_path(@gallery) %>" id="various2" class="fltrt ifancy_frame">+ Add a video</a>
+      <a href="<%= new_gallery_photo_path(@gallery) %>" id="various1" class="first fltlft iframe_fancy">+ Add a photo</a>
+      <a href="<%= new_gallery_video_path(@gallery) %>" id="various2" class="fltrt iframe_fancy">+ Add a video</a>
   </div>   
   <% end %>                        
   <div class="display_preferences_field left field">
@@ -33,7 +33,6 @@
       <% end %>
     </strong></span></a>
     <% if !@gallery.new_record?  %>
-    
       <a id="save_gallery_btn" href="<%= new_gallery_path+"?project_id=#{@project.id}" %>" class="btn-2"><span><strong>Cancel</strong></span></a>
     <% end %>
   </p>
