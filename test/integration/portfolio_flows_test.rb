@@ -4,9 +4,7 @@
  class PortfolioFlowsTest < ActionDispatch::IntegrationTest
 
    def setup
-     b = PredefinedBackground.create(:name => "Background sadasdasd")
-     b.upload "test/fixtures/images/1.jpg"
-     b.save!
+    
      Factory.create :font
      @user = loggin
      @portfolio = @user.portfolio
@@ -20,19 +18,22 @@
   test "edit_layout portfolio page" do
     
     @portfolio.background = Factory (:pattern_background)
+    @pattern.upload("test/fixtures/images/1.jpg")
     assert @portfolio.save, @portfolio.errors.inspect
     
-    background = Factory( :predefined_background )
+    b = PredefinedBackground.create(:name => "Background sadasdasd")
+    b.upload "test/fixtures/images/1.jpg"
+    assert b.save!
     
     visit  edit_layout_portfolio_path
 
-    find(".image_link[@data-id='#{background.id}']").click
+    find(".image_link[@data-id='#{b.id}']").click
 
     click_button 'Save portfolio'
     
     @portfolio.reload
     
-    assert_equal background, @portfolio.background
+    assert_equal b, @portfolio.background
 
   end
   
