@@ -4,7 +4,7 @@ class CreatePhotos < ActiveRecord::Migration
       t.string :caption
       t.integer :gallery_id
       t.integer :image_id
-      t.integer :weight
+      t.integer :weight, :default => 0
 
       t.timestamps
     end

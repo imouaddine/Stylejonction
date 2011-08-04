@@ -68,11 +68,8 @@ class ProjectsController < ApplicationController
     @content_tab = params[:content_tab] ? params[:content_tab] : 0
     weights = params[:weight].split("&").map{|s| s.gsub("element[]=", "") }
     @project.elements.each do |element|
-      puts weights.index(element.id.to_s)
-      
       element.weight = weights.index(element.id.to_s)
       element.save
-      
     end
     check_defaultness
     #update_cover

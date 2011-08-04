@@ -24,10 +24,12 @@ class Stylejonction.Views.Projects.EditGalleryView extends Backbone.View
       padding: 0,
       onComplete: @.on_fancybox_complete  
     
-  on_fancybox_complete:()->
-    gallery_id = $("#gallery_id").val()
-    photo = new Stylejonction.Models.Photo({gallery_id: gallery_id})
-    new Stylejonction.Views.Projects.EditPhotoView(photo)
+  on_fancybox_complete:(e)->
+    link_id = $(e).attr('id')
+    if link_id == 'add_gallery_video'
+      new Stylejonction.Views.Projects.EditVideoView()
+    else if link_id == 'add_gallery_photo'
+      new Stylejonction.Views.Projects.EditPhotoView()
   
   updatePreference: (e)->
     e.preventDefault()
@@ -38,11 +40,10 @@ class Stylejonction.Views.Projects.EditGalleryView extends Backbone.View
     target.addClass("selected");
     preference = target.data('val')
     $("#gallery_display_preference").val(preference)
-    
-    
   
   saveGallery: (e)->
-    $("#new_gallery, #edit_gallery").submit()
+    $("#gallery_weight").val($('#gallery_element_list').sortable('serialize'));
+    $("#new_gallery, .edit_gallery").submit()
     
     
      

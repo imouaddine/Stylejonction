@@ -30,7 +30,8 @@ class VideosController < ApplicationController
   # GET /videos/new.json
   def new
     @video = Video.new
-
+    @video.gallery_id = params[:gallery_id]
+    @gallery = Gallery.find(params[:gallery_id])
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @video }
@@ -46,10 +47,10 @@ class VideosController < ApplicationController
   # POST /videos.json
   def create
     @video = Video.new(params[:video])
-
+    @gallery = Gallery.find(params[:video][:gallery_id])
     respond_to do |format|
       if @video.save
-        format.html { redirect_to @video, notice: 'Video was successfully created.' }
+        format.html { redirect_to edit_gallery_path(@video.gallery), notice: 'Video was successfully created.' }
         format.json { render json: @video, status: :created, location: @video }
       else
         format.html { render action: "new" }

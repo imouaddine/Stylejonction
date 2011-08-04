@@ -1,53 +1,17 @@
-<%= form_for(@video) do |f| %>
-  <% if @video.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@video.errors.count, "error") %> prohibited this video from being saved:</h2>
-
-      <ul>
-      <% @video.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+<section id="edit_video_section">
+  <%= form_for(@video, :url => gallery_videos_path(@gallery)) do |f| %>
+   <%= f.hidden_field :gallery_id %>
+  <header>
+  	  <h1 class="plus"><strong>Add</strong> a video to your gallery</h1>
+  </header>
+  <div class="content">
+    <p class="ta1">
+       <%= f.text_area :caption, :placeholder => "Video caption (optional) ...", :cols => 5, :row =>5 %>
+    </p>
+    
+  </div>
+  <footer>
+    <a href="#" class="btn-1" id="save_video" ><span><strong>Save</span></strong></a>
+  </footer>
   <% end %>
-
-  <div class="field">
-    <%= f.label :caption %><br />
-    <%= f.text_field :caption %>
-  </div>
-  <div class="field">
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
-  </div>
-  <div class="field">
-    <%= f.label :gallery_id %><br />
-    <%= f.number_field :gallery_id %>
-  </div>
-  <div class="field">
-    <%= f.label :weight %><br />
-    <%= f.number_field :weight %>
-  </div>
-  <div class="field">
-    <%= f.label :provider_name %><br />
-    <%= f.text_field :provider_name %>
-  </div>
-  <div class="field">
-    <%= f.label :thumbnail_width %><br />
-    <%= f.number_field :thumbnail_width %>
-  </div>
-  <div class="field">
-    <%= f.label :thumbnail_height %><br />
-    <%= f.number_field :thumbnail_height %>
-  </div>
-  <div class="field">
-    <%= f.label :thumbnail_url %><br />
-    <%= f.text_field :thumbnail_url %>
-  </div>
-  <div class="field">
-    <%= f.label :html %><br />
-    <%= f.text_field :html %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</section>

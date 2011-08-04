@@ -3,6 +3,7 @@
  	  <%= f.hidden_field :project_id %>
  	  <%= hidden_field_tag 'gallery_id', @gallery.id %>
     <%= f.hidden_field :display_preference %>
+    <%= hidden_field_tag 'gallery_weight', '' %>
   </div>
  
   <p class="styled_text_field tb2 field">
@@ -10,15 +11,15 @@
   </p>
   <% if !@gallery.new_record?  %>
     <div class="add-buttons">
-        <a href="<%= new_gallery_photo_path(@gallery) %>" id="various1" class="first fltlft iframe_fancy">+ Add a photo</a>
-        <a href="<%= new_gallery_video_path(@gallery) %>" id="various2" class="fltrt iframe_fancy">+ Add a video</a>
+        <a href="<%= new_gallery_photo_path(@gallery) %>" id="add_gallery_photo" class="first fltlft iframe_fancy">+ Add a photo</a>
+        <a href="<%= new_gallery_video_path(@gallery) %>" id="add_gallery_video" class="fltrt iframe_fancy">+ Add a video</a>
     </div>  
     <div class="scrollbar">
       <div id="gallery_pane" class="scroll_pane"> 
       <ul id="gallery_element_list">
-        <% @gallery.photos.each  do |photo| %>
-           <li class="upload" id="<%= photo.id %>"> 
-              <%= render photo %>
+        <% @gallery.elements.each  do |element| %>
+           <li class="upload" id="element_<%= element.id %>"> 
+              <%= render element %>
             </li>
         <% end %>
       </ul>
