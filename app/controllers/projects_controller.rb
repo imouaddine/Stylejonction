@@ -41,37 +41,35 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @selected_tab = 0
-    @content_selected_tab = 0
+    @tab = params[:tab] ? params[:tab] : 0
+    @content_tab = params[:content_tab] ? params[:content_tab] : 0
+   
     @project = get_project(params[:id])
     @cover = @project.cover
     @text_block = @project.text_blocks.new
     
-    
-    
     if params[:gallery_id]
       @gallery = @project.galleries.find(params[:gallery_id])
-      @selected_tab = 1
-      @content_selected_tab = 1
+      @tab = @content_tab = 1
     else
       @gallery = @project.galleries.new
     end
+    
     if params[:new_gallery]
-      @selected_tab = 1
-      @content_selected_tab = 1
+      @tab =  @content_tab = 1
     end
-    
-    
     @document_block = @project.document_blocks.new
     respond_with(@project)
   end
 
   def update
     @project = get_project(params[:id])
+    @tab = params[:tab] ? params[:tab] : 0
+    @content_tab = params[:content_tab] ? params[:content_tab] : 0
     check_defaultness
     #update_cover
     flash[:notice] = "Project was successfully updated" if @project.update_attributes(params[:project])
-    redirect_to edit_portfolio_project_path(@project)
+    redirect_to edit_portfolio_project_path(@project)+"?tab=#{@tab}&content_tab=#{@content_tab}"
   end
 
   def invite

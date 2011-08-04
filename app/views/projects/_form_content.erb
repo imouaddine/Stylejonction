@@ -27,10 +27,12 @@
     <p class="description">
       Use the arrows to change the order in which the contents will be displayed.
     </p>
-    <ul class="organize-list">
+    <ul class="organize-list" id="elements-list">
       <% @project.elements.each  do  |element| %>	
         <% if !element.new_record? %>
-          <li><%= render element %></li>
+          <li class='element_<%= element.id -%>' >
+            <%= render element %>
+          </li>
         <% end %>
     	<% end %>             
     </ul>

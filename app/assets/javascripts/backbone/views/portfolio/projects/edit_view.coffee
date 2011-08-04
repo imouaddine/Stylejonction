@@ -14,7 +14,17 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
   initialize: ()->
     _.bindAll(this, 'showCover', 'on_fancybox_complete')
     
-    $(".organize-list").sortable();
+    $("#elements-list").sortable(
+      handle: '.drag_icon', 
+      items: 'li',
+      opacity: 0.4,
+      scroll: true
+      update: ->
+        order = $('#elements-list').sortable('serialize')
+        console.log(order)
+      
+    
+    );
     @project = @options.model
     if @project.cover?
       @cover = @project.cover
@@ -101,8 +111,12 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
   submit_form: (e)->
     e.preventDefault()
     e.stopPropagation()
-    console.log e
-    $("form.edit_project, form.new_project").submit();
+   
+    $("#tab").val($("#edit_project_section").tabs( "option", "selected"))
+    $("#content_tab").val($("#add_project_content_section").tabs( "option", "selected"))
+    
+    console.log  $("form.edit_project").serialize()
+    $("form.edit_project, form.new_project").submit()
     
     
   

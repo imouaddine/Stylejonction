@@ -13,6 +13,7 @@
     <section class="edit_project_tab_section" id="edit_project_content">
       <%= render 'form_content'  %>
     </section>
+    
     <footer>
         <a id="submit_btn" href="#" class="btn-1 submit"><span><strong>Save project</strong></span></a>
     </footer>
@@ -24,7 +25,7 @@
   <%= render  "portfolios/preview",  :action => 'edit_project'  %>
 <% end %>
 <script>
-$("#edit_project_section").tabs({selected: <%= @selected_tab %> });
-$("#add_project_content_section").tabs({selected: <%= @content_selected_tab %> })
+$("#edit_project_section").tabs({selected: <%= @tab %> });
+$("#add_project_content_section").tabs({selected: <%= @content_tab %> })
 
 </script>

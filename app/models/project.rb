@@ -4,6 +4,8 @@ class Project < ActiveRecord::Base
 
   attr_accessible :title, :default, :public, :cover_id, :cover
   attr_reader :cover_name
+  
+
 
   #Vaidation
   validates_presence_of :title, :cover, :portfolio
@@ -20,6 +22,8 @@ class Project < ActiveRecord::Base
   has_many :document_blocks, :dependent => :destroy
   has_many :galleries, :dependent => :destroy
   has_many :text_blocks, :dependent => :destroy
+  
+  accepts_nested_attributes_for :galleries, :document_blocks, :text_blocks
   
   before_validation :setup_cover, :if => Proc.new{|f| f.cover.blank? }
 
