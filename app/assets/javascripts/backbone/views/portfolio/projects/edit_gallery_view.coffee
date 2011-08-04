@@ -7,7 +7,14 @@ class Stylejonction.Views.Projects.EditGalleryView extends Backbone.View
   initialize: ()->
     _.bindAll(this, 'on_fancybox_complete')
     @.init_fancybox()
-  
+    $('#gallery_pane').jScrollPane({showArrows:true});
+    $("#gallery_element_list").sortable(
+      handle: '.drag_icon', 
+      items: 'li',
+      opacity: 0.4,
+      scroll: true
+    );
+    
   init_fancybox: ()->
     $(".iframe_fancy").fancybox
       hideOnContentClick: false,
@@ -18,8 +25,9 @@ class Stylejonction.Views.Projects.EditGalleryView extends Backbone.View
       onComplete: @.on_fancybox_complete  
     
   on_fancybox_complete:()->
-    
-    new Stylejonction.Views.Projects.EditPhotoView({})
+    gallery_id = $("#gallery_id").val()
+    photo = new Stylejonction.Models.Photo({gallery_id: gallery_id})
+    new Stylejonction.Views.Projects.EditPhotoView(photo)
   
   updatePreference: (e)->
     e.preventDefault()

@@ -1,6 +1,6 @@
 <section id="edit_photo_section">
-  <%= form_for(@photo, :url => edit_gallery_path(@gallery)) do |f| %>
-  
+  <%= form_for(@photo, :url => gallery_photos_path(@gallery)) do |f| %>
+   <%= f.hidden_field :gallery_id %>
   <header>
   	  <h1 class="plus"><strong>Add</strong> a photo to your gallery</h1>
   </header>

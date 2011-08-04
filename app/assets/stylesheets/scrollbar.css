@@ -1,0 +1,67 @@
+/*-- Scroll Bar starts here ---*/
+.jScrollPaneContainer {
+    overflow:hidden;
+    position:relative;
+    z-index:1;
+}
+.jScrollPaneTrack {
+    background: url(../images/scroll.gif) no-repeat left top;
+    cursor:pointer;
+    height:100%;
+    position:absolute;
+    right:0;
+    top:0 !important;
+}
+.jScrollPaneDrag {
+    background: url(../images/scroll_space_boy.png) no-repeat;
+    cursor:pointer;
+    overflow:hidden;
+    position:absolute;
+}
+.jScrollPaneDragTop {
+    left:0;
+    overflow:hidden;
+    position:absolute;
+    top:0;
+}
+.jScrollPaneDragBottom {
+    bottom:0;
+    left:0;
+    overflow:hidden;
+    position:absolute;
+}
+a.jScrollArrowUp {
+    display:block;
+    height:21px;
+    overflow:hidden;
+    position:absolute;
+    right:0;
+    text-indent:-2000px;
+    bottom:22px;
+    z-index:1;
+}
+a.jScrollArrowUp:hover {
+    
+}
+a.jScrollArrowDown {
+    bottom:0;
+    display:block;
+    height:22px;
+    overflow:hidden;
+    position:absolute;
+    right:0;
+    text-indent:-2000px;
+    z-index:1;
+}
+a.jScrollArrowUp {
+    background: url(../images/ship_up.gif) no-repeat;
+}
+a.jScrollArrowDown {
+    background: url(../images/ship_down.gif) no-repeat;
+}
+.scroll_pane{
+    float:left;
+    height:225px;
+    overflow:auto;
+    width:651px;
+}

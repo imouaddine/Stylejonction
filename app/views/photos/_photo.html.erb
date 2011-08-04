@@ -1,0 +1,11 @@
+<div class="element">
+  <img src="/images/video.jpg" >
+</div>
+<p>
+Uploaded image
+</p>
+<p class="fltrt">
+  <%= link_to "Edit", edit_gallery_photo_path(photo) %>
+  <%= link_to "Remove", gallery_photo_path(photo), :method => :delete %>
+  <a href="#" class="drag_icon"></a>
+</p>

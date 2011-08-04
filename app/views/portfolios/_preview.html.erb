@@ -21,9 +21,7 @@
 			<% if @project.present? %>
 				project: <%= @project.to_json(:include => :cover).html_safe  -%>,
 			<% end %>
-		
-				action : <%= "'#{action}'"  %>
-
+		   action : <%= "'#{action}'"  %>
 		});
    
   });

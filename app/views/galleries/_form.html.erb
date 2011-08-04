@@ -1,6 +1,7 @@
 <%= form_for(@gallery, :class => "edit_gallery" ) do |f| %>
  	<div class="hidden_fields">
  	  <%= f.hidden_field :project_id %>
+ 	  <%= hidden_field_tag 'gallery_id', @gallery.id %>
     <%= f.hidden_field :display_preference %>
   </div>
  
@@ -8,10 +9,20 @@
     <%= f.text_field :title, :placeholder => "Give your gallery a catchy title", :required => true %>
   </p>
   <% if !@gallery.new_record?  %>
-  <div class="add-buttons">
-      <a href="<%= new_gallery_photo_path(@gallery) %>" id="various1" class="first fltlft iframe_fancy">+ Add a photo</a>
-      <a href="<%= new_gallery_video_path(@gallery) %>" id="various2" class="fltrt iframe_fancy">+ Add a video</a>
-  </div>   
+    <div class="add-buttons">
+        <a href="<%= new_gallery_photo_path(@gallery) %>" id="various1" class="first fltlft iframe_fancy">+ Add a photo</a>
+        <a href="<%= new_gallery_video_path(@gallery) %>" id="various2" class="fltrt iframe_fancy">+ Add a video</a>
+    </div>  
+    <div class="scrollbar">
+      <div id="gallery_pane" class="scroll_pane"> 
+      <ul id="gallery_element_list">
+        <% @gallery.photos.each  do |photo| %>
+           <li class="upload" id="<%= photo.id %>"> 
+              <%= render photo %>
+            </li>
+        <% end %>
+      </ul>
+    </div> 
   <% end %>                        
   <div class="display_preferences_field left field">
     <legend>Display preferences</legend>

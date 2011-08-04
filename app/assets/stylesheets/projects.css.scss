@@ -315,6 +315,39 @@
       background: url(../images/bg-organize-list-devider.gif) repeat-y right top;
     }
   }
-  
+}
+.gallery_section{
+  .scrollbar{
+    width: 621px;
+  }
+  .upload{
+    width: 594px;
+    height: 69px;
+    padding: 4px 0 3px 0;
+    background: url(../images/bg-upload.gif) no-repeat left top;
+    .element{
+      padding: 0 10px 0 5px;
+      float: left;
+    }
+    p{
+      float: left;
+      line-height: 63px;
+      margin-top: 0;
+    }
+    p.fltrt {
+      float: right;
+      line-height: 55px;
+      padding: 5px 0 0 0;
+      a {
+          padding:0 15px 0 12px;
+          height:56px;
+          float:left;
+          color:#5d5d5d;
+          background:url(../images/bg-organize-list-devider.gif) repeat-y right top;
+      }
+    }
  
+  }
+  
+  
 }

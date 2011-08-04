@@ -8,7 +8,7 @@ class Stylejonction.Views.Projects.EditPhotoView extends Backbone.View
   savePhoto: (e)->
     e.preventDefault()
     e.stopPropagation()
-    
+    $("#new_photo").submit()
     $.fancybox.close()
     
     
