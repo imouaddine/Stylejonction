@@ -1,5 +1,5 @@
 <section id="edit_photo_section">
-  <%= form_for(@photo, :url => project_gallery_path(params[:gallery_id])) do |f| %>
+  <%= form_for(@photo, :url => edit_gallery_path(@gallery)) do |f| %>
   
   <header>
   	  <h1 class="plus"><strong>Add</strong> a photo to your gallery</h1>

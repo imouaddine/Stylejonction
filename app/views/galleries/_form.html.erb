@@ -5,7 +5,7 @@
   </div>
  
   <p class="styled_text_field tb2 field">
-    <%= f.text_field :title, :placeholder => "Give your gallery a catchy title" %>
+    <%= f.text_field :title, :placeholder => "Give your gallery a catchy title", :required => true %>
   </p>
   <% if !@gallery.new_record?  %>
   <div class="add-buttons">

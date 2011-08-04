@@ -18,6 +18,7 @@ class Stylejonction.Views.Projects.EditGalleryView extends Backbone.View
       onComplete: @.on_fancybox_complete  
     
   on_fancybox_complete:()->
+    photo = new Stylejonction.Models.Photo({gallery_id: })
      new Stylejonction.Views.Projects.EditPhotoView({})
   
   updatePreference: (e)->

@@ -30,7 +30,7 @@ class PhotosController < ApplicationController
   # GET /photos/new.json
   def new
     @photo = Photo.new
-
+    @gallery = Gallery.find(params[:gallery_id])
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @photo }

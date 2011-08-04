@@ -12,7 +12,7 @@
     <legend>Project title</legend>
     <p class="description">Give your project a catchy title. (ex.: Spring 2011 Streetwear Designs)</p>
     <p class="styled_text_field tb4">
-      <%= f.text_field 'title', :placeholder => 'Enter project title here' %>
+      <%= f.text_field 'title', :placeholder => 'Enter project title here', :required => true %>
     </p>
     <p>
       <%= f.check_box "default", :class => "styled"  -%>
@@ -34,8 +34,6 @@
         </div>
         <div id="upload_custom_bg_links" class="upload_custom_bg_links">
           <%#= f.file_field 'cover[image]' %>
-          
-         
         </div>
       </div>
       <div class="col">
