@@ -16,14 +16,24 @@ class Stylejonction.Views.Projects.EditGalleryView extends Backbone.View
     );
     
   init_fancybox: ()->
-    $(".iframe_fancy").fancybox
+    
+    $("#add_gallery_video").fancybox
+      hideOnContentClick: false,
+      showCloseButton: true,
+      autoDimensions: true,
+      autoScale: true,
+      
+      padding: 0,
+      onComplete: @.on_fancybox_complete  
+      
+    $("#add_gallery_photo").fancybox
       hideOnContentClick: false,
       showCloseButton: true,
       autoDimensions: false
       width: 490,
       padding: 0,
-      onComplete: @.on_fancybox_complete  
-    
+      onComplete: @.on_fancybox_complete
+  
   on_fancybox_complete:(e)->
     link_id = $(e).attr('id')
     if link_id == 'add_gallery_video'

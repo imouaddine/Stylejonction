@@ -346,8 +346,17 @@
           background:url(../images/bg-organize-list-devider.gif) repeat-y right top;
       }
     }
- 
   }
   
+  
+}
+.video-format{
+  clear: both;
+  overflow: hidden;
+  text-align: center;
+  padding: 15px 0;
+  img{
+    margin: 0 15px;
+  }
   
 }

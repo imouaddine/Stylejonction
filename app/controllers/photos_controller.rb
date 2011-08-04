@@ -82,7 +82,7 @@ class PhotosController < ApplicationController
     @photo.destroy
 
     respond_to do |format|
-      format.html { redirect_to photos_url }
+      format.html { redirect_to edit_gallery_path(@photo.gallery) }
       format.json { head :ok }
     end
   end

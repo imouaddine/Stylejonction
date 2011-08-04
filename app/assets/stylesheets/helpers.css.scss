@@ -89,7 +89,22 @@
   }
 }
 
-
+.styled_text_field.tb3 {
+  width: 339px;
+  height: 20px;
+  padding: 12px 15px;
+  background: url(../images/tb3.gif) no-repeat left top;
+  input{
+    width: 339px;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: none;
+    color: #7C7C7C;
+  }
+}
 
 #content .tb2-2 {background:url(../images/tb2-2.png) no-repeat left top;}
 #content .tb1 input {

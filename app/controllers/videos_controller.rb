@@ -82,7 +82,7 @@ class VideosController < ApplicationController
     @video.destroy
 
     respond_to do |format|
-      format.html { redirect_to videos_url }
+      format.html { redirect_to edit_gallery_path(@video.gallery) }
       format.json { head :ok }
     end
   end

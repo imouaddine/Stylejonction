@@ -1,11 +1,11 @@
 <div class="element">
-  <img src="/images/video.jpg" >
+  <%= image_tag video.thumbnail_url, :width => 85,  :height => (video.thumbnail_height * 85 / video.thumbnail_width) %>
 </div>
 <p>
 Uploaded video
 </p>
 <p class="fltrt">
-  <%= link_to "Edit", edit_gallery_video_path(video) %>
-  <%= link_to "Remove", gallery_video_path(video), :method => :delete %>
+  <%= link_to "Edit", edit_gallery_video_path(:id => video.id, :gallery_id => video.gallery_id) %>
+  <%= link_to "Remove", gallery_video_path(:id => video.id, :gallery_id => video.gallery_id), :method => :delete, :confirm => 'Are you sure you want to delete this video?' %>
   <a href="#" class="drag_icon"></a>
 </p>

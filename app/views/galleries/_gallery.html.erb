@@ -4,6 +4,6 @@
 <p class="right">
 
   <%= link_to "Edit", edit_gallery_path(gallery) %>
-  <%= link_to "Remove", gallery_path(gallery), :method => :delete %>
+  <%= link_to "Remove", gallery_path(gallery), :method => :delete, :confirm => 'Are you sure you want to delete it?' %>
   <a href="#" class="drag_icon"></a>  
 </p>

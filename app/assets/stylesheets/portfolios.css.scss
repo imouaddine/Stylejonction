@@ -444,6 +444,13 @@ fieldset{
   .btn-1{
     margin-right: 20px;
   }
+  fieldset{
+    margin: 0;
+  }
+  .browse{
+    clear: both;
+    overflow: hidden;
+  }
   
 }
 #fancybox-close {

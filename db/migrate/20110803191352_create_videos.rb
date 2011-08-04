@@ -10,6 +10,8 @@ class CreateVideos < ActiveRecord::Migration
       t.integer :thumbnail_height
       t.string :thumbnail_url
       t.string :html
+      t.integer :width
+      t.integer :height
 
       t.timestamps
     end
