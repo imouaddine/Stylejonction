@@ -50,8 +50,9 @@ class Project < ActiveRecord::Base
   end
   
   def elements
-    elements = self.galleries | self.document_blocks | self.text_blocks
-    elements
+    elements = self.galleries + self.document_blocks + self.text_blocks
+    elements.delete_if {|x| x.weight == nil}
+    elements.sort_by(&:weight)
   end
   def setup_cover
     self.cover = Image.new(:dir => "#{portfolio.user.username}/projects", :editable => true )
