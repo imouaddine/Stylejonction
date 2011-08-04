@@ -1,6 +1,7 @@
  <%= form_for(@project, :url => url_for_action(@project)) do |f| %>
  <div class="hidden_fields">
   <%= f.hidden_field :public %>
+  <%= hidden_field_tag :weight %>
   <%= hidden_field_tag "tab", 0  %>
   <%= hidden_field_tag "content_tab", 0  %>
  </div>

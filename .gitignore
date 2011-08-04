@@ -41,6 +41,7 @@ db/schema.rb
 /public/stylesheets/compiled
 /public/system
 /public/uploads
+/public/assets
 /spec/tmp/*
 /cache
 /capybara*

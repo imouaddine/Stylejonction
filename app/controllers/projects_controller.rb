@@ -66,6 +66,13 @@ class ProjectsController < ApplicationController
     @project = get_project(params[:id])
     @tab = params[:tab] ? params[:tab] : 0
     @content_tab = params[:content_tab] ? params[:content_tab] : 0
+    
+    @project.elements.each do |element|
+      
+      element.weight = params[:weight].index(element.id.to_s) + 1
+      puts  element.weight
+      element.save
+    end
     check_defaultness
     #update_cover
     flash[:notice] = "Project was successfully updated" if @project.update_attributes(params[:project])

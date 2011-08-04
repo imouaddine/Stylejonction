@@ -30,7 +30,7 @@
     <ul class="organize-list" id="elements-list">
       <% @project.elements.each  do  |element| %>	
         <% if !element.new_record? %>
-          <li class='element_<%= element.id -%>' >
+          <li id='element_<%= element.id -%>' >
             <%= render element %>
           </li>
         <% end %>
@@ -38,6 +38,7 @@
     </ul>
   </div>
 </fieldset>
+
 
 
 	

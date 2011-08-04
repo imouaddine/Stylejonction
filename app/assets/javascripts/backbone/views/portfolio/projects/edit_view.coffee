@@ -20,8 +20,8 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
       opacity: 0.4,
       scroll: true
       update: ->
-        order = $('#elements-list').sortable('serialize')
-        console.log(order)
+        order = $('#elements-list').sortable('serialize', /(.+)=(.+)/ )
+       
       
     
     );
@@ -114,8 +114,8 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
    
     $("#tab").val($("#edit_project_section").tabs( "option", "selected"))
     $("#content_tab").val($("#add_project_content_section").tabs( "option", "selected"))
-    
-    console.log  $("form.edit_project").serialize()
+    $("#weight").val($('#elements-list').sortable('serialize'));
+  
     $("form.edit_project, form.new_project").submit()
     
     
