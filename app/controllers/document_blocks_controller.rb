@@ -18,7 +18,7 @@ class DocumentBlocksController < ApplicationController
     @document_block = DocumentBlock.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html {redirect_to edit_portfolio_project_path(params[:project_id])+"?new_document_block=1"}
       format.json { render json: @document_block }
     end
   end
@@ -26,6 +26,7 @@ class DocumentBlocksController < ApplicationController
   # GET /document_blocks/1/edit
   def edit
     @document_block = DocumentBlock.find(params[:id])
+    redirect_to get_redirect_path
   end
 
   # POST /document_blocks
@@ -35,7 +36,7 @@ class DocumentBlocksController < ApplicationController
 
     respond_to do |format|
       if @document_block.save
-        format.html { redirect_to edit_portfolio_project_path(@document_block.project), notice: 'Document block was successfully created.' }
+        format.html { redirect_to get_redirect_path, notice: 'Document block was successfully created.' }
         format.json { render json: @document_block, status: :created, location: @document_block }
       else
         format.html { render action: "new" }
@@ -51,7 +52,7 @@ class DocumentBlocksController < ApplicationController
 
     respond_to do |format|
       if @document_block.update_attributes(params[:document_block])
-        format.html {  redirect_to edit_portfolio_project_path(@document_block.project), notice: 'Document block was successfully updated.' }
+        format.html {  redirect_to get_redirect_path, notice: 'Document block was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -67,8 +68,14 @@ class DocumentBlocksController < ApplicationController
     @document_block.destroy
 
     respond_to do |format|
-      format.html { redirect_to edit_portfolio_project_path(@document_block.project) }
+      format.html {redirect_to edit_portfolio_project_path(params[:project_id])+"?new_document_block=1"}
       format.json { head :ok }
     end
   end
+  
+  private
+    
+    def get_redirect_path
+      edit_portfolio_project_path(@document_block.project)+"?document_block_id=#{@document_block.id}"
+    end
 end

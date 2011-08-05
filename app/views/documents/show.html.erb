@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @document.title %>
+</p>
+
+<p>
+  <b>File:</b>
+  <%= @document.file %>
+</p>
+
+<p>
+  <b>Content type:</b>
+  <%= @document.content_type %>
+</p>
+
+<p>
+  <b>Filesize:</b>
+  <%= @document.filesize %>
+</p>
+
+<p>
+  <b>Document block:</b>
+  <%= @document.document_block_id %>
+</p>
+
+<p>
+  <b>Weight:</b>
+  <%= @document.weight %>
+</p>
+
+
+<%= link_to 'Edit', edit_document_path(@document) %> |
+<%= link_to 'Back', documents_path %>

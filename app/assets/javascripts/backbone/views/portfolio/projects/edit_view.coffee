@@ -33,7 +33,8 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     @cover.bind 'change', @.showCover
     @.init_fancybox()
     
-    @edit_gallery_view = new Stylejonction.Views.Projects.EditGalleryView({el: "#edit_gallery_section" })
+    @edit_gallery_view = new Stylejonction.Views.Projects.EditGalleryView()
+    @edit_document_block_view = new Stylejonction.Views.Projects.EditDocumentBlockView()
 
 
   init_fancybox: ()->

@@ -48,6 +48,7 @@ class ProjectsController < ApplicationController
     @cover = @project.cover
     @text_block = @project.text_blocks.new
     
+    #gallery
     if params[:gallery_id]
       @gallery = @project.galleries.find(params[:gallery_id])
       @tab = @content_tab = 1
@@ -58,7 +59,19 @@ class ProjectsController < ApplicationController
     if params[:new_gallery]
       @tab =  @content_tab = 1
     end
-    @document_block = @project.document_blocks.new
+    
+    #document block
+    if params[:document_block_id]
+      @document_block = @project.document_blocks.find(params[:document_block_id])
+      @tab = 1
+      @content_tab = 2
+    else
+      @document_block = @project.document_blocks.new
+    end
+    if params[:new_document_block]
+      @tab =  1
+      @content_tab = 2
+    end
     respond_with(@project)
   end
 

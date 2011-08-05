@@ -1,5 +1,6 @@
 Stylejonction.Views.Projects ||= {}
 class Stylejonction.Views.Projects.EditGalleryView extends Backbone.View
+  el: "#edit_gallery_section"
   events:
     "click  .preference_link" : "updatePreference"
     "click #save_gallery_btn" : "saveGallery"

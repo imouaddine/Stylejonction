@@ -3,8 +3,10 @@ class CreateDocuments < ActiveRecord::Migration
     create_table :documents do |t|
       t.string :title
       t.string :file
+      t.string :content_type
+      t.string :filesize
       t.integer :document_block_id
-      t.integer :weight, :default => 0
+      t.integer :weight
 
       t.timestamps
     end

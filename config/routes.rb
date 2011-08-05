@@ -1,30 +1,22 @@
 Stylejonction::Application.routes.draw do
   
-
-  
-
- 
-
-  resources :document_blocks
-
-  resources :galleries do 
-    resources :videos
-    resources :photos
-  end
-
-  resources :text_blocks
-
-  get "text_blocks/create"
-
-  get "text_blocks/destroy"
-
-  get "text_blocks/update"
-
   require 'subdomain'
-  
   devise_for :users
+
  
-   
+
+
+
+  
+  
+
+  
+
+ 
+
+ 
+  
+  
 
   match "/users" => "users#index"
   
@@ -54,9 +46,6 @@ Stylejonction::Application.routes.draw do
   end
   resources :predefined_backgrounds, :only => [:show]
   resources :patterns, :only => [:show]
-  resources :text_blocks, :except => [:index]
-  resources :document_blocks, :except => [:index]
-  resources :galleries, :except => [:index]
   resources :invitations, :only => [:show]
   resources :fonts, :only => [:show]
   resources :images do
@@ -64,6 +53,14 @@ Stylejonction::Application.routes.draw do
       post 'upload'
       match 'crop'
     end
+  end
+  resources :text_blocks, :except => [:index]
+  resources :galleries, :except => [:index] do 
+    resources :videos
+    resources :photos
+  end
+  resources :document_blocks, :except => [:index] do 
+    resources :documents
   end
 
   # This duplicates upload_image but doesn't need id

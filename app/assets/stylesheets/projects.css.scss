@@ -253,31 +253,35 @@
   .actions{
     margin-top: 70px;
   }
-  .add-buttons {
-      clear:both;
-      overflow:hidden;
-      width:100%;
-      padding:30px 0 15px 0;
-      text-align:center;
-      line-height:44px;
-      a {
-          display: block;
-          float: left;
-          width:288px;
-          height:44px;
-          color:#53646f;
-          background:url(../images/add-buttons.gif) no-repeat;
-          background-position:0 0;
-          &.first{
-            margin-right: 20px;
-          }
-          &:hover {
-              background-position:0 -44px;
-              color:#fff;
-          }
-      }
-  }
   
+  
+}
+.add-buttons {
+    clear:both;
+    overflow:hidden;
+    width:100%;
+    padding:30px 0 15px 0;
+    text-align:center;
+    line-height:44px;
+    a {
+        display: block;
+        float: left;
+        width:288px;
+        height:44px;
+        color:#53646f;
+        background:url(../images/add-buttons.gif) no-repeat;
+        background-position:0 0;
+        &.first{
+          margin-right: 20px;
+        }
+        &:hover {
+            background-position:0 -44px;
+            color:#fff;
+        }
+    }
+    p {
+      color: #ED6E94;
+    }
 }
 .organize-list {
   clear: both;

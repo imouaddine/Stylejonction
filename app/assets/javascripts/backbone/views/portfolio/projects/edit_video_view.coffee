@@ -23,8 +23,7 @@ class Stylejonction.Views.Projects.EditVideoView extends Backbone.View
         $("#video_thumbnail_width").val(json.thumbnail_width)
         $("#video_thumbnail_height").val(json.thumbnail_height)
         $("#video_thumbnail_url").val(json.thumbnail_url)
-       
-       
+        $("#video_caption").html(json.title);
     )
     
     

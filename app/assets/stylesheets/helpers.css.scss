@@ -63,6 +63,22 @@
     @include opacity(0.96);
   }
 }
+.styled_text_field.tb1 {
+    width:553px;
+    height:20px;
+    padding:12px 20px;
+    background:url(../images/tb1.png) no-repeat left top;
+    input{
+        width:553px;
+         height:20px;
+         margin:0;
+         padding:0;
+         border:0;
+         outline:none;
+         background:none;
+         color:#7c7c7c;
+    }
+}
 .styled_text_field.tb2{
   width: 570px;
   height: 20px;
@@ -106,10 +122,8 @@
   }
 }
 
-#content .tb2-2 {background:url(../images/tb2-2.png) no-repeat left top;}
-#content .tb1 input {
-    
-}
+.styled_text_field.tb2-2 {background:url(../images/tb2-2.png) no-repeat left top;}
+
 .styled_text_field.tb4{
   background: url(../images/tb4.gif) no-repeat left top;
   padding: 12px 15px;
