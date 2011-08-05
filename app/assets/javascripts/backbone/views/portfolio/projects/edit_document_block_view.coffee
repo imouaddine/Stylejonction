@@ -5,10 +5,10 @@ class Stylejonction.Views.Projects.EditDocumentBlockView extends Backbone.View
     "click  #save_document_btn" : "saveDocumentBlock"
   
   initialize: ()->
-     _.bindAll(this, 'on_fancybox_complete')
+    _.bindAll(this, 'on_fancybox_complete')
     @.init_fancybox()  
     
-  init_fancybox()->
+  init_fancybox:()->
     $("#add_document").fancybox
       hideOnContentClick: false,
       showCloseButton: true,
