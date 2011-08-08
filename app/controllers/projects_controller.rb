@@ -48,6 +48,20 @@ class ProjectsController < ApplicationController
     @cover = @project.cover
     @text_block = @project.text_blocks.new
     
+    #document block
+    if params[:text_block_id]
+      @text_block = @project.text_blocks.find(params[:text_block_id])
+      @tab = 1
+      @content_tab = 0
+    else
+      @text_block = @project.text_blocks.new
+    end
+    if params[:text_block_id]
+      @tab =  1
+      @content_tab = 0
+    end
+    
+      
     #gallery
     if params[:gallery_id]
       @gallery = @project.galleries.find(params[:gallery_id])

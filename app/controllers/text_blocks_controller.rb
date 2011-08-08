@@ -10,11 +10,13 @@ class TextBlocksController < ApplicationController
       format.json { render json: @text_block }
     end
   end
-
+  
+ 
 
   # GET /text_blocks/1/edit
   def edit
     @text_block = TextBlock.find(params[:id])
+    redirect_to get_redirect_path
   end
 
   # POST /text_blocks
@@ -25,7 +27,7 @@ class TextBlocksController < ApplicationController
 
     respond_to do |format|
       if @text_block.save
-        format.html { redirect_to edit_portfolio_project_path(@text_block.project), notice: 'Writing was added successfully.' }
+        format.html { redirect_to get_redirect_path, notice: 'Writing was added successfully.' }
         format.json { render json: @text_block, status: :created, location: @text_block }
       else
         format.html { render action: "new" }
@@ -41,7 +43,7 @@ class TextBlocksController < ApplicationController
 
     respond_to do |format|
       if @text_block.update_attributes(params[:text_block])
-        format.html { redirect_to edit_portfolio_project_path(@text_block.project), notice: 'Text block was successfully updated.' }
+        format.html { redirect_to get_redirect_path, notice: 'Text block was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -57,8 +59,13 @@ class TextBlocksController < ApplicationController
     @text_block.destroy
 
     respond_to do |format|
-      format.html { redirect_to edit_portfolio_project_path(@text_block.project) }
+      format.html{ redirect_to edit_portfolio_project_path(params[:project_id])+"?new_text_block=1" }
       format.json { head :ok }
     end
   end
+  
+  private
+    def get_redirect_path
+      edit_portfolio_project_path(@text_block.project)+"?text_block_id=#{@text_block.id}"
+    end
 end

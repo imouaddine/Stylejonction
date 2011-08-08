@@ -1,4 +1,7 @@
 <%= form_for(@text_block) do |f| %>
+  <div class="hidden_fields">
+  	<%= f.hidden_field :project_id %>
+  </div>
   <% if @text_block.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@text_block.errors.count, "error") %> prohibited this text_block from being saved:</h2>
@@ -10,17 +13,24 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
+  <p class="styled_text_field tb1 field">
+    <%= f.text_field :title, :placeholder => "Please insert a title ...", :required => true %>
+  </p>
+  <p>
     <%= f.label :body %><br />
     <%= f.text_field :body %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-	<%= f.hidden_field :project_id %>
+  </p>
+  <p class="right actions" >
+     <a id="save_text_block_btn" href="#" class="btn-1"><span><strong>
+       <% if !@text_block.new_record?  %>
+         Save writing
+       <% else %>
+         Create writing
+       <% end %>
+     </strong></span></a>
+     <% if !@text_block.new_record?  %>
+       <a id="save_text_block_btn" href="<%= new_text_block_path+"?project_id=#{@project.id}" %>" class="btn-2"><span><strong>Cancel</strong></span></a>
+     <% end %>
+   </p>
+
 <% end %>

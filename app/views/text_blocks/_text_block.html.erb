@@ -1,6 +1,8 @@
-<p class="fltlft bg1"><%= text_block.title %> </p>
-<p class="fltrt">
-   <a href="#">Edit</a>
-   <a href="#">Remove</a>
-   <a href="#" class="icon"></a>                                
+<p class="left bg1">
+  <%= text_block.title %> 
+</p>
+<p class="right">
+  <%= link_to "Edit", edit_text_block_path(text_block) %>
+  <%= link_to "Remove", text_block_path(text_block), :method => :delete, :confirm => 'Are you sure you want to delete it?' %>
+  <a href="#" class="drag_icon"></a>  
 </p>
