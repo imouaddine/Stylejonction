@@ -147,7 +147,7 @@
   width: 291px;
   height: 19px;
   padding: 8px 10px;
-  background: url(../images/tb5.gif) no-repeat left top;
+  
   input{
     width: 291px;
     height: 19px;
@@ -160,6 +160,81 @@
      &:focus{
         border: 0;
       }
+  }
+}
+.styled_text_area{
+  background: url(../images/text_area_bg.png) no-repeat left top;
+  width: 591px;
+  height: 215px;
+}
+.wysiwyg-input{
+  width: 595px;
+  height: 180px;
+  padding: 0 10px;
+}
+.wysiwyg{
+  width: 591px;
+  .toolbar {
+    li{ 
+      float: left;
+      text-indent: -5000px;
+      opacity: 0.85;
+      filter: alpha(opacity=85);
+      display: block;
+      width: 34px;
+      height: 33px;
+      background: url('../images/wysiwig_toolbar_bg.png') no-repeat;
+      cursor: pointer;
+      margin: 0px;
+      &:hover{
+        background: url('../images/wysiwig_toolbar_bg_hover.png') no-repeat;
+      }
+      &.bold{
+        background-position: 0 0;
+      }
+      &.italic{
+        background-position: -33px 0;
+      }
+      &.underline{
+        background-position: -66px 0;
+      }
+      &.insertOrderedList{
+        background-position: -99px 0;
+        width: 46px;
+      }
+      &.insertUnorderedList{
+        background-position: -145px 0;
+        width: 42px;
+      }
+      &.indent{
+        background-position: -185px 0;
+        width: 42px;
+      }
+      &.outdent{
+        background-position: -227px 0;
+        width: 42px;
+      }
+      &.quote{
+        background-position: -269px 0;
+        width: 42px;
+      }
+      &.justifyLeft{
+        background-position: -314px 0;
+        width: 42px;
+      }
+      &.justifyCenter{
+        background-position: -353px 0;
+        width: 42px;
+      }
+      &.justifyRight{
+        background-position: -395px 0;
+        width: 42px;
+      }
+      &.separator{
+        display: none;
+      }
+    }
+    
   }
 }
 /*--- Custom Checkbox Buttons ---*/

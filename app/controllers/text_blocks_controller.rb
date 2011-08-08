@@ -11,6 +11,16 @@ class TextBlocksController < ApplicationController
     end
   end
   
+  def new
+    @text_block = TextBlock.new
+    
+    respond_to do |format|
+      format.html{ redirect_to edit_portfolio_project_path(params[:project_id])+"?new_text_block=1" }
+      format.json { render json: @text_block }
+    end
+  end
+  
+  
  
 
   # GET /text_blocks/1/edit
