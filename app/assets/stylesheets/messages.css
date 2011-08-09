@@ -1,4 +1,4 @@
-.message
+div.message
 {
   -webkit-background-size: 40px 40px;
   -moz-background-size: 40px 40px;
@@ -34,30 +34,29 @@
 }
 
 
-.error
-{
-                 background-color: #de4343;
-                 border-color: #c43d3d;
+div.error{
+  background-color: #de4343;
+  border-color: #c43d3d;
 }
 
-.warning
+div.warning
 {
                  background-color: #eaaf51;
                  border-color: #d99a36;
 }
 
-.notice
+div.notice
 {
                  background-color: #61b832;
                  border-color: #55a12c;
 }
 
-.message h3
+div.message h3
 {
                  margin: 0 0 5px 0;
 }
 
-.message p
+div.message p
 {
                  margin: 0;
 }

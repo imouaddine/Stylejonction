@@ -39,7 +39,8 @@ class DocumentBlocksController < ApplicationController
         format.html { redirect_to get_redirect_path, notice: 'Document block was successfully created.' }
         format.json { render json: @document_block, status: :created, location: @document_block }
       else
-        format.html { render action: "new" }
+        flash[:error] = "Document block cannot be created due to validation errors"
+        format.html { redirect_to edit_portfolio_project_path(@document_block.project_id)+"?new_document_block=1" }
         format.json { render json: @document_block.errors, status: :unprocessable_entity }
       end
     end
@@ -55,7 +56,8 @@ class DocumentBlocksController < ApplicationController
         format.html {  redirect_to get_redirect_path, notice: 'Document block was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
+        flash[:error] = "Document block cannot be saved due to validation errors"
+        format.html { redirect_to get_redirect_path  }
         format.json { render json: @document_block.errors, status: :unprocessable_entity }
       end
     end
@@ -68,7 +70,7 @@ class DocumentBlocksController < ApplicationController
     @document_block.destroy
 
     respond_to do |format|
-      format.html {redirect_to edit_portfolio_project_path(params[:project_id])+"?new_document_block=1"}
+      format.html {redirect_to edit_portfolio_project_path(@document_block.project_id)+"?new_document_block=1"}
       format.json { head :ok }
     end
   end

@@ -65,6 +65,17 @@ Factory.define :gallery do |f|
   f.association :project
 end
 
+Factory.define :photo do |p|
+  p.sequence(:caption) { |n| "Image #{n}" }
+  p.association :gallery
+end
+
+Factory.define :video do |p|
+  p.sequence(:caption) { |n| "Video #{n}" }
+  p.association :gallery
+end
+
+
 Factory.define :text_block do |t|
   t.title "Title of the block"
   t.body  "Lorem Ipsum "

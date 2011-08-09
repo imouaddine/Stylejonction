@@ -2,19 +2,10 @@
   <div class="hidden_fields">
   	<%= f.hidden_field :project_id %>
   </div>
-  <% if @text_block.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@text_block.errors.count, "error") %> prohibited this text_block from being saved:</h2>
-
-      <ul>
-      <% @text_block.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  
+  <p id="text_block_title_error" class="error hidden">* Title is required</p>
   <p class="styled_text_field tb1 field">
-    <%= f.text_field :title, :placeholder => "Please insert a title ...", :required => true %>
+    <%= f.text_field :title, :placeholder => "Please insert a title ..." %>
   </p>
   <p class="styled_text_area field">
     <%= f.text_area :body, :rows => "5", :cols => "73", :placeholder => "Content goes here ..." %>

@@ -23,6 +23,12 @@ class Stylejonction.Views.Projects.EditTextBlockView extends Backbone.View
           justifyRight: {visible: true}
     );
     
-  save: ->
+  save: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+  
+    if $("#text_block_title").val().trim().length == 0
+      $("#text_block_title_error").show()
+      return false
     $("#new_text_block, .edit_text_block").submit()
     

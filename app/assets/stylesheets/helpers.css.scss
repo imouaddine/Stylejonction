@@ -26,7 +26,14 @@
 .panel{
   display: block;
 }
-
+.error{
+  color: $error-color;
+}
+form .error{
+  margin: 0;
+  border: 0px;
+  background: none;
+}
 .iviewer
 {
     width: 165px;

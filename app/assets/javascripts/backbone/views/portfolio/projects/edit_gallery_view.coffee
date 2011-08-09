@@ -53,6 +53,12 @@ class Stylejonction.Views.Projects.EditGalleryView extends Backbone.View
     $("#gallery_display_preference").val(preference)
   
   saveGallery: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    if $("#gallery_title").val().trim().length == 0
+      $("#gallery_title_error").show()
+      return false
+    
     $("#gallery_weight").val($('#gallery_element_list').sortable('serialize'));
     $("#new_gallery, .edit_gallery").submit()
     

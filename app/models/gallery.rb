@@ -6,7 +6,8 @@ class Gallery < ActiveRecord::Base
   has_many :videos, :dependent => :destroy
   has_many :photos, :dependent => :destroy
   
-  validates :display_preference, :presence => true
+  validates_presence_of :title, :display_preference, :project_id
+
   validates_inclusion_of :display_preference, :in => DISPLAY_PREFERENCES, :message => "%s should be one of #{DISPLAY_PREFERENCES}"
   
   def elements

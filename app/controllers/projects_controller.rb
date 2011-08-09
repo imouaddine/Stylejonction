@@ -56,7 +56,7 @@ class ProjectsController < ApplicationController
     else
       @text_block = @project.text_blocks.new
     end
-    if params[:text_block_id]
+    if params[:new_text_block]
       @tab =  1
       @content_tab = 0
     end

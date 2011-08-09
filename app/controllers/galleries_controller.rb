@@ -39,7 +39,8 @@ class GalleriesController < ApplicationController
         format.html { redirect_to get_redirect_path, notice: 'Gallery was successfully created.' }
         format.json { render json: @gallery, status: :created, location: @gallery }
       else
-        format.html { render action: "new" }
+        flash[:error] = "Gallery cannot be created. Please correct form errors"
+        format.html { redirect_to edit_portfolio_project_path(@gallery.project_id)+"?new_gallery=1" }
         format.json { render json: @gallery.errors, status: :unprocessable_entity }
       end
     end
@@ -51,18 +52,22 @@ class GalleriesController < ApplicationController
     @gallery = Gallery.find(params[:id])
     
     #update order of elements
-    weights = params[:gallery_weight].split("&").map{|s| s.gsub("element[]=", "") }
-    @gallery.elements.each do |element|
-      element.weight = weights.index(element.id.to_s)
-      element.save
+    if params[:gallery_weight]
+      weights = params[:gallery_weight].split("&").map{|s| s.gsub("element[]=", "") }
+      
+      @gallery.elements.each do |element|
+        element.weight = weights.index(element.id.to_s)
+        element.save
+      end
     end
-    
-    respond_to do |format|
+   
+   respond_to do |format|
       if @gallery.update_attributes(params[:gallery])
         format.html { redirect_to get_redirect_path, notice: 'Gallery was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
+        flash[:error] = "Gallery cannot be created. Please correct form errors"
+        format.html { redirect_to get_redirect_path }
         format.json { render json: @gallery.errors, status: :unprocessable_entity }
       end
     end
@@ -75,7 +80,7 @@ class GalleriesController < ApplicationController
     @gallery.destroy
 
     respond_to do |format|
-      format.html{ redirect_to edit_portfolio_project_path(params[:project_id])+"?new_gallery=1" }
+      format.html{ redirect_to edit_portfolio_project_path(@gallery.project_id)+"?new_gallery=1" }
       format.json { head :ok }
     end
   end

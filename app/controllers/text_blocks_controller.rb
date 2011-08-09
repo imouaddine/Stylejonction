@@ -32,15 +32,14 @@ class TextBlocksController < ApplicationController
   # POST /text_blocks
   # POST /text_blocks.json
   def create
-    
     @text_block = TextBlock.new(params[:text_block])
-
     respond_to do |format|
       if @text_block.save
         format.html { redirect_to get_redirect_path, notice: 'Writing was added successfully.' }
         format.json { render json: @text_block, status: :created, location: @text_block }
       else
-        format.html { render action: "new" }
+        flash[:error] = "Writing cannot be created due to validation errors"
+        format.html { redirect_to edit_portfolio_project_path(@text_block.project_id)+"?new_text_block=1" }
         format.json { render json: @text_block.errors, status: :unprocessable_entity }
       end
     end
@@ -56,7 +55,8 @@ class TextBlocksController < ApplicationController
         format.html { redirect_to get_redirect_path, notice: 'Text block was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
+        flash[:error] = "Writing cannot be updated due to validation errors"
+        format.html { redirect_to get_redirect_path  }
         format.json { render json: @text_block.errors, status: :unprocessable_entity }
       end
     end
@@ -69,7 +69,7 @@ class TextBlocksController < ApplicationController
     @text_block.destroy
 
     respond_to do |format|
-      format.html{ redirect_to edit_portfolio_project_path(params[:project_id])+"?new_text_block=1" }
+      format.html{ redirect_to edit_portfolio_project_path(@text_block.project_id)+"?new_text_block=1" }
       format.json { head :ok }
     end
   end

@@ -1,13 +1,13 @@
 class Stylejonction.Messages
   constructor: ()->
     @.types = ['notice','warning','error']
-    $('.message').click ->
-      $(this).animate({top: -$(this).outerHeight()}, 500)
+    $('div.message').click ->
+      $(this).animate({top: -$(this).outerHeight()}, 1000)
 
   hideAll: ()->
     messageHeights = new Array()
     for type in @.types
-      type_element = $(".#{type}")
+      type_element = $("div.#{type}")
       height = type_element.outerHeight()
       messageHeights.push(height)
       type_element.css('top', -height)
@@ -15,8 +15,15 @@ class Stylejonction.Messages
   show: (type, message)->
     @.hideAll()
     if message isnt ''
-      $(".#{type}").html(message)
-    $(".#{type}").animate({top: "0"}, 500)
+      $("div.#{type}").html(message)
+    $("div.#{type}").animate({top: "0"}, 1000)
+    setTimeout =>
+         @hideAll()
+        , 5000
+        
+       
+    
+    
 
 
 

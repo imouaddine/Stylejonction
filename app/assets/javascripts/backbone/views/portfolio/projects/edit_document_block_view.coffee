@@ -23,6 +23,13 @@ class Stylejonction.Views.Projects.EditDocumentBlockView extends Backbone.View
       
   
   saveDocumentBlock : (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    if $("#document_block_title").val().trim().length == 0
+      $("#document_block_title_error").show()
+      return false 
+    
+    
     $("#new_document_block, .edit_document_block").submit()
 
 
