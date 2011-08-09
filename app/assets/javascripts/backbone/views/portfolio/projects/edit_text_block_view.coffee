@@ -8,6 +8,7 @@ class Stylejonction.Views.Projects.EditTextBlockView extends Backbone.View
   initialize: ->
     $("#text_block_body").wysiwyg(
         rmUnusedControls: true,
+        css: '/editor.css',
         iFrameClass: "wysiwyg-input",
         controls: 
           bold: { visible: true },

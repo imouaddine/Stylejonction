@@ -34,6 +34,9 @@ form .error{
   border: 0px;
   background: none;
 }
+input, textarea{
+  color: $input-text-color;
+}
 .iviewer
 {
     width: 165px;
@@ -70,47 +73,54 @@ form .error{
     @include opacity(0.96);
   }
 }
+.styled_text_field{
+  input{
+      margin:0;
+      padding:0;
+      border:0;
+      outline:none;
+      background:none;
+      &:focus{
+        border: 0;
+      }
+  }
+}
+.styled_text_area{
+  background: url(../images/text_area_bg.png) no-repeat left top;
+  width: 591px;
+  height: 215px;
+  textarea{
+     margin:0;
+     padding:0;
+      border:0;
+      outline:none;
+      background:none;
+      &:focus{
+        border: 0;
+      }
+  }
+}
 .styled_text_field.tb1 {
     width:553px;
     height:20px;
     padding:12px 20px;
     background:url(../images/tb1.png) no-repeat left top;
     input{
-        width:553px;
-         height:20px;
-         margin:0;
-         padding:0;
-         border:0;
-         outline:none;
-         background:none;
-         color:#7c7c7c;
+      width:553px;
+      height:20px;
     }
 }
 .styled_text_field.tb2{
   width: 570px;
   height: 20px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: none;
-  background: none;
-  color: #7C7C7C;
   padding: 12px 15px;
   background:url(../images/tb2.png) no-repeat left top;
   input{
     width:553px;
     height:20px;
-    margin:0;
-    padding:0;
-    border:0;
-    outline:none;
-    background:none;
-    color:#7c7c7c;
-    &:focus{
-        border: 0;
-    }
   }
 }
+.styled_text_field.tb2-2 {background:url(../images/tb2-2.png) no-repeat left top;}
 
 .styled_text_field.tb3 {
   width: 339px;
@@ -120,16 +130,10 @@ form .error{
   input{
     width: 339px;
     height: 20px;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: none;
-    background: none;
-    color: #7C7C7C;
   }
 }
 
-.styled_text_field.tb2-2 {background:url(../images/tb2-2.png) no-repeat left top;}
+
 
 .styled_text_field.tb4{
   background: url(../images/tb4.gif) no-repeat left top;
@@ -139,41 +143,19 @@ form .error{
   input{
     width: 404px;
     height: 20px;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: none;
-    background: none;
-    color: #7C7C7C;
-    &:focus{
-      border: 0;
-    }
   }
 }
 .styled_text_field.tb5{
   width: 291px;
   height: 19px;
   padding: 8px 10px;
-  
   input{
     width: 291px;
     height: 19px;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: none;
-    background: none;
     color: #BBB;
-     &:focus{
-        border: 0;
-      }
   }
 }
-.styled_text_area{
-  background: url(../images/text_area_bg.png) no-repeat left top;
-  width: 591px;
-  height: 215px;
-}
+
 .wysiwyg-input{
   width: 595px;
   height: 180px;
