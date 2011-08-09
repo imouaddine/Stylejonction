@@ -70,6 +70,7 @@ class DocumentBlocksController < ApplicationController
     @document_block.destroy
 
     respond_to do |format|
+      flash[:notice] = "Document block <em>#{@document_block.title}</em> has been deleted.".html_safe
       format.html {redirect_to edit_portfolio_project_path(@document_block.project_id)+"?new_document_block=1"}
       format.json { head :ok }
     end

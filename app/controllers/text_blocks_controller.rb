@@ -69,7 +69,8 @@ class TextBlocksController < ApplicationController
     @text_block.destroy
 
     respond_to do |format|
-      format.html{ redirect_to edit_portfolio_project_path(@text_block.project_id)+"?new_text_block=1" }
+      flash[:notice] = "Writing <em>#{@text_block.title}</em> has been deleted.".html_safe
+      format.html{ redirect_to edit_portfolio_project_path(@text_block.project_id)+"?new_text_block=1"}
       format.json { head :ok }
     end
   end

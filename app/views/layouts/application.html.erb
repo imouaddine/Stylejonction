@@ -70,7 +70,7 @@
   </div>
   <% [:notice, :warning, :error].each do |type| %>
     <div class="<%= type %> message <%= 'has_content' unless flash[type].to_s.empty? %>">
-      <%= flash[type] %>
+      <%= h flash[type] %>
     </div>
  <% end %>
 

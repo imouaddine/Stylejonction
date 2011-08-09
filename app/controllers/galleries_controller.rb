@@ -80,6 +80,7 @@ class GalleriesController < ApplicationController
     @gallery.destroy
 
     respond_to do |format|
+      flash[:notice] = "Gallery <em>#{@gallery.title}</em> has been deleted.".html_safe
       format.html{ redirect_to edit_portfolio_project_path(@gallery.project_id)+"?new_gallery=1" }
       format.json { head :ok }
     end
