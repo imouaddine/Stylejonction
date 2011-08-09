@@ -10,6 +10,7 @@ class Stylejonction.Views.Projects.EditTextBlockView extends Backbone.View
         rmUnusedControls: true,
         css: '/editor.css',
         iFrameClass: "wysiwyg-input",
+        initialContent: "<p>Content goes here...</p>",
         controls: 
           bold: { visible: true },
           italic: { visible: true },
