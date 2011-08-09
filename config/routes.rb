@@ -57,12 +57,17 @@ Stylejonction::Application.routes.draw do
   resources :text_blocks, :except => [:index]
   resources :galleries, :except => [:index] do 
     resources :videos
-    resources :photos
+    resources :photos do 
+      collection do
+        post "upload" 
+      end
+    end
   end
   resources :document_blocks, :except => [:index] do 
     resources :documents
   end
-
+  
+  
   # This duplicates upload_image but doesn't need id
   match "/images/upload" => 'images#upload', :via => "post"
 

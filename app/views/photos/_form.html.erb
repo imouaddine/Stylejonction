@@ -1,17 +1,17 @@
-<section id="edit_photo_section">
-  <%= form_for(@photo, :url => gallery_photos_path(@gallery)) do |f| %>
-   <%= f.hidden_field :gallery_id %>
+<section id="edit_photo_section" class="edit_photo_section">
+  
+  
   <header>
   	  <h1 class="plus"><strong>Add</strong> a photo to your gallery</h1>
   </header>
-  <div class="content">
-    <p class="ta1">
-       <%= f.text_area :caption, :placeholder => "Photo caption (optional) ...", :cols => 5, :row =>5 %>
-    </p>
-    
-  </div>
-  <footer>
-    <a href="#" class="btn-1" id="save_photo" ><span><strong>Save</span></strong></a>
-  </footer>
-  <% end %>
+  <section class="upload_image_section">
+      <a id="upload_custom_bg" href="#" class="upload_btn btn">Upload</a>
+  </section>
+  <section id="uploaded_image_form">
+    <% if !@photo.new_record?  %>
+      <%= render 'image_form' %>
+    <% end %>
+  </section>
+ 
 </section>
+<%= photo_uploadify "#upload_custom_bg", nil, upload_gallery_photos_path(@photo.gallery.id, :format => :js), 'image[image]' %>

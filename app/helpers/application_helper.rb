@@ -82,15 +82,15 @@ module ApplicationHelper
              '#{session_key_name}' : encodeURIComponent('#{u(cookies[session_key_name])}'),
              'authenticity_token'  : encodeURIComponent('#{u(form_authenticity_token)}')
            },
-           onComplete : function(a, b, c, response){  if(image_selector.length > 0) {
-                                                          image_selector.html(response);
-                                                          $('#project_cover_name').val(c.name);
-                                                       }
-                                                      else {
-                                                        console.log(response);
-                                                        eval(response.replace(/'/g, "\'"));
-                                                      }
-                                                  }
+           onComplete : function(a, b, c, response){  
+             if(image_selector.length > 0) {
+               image_selector.html(response);
+               $('#project_cover_name').val(c.name);
+              }else {
+                   eval(response.replace(/'/g, "\'"));
+              }
+              $('#{element_selector}').trigger('completed');
+          }
          });
        });
      </script>

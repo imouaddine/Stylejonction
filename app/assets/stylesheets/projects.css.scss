@@ -367,3 +367,26 @@
 .edit_project_tab_section  .actions{
   margin-right: 20px;
 }
+.edit_photo_section{
+ .image_details{
+      clear:both;
+      overflow:hidden;
+      width:100%;
+      padding:20px 0 0 0;
+      figure{
+        float:left;
+         border:1px solid #b4b4b4;
+      }
+      .details{
+          width:260px;
+          float:left;
+          padding:0 0 0 30px;
+          .image-uploaded {
+              padding:0 0 0 15px;
+              background:url(../images/icon-right.png) no-repeat left center;
+          }
+      }
+      
+ }
+}
+

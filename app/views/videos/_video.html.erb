@@ -5,7 +5,7 @@
 Uploaded video
 </p>
 <p class="fltrt">
-  <%= link_to "Edit", edit_gallery_video_path(:id => video.id, :gallery_id => video.gallery_id) %>
+  <%= link_to "Edit", edit_gallery_video_path(:id => video.id, :gallery_id => video.gallery_id), :class => 'edit_gallery_video' %>
   <%= link_to "Remove", gallery_video_path(:id => video.id, :gallery_id => video.gallery_id), :method => :delete, :confirm => 'Are you sure you want to delete this video?' %>
   <a href="#" class="drag_icon"></a>
 </p>

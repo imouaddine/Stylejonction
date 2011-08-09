@@ -2,24 +2,13 @@ class VideosController < ApplicationController
   
   layout "modal"
   before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :find_gallery
+  before_filter :find_or_build_video
     
-    
-  # GET /videos
-  # GET /videos.json
-  def index
-    @videos = Video.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @videos }
-    end
-  end
-
+ 
   # GET /videos/1
   # GET /videos/1.json
   def show
-    @video = Video.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @video }
@@ -29,9 +18,6 @@ class VideosController < ApplicationController
   # GET /videos/new
   # GET /videos/new.json
   def new
-    @video = Video.new
-    @video.gallery_id = params[:gallery_id]
-    @gallery = Gallery.find(params[:gallery_id])
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @video }
@@ -40,45 +26,24 @@ class VideosController < ApplicationController
 
   # GET /videos/1/edit
   def edit
-    @video = Video.find(params[:id])
   end
 
   # POST /videos
   # POST /videos.json
   def create
-    @video = Video.new(params[:video])
-    @gallery = Gallery.find(params[:video][:gallery_id])
-    respond_to do |format|
-      if @video.save
-        format.html { redirect_to edit_gallery_path(@video.gallery), notice: 'Video was successfully created.' }
-        format.json { render json: @video, status: :created, location: @video }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @video.errors, status: :unprocessable_entity }
-      end
-    end
+    update_video
   end
 
   # PUT /videos/1
   # PUT /videos/1.json
   def update
-    @video = Video.find(params[:id])
-
-    respond_to do |format|
-      if @video.update_attributes(params[:video])
-        format.html { redirect_to @video, notice: 'Video was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @video.errors, status: :unprocessable_entity }
-      end
-    end
+    update_video
   end
 
   # DELETE /videos/1
   # DELETE /videos/1.json
   def destroy
-    @video = Video.find(params[:id])
+   
     @video.destroy
 
     respond_to do |format|
@@ -86,4 +51,23 @@ class VideosController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  protected 
+   def update_video
+     respond_to do |format|
+       if @video.update_attributes(params[:video])
+         format.html { redirect_to edit_gallery_path(@video.gallery), notice: 'Video was successfully created.' }
+         format.json { render json: @video, status: :created, location: @video }
+       else
+         format.html { render action: "new" }
+         format.json { render json: @video.errors, status: :unprocessable_entity }
+       end
+     end
+   end
+   def find_gallery
+      @gallery = Gallery.find(params[:gallery_id])
+    end
+    def find_or_build_video
+      @video = params[:id] ? @gallery.videos.find(params[:id]) : @gallery.videos.new
+    end
 end

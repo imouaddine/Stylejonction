@@ -17,7 +17,7 @@ class Stylejonction.Views.Images.EditView extends Backbone.View
 
     x = -object.x;
     y = -object.y;
-    console.log @image
+    
     if $("#image_scale_to_fit").is(":checked")
       @image.save(
         {scale_to_fit: true }

@@ -6,7 +6,7 @@ class Stylejonction.Views.Projects.EditGalleryView extends Backbone.View
     "click #save_gallery_btn" : "saveGallery"
 
   initialize: ()->
-    _.bindAll(this, 'on_fancybox_complete')
+    _.bindAll(this, 'on_video_fancybox_complete', 'on_photo_fancybox_complete')
     @.init_fancybox()
     $('#gallery_pane').jScrollPane({showArrows:true});
     $("#gallery_element_list").sortable(
@@ -18,29 +18,27 @@ class Stylejonction.Views.Projects.EditGalleryView extends Backbone.View
     
   init_fancybox: ()->
     
-    $("#add_gallery_video").fancybox
+    $("#add_gallery_video, .edit_gallery_video").fancybox
       hideOnContentClick: false,
       showCloseButton: true,
       autoDimensions: true,
       autoScale: true,
-      
       padding: 0,
-      onComplete: @.on_fancybox_complete  
+      onComplete: @.on_video_fancybox_complete  
       
-    $("#add_gallery_photo").fancybox
+    $("#add_gallery_photo, .edit_gallery_photo").fancybox
       hideOnContentClick: false,
       showCloseButton: true,
-      autoDimensions: false
-      width: 490,
+      autoDimensions: true,
+      autoScale: true,
       padding: 0,
-      onComplete: @.on_fancybox_complete
+      onComplete: @.on_photo_fancybox_complete
   
-  on_fancybox_complete:(e)->
-    link_id = $(e).attr('id')
-    if link_id == 'add_gallery_video'
-      new Stylejonction.Views.Projects.EditVideoView()
-    else if link_id == 'add_gallery_photo'
-      new Stylejonction.Views.Projects.EditPhotoView()
+  on_video_fancybox_complete:(e)->
+    new Stylejonction.Views.Projects.EditVideoView()
+      
+  on_photo_fancybox_complete:(e)->
+    new Stylejonction.Views.Projects.EditPhotoView()
   
   updatePreference: (e)->
     e.preventDefault()

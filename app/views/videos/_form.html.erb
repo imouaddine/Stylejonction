@@ -1,5 +1,5 @@
 <section id="edit_video_section">
-  <%= form_for(@video, :url => gallery_videos_path(@gallery)) do |f| %>
+  <%= form_for [@gallery, @video] do |f| %>
     <div class="hidden_fields">
       <%= f.hidden_field :gallery_id %>
       <%= f.hidden_field :html %>

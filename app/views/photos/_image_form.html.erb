@@ -1,0 +1,30 @@
+<%= form_for [@gallery, @photo] do |f| %>
+ 
+  <%= f.hidden_field :gallery_id %>
+  <%= hidden_field_tag :crop_x, @photo.image.display_format.crop_x %>
+  <%= hidden_field_tag :crop_y, @photo.image.display_format.crop_y %>
+  <div class="image_details">
+    <figure id="image_editor" class="iviewer">
+      <%= image_preview @photo.image %>
+    </figure>
+    <div class="details">
+      <p class="text-type2">IMAGE UPLOADED</p>
+      <p><span class="image-uploaded">IMG05223687001.png</span></p>
+      <p><br><em>Now edit your thumbnail</em><br><strong>Drag your image to adjust</strong><br>&nbsp;</p>
+      <%= f.fields_for :image do |image| %>
+        	<%= image.check_box :scale_to_fit %>
+					<%= image.label :scale_to_fit %>
+			<% end %>
+      <p><br>Original image is <strong>800 px</strong> x <strong>500 px</strong></p>
+    </div>
+  </div>
+  <div class="content">
+     <p class="ta1">
+        <%= f.text_area :caption, :placeholder => "Photo caption (optional) ...", :cols => 5, :row =>5 %>
+     </p>
+  </div>
+  <footer>
+     <a href="#" class="btn-1" id="save_photo" ><span><strong>Save</span></strong></a>
+  </footer>
+<% end %>
+<%= iviewer("#image_editor", @photo.image.edit_url, "#photo_image_attributes_scale_to_fit",  @photo.image.to_json(:include => :display_format).html_safe)  %> 
