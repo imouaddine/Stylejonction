@@ -3,10 +3,23 @@ class Stylejonction.Views.Projects.EditPhotoView extends Backbone.View
   el: '#edit_photo_section'
   
   events:
-    "click  #save_photo":          "savePhoto"
-    "completed #upload_custom_bg" : "on_photo_uploaded"
+    "click  #save_photo":          "save"
+    "click #cancel_photo":         "cancel"
+  
+  
+  cancel: (e)->
+    e.preventDefault()
+    e.stopPropagation()
     
-  savePhoto: (e)->
+    image_id = $("#photo_image_attributes_id").val()
+    
+    #$.post("/images/#{image_id}", { _method: 'delete' }, success: -> console.log("DELETED") )
+    $.fancybox.cancel()
+    $.fancybox.close()
+    
+    
+      
+  save: (e)->
     e.preventDefault()
     e.stopPropagation()
     
@@ -21,7 +34,6 @@ class Stylejonction.Views.Projects.EditPhotoView extends Backbone.View
     $("#new_photo, .edit_photo").submit()
     $.fancybox.close()
     
-  on_photo_uploaded: (e)->
-    console.log "UPLOADED"
+
     
     

@@ -1,17 +1,15 @@
 <section id="edit_video_section">
   <%= form_for [@gallery, @video] do |f| %>
-    <div class="hidden_fields">
-      <%= f.hidden_field :gallery_id %>
-      <%= f.hidden_field :html %>
-      <%= f.hidden_field :provider_name %>
-      <%= f.hidden_field :thumbnail_height %>
-      <%= f.hidden_field :thumbnail_width %>
-      <%= f.hidden_field :thumbnail_url %>
-      <%= f.hidden_field :width %>
-      <%= f.hidden_field :height %>
-      
-    </div>
-   
+  <div class="hidden_fields">
+    <%= f.hidden_field :gallery_id %>
+    <%= f.hidden_field :html %>
+    <%= f.hidden_field :provider_name %>
+    <%= f.hidden_field :thumbnail_height %>
+    <%= f.hidden_field :thumbnail_width %>
+    <%= f.hidden_field :thumbnail_url %>
+    <%= f.hidden_field :width %>
+    <%= f.hidden_field :height %>
+  </div>
   <header>
   	  <h1 class="plus"><strong>Add</strong> a video to your gallery</h1>
   </header>
@@ -19,37 +17,33 @@
   <div class="content">
     <fieldset>
       <legend>Upload your video</legend>
-    
-    
-    
-    <p class="description">
-      
-      You must upload your video using one of the following video sharing websites
-    </p>
-    <div class="video-format">
-      <%= image_tag "../images/video-format1.gif", :alt => 'Youtube' %>
-      <%= image_tag "../images/video-format2.gif", :alt => 'vimeo' %>
-      <%= image_tag "../images/video-format3.gif", :alt => 'blip.tv' %>
-    </div>
-    <div class="browse">
-      <p class="tb3 styled_text_field left">
-        <%= f.text_field :url, :placeholder => "copy & paste the video URL ...", :required => 'required_video'   %>
-      
+      <p class="description">
+        You must upload your video using one of the following video sharing websites
       </p>
-      <a id="upload_video" href="#" class="btn-1"><span><strong>Link</strong></span></a>
+      <div class="video-format">
+        <%= image_tag "../images/video-format1.gif", :alt => 'Youtube' %>
+        <%= image_tag "../images/video-format2.gif", :alt => 'vimeo' %>
+        <%= image_tag "../images/video-format3.gif", :alt => 'blip.tv' %>
+      </div>
+      <div class="browse">
+        <p class="tb3 styled_text_field left">
+          <%= f.text_field :url, :placeholder => "copy & paste the video URL ...", :required => 'required_video'   %>
+        </p>
+        <a id="upload_video" href="#" class="btn-1"><span><strong>Link</strong></span></a>
     </div>
-    <div id="video_preview">
-      <%= image_tag @video.thumbnail_url, :width => 300 %>
-  
-    </div>
-    
-    <p class="ta1">
-         <%= f.text_area :caption, :placeholder => "Video caption (optional) ...", :cols => 5, :row =>5 %>
-    </p>
-    </fieldset>
+   </fieldset>
+   <fieldset id="video_form" class=" <%= 'hidden' if @video.new_record? %>">
+      <div id="video_preview">
+        <%= image_tag @video.thumbnail_url, :width => 300 %>
+      </div>
+      <p class="ta1">
+        <%= f.text_area :caption, :placeholder => "Video caption (optional) ...", :cols => 5, :row =>5 %>
+      </p>
+   </fieldset>
   </div>
-  <footer>
+  <footer id="video_actions" class="<%= 'hidden' if @video.new_record? %>">
     <a href="#" class="btn-1" id="save_video" ><span><strong>Save</span></strong></a>
+    <a href="#" class="btn-2" id="cancel_video" ><span><strong>Cancel</span></strong></a>
   </footer>
   <% end %>
 </section>

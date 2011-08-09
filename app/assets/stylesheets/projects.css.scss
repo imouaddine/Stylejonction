@@ -368,11 +368,17 @@
   margin-right: 20px;
 }
 .edit_photo_section{
+  min-width: 480px;
+  min-height: 150px;
+ 
+  .upload_image_section{
+    margin: 10px;
+  }
  .image_details{
       clear:both;
       overflow:hidden;
       width:100%;
-      padding:20px 0 0 0;
+      padding:20px 0 0 20px;
       figure{
         float:left;
          border:1px solid #b4b4b4;
@@ -382,6 +388,8 @@
           float:left;
           padding:0 0 0 30px;
           .image-uploaded {
+              width: 100%;
+              word-wrap:break-word;
               padding:0 0 0 15px;
               background:url(../images/icon-right.png) no-repeat left center;
           }

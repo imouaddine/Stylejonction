@@ -53,7 +53,7 @@ class ImagesController < ApplicationController
   end
 
   def update
-     @image = Image.find(params[:id])
+    @image = Image.find(params[:id])
     respond_to do |format|
         if @image.update_attributes(params[:image])
           format.json { render :json => @image  }
@@ -61,6 +61,15 @@ class ImagesController < ApplicationController
           format.json { @image.errors.inspect }
         end
       end
+  end
+  
+  def destroy
+    @image = Image.find(params[:id])
+    @image.destroy
+    
+    respond_to do |format|
+      format.json { head :ok }
+    end
   end
  
 

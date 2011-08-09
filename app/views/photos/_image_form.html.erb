@@ -9,9 +9,10 @@
     </figure>
     <div class="details">
       <p class="text-type2">IMAGE UPLOADED</p>
-      <p><span class="image-uploaded">IMG05223687001.png</span></p>
+      <p><span class="image-uploaded"><%= File.basename(@photo.image.image.url) %> </span></p>
       <p><br><em>Now edit your thumbnail</em><br><strong>Drag your image to adjust</strong><br>&nbsp;</p>
       <%= f.fields_for :image do |image| %>
+          <%= image.hidden_field :id %>
         	<%= image.check_box :scale_to_fit %>
 					<%= image.label :scale_to_fit %>
 			<% end %>
@@ -25,6 +26,7 @@
   </div>
   <footer>
      <a href="#" class="btn-1" id="save_photo" ><span><strong>Save</span></strong></a>
+     <a href="#" class="btn-2" id="cancel_photo" ><span><strong>Cancel</span></strong></a>
   </footer>
 <% end %>
 <%= iviewer("#image_editor", @photo.image.edit_url, "#photo_image_attributes_scale_to_fit",  @photo.image.to_json(:include => :display_format).html_safe)  %> 

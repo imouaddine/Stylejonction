@@ -5,6 +5,7 @@ class Stylejonction.Views.Projects.EditVideoView extends Backbone.View
   events:
     "click #upload_video" : "uploadVideo"
     "click  #save_video":          "save"
+    "click #cancel_video" : "cancel"
   
   
   uploadVideo: (e)->
@@ -24,7 +25,15 @@ class Stylejonction.Views.Projects.EditVideoView extends Backbone.View
         $("#video_thumbnail_height").val(json.thumbnail_height)
         $("#video_thumbnail_url").val(json.thumbnail_url)
         $("#video_caption").html(json.title);
+        $("#video_form, #video_actions").show();
+        
     )
+    
+  cancel: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    $.fancybox.cancel()
+    $.fancybox.close()
     
     
   save: (e)->
