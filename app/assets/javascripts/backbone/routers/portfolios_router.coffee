@@ -27,7 +27,7 @@ class Stylejonction.Routers.PortfoliosRouter extends Backbone.Router
   edit_project: ->
     created = @projects.get(@options.project.id)
     @project = created || new Stylejonction.Models.Project(title: "Project X")
-    @view = new Stylejonction.Views.Projects.EditView(model: @project, el: '#edit_project_section')
+    @view = new Stylejonction.Views.Projects.EditView(model: @project)
 
   add_preview: ->
     @previewView = new Stylejonction.Views.Portfolios.PreviewView(

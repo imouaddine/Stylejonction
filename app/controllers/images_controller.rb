@@ -63,6 +63,19 @@ class ImagesController < ApplicationController
       end
   end
   
+  
+  def remove_upload
+    @image = Image.find(params[:id])
+    
+    respond_to do |format|
+      if @image.delete_image!
+        format.js
+        format.json { render json: @background }
+      end
+    end
+    
+  end
+  
   def destroy
     @image = Image.find(params[:id])
     @image.destroy

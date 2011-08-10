@@ -8,7 +8,6 @@ class Stylejonction.Views.Images.EditView extends Backbone.View
     
     
   initialize: (options)->
-    _.bindAll(this, 'updateAndClose')
     @image = options.image
     
     
@@ -19,22 +18,28 @@ class Stylejonction.Views.Images.EditView extends Backbone.View
     y = -object.y;
     
     if $("#image_scale_to_fit").is(":checked")
+      
       @image.save(
         {scale_to_fit: true }
-        success: -> @.updateAndClose
+        success: (e) -> 
+          $.fancybox.close()
+          
       )
     else
       $.post(
         "#{@image.url}/crop.json"
         {x: x, y: y }
-        @.updateAndClose
+        (data) ->
+           @image = new Stylejonction.Models.Image(data)
+           router.view.edit_cover_view.trigger('change', @image)
+           $.fancybox.close()
+           
       )
   
   
-  updateAndClose: (data) ->
-    @image = new Stylejonction.Models.Image(data)
-    @.trigger('change', @image)
-    $.fancybox.close()
+ 
+    
+    
     
     
   cancel: ->

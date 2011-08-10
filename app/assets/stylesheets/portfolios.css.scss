@@ -870,7 +870,7 @@ section.edit_portfolio_font{
     background-repeat: repeat;
     @include border-radius(5px);
     @include fancy-box-shadow;
-    
+    cursor: pointer;
   }
   
 }

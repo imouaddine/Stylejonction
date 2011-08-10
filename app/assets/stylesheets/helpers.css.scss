@@ -430,3 +430,14 @@ input, textarea{
   padding: 0;
   background: url(../images/icon-1.png) no-repeat center center !important;
 }
+.ui-icon-closethick{
+  position: absolute;
+  top: 25px;
+  right: 45px;
+  width: 30px;
+  height: 30px;
+  background: url(../images/fancy_close.png) no-repeat center center;
+  cursor: pointer;
+  z-index: 9999999;
+  text-indent: -9999px;
+}

@@ -4,7 +4,7 @@
       <%= link_to "Edit your background", edit_custom_background_path(background), :class => "icon_link edit_link iframe_fancy" %>
       <%= link_to "Remove", remove_upload_custom_background_path(background, :format => 'js'), :remote=>true, :id => 'remove_custom_background_btn' , :class => "hidden icon_link remove_link", :confirm => "Are you sure?" %></div>
 <% else %>
-  <figure class="image image_preview" id="image_18">
+  <figure class="image image_preview" >
     <img src='/images/fallback/custom_background_default.jpg' alt="Background placeholder"  />
   </figure>
 <% end %>

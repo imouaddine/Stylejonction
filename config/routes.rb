@@ -2,25 +2,9 @@ Stylejonction::Application.routes.draw do
   
   require 'subdomain'
   devise_for :users
-
- 
-
-
-
   
-  
-
-  
-
- 
-
- 
-  
-  
-
   match "/users" => "users#index"
   
-
   constraints(Subdomain) do
     match '/' => 'portfolios#edit_layout'
 
@@ -52,6 +36,7 @@ Stylejonction::Application.routes.draw do
     member do
       post 'upload'
       match 'crop'
+      match 'remove_upload'
     end
   end
   resources :text_blocks, :except => [:index]

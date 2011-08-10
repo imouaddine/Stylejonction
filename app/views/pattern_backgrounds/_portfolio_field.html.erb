@@ -29,7 +29,11 @@
 	    </li>
 	  </ul>
  <% end %>
+
 	<section id="pattern_dialog" class="dialog pattern_dialog">
+	  <header>
+			<h1 class="icon_link edit_link"><strong>Choose a pattern</strong></h1>
+		</header>
 		<ul class="horizontal_list">
 			<% @patterns.each do |pattern|  %>
 				<li data-id="<%= pattern.id %>" data-url="<%= pattern.image.display_url %>" 

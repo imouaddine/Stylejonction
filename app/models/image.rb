@@ -1,8 +1,8 @@
 class Image < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
-  validates_integrity_of :image
-  validates_processing_of :image
+  #validates_integrity_of :image
+  #validates_processing_of :image
   validates_presence_of :dir
   
   validate :image, 
@@ -10,7 +10,7 @@ class Image < ActiveRecord::Base
        :maximum => 5.megabytes.to_i 
      }
      
-  attr_accessible :image, :dir, :edit_format, :preview_format, :display_format, :empty, :editable, :scale_to_fit
+  attr_accessible :image, :dir, :edit_format, :preview_format, :display_format, :editable, :scale_to_fit
   
   belongs_to  :edit_format, :foreign_key => 'edit_format_id',  :class_name => "ImageFormat", 
               :dependent => :destroy,  :autosave => true
@@ -22,8 +22,7 @@ class Image < ActiveRecord::Base
               :dependent => :destroy,  :autosave => true
   
   after_initialize :create_formats
-  before_save :update_image_attributes
-  
+ 
   
  
   
@@ -34,10 +33,6 @@ class Image < ActiveRecord::Base
   def uploaded?
     !self.image.blank?
   end
-  
- 
-  
-  
   
   def edit_url
     image.url(:edit)
@@ -62,13 +57,16 @@ class Image < ActiveRecord::Base
   def upload(file)
     self.image.store!(File.open(File.join(Rails.root, file)))
   end
+  
   def update_versions
     self.recreate_versions!
   end
   
   def delete_image!
-    self.remove_image!
-    self.remove_image = true
+    if self.uploaded?
+      self.remove_image!
+      self.remove_image = true
+    end
   end
   
   def crop(x, y)
@@ -79,10 +77,11 @@ class Image < ActiveRecord::Base
     end
     self.scale_to_fit = false
     self.image.recreate_versions!
+    self.save
   end
  
   def scale_to_fit=(value)
-    if value != self.scale_to_fit
+    if value != @scale_to_fit
       super(value)
       self.image.recreate_versions!
     end
@@ -95,12 +94,7 @@ class Image < ActiveRecord::Base
       self.preview_format = ImageFormat.new(:format => 'preview') if self.preview_format.nil?
       self.display_format = ImageFormat.new(:format => 'display', :scalable => false) if self.display_format.nil?
     end
-    def update_image_attributes
-      if image.present? && image?
-          self.content_type = image.file.content_type
-          self.file_size = image.file.size
-      end
-    end
+    
 
   
     

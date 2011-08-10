@@ -1,6 +1,6 @@
 Stylejonction.Views.Projects ||= {}
 class Stylejonction.Views.Projects.EditView extends Backbone.View
-
+  el: "#edit_project_section"
   events:
     "change #project_title":        "update"
     "change #project_default":      "update"
@@ -26,6 +26,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     else
       @cover = new Stylejonction.Models.Image({})
     @cover.bind 'change', @.showCover
+    
     @.init_fancybox()
     
     @edit_text_block_view = new Stylejonction.Views.Projects.EditTextBlockView()
@@ -34,7 +35,8 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
 
 
   init_fancybox: ()->
-    $(".iframe_fancy").fancybox
+    
+    @.$(".edit_link.iframe_fancy").fancybox
       hideOnContentClick: false,
       showCloseButton: true,
       padding: 0,
@@ -95,14 +97,17 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
 
   cover_changed: (e)->
     @project.fetch()
+    @.init_fancybox()
 
   showCover: (cover)->
+    console.log cover
     @project.cover = cover;
     @project.trigger('change')
     #force loading image from the server using timestamp
     timestamp = new Date().getTime();
-
-    $("#cover img").attr('src', "#{cover.toJSON().image.display.url}?#{timestamp}")
+    console.log cover.get('image').display
+    url = cover.get('image').display.url
+    $("#cover img").attr('src', "#{url}?#{timestamp}")
     
     
   submit_form: (e)->

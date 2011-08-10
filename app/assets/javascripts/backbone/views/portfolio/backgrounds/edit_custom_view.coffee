@@ -40,7 +40,7 @@ class Stylejonction.Views.Backgrounds.EditCustomView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
     @portfolio.custom_background.set({'display_mode': @old_display_mode})
-    console.log  @portfolio.custom_background
+    
     @portfolio.trigger("backgroundChanged", @portfolio.custom_background)
     $.fancybox.close()
     

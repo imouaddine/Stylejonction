@@ -34,7 +34,6 @@ class CustomBackgroundsController < ApplicationController
       @background = CustomBackground.find(params[:id])
       respond_with do |format|
         if @background.delete_image! 
-         
           format.js { render template: '/custom_backgrounds/upload' }
           format.json { render json: @background }
         end
