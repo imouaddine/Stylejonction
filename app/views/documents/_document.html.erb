@@ -1,0 +1,12 @@
+<div class="left element">
+   <%=  document.caption %>
+</div>
+<p class="right fltrt">
+    <%= link_to "Edit", 
+                edit_document_block_document_path(:id => document.id, :document_block_id => document.document_block_id), 
+                :class=> 'edit_document' %>
+    <%= link_to "Remove", document_block_document_path(:id => document.id, :document_block_id => document.document_block_id),
+                :method => :delete, 
+                :confirm => 'Are you sure you want to delete this document?' %>
+    <a href="#" class="drag_icon"></a>
+</p>

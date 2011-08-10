@@ -226,6 +226,42 @@ input, textarea{
     
   }
 }
+/*--- Custome Input Browse ---*/
+.browse-but {
+    position:relative;
+    width: 369px;
+    height: 44px;
+    overflow:hidden;
+}
+.si-files-stylized label.cabinet {
+    height: 44px;
+    clear:both;
+    top:0;
+    position:absolute;
+    width: 369px;
+    background:url(../images/but-browse.gif) no-repeat left top;
+    
+}
+.si-files-stylized label.cabinet input.file {
+    position: relative;
+    height: 100%;
+    width: auto;
+    cursor: pointer;
+}
+#fileinput_wrap_list {
+    position:absolute;
+    z-index:9999999
+}
+.MultiFile-label {
+    position:absolute;
+    left:10px;
+    top:-25px;
+    width: 270px;
+    overflow:hidden;
+    line-height:46px;
+}
+.MultiFile-label a { display:none}
+
 /*--- Custom Checkbox Buttons ---*/
 /*--- Custom Radio Buttons ---*/
 .checkbox {

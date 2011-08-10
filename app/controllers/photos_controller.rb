@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
+  layout "modal"
   
-  layout 'modal'
   before_filter :authenticate_user!, :except => [:index, :show]
   before_filter :find_gallery
   before_filter :find_or_build_photo

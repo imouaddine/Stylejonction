@@ -397,4 +397,35 @@
       
  }
 }
+.edit_document_section{
+  .upload_document_section{
+    padding: 20px;
+  }
+  .browse {
+    clear: both;
+    overflow: hidden;
+    p{
+      float: left;
+    }
+  }
+  #document_file_wrap_list {
+    position: absolute;
+    z-index: 9999999;
+  }
+  .MultiFile-label {
+    line-height: 46px;
+  }
+  .btn-1{
+    margin-right: 0px !important;
+    strong{
+      padding: 0 10px;
+    }
+  }
+  .description{
+    strong{
+      font-style: normal;
+    }
+    margin: 10px 0;
+  }
+}
 

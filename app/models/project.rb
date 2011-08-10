@@ -4,8 +4,6 @@ class Project < ActiveRecord::Base
 
   attr_accessible :title, :default, :public, :cover_id, :cover
   attr_reader :cover_name
-  
-
 
   #Vaidation
   validates_presence_of :title, :cover, :portfolio
@@ -14,20 +12,15 @@ class Project < ActiveRecord::Base
   belongs_to :portfolio
   belongs_to :cover, :class_name => "Image", :foreign_key => "cover_id", :dependent => :destroy
 
- 
-  
-
   #Has_many association
   has_many :invitations, :dependent => :destroy
-  has_many :document_blocks, :dependent => :destroy
-  has_many :galleries, :dependent => :destroy
-  has_many :text_blocks, :dependent => :destroy
+  has_many :document_blocks, :dependent => :destroy, :order => 'weight'
+  has_many :galleries, :dependent => :destroy, :order => 'weight'
+  has_many :text_blocks, :dependent => :destroy, :order => 'weight'
   
   accepts_nested_attributes_for :galleries, :document_blocks, :text_blocks
   
   before_validation :setup_cover, :if => Proc.new{|f| f.cover.blank? }
-
-
 
   scope :published,  where(:published => true)
   scope :default, where(:default => true)
@@ -54,6 +47,7 @@ class Project < ActiveRecord::Base
     elements.delete_if {|x| x.weight == nil}
     elements.sort_by(&:weight)
   end
+  
   def setup_cover
     self.cover = Image.new(:dir => "#{portfolio.user.username}/projects", :editable => true )
     self.cover.preview_format.update_attributes(COVER_DIMENSIONS)

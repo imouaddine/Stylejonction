@@ -19,11 +19,6 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
       items: 'li',
       opacity: 0.4,
       scroll: true
-      update: ->
-        order = $('#elements-list').sortable('serialize', /(.+)=(.+)/ )
-       
-      
-    
     );
     @project = @options.model
     if @project.cover?

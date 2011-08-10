@@ -1,41 +1,38 @@
-<%= form_for(@document) do |f| %>
-  <% if @document.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
-
-      <ul>
-      <% @document.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<section id="edit_document_section" class="edit_document_section">
+  <%= form_for([@document_block, @document]) do |f| %>
+    <div class="hidden_forms">
+    
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :file %><br />
-    <%= f.text_field :file %>
-  </div>
-  <div class="field">
-    <%= f.label :content_type %><br />
-    <%= f.text_field :content_type %>
-  </div>
-  <div class="field">
-    <%= f.label :filesize %><br />
-    <%= f.text_field :filesize %>
-  </div>
-  <div class="field">
-    <%= f.label :document_block_id %><br />
-    <%= f.number_field :document_block_id %>
-  </div>
-  <div class="field">
-    <%= f.label :weight %><br />
-    <%= f.number_field :weight %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <header>
+    	  <h1 class="plus"><strong>Add</strong> a document</h1>
+    </header>
+    <section class="upload_document_section">
+     <p class="description">
+        <strong>Upload a document</strong>
+        <br>
+        <em>You can upload almost any type of document, including: <br>Word, Pdf, PowerPoint, Excel and more.</em>
+     </p>
+     <div class="browse">
+      <p class="browse-but">
+        <label class="cabinet">
+          <%= f.file_field :file, :class => "file multi"  %>
+        </label>
+        <script type="text/javascript" language="javascript">
+          SI.Files.stylizeAll();
+          document.getElementById("document_file").style.filter = "alpha(opacity=0)";
+          document.getElementById("document_file").style.opacity = 0;
+        </script>
+      </p>
+      <a href="#" class="btn-1">
+        <span><strong>Upload</strong></span>
+      </a>
+     </div>
+     <p class="ta1">
+        <%= f.text_area :caption, :placeholder => "Document caption (optional) ...", :cols => 5, :row =>5 %>
+     </p>
+     <footer>
+        <a href="#" class="btn-1" id="save_document" ><span><strong>Save</span></strong></a>
+        <a href="#" class="btn-2" id="cancel_document" ><span><strong>Cancel</span></strong></a>
+     </footer>
+  </section>
 <% end %>

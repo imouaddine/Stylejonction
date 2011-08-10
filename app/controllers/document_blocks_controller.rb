@@ -50,7 +50,13 @@ class DocumentBlocksController < ApplicationController
   # PUT /document_blocks/1.json
   def update
     @document_block = DocumentBlock.find(params[:id])
-
+    if params[:document_block_weight]
+      weights = params[:document_block_weight].split("&").map{|s| s.gsub("element[]=", "") }
+      @document_block.documents.each do |document|
+        document.weight = weights.index(document.id.to_s)
+        document.save
+      end
+    end
     respond_to do |format|
       if @document_block.update_attributes(params[:document_block])
         format.html {  redirect_to get_redirect_path, notice: 'Document block was successfully updated.' }

@@ -39,6 +39,8 @@ module ApplicationHelper
      }.gsub(/[\n ]+/, ' ').strip.html_safe
 
   end
+ 
+  
   def photo_uploadify(element_selector, image_selector, script_path, fileDataName)
      # Putting the uploadify trigger script in the helper gives us
      # full access to the view and native rails objects without having

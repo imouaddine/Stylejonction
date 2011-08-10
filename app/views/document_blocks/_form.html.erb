@@ -1,5 +1,6 @@
 <%= form_for(@document_block) do |f| %>
  	<%= f.hidden_field :project_id %>
+ 	<%= hidden_field_tag 'document_block_weight', '' %>
  	
  	<p id="document_block_title_error" class="error hidden">* Title is required</p>
  	<p class="styled_text_field tb1 tb2-2 field">
@@ -12,7 +13,7 @@
      </div>  
      <div class="scrollbar">
        <div id="document_block_pane" class="scroll_pane"> 
-       <ul id="document_element_list">
+       <ul id="document_element_list" class="organize-list">
          <% @document_block.documents.each  do |element| %>
             <li class="upload" id="element_<%= element.id %>"> 
                <%= render element %>

@@ -1,5 +1,5 @@
-class DocumentBlock < ActiveRecord::Base
-  has_many :documents , :dependent => :destroy
+class DocumentBlock < Element
+  has_many :documents , :dependent => :destroy, :order  => 'weight'
 
   belongs_to :project 
   

@@ -1,10 +1,10 @@
-class Gallery < ActiveRecord::Base
+class Gallery < Element
   DISPLAY_PREFERENCES = %w{slideshow mosaic}
   
   belongs_to :project
   
-  has_many :videos, :dependent => :destroy
-  has_many :photos, :dependent => :destroy
+  has_many :videos, :dependent => :destroy, :order => 'weight'
+  has_many :photos, :dependent => :destroy, :order => 'weight'
   
   validates_presence_of :title, :display_preference, :project_id
 

@@ -2,6 +2,6 @@ class Document < ActiveRecord::Base
   
   belongs_to :document_block
   
-  #file :FileUploader
+  mount_uploader :file, DocumentUploader
   
 end
