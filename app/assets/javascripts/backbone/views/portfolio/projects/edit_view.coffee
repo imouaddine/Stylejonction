@@ -9,6 +9,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     "click #send_invites":          "send_invites"
     "change #cover"                 :"cover_changed"
     "click #submit_btn"             :"submit_form"
+    "completed #upload_project_cover": "cover_uploaded"
    
 
   initialize: ()->
@@ -35,7 +36,7 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
 
 
   init_fancybox: ()->
-    
+    console.log "INIT"
     @.$(".edit_link.iframe_fancy").fancybox
       hideOnContentClick: false,
       showCloseButton: true,
@@ -97,6 +98,8 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
 
   cover_changed: (e)->
     @project.fetch()
+  
+  cover_uploaded: ->
     @.init_fancybox()
 
   showCover: (cover)->
@@ -108,6 +111,8 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
     console.log cover.get('image').display
     url = cover.get('image').display.url
     $("#cover img").attr('src', "#{url}?#{timestamp}")
+    
+    
     
     
   submit_form: (e)->

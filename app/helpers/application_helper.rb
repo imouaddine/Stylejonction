@@ -87,7 +87,6 @@ module ApplicationHelper
            onComplete : function(a, b, c, response){  
              if(image_selector.length > 0) {
                image_selector.html(response);
-               $('#project_cover_name').val(c.name);
               }else {
                    eval(response.replace(/'/g, "\'"));
               }
