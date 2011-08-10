@@ -76,7 +76,6 @@ class DocumentsController < ApplicationController
     def find_document_block
         @document_block = DocumentBlock.find(params[:document_block_id])
     end
-
     def find_or_build_document
         @document = params[:id] ? @document_block.documents.find(params[:id]) : @document_block.documents.build(params[:document])
     end

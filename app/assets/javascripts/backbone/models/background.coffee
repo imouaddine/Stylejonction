@@ -38,7 +38,6 @@ class Stylejonction.Models.PatternBackground extends Stylejonction.Models.Backgr
     @pattern = new Stylejonction.Models.Pattern(options.pattern)
     
   background_url: ()->
-    console.log @pattern.image
     @pattern.image.get('image').display.url
     
   render: (element)->
@@ -59,21 +58,26 @@ class Stylejonction.Models.CustomBackground extends Stylejonction.Models.Backgro
     @ignored_attributes = ['image']
     
   render: (element)->
-     super 
-     display_mode = @.get("display_mode")
-     switch display_mode
-      when 'original'  
-        element.addClass("original_background")
-        element.removeClass("stretch_background")
-        element.removeClass("tile_background")
-      when 'stretch'  
-        element.addClass("stretch_background")
-        element.removeClass("original_background")
-        element.removeClass("tile_background")
-      when 'tile'  
-        element.addClass("tile_background")
-        element.removeClass("stretch_background")
-        element.removeClass("original_background")
+     url = @.background_url()
+     if url is null
+       element.css("background-image", "none") 
+       element.css("background-color", "#FFF")
+     else 
+       element.css("background-image", "url(#{url})") 
+       display_mode = @.get("display_mode")
+       switch display_mode
+        when 'original'  
+          element.addClass("original_background")
+          element.removeClass("stretch_background")
+          element.removeClass("tile_background")
+        when 'stretch'  
+          element.addClass("stretch_background")
+          element.removeClass("original_background")
+          element.removeClass("tile_background")
+        when 'tile'  
+          element.addClass("tile_background")
+          element.removeClass("stretch_background")
+          element.removeClass("original_background")
         
 
 class Stylejonction.Models.BackgroundFactory

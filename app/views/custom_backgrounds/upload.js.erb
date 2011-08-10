@@ -1,3 +1,2 @@
-$('#preview_custom_background').html('<%= render "/custom_backgrounds/portfolio_edit_image", :background => @background %>');
+$('#preview_custom_background').html('<%= escape_javascript(render "/custom_backgrounds/portfolio_edit_image", :background => @background) %>');
   window.router.portfolio.trigger('backgroundChanged', new Stylejonction.Models.CustomBackground(<%= @background.to_json(:include => :image).html_safe -%>));
-  

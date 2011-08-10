@@ -1,37 +1,32 @@
 Stylejonction.Views.Backgrounds ||= {}
 
 class Stylejonction.Views.Backgrounds.EditCustomView extends Backbone.View
-  
+  el: '#edit_background'
   events:
     "click #save_btn"      : "save"
     "click #cancel_btn"    : "cancel"
+    "change input[type='radio']" : "preview"
     
   
   initialize: ()->
     @portfolio = @options.portfolio
     @background =  @options.model
-    
     @.validatesParams()
-   
-    #fancybox
-    @.init_fancybox()
-   
-
+    @old_display_mode = @background.get('display_mode')
+  
+  preview: (e)->
+    newDisplayMode = @.$("input[type='radio']:checked").val()
+    @portfolio.custom_background.set({'display_mode': newDisplayMode})
+    @portfolio.trigger("backgroundChanged", @portfolio.custom_background)
     
-  init_fancybox: ()->
-    $(".iframe_fancy").fancybox
-      hideOnContentClick: false,
-      showCloseButton: true,
-      padding: 0
-      
   save: (e)->
     e.preventDefault()
     e.stopPropagation()
     portfolio = @portfolio
     
     
-    newDisplayMode = @.$("#edit_background input[type='radio']:checked").val()
-    console.log(newDisplayMode);
+    newDisplayMode = @.$("input[type='radio']:checked").val()
+   
     
     @portfolio.custom_background.save(
        {'display_mode': newDisplayMode },
@@ -44,6 +39,9 @@ class Stylejonction.Views.Backgrounds.EditCustomView extends Backbone.View
   cancel: (e)->
     e.preventDefault()
     e.stopPropagation()
+    @portfolio.custom_background.set({'display_mode': @old_display_mode})
+    console.log  @portfolio.custom_background
+    @portfolio.trigger("backgroundChanged", @portfolio.custom_background)
     $.fancybox.close()
     
   validatesParams: ()->

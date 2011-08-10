@@ -1,3 +1,10 @@
-<%= image_preview background.image, :fallback => '../images/fallback/custom_background_default.jpg',  %><div id="upload_custom_bg_links" class="edit_image_links"><% if background.image.uploaded? %><%= link_to "Edit your background", 
-		edit_custom_background_path(background),:class => "icon_link edit_link iframe_fancy" %><!--<%= link_to "Remove", 
-				remove_upload_custom_background_path(background, :format => 'js'), :remote=>true, :id => 'remove_custom_background_btn' , :class => "hidden icon_link remove_link", :confirm => "Are you sure?" %>!--><% end %></div>
+<% if background.image.uploaded? %>
+    <%= image_preview background.image,  %>
+    <div id="upload_custom_bg_links" class="edit_image_links">
+      <%= link_to "Edit your background", edit_custom_background_path(background), :class => "icon_link edit_link iframe_fancy" %>
+      <%= link_to "Remove", remove_upload_custom_background_path(background, :format => 'js'), :remote=>true, :id => 'remove_custom_background_btn' , :class => "hidden icon_link remove_link", :confirm => "Are you sure?" %></div>
+<% else %>
+  <figure class="image image_preview" id="image_18">
+    <img src='/images/fallback/custom_background_default.jpg' alt="Background placeholder"  />
+  </figure>
+<% end %>

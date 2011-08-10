@@ -1,6 +1,6 @@
 class Image < ActiveRecord::Base
   mount_uploader :image, ImageUploader
-  
+
   validates_integrity_of :image
   validates_processing_of :image
   validates_presence_of :dir
@@ -25,14 +25,17 @@ class Image < ActiveRecord::Base
   before_save :update_image_attributes
   
   
-  def image=(obj)
-    super(obj)
-    self.uploaded = true
-  end
+ 
   
   def url(format)
     image.url(format)
   end
+  
+  def uploaded?
+    !self.image.blank?
+  end
+  
+ 
   
   
   
@@ -58,14 +61,14 @@ class Image < ActiveRecord::Base
   
   def upload(file)
     self.image.store!(File.open(File.join(Rails.root, file)))
-    self.uploaded = true
   end
   def update_versions
     self.recreate_versions!
   end
-  def remove_file!
+  
+  def delete_image!
     self.remove_image!
-    self.uploaded = false
+    self.remove_image = true
   end
   
   def crop(x, y)

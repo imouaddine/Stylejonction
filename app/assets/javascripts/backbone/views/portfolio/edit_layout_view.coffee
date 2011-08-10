@@ -11,9 +11,11 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
    
   
   initialize: (e)->
-    _.bindAll(this, 'updateCustomBackground')
+    _.bindAll(this, 'updateCustomBackground', 'on_fancybox_complete')
     @portfolio = @options.model
     @portfolio.bind 'backgroundChanged', @.updateCustomBackground
+    
+   
     
     #Edit pattern view 
     @.pattern_view = new Stylejonction.Views.Backgrounds.EditPatternView(
@@ -21,12 +23,10 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
         portfolio: @portfolio, 
         el: 'body'
     )
-    #Edit background view 
-    @.custom_view = new Stylejonction.Views.Backgrounds.EditCustomView(
-      model: @portfolio.custom_background, 
-      portfolio: @portfolio, 
-      el: 'body'
-    )
+    
+    
+    @.initializeFancybox()
+   
     
     #prefefined background view
     @.predefined_view = new Stylejonction.Views.Backgrounds.EditPredefinedView(
@@ -34,8 +34,22 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
       el: '#predefined_background_field'
     )
    
+  initializeFancybox: ->
+    @.$(".edit_link").fancybox
+      hideOnContentClick: false,
+      showCloseButton: true,
+      autoDimensions: true,
+      autoScale: true,
+      padding: 0,
+      onComplete: @.on_fancybox_complete
   
-       
+  on_fancybox_complete: (e)->
+    @.custom_view = new Stylejonction.Views.Backgrounds.EditCustomView(
+      model: @portfolio.custom_background, 
+      portfolio: @portfolio, 
+      
+    )
+      
   toggleCustomBackgroundSection: (e)->
     e.preventDefault()
     e.stopPropagation()
@@ -122,6 +136,9 @@ class Stylejonction.Views.Portfolios.EditLayoutView extends Backbone.View
     $(background_attr).val(e.get('id')) 
     $("#portfolio_background_id").val(e.get('id'))
     $("#portfolio_background_type").val(e.type)
+    
+  
+    @.initializeFancybox()
     
     
   updateEditCustomBackgroundSection:(e) ->

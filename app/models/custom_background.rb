@@ -18,7 +18,11 @@ class CustomBackground < ActiveRecord::Base
   belongs_to :user
   
   
-  
+  def delete_image!
+    if self.image.has_uploaded_file?
+      self.image.delete_image!
+    end
+  end
   
   
   def setup_image

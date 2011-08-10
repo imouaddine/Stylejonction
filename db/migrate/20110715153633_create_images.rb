@@ -12,7 +12,7 @@ class CreateImages < ActiveRecord::Migration
       t.integer :width
       t.integer :height
       t.boolean :editable, :default => false
-      t.boolean :uploaded, :default => false
+     
       t.timestamps
     end
     
