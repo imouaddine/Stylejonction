@@ -515,8 +515,8 @@
 		with the class 'multi' when the page loads
 	*/
 	$(function(){
-  //$("input:file.multi").MultiFile();
-  $("input[type=file].multi").MultiFile();
+  	//$("input:file.multi").MultiFile();
+  	//$("input[type=file].multi").MultiFile();
  });
 	
 	

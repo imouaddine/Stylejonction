@@ -1,34 +1,32 @@
 <section id="edit_document_section" class="edit_document_section">
   <%= form_for([@document_block, @document]) do |f| %>
     <div class="hidden_forms">
-    
     </div>
     <header>
-    	  <h1 class="plus"><strong>Add</strong> a document</h1>
+    	<h1 class="plus"><strong>Add</strong> a document</h1>
     </header>
+    
     <section class="upload_document_section">
      <p class="description">
         <strong>Upload a document</strong>
         <br>
         <em>You can upload almost any type of document, including: <br>Word, Pdf, PowerPoint, Excel and more.</em>
      </p>
+     <p id="document_extension_error" class="error hidden">* Type of document is not accepted.</p>
      <div class="browse">
-      <p class="browse-but">
+      <p class="browse-but no-margin">
         <label class="cabinet">
+        
           <%= f.file_field :file, :class => "file multi"  %>
         </label>
-        <script type="text/javascript" language="javascript">
-          SI.Files.stylizeAll();
-          document.getElementById("document_file").style.filter = "alpha(opacity=0)";
-          document.getElementById("document_file").style.opacity = 0;
-        </script>
       </p>
       <a href="#" class="btn-1">
         <span><strong>Upload</strong></span>
       </a>
      </div>
+     <p id="document_caption_error" class="error hidden">* Caption is required</p>
      <p class="ta1">
-        <%= f.text_area :caption, :placeholder => "Document caption (optional) ...", :cols => 5, :row =>5 %>
+        <%= f.text_area :caption, :placeholder => "Document caption...", :cols => 5, :row => 5 %>
      </p>
      <footer>
         <a href="#" class="btn-1" id="save_document" ><span><strong>Save</span></strong></a>

@@ -388,6 +388,7 @@
  
   .upload_image_section{
     margin: 10px;
+    
   }
  .image_details{
       clear:both;
@@ -417,9 +418,13 @@
   .upload_document_section{
     padding: 20px;
   }
+  .ta1{
+    margin: 0 0 40px 0;
+   }
   .browse {
     clear: both;
     overflow: hidden;
+    margin-bottom: 10px;
     p{
       float: left;
     }
@@ -427,10 +432,14 @@
   #document_file_wrap_list {
     position: absolute;
     z-index: 9999999;
+    top: 0;
   }
   .MultiFile-label {
     line-height: 46px;
   }
+  .no-margin .MultiFile-label {
+    top:0 !important
+   }
   .btn-1{
     margin-right: 0px !important;
     strong{
