@@ -1,8 +1,8 @@
 <figure class="project_cover">
-        <% if(cover && cover.image.display) { %>
-                <img src="<%= (cover.image.display.url) %>?timestamp=<%= new Date().getTime() %>" alt="<%= title %>" ></img>
-        <% } %>
-        <figurecaption class="title">
+	<% if(cover && cover.image.display) { %>
+    	<img src="<%= (cover.image.display.url) %>?timestamp=<%= new Date().getTime() %>" alt="<%= title %>" ></img>
+	<% } %>
+    <figurecaption class="title">
                 <%= title %>
-        </figurecaption>
+ 	</figurecaption>
 </figure

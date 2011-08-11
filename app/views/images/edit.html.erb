@@ -2,7 +2,7 @@
 <div  id="edit_image">
 	<section class="fancybox">
 		<header>
-			<h1 class="icon_link edit_link">Edit your thumbnail</h1>
+			<h1 class="icon_link edit_link"><strong>Edit</strong> your thumbnail</h1>
 		</header>
 		<div class="content">
 			<div class="left_col">
@@ -17,11 +17,14 @@
 					<%= f.label :scale_to_fit %>
 			</div>
 		</div>
-		<footer>
-			<a class="btn" href="#" id="submit" >Submit</a>
-			<a class="btn cancel" href="#" id="cancel" >Cancel</a>
+		<footer class="clearfix">
+			<a class="btn-1" href="#" id="submit" >
+				<span><strong>Save</strong></span>
+			</a>
+			<a class="btn-2 cancel" href="#" id="cancel" >
+				<span><strong>Cancel</strong></span>
+			</a>
 		</footer>
-		
 	</section>
 </div>
 <%= iviewer("#image_editor", @image.edit_url, "#image_scale_to_fit",  @image.to_json(:include => :display_format).html_safe)  %> 

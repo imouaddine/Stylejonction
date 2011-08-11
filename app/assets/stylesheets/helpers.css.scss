@@ -1,5 +1,10 @@
 @import "mixins";
+@import "compass/utilities/general/clearfix";
 
+.clearfix{
+	@include clearfix;
+	clear: both;
+}
 .horizontal_list{
   @include horizontal-list-container;
   li{

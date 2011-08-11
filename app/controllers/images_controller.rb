@@ -30,12 +30,13 @@ class ImagesController < ApplicationController
       @image.image = cover
       @image.save
      end
+     @image.scale_to_fit = false
      respond_to do |format|
        if @image.update_attributes(params[:image])
-         format.html { render :layout => false }
+         format.js 
          format.json {render :json => @image}
        else
-         format.html
+         format.js{ render template: 'upload_error' }
          format.json {render :json => @image.errors }
        end
      end
@@ -69,7 +70,7 @@ class ImagesController < ApplicationController
     
     respond_to do |format|
       if @image.delete_image!
-        format.js
+        format.js { render template: 'upload' }
         format.json { render json: @background }
       end
     end

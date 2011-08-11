@@ -36,10 +36,12 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
 
 
   init_fancybox: ()->
-    console.log "INIT"
+    
     @.$(".edit_link.iframe_fancy").fancybox
       hideOnContentClick: false,
       showCloseButton: true,
+      autoDimensions: true,
+      autoScale: true,
       padding: 0,
       onComplete: @.on_fancybox_complete
 
@@ -99,16 +101,16 @@ class Stylejonction.Views.Projects.EditView extends Backbone.View
   cover_changed: (e)->
     @project.fetch()
   
-  cover_uploaded: ->
+  cover_uploaded: (url)->
+    
     @.init_fancybox()
+    
 
   showCover: (cover)->
-    console.log cover
     @project.cover = cover;
-    @project.trigger('change')
+    @project.trigger('change:cover', cover)
     #force loading image from the server using timestamp
     timestamp = new Date().getTime();
-    console.log cover.get('image').display
     url = cover.get('image').display.url
     $("#cover img").attr('src', "#{url}?#{timestamp}")
     

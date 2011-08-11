@@ -5,9 +5,9 @@ module ProjectsHelper
 
   def path_for_image_upload(project)
     if project.cover.id.present?
-      upload_image_path(:format => 'html', :id => project.cover)
+      upload_image_path(:format => :js, :id => project.cover)
     else
-      images_upload_path(:format => "html")
+      images_upload_path(:format => :js)
     end
   end
 

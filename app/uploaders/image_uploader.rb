@@ -23,6 +23,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   def process_format(format)
     image_format = self.model.image_format(format)
+    puts image_format.inspect
     if self.model.editable?
       process_editable_image(image_format)
     else
@@ -42,26 +43,32 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
  
   def process_editable_image(image_format)
+  	puts image_format.inspect
     manipulate! do |img|
       width = img.columns
       height = img.rows
       if self.model.scale_to_fit? 
         img.resize_to_fit!(image_format.width, image_format.height)
       else
+      
         format_width = image_format.width.to_f
         format_height = image_format.height.to_f
+        
+        puts "Format width: #{format_width} height: #{format_height}"
         
         if(format_height < format_width)
             scale = format_height / [width, height].min
         else
             scale = format_width / [width, height].min
         end
-        
         img.resize_to_fit!(width * scale, height * scale)
+        if (image_format.croppable? && image_format.width > 0  && image_format.height > 0)
+        	img.crop!(image_format.crop_x, image_format.crop_y, image_format.width, image_format.height)
+      	end
       end
-      if (image_format.croppable? && image_format.width > 0  && image_format.height > 0)
-        img.crop!(image_format.crop_x, image_format.crop_y, image_format.width, image_format.height)
-      end
+     
+      self.model.width = img.columns
+      self.model.height = img.rows
       img
     end
   end

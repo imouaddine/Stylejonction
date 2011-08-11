@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>EmbeddedEditorHidden:imouaddine</key>
+	<false/>
+	<key>ExpandedEditorWidth:imouaddine:displays([(0, 0), (1440, 900)]:[(1440, 69), (1920, 1080)])</key>
+	<integer>772</integer>
+	<key>ExpandedItems:imouaddine</key>
+	<array>
+		<string>D55F8233-57E9-431C-8E6C-AA9A0B95A024</string>
+	</array>
+	<key>FileFilterID:imouaddine</key>
+	<string>msng</string>
+	<key>OpenDocuments:imouaddine</key>
+	<array/>
+	<key>OpenDocumentsExpanded</key>
+	<true/>
+	<key>OpenDocumentsVisible</key>
+	<true/>
+	<key>ProjectViewVisible</key>
+	<true/>
+	<key>RecentItems:imouaddine</key>
+	<array/>
+	<key>RecentItemsExpanded</key>
+	<true/>
+	<key>RecentItemsVisible</key>
+	<true/>
+	<key>ScratchpadItemsExpanded</key>
+	<true/>
+	<key>ScratchpadItemsVisible</key>
+	<true/>
+	<key>ShowInvisibles:imouaddine</key>
+	<false/>
+	<key>ShowSCMData:imouaddine</key>
+	<false/>
+	<key>TextFilesOnly:imouaddine</key>
+	<true/>
+	<key>ToolbarVisible:imouaddine</key>
+	<true/>
+	<key>ViewSplitterPosition:imouaddine</key>
+	<real>0.28186047077178955</real>
+	<key>WindowFrame:imouaddine:displays([(0, 0), (1440, 900)]:[(1440, 69), (1920, 1080)])</key>
+	<string>rect(44,132,820,1207)</string>
+</dict>
+</plist>

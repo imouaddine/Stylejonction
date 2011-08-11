@@ -85,11 +85,7 @@ module ApplicationHelper
              'authenticity_token'  : encodeURIComponent('#{u(form_authenticity_token)}')
            },
            onComplete : function(a, b, c, response){  
-             if(image_selector.length > 0) {
-               image_selector.html(response);
-              }else {
-                   eval(response.replace(/'/g, "\'"));
-              }
+              eval(response);
               $('#{element_selector}').trigger('completed');
           }
          });

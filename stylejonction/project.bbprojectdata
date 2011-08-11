@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>HierarchyData</key>
+	<array>
+		<dict>
+			<key>CollectionID</key>
+			<string>D55F8233-57E9-431C-8E6C-AA9A0B95A024</string>
+			<key>CollectionItems</key>
+			<array/>
+		</dict>
+	</array>
+	<key>ProjectItems</key>
+	<dict>
+		<key>D55F8233-57E9-431C-8E6C-AA9A0B95A024</key>
+		<dict>
+			<key>ItemData</key>
+			<array/>
+			<key>ItemName</key>
+			<string>models</string>
+			<key>ItemType</key>
+			<string>StaticCollection</string>
+		</dict>
+	</dict>
+	<key>com.barebones.DocumentFormatVersion</key>
+	<integer>5</integer>
+	<key>com.barebones.DocumentType</key>
+	<string>Project</string>
+</dict>
+</plist>

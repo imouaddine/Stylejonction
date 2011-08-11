@@ -1,0 +1,5 @@
+$('#image_preview').html('<%= escape_javascript(render "/images/preview", :image => @image) %>');
+var image = new Stylejonction.Models.Image(<%= @image.to_json.html_safe %>);
+window.router.view.cover.trigger('change', image);
+
+

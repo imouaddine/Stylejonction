@@ -1,10 +1,14 @@
 <div id="image_preview">
   <% if !image.nil? && image.uploaded? %>
     <%= image_preview image %>
-    <%= link_to "Edit", 
-  		  edit_image_path(image), :class => "icon_link edit_link iframe_fancy" %>
-    <%= link_to "Remove", 
-      	remove_upload_image_path(image), :method => :delete, :class => "icon_link remove_link", :remote => true, :confirm => "Are you sure?" %>
+    <%= link_to "<strong>Edit</strong> your cover".html_safe, 
+		 		 edit_image_path(image), 
+		 		 :class => "icon_link edit_link iframe_fancy" %>
+	<%= link_to "<strong>Remove</strong>".html_safe, 
+      			remove_upload_image_path(image), 
+      			:method => :delete, :class => "icon_link remove_link", 
+      			:remote => true, 
+      			:confirm => "Are you sure?" %>
   <% else %>
     <img src='/images/fallback/custom_background_default.jpg' alt="Background placeholder"  />
   <% end %>

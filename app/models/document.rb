@@ -4,4 +4,6 @@ class Document < ActiveRecord::Base
   
   mount_uploader :file, DocumentUploader
   
+  validates_presence_of :caption
+  
 end
