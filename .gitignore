@@ -65,6 +65,7 @@ db/schema.rb
 
 # Textmate project files
 /*.tmpproj
+/*.bbprojectd
 
 
 # vim artifacts
